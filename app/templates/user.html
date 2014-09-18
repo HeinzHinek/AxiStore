@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ _("User's Page") }}</h1>
+{% include 'flash.html' %}
+<br/>
+
+<form action="" method="post" name="user">
+    {{form.hidden_tag()}}
+    <div>
+        <label>{{ _('Select your preferred language') }}:</label>
+        <div class="input-group">
+            {{form.language(class="form-control") }}<br>
+        </div>
+        {% for error in form.errors.language %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </div>
+    <div>
+        <label>{{ _('Select number of products displayed per page') }}:</label>
+        <div class="input-group">
+            {{form.products_per_page(class="form-control",
+                                    size=10,
+                                    style="text-align: right;",
+                                    onclick="$(this).select()") }}<br>
+        </div>
+        {% for error in form.errors.products_per_page %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </div>
+    <p><input type="submit" value="{{ _('Save settings') }}" class="btn btn-default"></p>
+</form>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ _('New delivery report') }}</h1>
+{% include 'flash.html' %}
+
+<div style="border: 1px solid #dddddd; padding: 0px 20px;">
+<h3>{{ _('Details:') }}</h3>
+<ul>
+    <li>{{ _('Delivery from maker: ') }}{{ report['maker'] }}</li>
+    <li>{{ _('Recieved by: ') }}{{ report['recipient'] }}</li>
+    <li>{{ _('Received products: ') }}<br/>
+        <table class="table">
+            <tr>
+                <th>{{ _('Product Code') }}</th>
+                <th>{{ _('Maker') }}</th>
+                <th>{{ _('Description CS') }}</th>
+                <th>{{ _('Description JP') }}</th>
+                <th style="text-align: right;">{{ _('Quantity') }}</th>
+            </tr>
+        {% for product in report['products'] %}
+            <tr>
+                <td>{{ product['product'].code }}</td>
+                <td>{{ product['product'].maker.name }}</td>
+                <td>{{ product['product'].desc_CS }}</td>
+                <td>{{ product['product'].desc_JP }}</td>
+
+                {% if product['over'] > 0 %}
+                    <td class="danger" style="text-align: right; font-weight: bold;">
+                        <span style="color: red">* </span>{{ product['qty'] }} ({{ product['qty'] - product['over'] }})
+                    </td>
+                {% else %}
+                    <td style="text-align: right; font-weight: bold;">{{ product['qty'] }}</td>
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+        <tr>
+            {% if report['overreceived_products'] %}
+                <td colspan="5" style="text-align: right;">
+                <span style="color: red;">{{ _('* The received quantity is higher than ordered total. Value in () shows sum of all orders for given product.') }}</span>
+                </td>
+            {% endif %}
+        </tr>
+        </table>
+        <br/>
+    </li>
+
+    {% if report['closed_orders'] %}
+        <li>{{ _('Completed and closed orders to maker: ') }}<br/>
+            <table class="table">
+                <tr>
+                    <th class="col-md-3">{{ _('Order ID') }}</th>
+                    <th class="col-md-3">{{ _('Placed') }}</th>
+                    <th class="col-md-3">{{ _('Ordered by') }}</th>
+                    <th class="col-md-3">{{ _('Maker') }}</th>
+                </tr>
+                {% for order in report['closed_orders'] %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ momentjs(order.created_dt).format('LLL') }}</td>
+                        <td>{{ order.orderer.nickname }}</td>
+                        <td>{{ order.maker.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br/>
+        </li>
+    {% endif %}
+
+    {% if report['changed_orders'] %}
+        <li>{{ _('Not fully completed but partially delivered orders to maker: ') }}<br/>
+            <table class="table">
+                <tr>
+                    <th class="col-md-3">{{ _('Order ID') }}</th>
+                    <th class="col-md-3">{{ _('Placed') }}</th>
+                    <th class="col-md-3">{{ _('Ordered by') }}</th>
+                    <th class="col-md-3">{{ _('Maker') }}</th>
+                </tr>
+                {% for order in report['changed_orders'] %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ momentjs(order.created_dt).format('LLL') }}</td>
+                        <td>{{ order.orderer.nickname }}</td>
+                        <td>{{ order.maker.name }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br/>
+        </li>
+    {% endif %}
+</ul>
+</div>
+
+<br/>
+<div>
+<a href="{{ url_for('stock') }}"><input type="button" class="btn btn-default" value="{{ _('To stock') }}"></a>
+<a href="{{ url_for('deliveries') }}"><input type="button" class="btn btn-default" value="{{ _('To deliveries') }}"></a>
+<a href="{{ url_for('orders') }}"><input type="button" class="btn btn-default" value="{{ _('To orders') }}"></a>
+</div>
+<br/><br/>
+{% endblock %}

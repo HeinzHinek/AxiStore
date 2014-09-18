@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script>
+    $(function() {
+        $( "#tabs-categories" ).sortable({
+            axis: 'x',
+            update: function (event, ui) {
+                var data = $(this).sortable('serialize');
+                $.ajax({
+                    data: data,
+                    type: 'POST',
+                    url: '/categories/saveorder'
+                });
+            }
+        });
+    });
+
+$(document).ready( function() {
+
+    $('.td-redir-edit').click( function() {
+        id = $(this).parent().attr('id');
+        window.location.href = '{{ url_for("editProduct") }}' + '/' + id;
+    });
+
+    $('.td-qty-edit').click( function() {
+        $(this).addClass('td-border-highlighted');
+        div = $(this).find('div');
+        $(div).show();
+        $(div).find('input[type="text"]').focus();
+        $(div).scrollToFixed();
+    });
+
+    $('.div-qty-stock-edit').focusout( function() {
+        $(this).hide();
+        $('.td-qty-edit').removeClass('td-border-highlighted');
+    });
+
+    $('.submit-qty-stock-edit').blur( function(event) {
+        t = $(this).parent().find('input[type="text"]').val();
+        if (t != '' && t != null) {
+            $(this).trigger('click');
+        }
+    });
+
+});
+</script>
+
+
+<div class="row">
+    <h1>{{ _('Stock overview') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+{% if categories %}
+<ul id="tabs-categories" class="nav nav-tabs" role="tablist">
+{% for category in categories %}
+  <li id="cat_{{ category.id }}"
+    {% if g.category_id == category.id %} class="active" {% endif %}
+    >
+    <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if products %}
+<table class="table table-hover table-condensed table-striped table-responsive td-border-bottom-2px">
+<thead>
+    <tr>
+        <th class="td-border-left-1px">{{ _('Product Code') }}</th>
+        <th>
+            <div class="dropdown">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="makerChoice" data-toggle="dropdown" style="font-weight: bold;">
+                    {% if curr_maker_name %}
+                    {{ curr_maker_name }}
+                    {% else %}
+                    {{ _('Maker') }}
+                    {% endif %}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="makerChoice">
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               href="{{ url_for('stock') + '?mak=-1' }}">
+                        {{ _('All') }}
+                    </a></li>
+                    {% for maker in makers %}
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               href="{{ url_for('stock') + '?mak=' + (maker.id|string) }}">
+                        {{ maker.name }}
+                    </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </th>
+        <th>{{ _('Description CS') }}</th>
+        <th>{{ _('Description JP') }}</th>
+        <th style="text-align: right;">{{ _('Unit Price') }}</th>
+        <th style="text-align: right;">{{ _('Retail Price') }}</th>
+        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Stock') }}</th>
+        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Req.') }}</th>
+        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Ord.') }}</th>
+        <th style="text-align: right; width: 5%;" class="td-border-left-1px td-border-right-1px">{{ _('Net') }}</th>
+    </tr>
+</thead>
+<tbody>
+    {% for product in products.items %}
+    <tr id="{{ product.id }}">
+        <td class="clickable-td td-redir-edit td-border-left-2px">{{product.code}}</td>
+        <td class="clickable-td td-redir-edit">{{product.maker.name}}</td>
+        <td class="clickable-td td-redir-edit">{{product.desc_CS}}</td>
+        <td class="clickable-td td-redir-edit">{{product.desc_JP}}</td>
+        <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_unit}}</td>
+        <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_retail}}</td>
+
+        <form action="" method="post" name="stock">
+            {{form.hidden_tag()}}
+            {% if product.qty_stock == None %}
+            <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px">?
+            {% elif product.qty_stock == 0 %}
+            <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
+            {% else %}
+            <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
+            {% endif %}
+                <div class="div-qty-stock-edit" style="display: none; position: absolute;">
+                    <p>{{ form.qty_stock( class="control", size=5, style="color: black; text-align: right;") }}
+                    <input type="submit" class="submit-qty-stock-edit" value="OK">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    </p>
+                </div>
+            </td>
+        </form>
+
+        <td style="text-align: right;" class="td-border-left-1px">{{ product.request_qty }}</td>
+
+        {% if product.order_qty == 0 %}
+        <td style="text-align: right; color: gray;" class="td-border-left-1px">{{ product.order_qty }}</td>
+        {% else %}
+        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
+                onclick="window.location.href = '{{ url_for("productorders", id=product.id) }}'">{{ product.order_qty }}</td>
+        {% endif %}
+
+        {% if product.net_stock == None %}
+        <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px">?
+        {% elif product.net_stock == 0 %}
+        <td style="text-align: right;" class="danger td-border-left-1px td-border-right-2px">{{product.net_stock}}
+        {% elif product.net_stock < 0 %}
+        <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-2px">{{product.net_stock}}
+        {% else %}
+        <td style="text-align: right;" class="td-border-left-1px td-border-right-2px">{{product.net_stock}}
+        {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+<!-- PAGINATION -->
+<div id="footer">
+    <ul class="pagination">
+
+        {% if products.has_prev or products.has_next %}
+        {% if products.has_prev %}
+        <li class="previous"><a href="{{ url_for('stock', page = products.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+
+
+        {%- for page in products.iter_pages() %}
+        <li class="{% if page == products.page %}active{% endif %}">
+            {% if page %}
+            {% if page != products.page %}
+            <a href="{{ url_for('stock', page = page) }}">{{ page }}</a>
+            {% else %}
+            <a hrer="#">{{ page }}</a>
+            {% endif %}
+            {% else %}
+            <span class=ellipsis>…</span>
+            {% endif %}
+        </li>
+        {%- endfor %}
+
+        {% if products.has_next %}
+        <li class="next"><a href="{{ url_for('stock', page = products.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}

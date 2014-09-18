@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+
+    function checkProductId(code) {
+        if (code.length < 3) {
+            $('#icon_id_check_ok').hide()
+            $('#icon_id_check_ng').hide()
+            return
+        }
+        $.post('/checkProductId', {
+            code: code,
+            orig_id: "{{ product.code|string }}"
+        }).done(function(result) {
+            if(result['result'] === 'OK') {
+                $('#icon_id_check_ok').show()
+                $('#icon_id_check_ng').hide()
+                $('#btn_submit').removeAttr('disabled')
+            } else {
+                $('#icon_id_check_ng').show()
+                $('#icon_id_check_ok').hide()
+                $('#btn_submit').attr('disabled','disabled')
+                $('#code_input').focus()
+            }
+        }).fail(function() {
+
+        });
+    }
+
+    $(document).ready(function() {
+
+        $("#maker_select").val({{ selected_category }});
+
+        $('#code_input').focusout(function() {
+            checkProductId($(this).val());
+        });
+
+        $("#btn_delete").click(function() {
+            return confirm("{{ _('Do you really want to delete this product?') }}");
+        });
+
+        $("input[type=text]").click(function(){
+            this.select();
+        });
+
+    });
+
+</script>
+
+
+<h1>{{ _('Edit Product') }}</h1>
+{% include 'flash.html' %}
+<div>
+    <a href="{{ url_for('stock') }}">{{ _('Back to the list') }}</a>
+</div>
+
+<form action="" method="post" name="editProduct">
+    {{form.hidden_tag()}}
+    <table class="table no-border">
+        <tr>
+            <td>
+            <label>{{ _('Product code') }}:</label>
+            <div class="input-group">
+                {{form.code(id='code_input', size=60, class="form-control")}}
+                <span class="input-group-addon" style="width: 50px;">
+                    <i id="icon_id_check_ok" class="glyphicon glyphicon-ok" style="display: none; color: #009900"></i>
+                    <i id="icon_id_check_ng" class="glyphicon glyphicon-remove" style="display: none; color: red"></i>
+                </span>
+            </div>
+            {% for error in form.errors.code %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Maker') }}:</label>
+            <div class="input-group">
+                {{form.maker(id="maker_select", class="form-control")}}
+            </div>
+            {% for error in form.errors.maker %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Czech description') }}:</label>
+            <div class="input-group">
+                {{form.desc_CS(size=80, class="form-control")}}
+            </div>
+            {% for error in form.errors.desc_CS %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Japanese description') }}:</label>
+            <div class="input-group">
+                {{form.desc_JP(size=80, class="form-control")}}
+            </div>
+            {% for error in form.errors.desc_JP %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Unit price') }}:</label>
+            <div class="input-group">
+                {{form.price_unit(size=80, class="form-control")}}
+            </div>
+            {% for error in form.errors.price_unit %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Retail price') }}:</label>
+            <div class="input-group">
+                {{form.price_retail(size=80, class="form-control")}}
+            </div>
+            {% for error in form.errors.price_retail %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <label>{{ _('Quantity on stock') }}:</label>
+            <div class="input-group">
+                {{ form.qty_stock(size=20, class="form-control", style="text-align: right") }}
+            </div>
+            {% for error in form.errors.qty_stock %}
+            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                [{{error}}]
+            </div>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" name="orig_code" value="{{ product.code }}"/>
+                <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
+                <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock")}}'" value="{{ _('Cancel') }}"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

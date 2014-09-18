@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Deliveries overview') }}</h1>
+    {% include 'flash.html' %}
+
+    <div style="text-align: right; padding: 10px 0px;">
+        <a href="{{ url_for('newDelivery') }}"><input type="button" class="btn btn-default" value="{{ _('New delivery') }}"></a>
+    </div>
+</div>
+
+
+<!-- This might be reused later
+{% if categories %}
+<ul class="nav nav-tabs" role="tablist">
+{% for category in categories %}
+  <li
+    {% if g.category_id == category.id %} class="active" {% endif %}
+    >
+    <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+-->
+
+{% if deliveries %}
+<div class="row">
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px td-border-top-1px">
+    <thead>
+        <tr>
+            <th class="td-border-left-1px">{{ _('Delivery ID') }}</th>
+            <th>{{ _('Received') }}</th>
+            <th>{{ _('Recipient') }}</th>
+            <th class="td-border-right-1px">{{ _('Maker') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for delivery in deliveries.items %}
+        <tr onclick="window.location.href = '{{ url_for("delivery", id=delivery.id) }}'">
+            <td class="clickable-td td-border-left-2px">{{ delivery.id }}</td>
+            <td class="clickable-td">{{ momentjs(delivery.created_dt).format('LLL') }}</td>
+            <td class="clickable-td">{{ delivery.recipient.nickname }}</td>
+            <td class="clickable-td td-border-right-2px">{{ delivery.maker.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br>
+
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if deliveries.has_prev or deliveries.has_next %}
+        {% if deliveries.has_prev %}
+        <li class="previous"><a href="{{ url_for('deliveries', page = deliveries.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if deliveries.has_next %}
+        <li class="next"><a href="{{ url_for('deliveries', page = deliveries.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+
+</div>
+{% endif %}
+
+{% endblock %}

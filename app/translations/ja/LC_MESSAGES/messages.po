@@ -1,0 +1,645 @@
+# Japanese translations for PROJECT.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-09-11 21:39+0900\n"
+"PO-Revision-Date: 2014-09-11 21:39+0900\n"
+"Last-Translator: \n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"Language: ja\n"
+"X-Generator: Poedit 1.6.8\n"
+
+#: app/__init__.py:15
+msgid "Please log in to access this page."
+msgstr "このページのアクセスにはログインが必要です。"
+
+#: app/forms.py:51
+msgid "This product code is already in use!"
+msgstr "入力された品番はすでに登録されています！"
+
+#: app/viewsBase.py:34
+msgid "Home"
+msgstr "Home"
+
+#: app/viewsBase.py:58
+msgid "Stock quantity successfully updated."
+msgstr "在庫個数の更新が成功しました。"
+
+#: app/viewsBase.py:60 app/viewsBase.py:62
+msgid "Input value error."
+msgstr "入力された値が不正です。"
+
+#: app/viewsBase.py:89
+msgid "Stock condition"
+msgstr "在庫状況"
+
+#: app/viewsBase.py:108 app/templates/user.html:3
+msgid "User's Page"
+msgstr "ユーザーページ"
+
+#: app/viewsBase.py:116 app/templates/base.html:61
+#: app/templates/settings.html:3
+msgid "Settings"
+msgstr "設定"
+
+#: app/viewsCategory.py:17
+msgid "Product Categories"
+msgstr "製品のカテゴリー"
+
+#: app/viewsCategory.py:31
+msgid "New product category successfully added."
+msgstr "新しい製品を追加しました。"
+
+#: app/viewsCategory.py:34 app/templates/settings/addCategory.html:3
+msgid "Add New Product Category"
+msgstr "新しい製品カテゴリーを追加"
+
+#: app/viewsCategory.py:43
+msgid "Category not found."
+msgstr "カテゴリーが不明です。"
+
+#: app/viewsCategory.py:59
+msgid "Category successfully changed."
+msgstr "カテゴリーが変更されました。"
+
+#: app/viewsCategory.py:62 app/templates/settings/editCategory.html:13
+msgid "Edit Category"
+msgstr "カテゴリー変更"
+
+#: app/viewsDelivery.py:17 app/templates/base.html:43
+msgid "Deliveries"
+msgstr "入庫"
+
+#: app/viewsDelivery.py:32 app/viewsDelivery.py:54 app/viewsMaker.py:43
+#: app/viewsOrder.py:33 app/viewsOrder.py:55
+msgid "Maker not found."
+msgstr "メーカーは不明です。"
+
+#: app/viewsDelivery.py:42 app/viewsDelivery.py:149
+msgid "New Delivery"
+msgstr "新規入庫"
+
+#: app/viewsDelivery.py:136
+msgid "New delivery received sucessfully."
+msgstr "入庫に成功しました。"
+
+#: app/viewsDelivery.py:140
+msgid "Delivery Report"
+msgstr "入庫レポート"
+
+#: app/viewsDelivery.py:162 app/templates/deliveries/delivery.html:5
+msgid "Delivery details"
+msgstr "入庫の詳細"
+
+#: app/viewsLogin.py:22
+msgid "Username or Password is invalid"
+msgstr "ユーザー名またはパスワードが不正です"
+
+#: app/viewsLogin.py:25
+msgid "Logged in successfully."
+msgstr "ログインに成功しました。"
+
+#: app/viewsLogin.py:28 app/templates/login/login.html:5
+#: app/templates/login/login.html:48
+msgid "Sign In"
+msgstr "ログイン"
+
+#: app/viewsMaker.py:17
+msgid "Makers"
+msgstr "メーカー"
+
+#: app/viewsMaker.py:31
+msgid "New maker successfully added."
+msgstr "新しいメーカーが追加されました。"
+
+#: app/viewsMaker.py:34 app/templates/settings/addMaker.html:3
+msgid "Add New Maker"
+msgstr "新しいメーカーを追加する"
+
+#: app/viewsMaker.py:60
+msgid "Maker successfully changed."
+msgstr "メーカーが変更されました。"
+
+#: app/viewsMaker.py:64 app/templates/settings/editMaker.html:15
+msgid "Edit Maker"
+msgstr "メーカーを変更する"
+
+#: app/viewsOrder.py:18 app/templates/base.html:42
+msgid "Orders"
+msgstr "発注"
+
+#: app/viewsOrder.py:43 app/viewsOrder.py:86
+msgid "Place new order"
+msgstr "新規発注を入力する"
+
+#: app/viewsOrder.py:99 app/templates/orders/order.html:5
+msgid "Order details"
+msgstr "発注の詳細"
+
+#: app/viewsOrder.py:113
+msgid "Orders for product"
+msgstr "製品に対する発注"
+
+#: app/viewsProduct.py:30
+msgid "New product successfully added."
+msgstr "新しい製品は追加されました。"
+
+#: app/viewsProduct.py:33 app/templates/product/addProduct.html:45
+msgid "Add new product"
+msgstr "新しい製品を追加"
+
+#: app/viewsProduct.py:43
+msgid "Product not found."
+msgstr "製品は不明です。"
+
+#: app/viewsProduct.py:70
+msgid "Product successfully changed."
+msgstr "製品が変更されました。"
+
+#: app/viewsProduct.py:74 app/templates/product/editProduct.html:51
+msgid "Edit Product"
+msgstr "製品を変更する"
+
+#: app/templates/base.html:41 app/templates/stock.html:68
+msgid "Stock"
+msgstr "在庫"
+
+#: app/templates/base.html:46
+msgid "New"
+msgstr "新規"
+
+#: app/templates/base.html:48
+msgid "Product"
+msgstr "製品"
+
+#: app/templates/base.html:49
+msgid "Order to maker"
+msgstr "発注"
+
+#: app/templates/base.html:50
+msgid "Delivery"
+msgstr "入庫"
+
+#: app/templates/base.html:52
+msgid "Order from Customer"
+msgstr "お客様からの注文"
+
+#: app/templates/base.html:53
+msgid "Order from Axis Mart"
+msgstr "アクシスマートからの注文"
+
+#: app/templates/base.html:64
+#, python-format
+msgid "%(nickname)s"
+msgstr "%(nickname)s"
+
+#: app/templates/base.html:66
+msgid "Logout"
+msgstr "ログアウト"
+
+#: app/templates/base.html:69
+msgid "Login"
+msgstr "ログイン"
+
+#: app/templates/index.html:3
+msgid "Hi, "
+msgstr "こんにちは、"
+
+#: app/templates/settings.html:7
+msgid "Manage makers"
+msgstr "メーカーの管理"
+
+#: app/templates/settings.html:11
+msgid "Manage product categories"
+msgstr "製品カテゴリーの管理"
+
+#: app/templates/stock.html:37
+msgid "Stock overview"
+msgstr "在庫の状況"
+
+#: app/templates/stock.html:41
+msgid "Add product"
+msgstr "製品を追加"
+
+#: app/templates/stock.html:62 app/templates/deliveries/deliveryReport.html:15
+msgid "Product Code"
+msgstr "品番"
+
+#: app/templates/stock.html:63 app/templates/deliveries/deliveries.html:36
+#: app/templates/deliveries/delivery.html:26
+#: app/templates/deliveries/deliveryReport.html:16
+#: app/templates/deliveries/deliveryReport.html:56
+#: app/templates/deliveries/deliveryReport.html:78
+#: app/templates/orders/order.html:26 app/templates/orders/orders.html:36
+#: app/templates/orders/productorders.html:23
+#: app/templates/product/addProduct.html:75
+#: app/templates/product/editProduct.html:80
+msgid "Maker"
+msgstr "メーカー"
+
+#: app/templates/stock.html:64 app/templates/deliveries/delivery.html:39
+#: app/templates/deliveries/deliveryReport.html:17
+#: app/templates/orders/order.html:39
+msgid "Description CS"
+msgstr "チェコ語の説明"
+
+#: app/templates/stock.html:65 app/templates/deliveries/delivery.html:40
+#: app/templates/deliveries/deliveryReport.html:18
+#: app/templates/orders/order.html:40
+msgid "Description JP"
+msgstr "日本語の説明"
+
+#: app/templates/stock.html:66 app/templates/orders/productorders.html:27
+msgid "Unit Price"
+msgstr "単価"
+
+#: app/templates/stock.html:67 app/templates/orders/productorders.html:29
+msgid "Retail Price"
+msgstr "小売価格"
+
+#: app/templates/stock.html:69
+msgid "Req."
+msgstr "受注"
+
+#: app/templates/stock.html:70
+msgid "Ord."
+msgstr "発注"
+
+#: app/templates/stock.html:71
+msgid "Net"
+msgstr "正味"
+
+#: app/templates/stock.html:132 app/templates/stock.html:134
+#: app/templates/deliveries/deliveries.html:56
+#: app/templates/deliveries/deliveries.html:58
+#: app/templates/orders/orders.html:58 app/templates/orders/orders.html:60
+#: app/templates/settings/categories.html:31
+#: app/templates/settings/categories.html:33
+#: app/templates/settings/makers.html:33 app/templates/settings/makers.html:35
+msgid "Previous"
+msgstr "前"
+
+#: app/templates/stock.html:137 app/templates/stock.html:139
+#: app/templates/deliveries/deliveries.html:61
+#: app/templates/deliveries/deliveries.html:63
+#: app/templates/orders/orders.html:63 app/templates/orders/orders.html:65
+#: app/templates/settings/categories.html:36
+#: app/templates/settings/categories.html:38
+#: app/templates/settings/makers.html:38 app/templates/settings/makers.html:40
+msgid "Next"
+msgstr "次"
+
+#: app/templates/user.html:9
+msgid "Select your preferred language"
+msgstr "言語をお選びください"
+
+#: app/templates/user.html:17
+msgid "Save settings"
+msgstr "設定を保存"
+
+#: app/templates/deliveries/deliveries.html:5
+msgid "Deliveries overview"
+msgstr "入庫一覧"
+
+#: app/templates/deliveries/deliveries.html:9
+msgid "New delivery"
+msgstr "新規入庫"
+
+#: app/templates/deliveries/deliveries.html:33
+#: app/templates/deliveries/delivery.html:18
+msgid "Delivery ID"
+msgstr "入庫ID"
+
+#: app/templates/deliveries/deliveries.html:34
+#: app/templates/deliveries/delivery.html:20
+msgid "Received"
+msgstr "入庫日時"
+
+#: app/templates/deliveries/deliveries.html:35
+#: app/templates/deliveries/delivery.html:24
+msgid "Recipient"
+msgstr "受取人"
+
+#: app/templates/deliveries/delivery.html:9 app/templates/orders/order.html:9
+#: app/templates/product/addProduct.html:48
+#: app/templates/product/editProduct.html:54
+#: app/templates/settings/editCategory.html:16
+#: app/templates/settings/editMaker.html:18
+msgid "Back to the list"
+msgstr "一覧へ戻る"
+
+#: app/templates/deliveries/delivery.html:38
+#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:57
+#: app/templates/product/editProduct.html:62
+msgid "Product code"
+msgstr "品番"
+
+#: app/templates/deliveries/delivery.html:41
+#: app/templates/deliveries/deliveryReport.html:19
+#: app/templates/orders/order.html:41
+#: app/templates/orders/productorders.html:46
+msgid "Quantity"
+msgstr "数量"
+
+#: app/templates/deliveries/deliveryReport.html:4
+msgid "New delivery report"
+msgstr "新規入庫レポート"
+
+#: app/templates/deliveries/deliveryReport.html:8
+msgid "Details:"
+msgstr "詳細："
+
+#: app/templates/deliveries/deliveryReport.html:10
+msgid "Delivery from maker: "
+msgstr "入荷元："
+
+#: app/templates/deliveries/deliveryReport.html:11
+msgid "Recieved by: "
+msgstr "受取人："
+
+#: app/templates/deliveries/deliveryReport.html:12
+msgid "Received products: "
+msgstr "入庫した製品："
+
+#: app/templates/deliveries/deliveryReport.html:41
+msgid ""
+"* The received quantity is higher than ordered total. Value in () shows sum "
+"of all orders for given product."
+msgstr ""
+"* 入庫した数量は発注総数を上回っています。括弧内の値は該当製品に対する全ての"
+"発注の合計数量です。"
+
+#: app/templates/deliveries/deliveryReport.html:50
+msgid "Completed and closed orders to maker: "
+msgstr "全量入庫が完了した発注："
+
+#: app/templates/deliveries/deliveryReport.html:53
+#: app/templates/deliveries/deliveryReport.html:75
+#: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
+#: app/templates/orders/productorders.html:43
+msgid "Order ID"
+msgstr "発注のID"
+
+#: app/templates/deliveries/deliveryReport.html:54
+#: app/templates/deliveries/deliveryReport.html:76
+#: app/templates/orders/order.html:20 app/templates/orders/orders.html:34
+#: app/templates/orders/productorders.html:44
+msgid "Placed"
+msgstr "発注日時"
+
+#: app/templates/deliveries/deliveryReport.html:55
+#: app/templates/deliveries/deliveryReport.html:77
+#: app/templates/orders/order.html:24 app/templates/orders/orders.html:35
+#: app/templates/orders/productorders.html:45
+msgid "Ordered by"
+msgstr "発注者"
+
+#: app/templates/deliveries/deliveryReport.html:72
+msgid "Not fully completed but partially delivered orders to maker: "
+msgstr "完了ではないが部分的に入庫した発注："
+
+#: app/templates/deliveries/deliveryReport.html:97
+msgid "To stock"
+msgstr "在庫の状況へ"
+
+#: app/templates/deliveries/deliveryReport.html:98
+msgid "To deliveries"
+msgstr "入庫一覧へ"
+
+#: app/templates/deliveries/deliveryReport.html:99
+msgid "To orders"
+msgstr "発注一覧へ"
+
+#: app/templates/deliveries/newDelivery.html:51
+msgid "Receive a new delivery"
+msgstr "新規入荷を受け取る"
+
+#: app/templates/deliveries/newDelivery.html:60
+#: app/templates/orders/createOrder.html:60
+msgid "Select maker"
+msgstr "メーカーの選択"
+
+#: app/templates/deliveries/newDelivery.html:74
+#: app/templates/orders/createOrder.html:74
+msgid "Continue"
+msgstr "次へ"
+
+#: app/templates/deliveries/newDelivery.html:75
+#: app/templates/deliveries/newDelivery.html:114
+#: app/templates/orders/createOrder.html:75
+#: app/templates/orders/createOrder.html:114
+#: app/templates/product/addProduct.html:160
+#: app/templates/product/editProduct.html:166
+#: app/templates/settings/addCategory.html:40
+#: app/templates/settings/addMaker.html:40
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: app/templates/deliveries/newDelivery.html:87
+#: app/templates/orders/createOrder.html:87
+#: app/templates/orders/productorders.html:21
+msgid "Code"
+msgstr "品番"
+
+#: app/templates/deliveries/newDelivery.html:88
+#: app/templates/orders/createOrder.html:88
+msgid "Name CS"
+msgstr "チェコ語の品名"
+
+#: app/templates/deliveries/newDelivery.html:89
+#: app/templates/orders/createOrder.html:89
+msgid "Name JP"
+msgstr "日本語の品名"
+
+#: app/templates/deliveries/newDelivery.html:90
+msgid "Delivered Quantity"
+msgstr "入庫数量"
+
+#: app/templates/deliveries/newDelivery.html:111
+#: app/templates/orders/createOrder.html:111
+msgid "Submit"
+msgstr "確認"
+
+#: app/templates/deliveries/newDelivery.html:112
+#: app/templates/orders/createOrder.html:112
+msgid "Modify"
+msgstr "修正"
+
+#: app/templates/deliveries/newDelivery.html:113
+msgid "Receive products"
+msgstr "製品を入庫"
+
+#: app/templates/login/login.html:13
+msgid "Enter your user id"
+msgstr "ユーザーＩＤ"
+
+#: app/templates/login/login.html:28
+msgid "Enter your password"
+msgstr "パスワード"
+
+#: app/templates/login/login.html:42
+msgid "Remember Me"
+msgstr "パスワードを記録"
+
+#: app/templates/orders/createOrder.html:51
+msgid "Place a new order"
+msgstr "新規発注を入力する"
+
+#: app/templates/orders/createOrder.html:90
+msgid "Order Quantity"
+msgstr "発注数量"
+
+#: app/templates/orders/createOrder.html:113
+#: app/templates/orders/orders.html:9
+msgid "Place order"
+msgstr "発注を入力"
+
+#: app/templates/orders/order.html:42
+msgid "Delivered"
+msgstr "入庫数量"
+
+#: app/templates/orders/orders.html:5
+msgid "Orders overview"
+msgstr "発注一覧"
+
+#: app/templates/orders/productorders.html:5
+msgid "Orders for Product"
+msgstr "製品に対する発注"
+
+#: app/templates/orders/productorders.html:13
+msgid "Product name CS"
+msgstr "チェコ語の品名"
+
+#: app/templates/orders/productorders.html:17
+msgid "Product name JP"
+msgstr "日本語の品名"
+
+#: app/templates/product/addProduct.html:89
+#: app/templates/product/editProduct.html:94
+msgid "Czech description"
+msgstr "チェコ語の説明"
+
+#: app/templates/product/addProduct.html:103
+#: app/templates/product/editProduct.html:108
+msgid "Japanese description"
+msgstr "日本語の説明"
+
+#: app/templates/product/addProduct.html:117
+#: app/templates/product/editProduct.html:122
+msgid "Unit price"
+msgstr "単価"
+
+#: app/templates/product/addProduct.html:131
+#: app/templates/product/editProduct.html:136
+msgid "Retail price"
+msgstr "小売価格"
+
+#: app/templates/product/addProduct.html:145
+#: app/templates/product/editProduct.html:150
+msgid "Quantity on stock"
+msgstr "在庫数"
+
+#: app/templates/product/addProduct.html:159
+#: app/templates/product/editProduct.html:165
+msgid "Save product"
+msgstr "製品を保存"
+
+#: app/templates/product/editProduct.html:39
+msgid "Do you really want to delete this product?"
+msgstr "本当にこの製品を削除しますか？"
+
+#: app/templates/settings/addCategory.html:11
+#: app/templates/settings/categories.html:14
+#: app/templates/settings/editCategory.html:24
+msgid "Category name in Czech"
+msgstr "チェコ語のカテゴリー名"
+
+#: app/templates/settings/addCategory.html:25
+#: app/templates/settings/categories.html:15
+#: app/templates/settings/editCategory.html:38
+msgid "Category name in Japanese"
+msgstr "日本語のカテゴリー名"
+
+#: app/templates/settings/addCategory.html:39
+#: app/templates/settings/editCategory.html:52
+msgid "Save category"
+msgstr "カテゴリーを保存する"
+
+#: app/templates/settings/addMaker.html:11
+#: app/templates/settings/editMaker.html:26
+msgid "Maker name"
+msgstr "メーカー名"
+
+#: app/templates/settings/addMaker.html:25
+#: app/templates/settings/editMaker.html:40
+msgid "Product category"
+msgstr "製品カテゴリー"
+
+#: app/templates/settings/addMaker.html:39
+#: app/templates/settings/editMaker.html:54
+msgid "Save maker"
+msgstr "メーカーを保存する"
+
+#: app/templates/settings/categories.html:3
+msgid "List of Product Categories"
+msgstr "製品カテゴリーの一覧"
+
+#: app/templates/settings/categories.html:7
+msgid "Add product category"
+msgstr "製品カテゴリーを追加する"
+
+#: app/templates/settings/categories.html:13
+msgid "Category ID"
+msgstr "カテゴリーのID"
+
+#: app/templates/settings/editCategory.html:6
+msgid "Do you really want to delete this category?"
+msgstr "本当にこのカテゴリーを削除しますか？"
+
+#: app/templates/settings/editCategory.html:53
+msgid "Delete category"
+msgstr "カテゴリーの削除"
+
+#: app/templates/settings/editMaker.html:8
+msgid "Do you really want to delete this maker?"
+msgstr "本当にこのメーカーを削除しますか？"
+
+#: app/templates/settings/editMaker.html:55
+msgid "Delete maker"
+msgstr "メーカーの削除"
+
+#: app/templates/settings/makers.html:4
+msgid "List of Makers"
+msgstr "メーカーの一覧"
+
+#: app/templates/settings/makers.html:8
+msgid "Add maker"
+msgstr "メーカーを追加する"
+
+#: app/templates/settings/makers.html:14
+msgid "Maker ID"
+msgstr "メーカーのID"
+
+#: app/templates/settings/makers.html:15
+msgid "Maker's Name"
+msgstr "マーカー名"
+
+#: app/templates/settings/makers.html:16
+msgid "Product Category"
+msgstr "カテゴリー名"
+
+#~ msgid "Product ID"
+#~ msgstr "製品のＩＤ"
+
+#~ msgid "Delivered XXX"
+#~ msgstr "入庫数量"

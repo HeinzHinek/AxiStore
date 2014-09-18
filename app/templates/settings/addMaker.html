@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ _('Add New Maker') }}</h1>
+{% include 'flash.html' %}
+
+<form action="" method="post" name="addMaker">
+    {{form.hidden_tag()}}
+    <table class="table no-border">
+        <tr>
+            <td>
+                <label>{{ _('Maker name') }}:</label>
+                <div class="input-group">
+                    {{form.name(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.name %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>{{ _('Product category') }}:</label>
+                <div class="input-group">
+                    {{form.category(class="form-control")}}
+                </div>
+                {% for error in form.errors.category %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <input type="submit" value="{{ _('Save maker') }}" class="btn btn-default">
+            <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("makers")}}'" value="{{ _('Cancel') }}"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

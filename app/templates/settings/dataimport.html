@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Import of Data') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<br/>
+<div class="row">
+    <div>{{ _('Upload database data from CSV file for:') }}</div>
+    <br/>
+    <div>
+        <form action="" method="post" name="uploadProducts" enctype="multipart/form-data" >
+            {{form.hidden_tag()}}
+            <h3>{{ _('Products') }}</h3>
+            <div class="alert-danger" style="display: inline-block;">
+            {{ _('Data must be aligned to the following columns:') }}<br/>
+            {% for col in form.colnames %}
+                {{ col }} {% if not loop.last %}, {% endif %}
+            {% endfor %}<br/>
+            {{ _('Do NOT use quotation marks around strings!') }}
+            </div>
+            <br/><br/>
+            {{ form.filename }}
+            <br/>
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

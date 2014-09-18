@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Orders overview') }}</h1>
+    {% include 'flash.html' %}
+
+    <div style="text-align: right; padding: 10px 0px;">
+    <a href="{{ url_for('createOrder') }}"><input type="button" class="btn btn-default" value="{{ _('Place order') }}"></a>
+    </div>
+</div>
+
+
+<!-- This might be reused later
+{% if categories %}
+<ul class="nav nav-tabs" role="tablist">
+{% for category in categories %}
+  <li
+    {% if g.category_id == category.id %} class="active" {% endif %}
+    >
+    <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+-->
+
+{% if orders %}
+<div class="row">
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px td-border-top-1px">
+    <thead>
+        <tr>
+            <th class="td-border-left-1px">{{ _('Order ID') }}</th>
+            <th>{{ _('Placed') }}</th>
+            <th>{{ _('Ordered by') }}</th>
+            <th class="td-border-right-1px">{{ _('Maker') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders.items %}
+        <tr
+                {% if order.active_flg == false %} class="danger" {% endif %}
+                onclick="window.location.href = '{{ url_for("order", id=order.id) }}'">
+            <td class="clickable-td td-border-left-2px">{{ order.id }}</td>
+            <td class="clickable-td">{{ momentjs(order.created_dt).format('LLL') }}</td>
+            <td class="clickable-td">{{ order.orderer.nickname }}</td>
+            <td class="clickable-td td-border-right-2px">{{ order.maker.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br>
+
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if orders.has_prev or orders.has_next %}
+        {% if orders.has_prev %}
+        <li class="previous"><a href="{{ url_for('orders', page = orders.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if orders.has_next %}
+        <li class="next"><a href="{{ url_for('orders', page = orders.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}

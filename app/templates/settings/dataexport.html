@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Export of Data') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<br/>
+<div class="row">
+    <div>{{ _('Download database data for:') }}</div>
+    <br/>
+    <div>
+        <a href="{{ url_for('downloadProducts') }}"><input type="button" class="btn btn-default" value="{{ _('Products') }}"></a>
+    </div>
+</div>
+
+{% endblock %}

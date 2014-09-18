@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ _('List of Product Categories') }}</h1>
+{% include 'flash.html' %}
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script>
+
+    var fixHelper = function(e, tr) {
+        var $originals = tr.children();
+        var $helper = tr.clone();
+        $helper.children().each(function(index) {
+            // Set helper cell sizes to match the original sizes
+            $(this).width($originals.eq(index).width());
+        });
+        return $helper;
+    }
+
+    $(function() {
+        $( "#tbody-categories" ).sortable({
+            helper: fixHelper,
+            axis: 'y',
+            update: function (event, ui) {
+                var data = $(this).sortable('serialize');
+                $.ajax({
+                    data: data,
+                    type: 'POST',
+                    url: '/categories/saveorder'
+                });
+            }
+        });
+    });
+
+</script>
+
+
+<div style="text-align: right; padding: 10px 0px;">
+<a href="{{ url_for('addCategory') }}"><input type="button" class="btn btn-default" value="{{ _('Add product category') }}"></a>
+</div>
+
+
+{% if categories %}
+<table class="table table-hover table-striped">
+<tr>
+    <th>{{ _('Category ID') }}</th>
+    <th>{{ _('Category name in Czech') }}</th>
+    <th>{{ _('Category name in Japanese') }}</th>
+</tr>
+<tbody id="tbody-categories">
+        {% for category in categories %}
+            <tr id='cat_{{ category.id }}' onclick="window.location.href = '{{ url_for("editCategory", id=category.id) }}'">
+                <td id="{{ category.id }}">{{category.id}}</td>
+                <td>{{category.name_CS}}</td>
+                <td>{{category.name_JP}}</td>
+            </tr>
+        {% endfor %}
+</tbody>
+</table>
+<br>
+
+
+{% endif %}
+
+{% endblock %}

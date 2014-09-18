@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ _('Add New Product Category') }}</h1>
+{% include 'flash.html' %}
+
+<form action="" method="post" name="addCategory">
+    {{form.hidden_tag()}}
+    <table class="table no-border">
+        <tr>
+            <td>
+                <label>{{ _('Category name in Czech') }}:</label>
+                <div class="input-group">
+                    {{form.name_CS(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.name_CS %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>{{ _('Category name in Japanese') }}:</label>
+                <div class="input-group">
+                    {{form.name_JP(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.name_JP %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <input type="submit" value="{{ _('Save category') }}" class="btn btn-default">
+            <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("categories")}}'" value="{{ _('Cancel') }}"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

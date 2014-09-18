@@ -1,0 +1,646 @@
+# Czech translations for PROJECT.
+# Copyright (C) 2014 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2014-09-11 21:39+0900\n"
+"PO-Revision-Date: 2014-09-17 16:36+0900\n"
+"Last-Translator: \n"
+"Language-Team: cs <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 1.3\n"
+"Language: cs\n"
+"X-Generator: Poedit 1.6.8\n"
+
+#: app/__init__.py:15
+msgid "Please log in to access this page."
+msgstr "K přístupu na tuto stránku je nutné přihlášení."
+
+#: app/forms.py:51
+msgid "This product code is already in use!"
+msgstr "Tento kód produktu se již používá!"
+
+#: app/viewsBase.py:34
+msgid "Home"
+msgstr "Domů"
+
+#: app/viewsBase.py:58
+msgid "Stock quantity successfully updated."
+msgstr "Množství na skladě úspěšně aktualizováno."
+
+#: app/viewsBase.py:60 app/viewsBase.py:62
+msgid "Input value error."
+msgstr "Hodnota zadána chybně."
+
+#: app/viewsBase.py:89
+msgid "Stock condition"
+msgstr "Stav skladu"
+
+#: app/viewsBase.py:108 app/templates/user.html:3
+msgid "User's Page"
+msgstr "Stránka uživatele"
+
+#: app/viewsBase.py:116 app/templates/base.html:61
+#: app/templates/settings.html:3
+msgid "Settings"
+msgstr "Nastavení"
+
+#: app/viewsCategory.py:17
+msgid "Product Categories"
+msgstr "Kategorie produktů"
+
+#: app/viewsCategory.py:31
+msgid "New product category successfully added."
+msgstr "Nový produkt úspěšně přidán."
+
+#: app/viewsCategory.py:34 app/templates/settings/addCategory.html:3
+msgid "Add New Product Category"
+msgstr "Přidat novou kategorii produktů"
+
+#: app/viewsCategory.py:43
+msgid "Category not found."
+msgstr "Kategorie nenalezena."
+
+#: app/viewsCategory.py:59
+msgid "Category successfully changed."
+msgstr "Kategorie úspěšně pozměněna."
+
+#: app/viewsCategory.py:62 app/templates/settings/editCategory.html:13
+msgid "Edit Category"
+msgstr "Editace kategorie"
+
+#: app/viewsDelivery.py:17 app/templates/base.html:43
+msgid "Deliveries"
+msgstr "Dodávky"
+
+#: app/viewsDelivery.py:32 app/viewsDelivery.py:54 app/viewsMaker.py:43
+#: app/viewsOrder.py:33 app/viewsOrder.py:55
+msgid "Maker not found."
+msgstr "Výrobce nenalezen."
+
+#: app/viewsDelivery.py:42 app/viewsDelivery.py:149
+msgid "New Delivery"
+msgstr "Nová dodávka"
+
+#: app/viewsDelivery.py:136
+msgid "New delivery received sucessfully."
+msgstr "Nová dodávka úspěšně přijata."
+
+#: app/viewsDelivery.py:140
+msgid "Delivery Report"
+msgstr "Zpráva o dodávce"
+
+#: app/viewsDelivery.py:162 app/templates/deliveries/delivery.html:5
+msgid "Delivery details"
+msgstr "Detaily dodávky"
+
+#: app/viewsLogin.py:22
+msgid "Username or Password is invalid"
+msgstr "Uživatelské jméno nebo heslo nesouhlasí"
+
+#: app/viewsLogin.py:25
+msgid "Logged in successfully."
+msgstr "Přihlášení proběhlo úspěšně."
+
+#: app/viewsLogin.py:28 app/templates/login/login.html:5
+#: app/templates/login/login.html:48
+msgid "Sign In"
+msgstr "Přihlášení"
+
+#: app/viewsMaker.py:17
+msgid "Makers"
+msgstr "Výrobci"
+
+#: app/viewsMaker.py:31
+msgid "New maker successfully added."
+msgstr "Nový výrobce úspěšně přidán."
+
+#: app/viewsMaker.py:34 app/templates/settings/addMaker.html:3
+msgid "Add New Maker"
+msgstr "Přidat výrobce"
+
+#: app/viewsMaker.py:60
+msgid "Maker successfully changed."
+msgstr "Výrobce úspěšně pozměněn."
+
+#: app/viewsMaker.py:64 app/templates/settings/editMaker.html:15
+msgid "Edit Maker"
+msgstr "Editace výrobce"
+
+#: app/viewsOrder.py:18 app/templates/base.html:42
+msgid "Orders"
+msgstr "Objednávky"
+
+#: app/viewsOrder.py:43 app/viewsOrder.py:86
+msgid "Place new order"
+msgstr "Zadat novou objednávku"
+
+#: app/viewsOrder.py:99 app/templates/orders/order.html:5
+msgid "Order details"
+msgstr "Detaily objednávky"
+
+#: app/viewsOrder.py:113
+msgid "Orders for product"
+msgstr "Objednávky produktu"
+
+#: app/viewsProduct.py:30
+msgid "New product successfully added."
+msgstr "Nový produkt úspěšně přidán."
+
+#: app/viewsProduct.py:33 app/templates/product/addProduct.html:45
+msgid "Add new product"
+msgstr "Přidat nový produkt"
+
+#: app/viewsProduct.py:43
+msgid "Product not found."
+msgstr "Produkt nenalezen."
+
+#: app/viewsProduct.py:70
+msgid "Product successfully changed."
+msgstr "Produkt úspěšně pozměněn."
+
+#: app/viewsProduct.py:74 app/templates/product/editProduct.html:51
+msgid "Edit Product"
+msgstr "Editace produktu"
+
+#: app/templates/base.html:41 app/templates/stock.html:68
+msgid "Stock"
+msgstr "Sklad"
+
+#: app/templates/base.html:46
+msgid "New"
+msgstr "Nový"
+
+#: app/templates/base.html:48
+msgid "Product"
+msgstr "Produkt"
+
+#: app/templates/base.html:49
+msgid "Order to maker"
+msgstr "Objednávka výrobci"
+
+#: app/templates/base.html:50
+msgid "Delivery"
+msgstr "Dodávka"
+
+#: app/templates/base.html:52
+msgid "Order from Customer"
+msgstr "Objednávka od zákazníka"
+
+#: app/templates/base.html:53
+msgid "Order from Axis Mart"
+msgstr "Objednávka z Axis Martu"
+
+#: app/templates/base.html:64
+#, python-format
+msgid "%(nickname)s"
+msgstr "%(nickname)s"
+
+#: app/templates/base.html:66
+msgid "Logout"
+msgstr "Odhlášení"
+
+#: app/templates/base.html:69
+msgid "Login"
+msgstr "Přihlášení"
+
+#: app/templates/index.html:3
+msgid "Hi, "
+msgstr "Vítejte uživateli "
+
+#: app/templates/settings.html:7
+msgid "Manage makers"
+msgstr "Správa výrobců"
+
+#: app/templates/settings.html:11
+msgid "Manage product categories"
+msgstr "Správa kategorií produktů"
+
+#: app/templates/stock.html:37
+msgid "Stock overview"
+msgstr "Přehled skladu"
+
+#: app/templates/stock.html:41
+msgid "Add product"
+msgstr "Přidat produkt"
+
+#: app/templates/stock.html:62 app/templates/deliveries/deliveryReport.html:15
+msgid "Product Code"
+msgstr "Kód produktu"
+
+#: app/templates/stock.html:63 app/templates/deliveries/deliveries.html:36
+#: app/templates/deliveries/delivery.html:26
+#: app/templates/deliveries/deliveryReport.html:16
+#: app/templates/deliveries/deliveryReport.html:56
+#: app/templates/deliveries/deliveryReport.html:78
+#: app/templates/orders/order.html:26 app/templates/orders/orders.html:36
+#: app/templates/orders/productorders.html:23
+#: app/templates/product/addProduct.html:75
+#: app/templates/product/editProduct.html:80
+msgid "Maker"
+msgstr "Výrobce"
+
+#: app/templates/stock.html:64 app/templates/deliveries/delivery.html:39
+#: app/templates/deliveries/deliveryReport.html:17
+#: app/templates/orders/order.html:39
+msgid "Description CS"
+msgstr "Popis ČJ"
+
+#: app/templates/stock.html:65 app/templates/deliveries/delivery.html:40
+#: app/templates/deliveries/deliveryReport.html:18
+#: app/templates/orders/order.html:40
+msgid "Description JP"
+msgstr "Popis JP"
+
+#: app/templates/stock.html:66 app/templates/orders/productorders.html:27
+msgid "Unit Price"
+msgstr "Nákupní cena"
+
+#: app/templates/stock.html:67 app/templates/orders/productorders.html:29
+msgid "Retail Price"
+msgstr "Maloobch. cena"
+
+#: app/templates/stock.html:69
+msgid "Req."
+msgstr "Popt."
+
+#: app/templates/stock.html:70
+msgid "Ord."
+msgstr "Obj."
+
+#: app/templates/stock.html:71
+msgid "Net"
+msgstr "Čist."
+
+#: app/templates/stock.html:132 app/templates/stock.html:134
+#: app/templates/deliveries/deliveries.html:56
+#: app/templates/deliveries/deliveries.html:58
+#: app/templates/orders/orders.html:58 app/templates/orders/orders.html:60
+#: app/templates/settings/categories.html:31
+#: app/templates/settings/categories.html:33
+#: app/templates/settings/makers.html:33 app/templates/settings/makers.html:35
+msgid "Previous"
+msgstr "Předchozí"
+
+#: app/templates/stock.html:137 app/templates/stock.html:139
+#: app/templates/deliveries/deliveries.html:61
+#: app/templates/deliveries/deliveries.html:63
+#: app/templates/orders/orders.html:63 app/templates/orders/orders.html:65
+#: app/templates/settings/categories.html:36
+#: app/templates/settings/categories.html:38
+#: app/templates/settings/makers.html:38 app/templates/settings/makers.html:40
+msgid "Next"
+msgstr "Další"
+
+#: app/templates/user.html:9
+msgid "Select your preferred language"
+msgstr "Vyberte preferovaný jazyk"
+
+#: app/templates/user.html:17
+msgid "Save settings"
+msgstr "Uložit nastavení"
+
+#: app/templates/deliveries/deliveries.html:5
+msgid "Deliveries overview"
+msgstr "Přehled dodávek"
+
+#: app/templates/deliveries/deliveries.html:9
+msgid "New delivery"
+msgstr "Nová dodávka"
+
+#: app/templates/deliveries/deliveries.html:33
+#: app/templates/deliveries/delivery.html:18
+msgid "Delivery ID"
+msgstr "ID dodávky"
+
+#: app/templates/deliveries/deliveries.html:34
+#: app/templates/deliveries/delivery.html:20
+msgid "Received"
+msgstr "Přijato"
+
+#: app/templates/deliveries/deliveries.html:35
+#: app/templates/deliveries/delivery.html:24
+msgid "Recipient"
+msgstr "Příjemce"
+
+#: app/templates/deliveries/delivery.html:9 app/templates/orders/order.html:9
+#: app/templates/product/addProduct.html:48
+#: app/templates/product/editProduct.html:54
+#: app/templates/settings/editCategory.html:16
+#: app/templates/settings/editMaker.html:18
+msgid "Back to the list"
+msgstr "Zpět na seznam"
+
+#: app/templates/deliveries/delivery.html:38
+#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:57
+#: app/templates/product/editProduct.html:62
+msgid "Product code"
+msgstr "Kód produktu"
+
+#: app/templates/deliveries/delivery.html:41
+#: app/templates/deliveries/deliveryReport.html:19
+#: app/templates/orders/order.html:41
+#: app/templates/orders/productorders.html:46
+msgid "Quantity"
+msgstr "Množství"
+
+#: app/templates/deliveries/deliveryReport.html:4
+msgid "New delivery report"
+msgstr "Zpráva o nové dodávce"
+
+#: app/templates/deliveries/deliveryReport.html:8
+msgid "Details:"
+msgstr "Detaily:"
+
+#: app/templates/deliveries/deliveryReport.html:10
+msgid "Delivery from maker: "
+msgstr "Dodávka od výrobce: "
+
+#: app/templates/deliveries/deliveryReport.html:11
+msgid "Recieved by: "
+msgstr "Příjemce: "
+
+#: app/templates/deliveries/deliveryReport.html:12
+msgid "Received products: "
+msgstr "Přijaté produkty: "
+
+#: app/templates/deliveries/deliveryReport.html:41
+msgid ""
+"* The received quantity is higher than ordered total. Value in () shows sum "
+"of all orders for given product."
+msgstr ""
+"* Přijaté množství je větší než úhrn objednávek. Hodnota v () představuje "
+"součet množství všech objednávek daného produktu."
+
+#: app/templates/deliveries/deliveryReport.html:50
+msgid "Completed and closed orders to maker: "
+msgstr "Zkompletované a uzavřené objednávky výrobci: "
+
+#: app/templates/deliveries/deliveryReport.html:53
+#: app/templates/deliveries/deliveryReport.html:75
+#: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
+#: app/templates/orders/productorders.html:43
+msgid "Order ID"
+msgstr "ID objednávky"
+
+#: app/templates/deliveries/deliveryReport.html:54
+#: app/templates/deliveries/deliveryReport.html:76
+#: app/templates/orders/order.html:20 app/templates/orders/orders.html:34
+#: app/templates/orders/productorders.html:44
+msgid "Placed"
+msgstr "Zadáno"
+
+#: app/templates/deliveries/deliveryReport.html:55
+#: app/templates/deliveries/deliveryReport.html:77
+#: app/templates/orders/order.html:24 app/templates/orders/orders.html:35
+#: app/templates/orders/productorders.html:45
+msgid "Ordered by"
+msgstr "Objednatel"
+
+#: app/templates/deliveries/deliveryReport.html:72
+msgid "Not fully completed but partially delivered orders to maker: "
+msgstr "Neuzavřené, ale částečně dodané objednávky výrobci: "
+
+#: app/templates/deliveries/deliveryReport.html:97
+msgid "To stock"
+msgstr "Na sklad"
+
+#: app/templates/deliveries/deliveryReport.html:98
+msgid "To deliveries"
+msgstr "Na dodávky"
+
+#: app/templates/deliveries/deliveryReport.html:99
+msgid "To orders"
+msgstr "Na objednávky"
+
+#: app/templates/deliveries/newDelivery.html:51
+msgid "Receive a new delivery"
+msgstr "Přijmout novou dodávku"
+
+#: app/templates/deliveries/newDelivery.html:60
+#: app/templates/orders/createOrder.html:60
+msgid "Select maker"
+msgstr "Vybrat výrobce"
+
+#: app/templates/deliveries/newDelivery.html:74
+#: app/templates/orders/createOrder.html:74
+msgid "Continue"
+msgstr "Pokračovat"
+
+#: app/templates/deliveries/newDelivery.html:75
+#: app/templates/deliveries/newDelivery.html:114
+#: app/templates/orders/createOrder.html:75
+#: app/templates/orders/createOrder.html:114
+#: app/templates/product/addProduct.html:160
+#: app/templates/product/editProduct.html:166
+#: app/templates/settings/addCategory.html:40
+#: app/templates/settings/addMaker.html:40
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: app/templates/deliveries/newDelivery.html:87
+#: app/templates/orders/createOrder.html:87
+#: app/templates/orders/productorders.html:21
+msgid "Code"
+msgstr "Kód"
+
+#: app/templates/deliveries/newDelivery.html:88
+#: app/templates/orders/createOrder.html:88
+msgid "Name CS"
+msgstr "Název v češtině"
+
+#: app/templates/deliveries/newDelivery.html:89
+#: app/templates/orders/createOrder.html:89
+msgid "Name JP"
+msgstr "Název v japonštině"
+
+#: app/templates/deliveries/newDelivery.html:90
+msgid "Delivered Quantity"
+msgstr "Doručené množství"
+
+#: app/templates/deliveries/newDelivery.html:111
+#: app/templates/orders/createOrder.html:111
+msgid "Submit"
+msgstr "Potvrdit"
+
+#: app/templates/deliveries/newDelivery.html:112
+#: app/templates/orders/createOrder.html:112
+msgid "Modify"
+msgstr "Pozměnit"
+
+#: app/templates/deliveries/newDelivery.html:113
+msgid "Receive products"
+msgstr "Přijmout produkty"
+
+#: app/templates/login/login.html:13
+msgid "Enter your user id"
+msgstr "Zadejte uživatelské jméno"
+
+#: app/templates/login/login.html:28
+msgid "Enter your password"
+msgstr "Zadejte heslo"
+
+#: app/templates/login/login.html:42
+msgid "Remember Me"
+msgstr "Zapamatuj si mě"
+
+#: app/templates/orders/createOrder.html:51
+msgid "Place a new order"
+msgstr "Zadat novou objednávku"
+
+#: app/templates/orders/createOrder.html:90
+msgid "Order Quantity"
+msgstr "Objednané množství"
+
+#: app/templates/orders/createOrder.html:113
+#: app/templates/orders/orders.html:9
+msgid "Place order"
+msgstr "Zadat objednávku"
+
+#: app/templates/orders/order.html:42
+msgid "Delivered"
+msgstr "Dodáno"
+
+#: app/templates/orders/orders.html:5
+msgid "Orders overview"
+msgstr "Přehled objednávek"
+
+#: app/templates/orders/productorders.html:5
+msgid "Orders for Product"
+msgstr "Objednávky produktu"
+
+#: app/templates/orders/productorders.html:13
+msgid "Product name CS"
+msgstr "Název produktu CS"
+
+#: app/templates/orders/productorders.html:17
+msgid "Product name JP"
+msgstr "Název produktu JP"
+
+#: app/templates/product/addProduct.html:89
+#: app/templates/product/editProduct.html:94
+msgid "Czech description"
+msgstr "Popis česky"
+
+#: app/templates/product/addProduct.html:103
+#: app/templates/product/editProduct.html:108
+msgid "Japanese description"
+msgstr "Popis japonsky"
+
+#: app/templates/product/addProduct.html:117
+#: app/templates/product/editProduct.html:122
+msgid "Unit price"
+msgstr "Nákupní cena"
+
+#: app/templates/product/addProduct.html:131
+#: app/templates/product/editProduct.html:136
+msgid "Retail price"
+msgstr "Maloobch. cena"
+
+#: app/templates/product/addProduct.html:145
+#: app/templates/product/editProduct.html:150
+msgid "Quantity on stock"
+msgstr "Množsví na skladě"
+
+#: app/templates/product/addProduct.html:159
+#: app/templates/product/editProduct.html:165
+msgid "Save product"
+msgstr "Uložit produkt"
+
+#: app/templates/product/editProduct.html:39
+msgid "Do you really want to delete this product?"
+msgstr "Chcete opravdu smazat tento produkt?"
+
+#: app/templates/settings/addCategory.html:11
+#: app/templates/settings/categories.html:14
+#: app/templates/settings/editCategory.html:24
+msgid "Category name in Czech"
+msgstr "Název kategorie v češtině"
+
+#: app/templates/settings/addCategory.html:25
+#: app/templates/settings/categories.html:15
+#: app/templates/settings/editCategory.html:38
+msgid "Category name in Japanese"
+msgstr "Název kategorie v japonštině"
+
+#: app/templates/settings/addCategory.html:39
+#: app/templates/settings/editCategory.html:52
+msgid "Save category"
+msgstr "Uložit kategorii"
+
+#: app/templates/settings/addMaker.html:11
+#: app/templates/settings/editMaker.html:26
+msgid "Maker name"
+msgstr "Název výrobce"
+
+#: app/templates/settings/addMaker.html:25
+#: app/templates/settings/editMaker.html:40
+msgid "Product category"
+msgstr "Kategorie produktu"
+
+#: app/templates/settings/addMaker.html:39
+#: app/templates/settings/editMaker.html:54
+msgid "Save maker"
+msgstr "Uložit výrobce"
+
+#: app/templates/settings/categories.html:3
+msgid "List of Product Categories"
+msgstr "Seznam kategorií produktů"
+
+#: app/templates/settings/categories.html:7
+msgid "Add product category"
+msgstr "Přidat kategorii produktů"
+
+#: app/templates/settings/categories.html:13
+msgid "Category ID"
+msgstr "ID kategorie"
+
+#: app/templates/settings/editCategory.html:6
+msgid "Do you really want to delete this category?"
+msgstr "Chcete opravdu smazat tuto kategorii?"
+
+#: app/templates/settings/editCategory.html:53
+msgid "Delete category"
+msgstr "Smazat kategorii"
+
+#: app/templates/settings/editMaker.html:8
+msgid "Do you really want to delete this maker?"
+msgstr "Chcete opravdu smazat tohoto výrobce?"
+
+#: app/templates/settings/editMaker.html:55
+msgid "Delete maker"
+msgstr "Smazat výrobce"
+
+#: app/templates/settings/makers.html:4
+msgid "List of Makers"
+msgstr "Seznam výrobců"
+
+#: app/templates/settings/makers.html:8
+msgid "Add maker"
+msgstr "Přidat výrobce"
+
+#: app/templates/settings/makers.html:14
+msgid "Maker ID"
+msgstr "ID výrobce"
+
+#: app/templates/settings/makers.html:15
+msgid "Maker's Name"
+msgstr "Název výrobce"
+
+#: app/templates/settings/makers.html:16
+msgid "Product Category"
+msgstr "Kategorie produktu"
+
+#~ msgid "Product ID"
+#~ msgstr "ID produktu"
+
+#~ msgid "Delivered XXX"
+#~ msgstr "Dodávky"

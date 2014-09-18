@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Orders for Product') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+{% if product %}
+<div class="row">
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        <tr>
+            <th class="info col-md-3">{{ _('Product name CS') }}</th>
+            <td colspan="3">{{ product.desc_CS }}</td>
+        </tr>
+        <tr>
+            <th class="info">{{ _('Product name JP') }}</th>
+            <td colspan="3">{{ product.desc_JP }}</td>
+        </tr>
+        <tr>
+            <th class="info">{{ _('Code') }}</th>
+            <td>{{ product.code }}</td>
+            <th class="info info col-md-3">{{ _('Maker') }}</th>
+            <td>{{ product.maker.name }}</td>
+        </tr>
+        <tr>
+            <th class="info">{{ _('Unit Price') }}</th>
+            <td>{{ product.price_unit }}</td>
+            <th class="info">{{ _('Retail Price') }}</th>
+            <td>{{ product.price_retail }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+
+<br/>
+
+{% if orders %}
+<div class="row">
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px td-border-top-1px">
+    <thead>
+        <tr>
+            <th class="td-border-left-1px">{{ _('Order ID') }}</th>
+            <th>{{ _('Placed') }}</th>
+            <th>{{ _('Ordered by') }}</th>
+            <th class="td-border-right-1px">{{ _('Quantity') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr onclick="window.location.href = '{{ url_for("order", id=order.order.id) }}'">
+            <td class="clickable-td td-border-left-2px">{{ order.order.id }}</td>
+            <td class="clickable-td">{{ momentjs(order.order.created_dt).format('LLL') }}</td>
+            <td class="clickable-td">{{ order.order.orderer.nickname }}</td>
+            <td class="clickable-td td-border-right-2px">{{ order.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

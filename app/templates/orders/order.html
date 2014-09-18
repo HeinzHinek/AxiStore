@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Order details') }}</h1>
+    {% include 'flash.html' %}
+
+    <div>
+        <a href="{{ url_for('orders') }}">{{ _('Back to the list') }}</a>
+    </div>
+    <br/>
+</div>
+
+{% if order %}
+<div class="row">
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        <tr>
+            <th class="info col-md-3">{{ _('Order ID') }}</th>
+            <td class="col-md-3">{{ order.id }}</td>
+            <th class="info info col-md-3">{{ _('Placed') }}</th>
+            <td class="col-md-3">{{ momentjs(order.created_dt).format('LLL') }}</td>
+        </tr>
+        <tr>
+            <th class="info info">{{ _('Ordered by') }}</th>
+            <td>{{ order.orderer.nickname }}</td>
+            <th class="info info">{{ _('Maker') }}</th>
+            <td>{{ order.maker.name }}</td>
+        </tr>
+    </table>
+</div>
+{% endif %}
+
+{% if products %}
+<div class="row">
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
+    <thead>
+        <tr>
+            <th>{{ _('Product code') }}</th>
+            <th>{{ _('Description CS') }}</th>
+            <th>{{ _('Description JP') }}</th>
+            <th>{{ _('Quantity') }}</th>
+            <th>{{ _('Delivered') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td class="clickable-td">{{ product.product.code }}</td>
+            <td class="clickable-td">{{ product.product.desc_CS }}</td>
+            <td class="clickable-td">{{ product.product.desc_JP }}</td>
+            <td class="clickable-td">{{ product.quantity }}</td>
+            <td class="clickable-td">{{ product.qty_delivered }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}
