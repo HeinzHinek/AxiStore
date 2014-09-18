@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from app import db
-from flask_wtf import Form, ValidationError
+from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, HiddenField, FileField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms import validators
@@ -51,7 +50,8 @@ class AddProductForm(Form):
             if self.request and (product.code == self.request.form['orig_code']):
                 pass
             else:
-                raise ValidationError(gettext('This product code is already in use!'))
+                pass
+                #raise ValidationError(gettext('This product code is already in use!'))
 
 
 class AddUserForm(Form):
