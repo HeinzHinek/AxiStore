@@ -23,7 +23,8 @@ def users(page=1):
     users = User.query.paginate(page, current_user.products_per_page, False)
     return render_template('/settings/users.html',
                     title=gettext("User List"),
-                    roles={v: k for k, v in USER_ROLES.items()},
+                    roles=USER_ROLES,
+                    #roles={v: k for k, v in USER_ROLES.items()},
                     languages=LANGUAGES,
                     users=users)
 
