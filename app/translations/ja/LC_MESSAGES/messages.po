@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-09-11 21:39+0900\n"
-"PO-Revision-Date: 2014-09-11 21:39+0900\n"
+"POT-Creation-Date: 2014-09-23 20:59+0900\n"
+"PO-Revision-Date: 2014-09-23 21:14+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -23,56 +23,60 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "このページのアクセスにはログインが必要です。"
 
-#: app/forms.py:51
-msgid "This product code is already in use!"
-msgstr "入力された品番はすでに登録されています！"
+#: app/forms.py:62
+msgid "Passwords must match"
+msgstr "確認用のパスワードが異なっています"
 
-#: app/viewsBase.py:34
+#: app/viewsBase.py:53
 msgid "Home"
 msgstr "Home"
 
-#: app/viewsBase.py:58
+#: app/viewsBase.py:85
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:60 app/viewsBase.py:62
+#: app/viewsBase.py:87 app/viewsBase.py:89
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
-#: app/viewsBase.py:89
+#: app/viewsBase.py:107
 msgid "Stock condition"
 msgstr "在庫状況"
 
-#: app/viewsBase.py:108 app/templates/user.html:3
+#: app/viewsBase.py:127
+msgid "User settings sucessfully updated."
+msgstr "ユーザーの情報が更新されました。"
+
+#: app/viewsBase.py:135 app/templates/user.html:3
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:116 app/templates/base.html:61
+#: app/viewsBase.py:143 app/templates/base.html:61
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
 
-#: app/viewsCategory.py:17
+#: app/viewsCategory.py:16
 msgid "Product Categories"
 msgstr "製品のカテゴリー"
 
-#: app/viewsCategory.py:31
+#: app/viewsCategory.py:32
 msgid "New product category successfully added."
 msgstr "新しい製品を追加しました。"
 
-#: app/viewsCategory.py:34 app/templates/settings/addCategory.html:3
+#: app/viewsCategory.py:35 app/templates/settings/addCategory.html:3
 msgid "Add New Product Category"
 msgstr "新しい製品カテゴリーを追加"
 
-#: app/viewsCategory.py:43
+#: app/viewsCategory.py:44
 msgid "Category not found."
 msgstr "カテゴリーが不明です。"
 
-#: app/viewsCategory.py:59
+#: app/viewsCategory.py:60
 msgid "Category successfully changed."
 msgstr "カテゴリーが変更されました。"
 
-#: app/viewsCategory.py:62 app/templates/settings/editCategory.html:13
+#: app/viewsCategory.py:63 app/templates/settings/editCategory.html:13
 msgid "Edit Category"
 msgstr "カテゴリー変更"
 
@@ -170,7 +174,31 @@ msgstr "製品が変更されました。"
 msgid "Edit Product"
 msgstr "製品を変更する"
 
-#: app/templates/base.html:41 app/templates/stock.html:68
+#: app/viewsSettings.py:25
+msgid "User List"
+msgstr "ユーザーの一覧"
+
+#: app/viewsSettings.py:43
+msgid "New user successfully added."
+msgstr "新しいユーザーが追加されました。"
+
+#: app/viewsSettings.py:46 app/templates/settings/addUser.html:3
+msgid "Add New User"
+msgstr "新しいユーザーを追加する"
+
+#: app/viewsSettings.py:63
+msgid "Data Import"
+msgstr "データのインポート"
+
+#: app/viewsSettings.py:71
+msgid "Data Export"
+msgstr "データのエクスポート"
+
+#: app/viewsSettings.py:93
+msgid "CSV uploaded and processed sucessfully."
+msgstr "CSVファイルのアップロードと処理が成功しました。"
+
+#: app/templates/base.html:41 app/templates/stock.html:104
 msgid "Stock"
 msgstr "在庫"
 
@@ -216,26 +244,34 @@ msgid "Hi, "
 msgstr "こんにちは、"
 
 #: app/templates/settings.html:7
+msgid "Manage users"
+msgstr "ユーザーの管理"
+
+#: app/templates/settings.html:12
 msgid "Manage makers"
 msgstr "メーカーの管理"
 
-#: app/templates/settings.html:11
+#: app/templates/settings.html:16
 msgid "Manage product categories"
 msgstr "製品カテゴリーの管理"
 
-#: app/templates/stock.html:37
+#: app/templates/settings.html:21
+msgid "Import data from csv"
+msgstr "CSVファイルからデータをインポート"
+
+#: app/templates/settings.html:24
+msgid "Export data as csv"
+msgstr "CSVファイルとしてデータをエキスポート"
+
+#: app/templates/stock.html:54
 msgid "Stock overview"
 msgstr "在庫の状況"
 
-#: app/templates/stock.html:41
-msgid "Add product"
-msgstr "製品を追加"
-
-#: app/templates/stock.html:62 app/templates/deliveries/deliveryReport.html:15
+#: app/templates/stock.html:75 app/templates/deliveries/deliveryReport.html:15
 msgid "Product Code"
 msgstr "品番"
 
-#: app/templates/stock.html:63 app/templates/deliveries/deliveries.html:36
+#: app/templates/stock.html:82 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:26
 #: app/templates/deliveries/deliveryReport.html:16
 #: app/templates/deliveries/deliveryReport.html:56
@@ -247,63 +283,69 @@ msgstr "品番"
 msgid "Maker"
 msgstr "メーカー"
 
-#: app/templates/stock.html:64 app/templates/deliveries/delivery.html:39
+#: app/templates/stock.html:89
+msgid "All"
+msgstr "全て"
+
+#: app/templates/stock.html:100 app/templates/deliveries/delivery.html:39
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/orders/order.html:39
 msgid "Description CS"
 msgstr "チェコ語の説明"
 
-#: app/templates/stock.html:65 app/templates/deliveries/delivery.html:40
+#: app/templates/stock.html:101 app/templates/deliveries/delivery.html:40
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:40
 msgid "Description JP"
 msgstr "日本語の説明"
 
-#: app/templates/stock.html:66 app/templates/orders/productorders.html:27
+#: app/templates/stock.html:102 app/templates/orders/productorders.html:27
 msgid "Unit Price"
 msgstr "単価"
 
-#: app/templates/stock.html:67 app/templates/orders/productorders.html:29
+#: app/templates/stock.html:103 app/templates/orders/productorders.html:29
 msgid "Retail Price"
 msgstr "小売価格"
 
-#: app/templates/stock.html:69
+#: app/templates/stock.html:105
 msgid "Req."
 msgstr "受注"
 
-#: app/templates/stock.html:70
+#: app/templates/stock.html:106
 msgid "Ord."
 msgstr "発注"
 
-#: app/templates/stock.html:71
+#: app/templates/stock.html:107
 msgid "Net"
 msgstr "正味"
 
-#: app/templates/stock.html:132 app/templates/stock.html:134
+#: app/templates/stock.html:170 app/templates/stock.html:172
 #: app/templates/deliveries/deliveries.html:56
 #: app/templates/deliveries/deliveries.html:58
 #: app/templates/orders/orders.html:58 app/templates/orders/orders.html:60
-#: app/templates/settings/categories.html:31
-#: app/templates/settings/categories.html:33
 #: app/templates/settings/makers.html:33 app/templates/settings/makers.html:35
+#: app/templates/settings/users.html:35 app/templates/settings/users.html:37
 msgid "Previous"
 msgstr "前"
 
-#: app/templates/stock.html:137 app/templates/stock.html:139
+#: app/templates/stock.html:191 app/templates/stock.html:193
 #: app/templates/deliveries/deliveries.html:61
 #: app/templates/deliveries/deliveries.html:63
 #: app/templates/orders/orders.html:63 app/templates/orders/orders.html:65
-#: app/templates/settings/categories.html:36
-#: app/templates/settings/categories.html:38
 #: app/templates/settings/makers.html:38 app/templates/settings/makers.html:40
+#: app/templates/settings/users.html:40 app/templates/settings/users.html:42
 msgid "Next"
 msgstr "次"
 
-#: app/templates/user.html:9
+#: app/templates/user.html:10
 msgid "Select your preferred language"
 msgstr "言語をお選びください"
 
-#: app/templates/user.html:17
+#: app/templates/user.html:19
+msgid "Select number of products displayed per page"
+msgstr "ページ一枚に表示される商品の件数を入力してください"
+
+#: app/templates/user.html:30
 msgid "Save settings"
 msgstr "設定を保存"
 
@@ -425,39 +467,40 @@ msgid "Receive a new delivery"
 msgstr "新規入荷を受け取る"
 
 #: app/templates/deliveries/newDelivery.html:60
-#: app/templates/orders/createOrder.html:60
+#: app/templates/orders/createOrder.html:68
 msgid "Select maker"
 msgstr "メーカーの選択"
 
 #: app/templates/deliveries/newDelivery.html:74
-#: app/templates/orders/createOrder.html:74
+#: app/templates/orders/createOrder.html:82
 msgid "Continue"
 msgstr "次へ"
 
 #: app/templates/deliveries/newDelivery.html:75
 #: app/templates/deliveries/newDelivery.html:114
-#: app/templates/orders/createOrder.html:75
-#: app/templates/orders/createOrder.html:114
+#: app/templates/orders/createOrder.html:83
+#: app/templates/orders/createOrder.html:122
 #: app/templates/product/addProduct.html:160
 #: app/templates/product/editProduct.html:166
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addMaker.html:40
+#: app/templates/settings/addUser.html:96
 msgid "Cancel"
 msgstr "キャンセル"
 
 #: app/templates/deliveries/newDelivery.html:87
-#: app/templates/orders/createOrder.html:87
+#: app/templates/orders/createOrder.html:95
 #: app/templates/orders/productorders.html:21
 msgid "Code"
 msgstr "品番"
 
 #: app/templates/deliveries/newDelivery.html:88
-#: app/templates/orders/createOrder.html:88
+#: app/templates/orders/createOrder.html:96
 msgid "Name CS"
 msgstr "チェコ語の品名"
 
 #: app/templates/deliveries/newDelivery.html:89
-#: app/templates/orders/createOrder.html:89
+#: app/templates/orders/createOrder.html:97
 msgid "Name JP"
 msgstr "日本語の品名"
 
@@ -466,12 +509,12 @@ msgid "Delivered Quantity"
 msgstr "入庫数量"
 
 #: app/templates/deliveries/newDelivery.html:111
-#: app/templates/orders/createOrder.html:111
+#: app/templates/orders/createOrder.html:119
 msgid "Submit"
 msgstr "確認"
 
 #: app/templates/deliveries/newDelivery.html:112
-#: app/templates/orders/createOrder.html:112
+#: app/templates/orders/createOrder.html:120
 msgid "Modify"
 msgstr "修正"
 
@@ -491,15 +534,15 @@ msgstr "パスワード"
 msgid "Remember Me"
 msgstr "パスワードを記録"
 
-#: app/templates/orders/createOrder.html:51
+#: app/templates/orders/createOrder.html:59
 msgid "Place a new order"
 msgstr "新規発注を入力する"
 
-#: app/templates/orders/createOrder.html:90
+#: app/templates/orders/createOrder.html:98
 msgid "Order Quantity"
 msgstr "発注数量"
 
-#: app/templates/orders/createOrder.html:113
+#: app/templates/orders/createOrder.html:121
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "発注を入力"
@@ -559,13 +602,13 @@ msgid "Do you really want to delete this product?"
 msgstr "本当にこの製品を削除しますか？"
 
 #: app/templates/settings/addCategory.html:11
-#: app/templates/settings/categories.html:14
+#: app/templates/settings/categories.html:48
 #: app/templates/settings/editCategory.html:24
 msgid "Category name in Czech"
 msgstr "チェコ語のカテゴリー名"
 
 #: app/templates/settings/addCategory.html:25
-#: app/templates/settings/categories.html:15
+#: app/templates/settings/categories.html:49
 #: app/templates/settings/editCategory.html:38
 msgid "Category name in Japanese"
 msgstr "日本語のカテゴリー名"
@@ -590,17 +633,75 @@ msgstr "製品カテゴリー"
 msgid "Save maker"
 msgstr "メーカーを保存する"
 
+#: app/templates/settings/addUser.html:11
+#, python-format
+msgid "User nickname"
+msgstr "ユーザー名"
+
+#: app/templates/settings/addUser.html:25
+msgid "User password"
+msgstr "ユーザーのパスワード"
+
+#: app/templates/settings/addUser.html:39
+msgid "Password confirmation"
+msgstr "パスワードの確認"
+
+#: app/templates/settings/addUser.html:53
+msgid "Email"
+msgstr "Eメール"
+
+#: app/templates/settings/addUser.html:67
+msgid "User role"
+msgstr "ユーザーの役割"
+
+#: app/templates/settings/addUser.html:81
+msgid "User language"
+msgstr "ユーザの言語"
+
+#: app/templates/settings/addUser.html:95
+msgid "Save user"
+msgstr "ユーザーを保存する"
+
 #: app/templates/settings/categories.html:3
 msgid "List of Product Categories"
 msgstr "製品カテゴリーの一覧"
 
-#: app/templates/settings/categories.html:7
+#: app/templates/settings/categories.html:40
 msgid "Add product category"
 msgstr "製品カテゴリーを追加する"
 
-#: app/templates/settings/categories.html:13
+#: app/templates/settings/categories.html:47
 msgid "Category ID"
 msgstr "カテゴリーのID"
+
+#: app/templates/settings/dataexport.html:5
+msgid "Export of Data"
+msgstr "データのエキスポート"
+
+#: app/templates/settings/dataexport.html:11
+msgid "Download database data for:"
+msgstr "ダウンロードするDBデータの選択："
+
+#: app/templates/settings/dataexport.html:14
+#: app/templates/settings/dataimport.html:16
+msgid "Products"
+msgstr "製品"
+
+#: app/templates/settings/dataimport.html:5
+msgid "Import of Data"
+msgstr "データのインポート"
+
+#: app/templates/settings/dataimport.html:11
+msgid "Upload database data from CSV file for:"
+msgstr "CSVファイルとしてアップロードするDBデータの選択："
+
+#: app/templates/settings/dataimport.html:18
+msgid "Data must be aligned to the following columns:"
+msgstr "データは次のコラム順で並べないといけない："
+
+#: app/templates/settings/dataimport.html:22
+msgid "Do NOT use quotation marks around strings!"
+msgstr "文字列をクォーテーションマークで囲まないこと！"
 
 #: app/templates/settings/editCategory.html:6
 msgid "Do you really want to delete this category?"
@@ -638,8 +739,39 @@ msgstr "マーカー名"
 msgid "Product Category"
 msgstr "カテゴリー名"
 
+#: app/templates/settings/users.html:4
+msgid "List of Users"
+msgstr "ユーザーの一覧"
+
+#: app/templates/settings/users.html:8
+msgid "Add user"
+msgstr "ユーザーの追加"
+
+#: app/templates/settings/users.html:14
+msgid "User ID"
+msgstr "ユーザーのID"
+
+#: app/templates/settings/users.html:15
+#, python-format
+msgid "Nickname"
+msgstr "ユーザー名"
+
+#: app/templates/settings/users.html:16
+msgid "Role"
+msgstr "役割"
+
+#: app/templates/settings/users.html:17
+msgid "Language"
+msgstr "言語"
+
 #~ msgid "Product ID"
 #~ msgstr "製品のＩＤ"
 
 #~ msgid "Delivered XXX"
 #~ msgstr "入庫数量"
+
+#~ msgid "This product code is already in use!"
+#~ msgstr "入力された品番はすでに登録されています！"
+
+#~ msgid "Add product"
+#~ msgstr "製品を追加"

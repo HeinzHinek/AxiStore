@@ -23,11 +23,9 @@ def users(page=1):
     users = User.query.paginate(page, current_user.products_per_page, False)
     return render_template('/settings/users.html',
                     title=gettext("User List"),
-                    roles=USER_ROLES,
-                    #roles={v: k for k, v in USER_ROLES.items()},
+                    roles = dict((v,k) for k,v in USER_ROLES.items()),
                     languages=LANGUAGES,
                     users=users)
-
 
 @app.route('/settings/adduser', methods=['GET', 'POST'])
 @login_required
@@ -89,7 +87,7 @@ def process_csv(path, orm):
             obj = orm()
             items = OrderedDict(zip(cols, row))
             for item in items:
-                setattr(obj, item, items[item].decode('utf-8'))
+                setattr(obj, item, items[item].decode('utf-8-sig'))
                 db.session.add(obj)
     db.session.commit()
     return gettext('CSV uploaded and processed sucessfully.')

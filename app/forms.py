@@ -19,8 +19,8 @@ class LoginForm(Form):
 
 
 class UserForm(Form):
-    #inv_lang = {v: k for k, v in LANGUAGES.items()}
-    lang = [(v, k) for k, v in LANGUAGES.iteritems()]
+    inv_lang = dict((v, k) for k, v in LANGUAGES.items())
+    lang = [(v, k) for k, v in inv_lang.iteritems()]
     language = SelectField('user_language', choices=lang)
     products_per_page = IntegerField('products_per_page', [validators.NumberRange(min=3)],
                                      default=PRODUCTS_PER_PAGE)
@@ -67,7 +67,8 @@ class AddUserForm(Form):
     role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
     role = SelectField('role', choices=role)
 
-    lang = [(v, k) for k, v in LANGUAGES.iteritems()]
+    inv_lang = dict((v, k) for k, v in LANGUAGES.items())
+    lang = [(v, k) for k, v in inv_lang.iteritems()]
     language = SelectField('language', choices=lang)
 
 
