@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+$(document).ready(function() {
+
+    $(".input-qty").focus(function(){
+        $(this).on("mouseup.a keyup.a", function(e){
+            $(this).off("mouseup.a keyup.a").select();
+        });
+    });
+
+    $('form').bind("keyup keypress", function(e) {
+        var code = e.keyCode || e.which;
+        if (code  == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $(document).on('keyup', '.nums_only', function (e) {
+        $(this).removeClass('td-border-highlighted');
+        if (e.keyCode != '9') {
+            this.value = this.value.replace(/[^0-9\.]/g,'');
+        }
+    });
+
+    $('#btn_check').click( function() {
+        inputs = $('.input-qty');
+        var empty = true;
+        for (var i=0; i<inputs.length; i++) {
+            if ( $(inputs[i]).val() > 0 ) {
+                empty = false;
+                break;
+            }
+        }
+        if (empty == true) {
+            return;
+        }
+        for (var i=0; i<inputs.length; i++) {
+            if ( $(inputs[i]).val() == 0 ) {
+                $(inputs[i]).parent().parent().hide();
+            } else {
+                $span = $(inputs[i]).parent().find('span');
+                $span.text($(inputs[i]).val());
+                $(inputs[i]).hide();
+                $span.show();
+            }
+        }
+        $('.div-error').html('');
+        $('#btn_check').hide();
+        $('#btn_correct').show();
+        $('#btn_submit').show();
+    });
+
+    $('#btn_correct').click( function() {
+        $('.span-qty-order').hide();
+        $('.input-qty').show();
+        $('.tr-product').show();
+        $('.div-error').html('');
+        $('#btn_check').show();
+        $('#btn_correct').hide();
+        $('#btn_submit').hide();
+    });
+});
+</script>
+
+<div class="row">
+    <h1>{{ _('Select products to supply') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+{% if customer %}
+<div class="row">
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        {% if custType == 'cust' %}
+        <tr>
+            <th class="info">{{ _('Customer name') }}</th>
+            <td>{{ customer.name }}</td>
+        </tr>
+        {% elif custType == 'axm' %}
+        <tr>
+            <th class="info">{{ _('Axis Mart order number') }}</th>
+            <td>{{ customer.order_no }}</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+{% endif %}
+
+{% if products %}
+<div class="row">
+    <form action="" method="post" name="selectProducts">
+        <h3>{{ _('Requested products:') }}</h3>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th>{{ _('Code') }}</th>
+                <th>{{ _('Decription CS') }}</th>
+                <th>{{ _('Description JP') }}</th>
+                <th style="text-align: right;">{{ _('Retail Price') }}</th>
+                <th style="text-align: right;">{{ _('Req. quantity') }}</th>
+                <th style="text-align: right;">{{ _('Supply quantity') }}</th>
+            </tr>
+
+            {% for product in products %}
+            <tr class="tr-product">
+                <td>{{ product.code }}</td>
+                <td>{{ product.desc_CS }}</td>
+                <td>{{ product.desc_JP }}</td>
+                <td style="text-align: right;">{{ product.price_retail }}</td>
+                <td style="text-align: right;">{{ product.cust_request_qty }}</td>
+                <td>
+                    <input type="text" name="supp_qty-{{ product.id }}" size="3"
+                           class="input-qty form-control nums_only" style="text-align: right;" value="0"/>
+                    <span class="span-qty-order" style="display: none; float: right;">0</span>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="button" id="btn_check" class="btn btn-default" value="{{ _('Submit') }}"/>
+        <input type="button" id="btn_correct" class="btn btn-warning" value="{{ _('Modify') }}" style="display: none;"/>
+        <input type="submit" id="btn_submit" value="{{ _('Confirm supply') }}" class="btn btn-danger" style="display: none;">
+        <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("supplies")}}'" value="{{ _('Cancel') }}"/>
+    </form>
+</div>
+{% endif %}
+
+<br/>
+{% endblock %}

@@ -81,7 +81,7 @@ def receiveDelivery():
                     report_details = {'product': new_product, 'qty': new_quantity, 'over': 0}
 
                     '''Here we are going to take each order for given product (from oldest),
-                    and add delivered quantity and also product stock quantity by substracting
+                    and add delivered quantity and also product stock quantity by subtracting
                     new quantity, one order a time, until new quantity reaches zero.
                     If delivered quantity of given order reaches ordered quantity, then we
                     have to check, whether all other products of that order have been delivered.
@@ -106,8 +106,16 @@ def receiveDelivery():
                             op.qty_delivered = op.quantity
 
                             #if order completely delivered add to report
-                            if op.order.active_flg and op.order.check_completely_delivered():
-                                report['closed_orders'].append(op.order)
+                            if op.order.active_flg:
+                                if op.order.check_completely_delivered():
+                                    while True:
+                                        if op.request in report['changed_orders']:
+                                            report['changed_orders'].remove(op.request)
+                                        else:
+                                            break
+                                    report['closed_orders'].append(op.order)
+                                else:
+                                    report['changed_orders'].append(op.order)
 
                             if delta_qty == temp_qty:
                                 temp_qty = 0

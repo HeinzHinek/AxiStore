@@ -2,29 +2,34 @@
 {% block content %}
 
 <div class="row">
-    <h1>{{ _('Delivery from maker details') }}</h1>
+    <h1>{{ _('Order from customer details') }}</h1>
     {% include 'flash.html' %}
 
     <div>
-        <a href="{{ url_for('deliveries') }}">{{ _('Back to the list') }}</a>
+        <a href="{{ url_for('requests') }}">{{ _('Back to the list') }}</a>
     </div>
     <br/>
 </div>
 
-{% if delivery %}
+{% if req %}
 <div class="row">
     <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
         <tr>
-            <th class="info col-md-3">{{ _('Delivery ID') }}</th>
-            <td class="col-md-3">{{ delivery.id }}</td>
-            <th class="info info col-md-3">{{ _('Received') }}</th>
-            <td class="col-md-3">{{ momentjs(delivery.created_dt).format('LLL') }}</td>
+            <th class="info col-md-3">{{ _('Order ID') }}</th>
+            <td class="col-md-3">{{ req.id }}</td>
+            <th class="info info col-md-3">{{ _('Placed') }}</th>
+            <td class="col-md-3">{{ momentjs(req.created_dt).format('LLL') }}</td>
         </tr>
         <tr>
-            <th class="info info">{{ _('Recipient') }}</th>
-            <td>{{ delivery.recipient.nickname }}</td>
-            <th class="info info">{{ _('Maker') }}</th>
-            <td>{{ delivery.maker.name }}</td>
+            <th class="info info">{{ _('Received by') }}</th>
+            <td>{{ req.receiver.nickname }}</td>
+            {% if req.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                <th class="info info">{{ _('Order no.') }}</th>
+                <td>Axis Mart, {{ _('order no.') }} {{ req.customer.order_no }}</td>
+            {% else %}
+                <th class="info info">{{ _('Customer') }}</th>
+                <td>{{ req.customer.name }}</td>
+            {% endif %}
         </tr>
     </table>
 </div>
@@ -39,6 +44,7 @@
             <th>{{ _('Description CS') }}</th>
             <th>{{ _('Description JP') }}</th>
             <th>{{ _('Quantity') }}</th>
+            <th>{{ _('Supplied') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +54,7 @@
             <td class="clickable-td">{{ product.product.desc_CS }}</td>
             <td class="clickable-td">{{ product.product.desc_JP }}</td>
             <td class="clickable-td">{{ product.quantity }}</td>
+            <td class="clickable-td">{{ product.qty_supplied }}</td>
         </tr>
         {% endfor %}
     </tbody>

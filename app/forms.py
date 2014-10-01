@@ -5,8 +5,8 @@ from wtforms import StringField, PasswordField, FloatField, SelectField, Integer
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField
-from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE
-from models import Product, Maker, Category
+from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, CUSTOMER_TYPES
+from models import Product, Maker, Category, Customer, Request
 from flask.ext.babel import gettext
 import wtforms
 
@@ -109,3 +109,31 @@ class ProductQuantityForm(Form):
 
 class UploadForm(Form):
     filename = FileField()
+
+
+class SelectCustomerForm(Form):
+    customer = QuerySelectField('customer',
+                                [validators.data_required],
+                                query_factory=Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all,
+                                get_pk=lambda a: a.id,
+                                get_label=lambda a: a.name,
+                                allow_blank=True)
+    maker = QuerySelectField(query_factory=Maker.query.all,
+                             get_pk=lambda a: a.id,
+                             get_label=lambda a: a.name,
+                             allow_blank=True)
+
+
+class OrderNumberForm(Form):
+    order_no = IntegerField('order_no', [validators.data_required, validators.NumberRange(min=0, max=99999)])
+    maker = QuerySelectField(query_factory=Maker.query.all,
+                             get_pk=lambda a: a.id,
+                             get_label=lambda a: a.name,
+                             allow_blank=True)
+
+
+class SelectOrderNumberFormAxm(Form):
+    order = QuerySelectField(query_factory=Customer.query.filter(Request.active_flg == True).filter_by(customer_type=CUSTOMER_TYPES['TYPE_AXM']).all,
+                             get_pk=lambda a: a.id,
+                             get_label=lambda a: a.order_no,
+                             allow_blank=True)

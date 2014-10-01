@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+function checkValues() {
+    if ($('#select_cust').val() == '__None') {
+        $('#select_cust').addClass('td-border-highlighted');
+        alert("{{ _('Select a customer to supply to!') }}");
+        return false;
+    }
+    return true;
+}
+
+$(document).ready(function() {
+    $("input[type=text]").click(function(){
+        this.select();
+    });
+});
+</script>
+
+<div class="row">
+    <h1>{{ _('Select customer to supply to') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+    <form action="" method="post" name="selectCustomer">
+        {{formCustomer.hidden_tag()}}
+        <table class="table no-border">
+            <tr>
+                <td>
+                    <input type="hidden" name="custType" value="{{ custType }}">
+                    {% if custType == 'cust' %}
+                    <label>{{ _('Select customer') }}</label>
+                        <div class="input-group">
+                            {{ formCustomer.customer(id="select_cust", class="form-control") }}
+                        </div>
+                        {% for error in formCustomer.errors.customer %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    {% elif custType == 'axm' %}
+                        <h3>{{ _('Customer from Axis Mart') }}</h3>
+                        <label>{{ _('Select order number:') }}</label>
+                        <div class="input-group">
+                            {{ formCustomer.order(id="select_cust", class="form-control") }}
+                        </div>
+                        {% for error in formCustomer.errors.order %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" class="btn btn-info" onclick="return checkValues()" value="{{ _('Continue') }}"></td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+
+<br/>
+{% endblock %}

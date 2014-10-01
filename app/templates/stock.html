@@ -135,14 +135,11 @@ $(document).ready( function() {
             </td>
         </form>
 
-        <td style="text-align: right;" class="td-border-left-1px">{{ product.request_qty }}</td>
+        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
+                onclick="window.location.href = '{{ url_for("productrequests", id=product.id) }}'">{{ product.request_qty }}</td>
 
-        {% if product.order_qty == 0 %}
-        <td style="text-align: right; color: gray;" class="td-border-left-1px">{{ product.order_qty }}</td>
-        {% else %}
         <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
                 onclick="window.location.href = '{{ url_for("productorders", id=product.id) }}'">{{ product.order_qty }}</td>
-        {% endif %}
 
         {% if product.net_stock == None %}
         <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px">?

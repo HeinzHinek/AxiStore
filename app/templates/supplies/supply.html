@@ -2,29 +2,33 @@
 {% block content %}
 
 <div class="row">
-    <h1>{{ _('Delivery from maker details') }}</h1>
+    <h1>{{ _('Supply details') }}</h1>
     {% include 'flash.html' %}
 
     <div>
-        <a href="{{ url_for('deliveries') }}">{{ _('Back to the list') }}</a>
+        <a href="{{ url_for('supplies') }}">{{ _('Back to the list') }}</a>
     </div>
     <br/>
 </div>
 
-{% if delivery %}
+{% if supply %}
 <div class="row">
     <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
         <tr>
-            <th class="info col-md-3">{{ _('Delivery ID') }}</th>
-            <td class="col-md-3">{{ delivery.id }}</td>
-            <th class="info info col-md-3">{{ _('Received') }}</th>
-            <td class="col-md-3">{{ momentjs(delivery.created_dt).format('LLL') }}</td>
+            <th class="info col-md-3">{{ _('Supply ID') }}</th>
+            <td class="col-md-3">{{ supply.id }}</td>
+            <th class="info info col-md-3">{{ _('Sent') }}</th>
+            <td class="col-md-3">{{ momentjs(supply.created_dt).format('LLL') }}</td>
         </tr>
         <tr>
-            <th class="info info">{{ _('Recipient') }}</th>
-            <td>{{ delivery.recipient.nickname }}</td>
-            <th class="info info">{{ _('Maker') }}</th>
-            <td>{{ delivery.maker.name }}</td>
+            <th class="info info">{{ _('Sender') }}</th>
+            <td>{{ supply.sender.nickname }}</td>
+            <th class="info info">{{ _('Customer') }}</th>
+            {% if supply.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                <td>Axis Mart, {{ _('order no.') }} {{ supply.customer.order_no }}</td>
+            {% else %}
+                <td>{{ supply.customer.name }}</td>
+            {% endif %}
         </tr>
     </table>
 </div>

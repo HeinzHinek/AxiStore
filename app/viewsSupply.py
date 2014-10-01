@@ -1,0 +1,213 @@
+# -*- coding: utf-8 -*-
+
+from flask import render_template, flash, redirect, url_for, request, session, g
+from app import app, db
+from forms import SelectCustomerForm, ProductQuantityForm, SelectOrderNumberFormAxm
+from models import Supply, Product, Customer, SuppliedProducts
+from flask_login import login_required
+from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
+from flask.ext.babel import gettext
+import flask
+
+@app.route('/supplies')
+@app.route('/supplies/<int:page>')
+@login_required
+def supplies(page=1):
+    supplies = Supply.query.paginate(page, DEFAULT_PER_PAGE, False)
+    return render_template('supplies/supplies.html',
+                           title=gettext("Supplies"),
+                           CUSTOMER_TYPES=CUSTOMER_TYPES,
+                           supplies=supplies)
+
+
+@app.route('/supplies/newsupply', methods=['GET', 'POST'])
+@login_required
+def newSupply():
+    cust = flask.request.args.get('cust')
+    if not cust:
+        cust = 'cust'
+    if cust == 'cust':
+        formCustomer = SelectCustomerForm()
+    else:
+        formCustomer = SelectOrderNumberFormAxm()
+
+    if formCustomer.is_submitted():
+        if request.form['custType']:
+            session['new_supply'] = None
+            if request.form['custType'] == 'cust':
+                session['new_supply'] = [('custType', request.form['custType']), ('cust_id', request.form['customer'])]
+            elif request.form['custType'] == 'axm':
+                session['new_supply'] = [('custType', request.form['custType']), ('cust_id', request.form['order'])]
+            if session['new_supply']:
+                return redirect(url_for("supplyProducts"))
+
+    return render_template('supplies/newSupply.html',
+                           title=gettext("New Supply"),
+                           custType=cust,
+                           formCustomer=formCustomer)
+
+@app.route('/supplies/supplyproducts', methods=['GET', 'POST'])
+@login_required
+def supplyProducts():
+    if not session['new_supply']:
+        flash(gettext('No customer data!'))
+        return redirect(url_for("supplies"))
+    custType = session['new_supply'][0][1]
+    cust_id = session['new_supply'][1][1]
+    cust = Customer.query.filter_by(id=cust_id).first()
+
+    if not cust:
+        flash(gettext('Customer not found!'))
+        return redirect(url_for("supplies"))
+
+    if request.method == 'POST':
+        ids = {}
+        for attr in flask.request.form:
+            if attr.startswith("supp_qty-"):
+                key = attr.split('-')[1]
+                if flask.request.form[attr] != '0':
+                    ids[key] = flask.request.form[attr]
+        if not ids:
+            flash(gettext('No product quantities!'))
+            return redirect(url_for("supplies"))
+
+        new_supply = Supply()
+        #TODO other date than now   new_supply.created_dt =
+        new_supply.customer_id = cust_id
+        new_supply.user_id = g.user.id
+        db.session.add(new_supply)
+
+        #variable for reporting purposes
+        report = {'sender': g.user.nickname, 'customer': cust.name, 'order_no': cust.order_no, 'products': [],
+                  'closed_requests': [], 'changed_requests': [], 'oversent_requests': False}
+
+        for id in ids:
+            new_quantity = int(ids[id])
+            if new_quantity > 0:
+                new_product = Product.query.filter_by(id=int(id)).first()
+                if new_product:
+
+                    rp = SuppliedProducts(quantity=new_quantity)
+                    rp.product = new_product
+                    new_supply.products.append(rp)
+
+                    report_details = {'product': new_product, 'qty': new_quantity, 'over': 0}
+
+                    temp_qty = new_quantity
+                    #get requested products from current customer for product from oldest
+                    all_products = new_product.request_assocs
+                    requested_products = []
+                    for p in all_products:
+                       if p.request.customer_id == cust.id:
+                           requested_products.append(p)
+                    if not requested_products:
+                            flash(gettext('No requested products!'))
+                            return redirect(url_for("supplies"))
+                    requested_products.sort(key=lambda x: x.request.created_dt, reverse=False)
+
+                    for rp in requested_products:
+                        #count requested products quantity - qty_supplied = delta qty
+                        if rp.qty_supplied is None:
+                            rp.qty_supplied = 0
+                        delta_qty = rp.quantity - rp.qty_supplied
+
+                        if delta_qty <= temp_qty:
+
+                            if new_product.qty_stock is not None:
+                                new_product.qty_stock -= (rp.quantity - rp.qty_supplied)
+
+                            rp.qty_supplied = rp.quantity
+
+                            #if request completely supplied add to report
+                            if rp.request.active_flg:
+                                if rp.request.check_completely_supplied():
+                                    while True:
+                                        if rp.request in report['changed_requests']:
+                                            report['changed_requests'].remove(rp.request)
+                                        else:
+                                            break
+                                    report['closed_requests'].append(rp.request)
+                                else:
+                                    report['changed_requests'].append(rp.request)
+
+                            if delta_qty == temp_qty:
+                                temp_qty = 0
+                                break
+
+                        else:
+                            if new_product.qty_stock is not None:
+                                new_product.qty_stock -= temp_qty
+
+                            rp.qty_supplied += temp_qty
+                            temp_qty -= rp.qty_supplied
+                            report['changed_requests'].append(rp.request)
+                            break
+
+                        temp_qty -= delta_qty
+
+                    if temp_qty > 0:
+                        if new_product.qty_stock is not None:
+                            new_product.qty_stock -= temp_qty
+
+                        report_details['over'] = temp_qty
+                        report['oversent_requests'] = True
+                    report['products'].append(report_details)
+
+        db.session.commit()
+
+        flash( gettext('New delivery received sucessfully.') )
+        print(report)
+
+        #return render_template('supplies/supplyReport.html',
+        #                   title=gettext("Supply Report"),
+        #                   report=report)
+
+
+    requests = cust.requests.all()
+    products = []
+    for r in requests:
+        for rp in r.products:
+            if rp.product not in products:
+                rp.product.cust_request_qty = rp.product.customer_request_qty(cust.id)
+                products.append(rp.product)
+    return render_template('supplies/supplyProducts.html',
+                           custType=custType,
+                           customer=cust,
+                           products=products)
+
+
+@app.route('/supplies/entersupply', methods=['GET', 'POST'])
+@login_required
+def receiveDelivery():
+    formQuantities = ProductQuantityForm(request.form)
+    maker_id = request.form['maker_id']
+    if not maker_id:
+        flash(gettext("Maker not found."))
+        return redirect(url_for("supplies"))
+
+    if formQuantities.validate_on_submit():
+        pass
+
+    #if not validated return to maker select
+    products = Product.query.order_by(Product.maker_id, Product.code)\
+        .filter_by(maker_id=int(maker_id),
+                   active_flg=True).all()
+    formMaker = SelectMakerForm()
+    return render_template('supplies/newSupply.html',
+                           title=gettext("New Supply"),
+                           formMaker=formMaker,
+                           formQuantities=formQuantities,
+                           products=products)
+
+
+@app.route('/supply/<int:id>')
+@login_required
+def supply(id):
+    supply = Supply.query.filter_by(id=id).first()
+    if supply:
+        products = supply.products
+    return render_template('supplies/supply.html',
+                            title=gettext("Supply details"),
+                            supply=supply,
+                            CUSTOMER_TYPES=CUSTOMER_TYPES,
+                            products=products)

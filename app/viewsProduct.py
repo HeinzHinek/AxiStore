@@ -91,3 +91,32 @@ def checkProductId():
         else:
             result = 'OK'
     return jsonify({'result': result})
+
+
+@app.route('/findProductsAjax', methods=['POST'])
+@login_required
+def findProductAjax():
+    code = request.form['code'] if request.form['code'] else None
+    maker_id = request.form['maker'] if request.form['maker'] else None
+    desc_CS = request.form['desc_cs'] if request.form['desc_cs'] else None
+    desc_JP = request.form['desc_jp'] if request.form['desc_jp'] else None
+
+    try:
+        int_maker_id = int(maker_id)
+    except ValueError:
+        int_maker_id = None
+
+    if not code and not int_maker_id and not desc_CS and not desc_JP:
+        return '0'
+
+    result = db.session.query(Product)
+    if code:
+        result = result.filter(Product.code.like('%' + code + '%'))
+    if int_maker_id:
+        result = result.filter(Product.maker_id==int_maker_id)
+    if desc_CS:
+        result = result.filter(Product.desc_CS.like('%' + desc_CS + '%'))
+    if desc_JP:
+        result = result.filter(Product.desc_CS.like('%' + desc_JP + '%'))
+    result = result.filter(Product.active_flg==True)
+    return jsonify(result=[i.serialize for i in result.all()])

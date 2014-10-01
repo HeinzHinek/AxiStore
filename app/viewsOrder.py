@@ -15,7 +15,7 @@ from flask.ext.babel import gettext
 def orders(page=1):
     orders = Order.query.paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('orders/orders.html',
-                           title=gettext("Orders"),
+                           title=gettext("Orders to maker"),
                            orders=orders)
 
 
@@ -40,7 +40,7 @@ def createOrder():
                 formQuantities.fields.append_entry()
 
     return render_template('orders/createOrder.html',
-                           title=gettext("Place new order"),
+                           title=gettext("Place new order to maker"),
                            formMaker=formMaker,
                            formQuantities=formQuantities,
                            products=products)
@@ -83,7 +83,7 @@ def placeOrder():
                    active_flg=True).all()
     formMaker = SelectMakerForm()
     return render_template('orders/createOrder.html',
-                           title=gettext("Place new order"),
+                           title=gettext("Place new order to maker"),
                            formMaker=formMaker,
                            formQuantities=formQuantities,
                            products=products)
@@ -110,6 +110,6 @@ def productorders(id):
         orders = product.order_assocs
 
     return render_template('orders/productorders.html',
-                           title=gettext("Orders for product"),
+                           title=gettext("Orders to maker for product"),
                            product=product,
                            orders=orders)

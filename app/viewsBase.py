@@ -45,6 +45,12 @@ def before_request():
         g.user.products_per_page = PRODUCTS_PER_PAGE
 
 
+@app.after_request
+def after_request(response):
+    db.session.expire_all()
+    return response
+
+
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -88,11 +94,6 @@ def stock(page=1):
         else:
             flash(gettext('Input value error.'))
         return redirect(url_for("stock"))
-
-    #compute requested quantity for each product
-    #TODO, this is just a placeholder:
-    for product in products.items:
-        product.request_qty = 0
 
     #compute net stock for each product
     for product in products.items:

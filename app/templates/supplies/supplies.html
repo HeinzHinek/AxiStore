@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('Supplies to customers overview') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+
+<!-- This might be reused later
+{% if categories %}
+<ul class="nav nav-tabs" role="tablist">
+{% for category in categories %}
+  <li
+    {% if g.category_id == category.id %} class="active" {% endif %}
+    >
+    <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+-->
+
+{% if supplies %}
+<div class="row">
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px td-border-top-1px">
+    <thead>
+        <tr>
+            <th class="td-border-left-1px">{{ _('Supply ID') }}</th>
+            <th>{{ _('Sent') }}</th>
+            <th>{{ _('Sender') }}</th>
+            <th class="td-border-right-1px">{{ _('Customer') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for supply in supplies.items %}
+        <tr onclick="window.location.href = '{{ url_for("supply", id=supply.id) }}'">
+            <td class="clickable-td td-border-left-2px">{{ supply.id }}</td>
+            <td class="clickable-td">{{ momentjs(supply.created_dt).format('LLL') }}</td>
+            <td class="clickable-td">{{ supply.sender.nickname }}</td>
+            {% if supply.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                <td class="clickable-td td-border-right-2px">Axis Mart, {{ _('order no.') }} {{ supply.customer.order_no }}</td>
+            {% else %}
+                <td class="clickable-td td-border-right-2px">{{ supply.customer.name }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br>
+
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if supplies.has_prev or supplies.has_next %}
+        {% if supplies.has_prev %}
+        <li class="previous"><a href="{{ url_for('supplies', page = supplies.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if supplies.has_next %}
+        <li class="next"><a href="{{ url_for('supplies', page = deliveries.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+
+</div>
+{% endif %}
+
+{% endblock %}

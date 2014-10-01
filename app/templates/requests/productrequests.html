@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="row">
-    <h1>{{ _('Orders to maker for Product') }}</h1>
+    <h1>{{ _('Orders from customers for Product') }}</h1>
     {% include 'flash.html' %}
 </div>
 
@@ -35,7 +35,7 @@
 
 <br/>
 
-{% if orders %}
+{% if requests %}
 <div class="row">
     <table class="table table-hover table-striped table-responsive td-border-bottom-2px td-border-top-1px">
     <thead>
@@ -47,12 +47,16 @@
         </tr>
     </thead>
     <tbody>
-        {% for order in orders %}
-        <tr onclick="window.location.href = '{{ url_for("order", id=order.order.id) }}'">
-            <td class="clickable-td td-border-left-2px">{{ order.order.id }}</td>
-            <td class="clickable-td">{{ momentjs(order.order.created_dt).format('LLL') }}</td>
-            <td class="clickable-td">{{ order.order.orderer.nickname }}</td>
-            <td class="clickable-td td-border-right-2px">{{ order.quantity }}</td>
+        {% for request in requests %}
+        <tr onclick="window.location.href = '{{ url_for("request_detail", id=request.request.id) }}'">
+            <td class="clickable-td td-border-left-2px">{{ request.request.id }}</td>
+            <td class="clickable-td">{{ momentjs(request.request.created_dt).format('LLL') }}</td>
+            {% if request.request.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                <td class="clickable-td">Axis Mart, {{ _('order no.') }} {{ request.request.customer.order_no }}</td>
+            {% else %}
+                <td class="clickable-td">{{ request.request.customer.name }}</td>
+            {% endif %}
+            <td class="clickable-td td-border-right-2px">{{ request.quantity }}</td>
         </tr>
         {% endfor %}
     </tbody>
