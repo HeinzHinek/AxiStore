@@ -69,11 +69,12 @@ def createRequest():
                 flash(gettext("Invalid data received!"))
                 return redirect(url_for("requests"))
 
-            req = Request()
-            req.user_id = g.user.id
-            req.customer_id = req_cust.id
-            req.active_flg = True
-            db.session.add(req)
+            new_request = Request()
+            new_request.user_id = g.user.id
+            new_request.customer_id = req_cust.id
+            new_request.active_flg = True
+            db.session.add(new_request)
+            db.session.commit()
 
             for id in ids:
                 new_product = db.session.query(Product).filter_by(id=id).first()
@@ -82,7 +83,8 @@ def createRequest():
                     return redirect(url_for("requests"))
                 rp = RequestedProducts(quantity=int(ids[id]))
                 rp.product = new_product
-                req.products.append(rp)
+                rp.request_id = new_request.id
+                new_request.products.append(rp)
 
             db.session.commit()
             flash(gettext("Order created successfully."))
@@ -115,8 +117,13 @@ def request_detail(id):
 @login_required
 def productrequests(id):
     product = Product.query.filter_by(id=id, active_flg=1).first()
+    requests = []
     if product:
-        requests = product.request_assocs
+        all_requests = product.request_assocs
+    for r in all_requests:
+        if r.request.active_flg:
+            if r.quantity - r.qty_supplied > 0:
+                requests.append(r)
 
     return render_template('requests/productrequests.html',
                            title=gettext("Orders from customers for product"),

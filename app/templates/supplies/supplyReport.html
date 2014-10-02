@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>{{ _('New delivery report') }}</h1>
+<h1>{{ _('New supply to customer report') }}</h1>
 {% include 'flash.html' %}
 
 <div style="border: 1px solid #dddddd; padding: 0px 20px;">
 <h3>{{ _('Details:') }}</h3>
 <ul>
-    <li>{{ _('Delivery from maker: ') }}{{ report['maker'] }}</li>
-    <li>{{ _('Recieved by: ') }}{{ report['recipient'] }}</li>
-    <li>{{ _('Received products: ') }}<br/>
+    <li>{{ _('Delivery to customer: ') }}{{ report['customer'] }}</li>
+    <li>{{ _('Sent by: ') }}{{ report['sender'] }}</li>
+    <li>{{ _('Sent products: ') }}<br/>
         <table class="table">
             <tr>
                 <th>{{ _('Product Code') }}</th>
@@ -36,9 +36,9 @@
             </tr>
         {% endfor %}
         <tr>
-            {% if report['overreceived_products'] %}
+            {% if report['oversent_requests'] %}
                 <td colspan="5" style="text-align: right;">
-                <span style="color: red;">{{ _('* The received quantity is higher than ordered total. Value in () shows sum of all orders for given product.') }}</span>
+                <span style="color: red;">{{ _('* The sent quantity is higher than requested total. Value in () shows sum of all orders of current customer for given product.') }}</span>
                 </td>
             {% endif %}
         </tr>
@@ -46,21 +46,21 @@
         <br/>
     </li>
 
-    {% if report['closed_orders'] %}
-        <li>{{ _('Completed and closed orders to maker: ') }}<br/>
+    {% if report['closed_requests'] %}
+        <li>{{ _('Completed and closed orders from customer: ') }}<br/>
             <table class="table">
                 <tr>
                     <th class="col-md-3">{{ _('Order ID') }}</th>
-                    <th class="col-md-3">{{ _('Placed') }}</th>
-                    <th class="col-md-3">{{ _('Ordered by') }}</th>
-                    <th class="col-md-3">{{ _('Maker') }}</th>
+                    <th class="col-md-3">{{ _('Received') }}</th>
+                    <th class="col-md-3">{{ _('Received by') }}</th>
+                    <th class="col-md-3">{{ _('Customer') }}</th>
                 </tr>
-                {% for order in report['closed_orders'] %}
+                {% for request in report['closed_requests'] %}
                     <tr>
-                        <td>{{ order.id }}</td>
-                        <td>{{ momentjs(order.created_dt).format('LLL') }}</td>
-                        <td>{{ order.orderer.nickname }}</td>
-                        <td>{{ order.maker.name }}</td>
+                        <td>{{ request.id }}</td>
+                        <td>{{ momentjs(request.created_dt).format('LLL') }}</td>
+                        <td>{{ request.receiver.nickname }}</td>
+                        <td>{{ request.customer.name }}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -68,21 +68,21 @@
         </li>
     {% endif %}
 
-    {% if report['changed_orders'] %}
-        <li>{{ _('Not fully completed but partially delivered orders to maker: ') }}<br/>
+    {% if report['changed_requests'] %}
+        <li>{{ _('Not fully completed but partially supplied orders from customer: ') }}<br/>
             <table class="table">
                 <tr>
                     <th class="col-md-3">{{ _('Order ID') }}</th>
-                    <th class="col-md-3">{{ _('Placed') }}</th>
-                    <th class="col-md-3">{{ _('Ordered by') }}</th>
-                    <th class="col-md-3">{{ _('Maker') }}</th>
+                    <th class="col-md-3">{{ _('Received') }}</th>
+                    <th class="col-md-3">{{ _('Received by') }}</th>
+                    <th class="col-md-3">{{ _('Customer') }}</th>
                 </tr>
-                {% for order in report['changed_orders'] %}
+                {% for request in report['changed_requests'] %}
                     <tr>
-                        <td>{{ order.id }}</td>
-                        <td>{{ momentjs(order.created_dt).format('LLL') }}</td>
-                        <td>{{ order.orderer.nickname }}</td>
-                        <td>{{ order.maker.name }}</td>
+                        <td>{{ request.id }}</td>
+                        <td>{{ momentjs(request.created_dt).format('LLL') }}</td>
+                        <td>{{ request.receiver.nickname }}</td>
+                        <td>{{ request.customer.name }}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -95,8 +95,8 @@
 <br/>
 <div>
 <a href="{{ url_for('stock') }}"><input type="button" class="btn btn-default" value="{{ _('To stock') }}"></a>
-<a href="{{ url_for('deliveries') }}"><input type="button" class="btn btn-default" value="{{ _('To deliveries') }}"></a>
-<a href="{{ url_for('orders') }}"><input type="button" class="btn btn-default" value="{{ _('To orders') }}"></a>
+<a href="{{ url_for('supplies') }}"><input type="button" class="btn btn-default" value="{{ _('To deliveries') }}"></a>
+<a href="{{ url_for('requests') }}"><input type="button" class="btn btn-default" value="{{ _('To orders') }}"></a>
 </div>
 <br/><br/>
 {% endblock %}

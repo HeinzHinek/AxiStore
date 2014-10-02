@@ -62,6 +62,7 @@ def placeOrder():
         new_order.maker_id = maker_id
         new_order.user_id = g.user.id
         db.session.add(new_order)
+        db.session.commit()
 
         #add ordered products to new order
         form_data = formQuantities.data['fields']
@@ -72,6 +73,7 @@ def placeOrder():
                 if new_product:
                     op = OrderedProducts(quantity=new_quantity)
                     op.product = new_product
+                    op.order_id = new_order.id
                     new_order.products.append(op)
 
         db.session.commit()

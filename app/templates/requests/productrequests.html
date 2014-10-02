@@ -56,7 +56,7 @@
             {% else %}
                 <td class="clickable-td">{{ request.request.customer.name }}</td>
             {% endif %}
-            <td class="clickable-td td-border-right-2px">{{ request.quantity }}</td>
+            <td class="clickable-td td-border-right-2px">{{ request.quantity - request.qty_supplied }}</td>
         </tr>
         {% endfor %}
     </tbody>

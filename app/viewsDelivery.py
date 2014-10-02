@@ -61,6 +61,7 @@ def receiveDelivery():
         new_delivery.maker_id = maker_id
         new_delivery.user_id = g.user.id
         db.session.add(new_delivery)
+        db.session.commit()
 
         #variable for reporting purposes
         report = {'recipient': g.user.nickname, 'maker': Maker.query.filter_by(id=maker_id).first().name, 'products': [], 'closed_orders': [],
@@ -76,6 +77,7 @@ def receiveDelivery():
 
                     dp = DeliveredProducts(quantity=new_quantity)
                     dp.product = new_product
+                    dp.delivery_id = new_delivery.id
                     new_delivery.products.append(dp)
 
                     report_details = {'product': new_product, 'qty': new_quantity, 'over': 0}
@@ -115,7 +117,8 @@ def receiveDelivery():
                                             break
                                     report['closed_orders'].append(op.order)
                                 else:
-                                    report['changed_orders'].append(op.order)
+                                    if op.order not in report['changed_orders']:
+                                        report['changed_orders'].append(op.order)
 
                             if delta_qty == temp_qty:
                                 temp_qty = 0
@@ -126,7 +129,8 @@ def receiveDelivery():
 
                             op.qty_delivered += temp_qty
                             temp_qty -= op.qty_delivered
-                            report['changed_orders'].append(op.order)
+                            if op.order not in report['changed_orders']:
+                                report['changed_orders'].append(op.order)
                             break
 
                         temp_qty -= delta_qty

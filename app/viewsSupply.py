@@ -76,6 +76,7 @@ def supplyProducts():
         new_supply.customer_id = cust_id
         new_supply.user_id = g.user.id
         db.session.add(new_supply)
+        db.session.commit()
 
         #variable for reporting purposes
         report = {'sender': g.user.nickname, 'customer': cust.name, 'order_no': cust.order_no, 'products': [],
@@ -89,6 +90,7 @@ def supplyProducts():
 
                     rp = SuppliedProducts(quantity=new_quantity)
                     rp.product = new_product
+                    rp.supply_id = new_supply.id
                     new_supply.products.append(rp)
 
                     report_details = {'product': new_product, 'qty': new_quantity, 'over': 0}
@@ -128,7 +130,8 @@ def supplyProducts():
                                             break
                                     report['closed_requests'].append(rp.request)
                                 else:
-                                    report['changed_requests'].append(rp.request)
+                                    if rp.request not in report['changed_requests']:
+                                        report['changed_requests'].append(rp.request)
 
                             if delta_qty == temp_qty:
                                 temp_qty = 0
@@ -140,7 +143,8 @@ def supplyProducts():
 
                             rp.qty_supplied += temp_qty
                             temp_qty -= rp.qty_supplied
-                            report['changed_requests'].append(rp.request)
+                            if rp.request not in report['changed_requests']:
+                                report['changed_requests'].append(rp.request)
                             break
 
                         temp_qty -= delta_qty
@@ -155,12 +159,12 @@ def supplyProducts():
 
         db.session.commit()
 
-        flash( gettext('New delivery received sucessfully.') )
+        flash(gettext('New supply sent sucessfully.'))
         print(report)
 
-        #return render_template('supplies/supplyReport.html',
-        #                   title=gettext("Supply Report"),
-        #                   report=report)
+        return render_template('supplies/supplyReport.html',
+                           title=gettext("Supply Report"),
+                           report=report)
 
 
     requests = cust.requests.all()
@@ -169,7 +173,8 @@ def supplyProducts():
         for rp in r.products:
             if rp.product not in products:
                 rp.product.cust_request_qty = rp.product.customer_request_qty(cust.id)
-                products.append(rp.product)
+                if rp.product.cust_request_qty > 0:
+                    products.append(rp.product)
     return render_template('supplies/supplyProducts.html',
                            custType=custType,
                            customer=cust,
@@ -178,7 +183,7 @@ def supplyProducts():
 
 @app.route('/supplies/entersupply', methods=['GET', 'POST'])
 @login_required
-def receiveDelivery():
+def receiveSupply():
     formQuantities = ProductQuantityForm(request.form)
     maker_id = request.form['maker_id']
     if not maker_id:
