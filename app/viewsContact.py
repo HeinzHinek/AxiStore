@@ -26,7 +26,7 @@ def addContact():
     if form.validate_on_submit():
         contact = Contact()
         contact.company_name = form.company_name.data
-        contact.post_code = form.post_code1.data + form.post_code2.data
+        contact.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
         contact.address1 = form.address1.data
         contact.address2 = form.address2.data
         contact.address3 = form.address3.data
@@ -66,7 +66,7 @@ def editContact(id=0):
         if form.validate():
             #update maker
             contact.company_name = form.company_name.data
-            contact.post_code = form.post_code1.data + form.post_code2.data
+            contact.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
             contact.address1 = form.address1.data
             contact.address2 = form.address2.data
             contact.address3 = form.address3.data
