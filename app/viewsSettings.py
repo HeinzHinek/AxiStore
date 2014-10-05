@@ -51,12 +51,13 @@ def addUser():
 @login_required
 def dataImport():
     form = UploadForm()
-    form.colnames = get_colnames(Product)
+    colnames = get_colnames(Product)
+    form.colnames = colnames
     if form.validate_on_submit() and form.filename.data:
         filename = secure_filename(form.filename.data.filename)
         file = request.files[form.filename.name].read()
         open(os.path.join(CSV_PATH, filename), 'w').write(file)
-        result = process_csv(os.path.join(CSV_PATH, filename), Product)
+        result = process_csv(os.path.join(CSV_PATH, filename), Product, colnames)
         flash(result)
         redirect('/settings/dataimport')
     return render_template('/settings/dataimport.html',
@@ -79,10 +80,9 @@ def downloadProducts():
     return redirect('/settings/dataexport')
 
 
-def process_csv(path, orm):
+def process_csv(path, orm, cols):
     with open(path, 'rb') as csvfile:
         reader = csv.reader(csvfile)
-        cols = get_colnames(orm)
         for row in reader:
             obj = orm()
             items = OrderedDict(zip(cols, row))

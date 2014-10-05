@@ -7,8 +7,14 @@
 <div style="border: 1px solid #dddddd; padding: 0px 20px;">
 <h3>{{ _('Details:') }}</h3>
 <ul>
-    <li>{{ _('Delivery to customer: ') }}{{ report['customer'] }}</li>
+    <li>{{ _('Delivery to customer: ') }}
+        {% if custType == 'cust' %}
+            {{ report['customer'].name }}
+        {% elif custType == 'axm' %}
+            Axis Mart, {{ _('order no.') }} {{ report['customer'].order_no }}
+        {% endif %}</li>
     <li>{{ _('Sent by: ') }}{{ report['sender'] }}</li>
+    <br/>
     <li>{{ _('Sent products: ') }}<br/>
         <table class="table">
             <tr>
@@ -90,6 +96,10 @@
         </li>
     {% endif %}
 </ul>
+    <div style="text-align: center">
+        <a href="{{ url_for('createNohinsho') }}"><input type="button" class="btn btn-info btn-lg" value="{{ _('Nohinsho download') }}" /></a>
+    </div>
+<br/>
 </div>
 
 <br/>

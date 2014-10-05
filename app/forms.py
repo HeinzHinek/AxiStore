@@ -4,9 +4,9 @@ from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, HiddenField, FileField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms import validators
-from wtforms.fields.html5 import EmailField
+from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, CUSTOMER_TYPES
-from models import Product, Maker, Category, Customer, Request
+from models import Product, Maker, Category, Customer, Contact
 from flask.ext.babel import gettext
 import wtforms
 
@@ -133,7 +133,35 @@ class OrderNumberForm(Form):
 
 
 class SelectOrderNumberFormAxm(Form):
-    order = QuerySelectField(query_factory=Customer.query.filter(Request.active_flg == True).filter_by(customer_type=CUSTOMER_TYPES['TYPE_AXM']).all,
+    order = SelectField()
+
+
+class AddCustomerForm(Form):
+    name = StringField('name', [validators.data_required(),
+                                validators.length(max=50)])
+    first_name = StringField('first_name', [validators.length(max=50)])
+    surname = StringField('surname', [validators.length(max=50)])
+    phone = TelField('phone', [validators.length(max=16)])
+    email = EmailField('email', [validators.data_required(),
+                                 validators.length(max=120)])
+    company = QuerySelectField(query_factory=Contact.query.all,
                              get_pk=lambda a: a.id,
-                             get_label=lambda a: a.order_no,
+                             get_label=lambda a: a.company_name,
                              allow_blank=True)
+    base_discount = IntegerField('base_discount', [validators.input_required(),
+                                                   validators.NumberRange(min=0, max=100)])
+
+
+class AddContactForm(Form):
+    company_name = StringField('company_name', [validators.data_required(),
+                                validators.length(max=100)])
+    post_code1 = StringField('post_code1', [validators.length(max=3),
+                                             validators.Regexp('^([0-9][0-9][0-9])?$')])
+    post_code2 = StringField('post_code2', [validators.length(max=4),
+                                             validators.Regexp('^([0-9][0-9][0-9][0-9])?$')])
+    address1 = StringField('address1', [validators.length(max=100)])
+    address2 = StringField('address2', [validators.length(max=100)])
+    address3 = StringField('address3', [validators.length(max=100)])
+    phone = TelField('phone', [validators.length(max=16)])
+    email = EmailField('email', [validators.data_required(),
+                                 validators.length(max=120)])

@@ -59,6 +59,7 @@ def editMaker(id=0):
         db.session.commit()
         flash(gettext("Maker successfully changed."))
         return redirect(url_for("makers"))
+
     selected = maker.category_id
     return render_template('settings/editMaker.html',
                            title=gettext("Edit Maker"),

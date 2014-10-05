@@ -1,47 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>{{ _('List of Makers') }}</h1>
-{% include 'flash.html' %}
-
-<div style="text-align: right; padding: 10px 0px;">
-<a href="{{ url_for('addMaker') }}"><input type="button" class="btn btn-default" value="{{ _('Add maker') }}"></a>
+<div class="row">
+    <h1>{{ _('List of Makers') }}</h1>
+    {% include 'flash.html' %}
 </div>
 
-{% if makers %}
-<table class="table table-hover table-striped">
-<tr>
-    <th>{{ _('Maker ID') }}</th>
-    <th>{{ _('Maker\'s Name') }}</th>
-    <th>{{ _('Product Category') }}</th>
-</tr>
+<div class="row">
+    <div style="text-align: right; padding: 10px 0px;">
+        <a href="{{ url_for('addMaker') }}"><input type="button" class="btn btn-default" value="{{ _('Add maker') }}"></a>
+    </div>
 
-{% for maker in makers.items %}
-<tr onclick="window.location.href = '{{ url_for("editMaker", id=maker.id) }}'">
-    <td>{{maker.id}}</td>
-    <td>{{maker.name}}</td>
-    <td>{{maker.category.name_CS + ' / ' + maker.category.name_JP}}</td>
-</tr>
-{% endfor %}
-</table>
-<br>
+    {% if makers %}
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>{{ _('Maker ID') }}</th>
+            <th>{{ _('Maker\'s Name') }}</th>
+            <th>{{ _('Product Category') }}</th>
+        </tr>
 
-<!-- PAGINATION -->
-<ul class="pager">
-    {% if makers.has_prev or makers.has_next %}
-    {% if makers.has_prev %}
-    <li class="previous"><a href="{{ url_for('makers', page = makers.prev_num) }}"><< {{ _('Previous') }}</a></li>
-    {% else %}
-    <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
-    {% endif %}
-    {% if makers.has_next %}
-    <li class="next"><a href="{{ url_for('makers', page = makers.next_num) }}">{{ _('Next') }} >></a></li>
-    {% else %}
-    <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
-    {% endif %}
-    {% endif %}
-</ul>
+        {% for maker in makers.items %}
+        <tr onclick="window.location.href = '{{ url_for("editMaker", id=maker.id) }}'">
+        <td>{{maker.id}}</td>
+        <td>{{maker.name}}</td>
+        <td>{{maker.category.name_CS + ' / ' + maker.category.name_JP}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
 
-{% endif %}
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if makers.has_prev or makers.has_next %}
+        {% if makers.has_prev %}
+        <li class="previous"><a href="{{ url_for('makers', page = makers.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if makers.has_next %}
+        <li class="next"><a href="{{ url_for('makers', page = makers.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+
+    {% endif %}
+</div>
 
 {% endblock %}

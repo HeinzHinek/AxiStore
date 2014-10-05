@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('List of Customers') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+    <div style="text-align: right; padding: 10px 0px;">
+        <a href="{{ url_for('addCustomer') }}"><input type="button" class="btn btn-default" value="{{ _('Add customer') }}"></a>
+    </div>
+
+    {% if customers %}
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>{{ _('Customer ID') }}</th>
+            <th>{{ _('Customer Name') }}</th>
+            <th>{{ _('Company Name') }}</th>
+        </tr>
+
+        {% for customer in customers.items %}
+        <tr onclick="window.location.href = '{{ url_for("editCustomer", id=customer.id) }}'">
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.contact.company_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if customers.has_prev or customers.has_next %}
+        {% if customers.has_prev %}
+        <li class="previous"><a href="{{ url_for('customers', page = customers.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if customers.has_next %}
+        <li class="next"><a href="{{ url_for('customers', page = customers.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+
+    {% endif %}
+</div>
+
+{% endblock %}

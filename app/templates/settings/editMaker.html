@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <script>
     $(document).ready(function() {
         $("#category_select").val({{ selected }});
@@ -8,7 +9,6 @@
             return confirm("{{ _('Do you really want to delete this maker?') }}");
         });
     });
-
 </script>
 
 

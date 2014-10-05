@@ -3,17 +3,20 @@
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import SelectCustomerForm, ProductQuantityForm, SelectOrderNumberFormAxm
-from models import Supply, Product, Customer, SuppliedProducts
+from models import Supply, Product, Customer, SuppliedProducts, Request
 from flask_login import login_required
-from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
+from sqlalchemy import desc
+from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES, NOHINSHO_PATH
 from flask.ext.babel import gettext
-import flask
+from xls import CreateXls
+import datetime, re
+import os, flask
 
 @app.route('/supplies')
 @app.route('/supplies/<int:page>')
 @login_required
 def supplies(page=1):
-    supplies = Supply.query.paginate(page, DEFAULT_PER_PAGE, False)
+    supplies = Supply.query.order_by(desc(Supply.id)).paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('supplies/supplies.html',
                            title=gettext("Supplies"),
                            CUSTOMER_TYPES=CUSTOMER_TYPES,
@@ -28,8 +31,16 @@ def newSupply():
         cust = 'cust'
     if cust == 'cust':
         formCustomer = SelectCustomerForm()
-    else:
+    elif cust == 'axm':
         formCustomer = SelectOrderNumberFormAxm()
+        all_orders = Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_AXM']).all()
+        orders = []
+        for o in all_orders:
+            r = Request.query.filter_by(customer_id=o.id).first()
+            if r and r.active_flg == True:
+                orders.append(o)
+        formCustomer.order.choices = [(a.id, a.order_no) for a in orders]
+        formCustomer.order.choices.insert(0, ('', ''))
 
     if formCustomer.is_submitted():
         if request.form['custType']:
@@ -71,6 +82,7 @@ def supplyProducts():
             flash(gettext('No product quantities!'))
             return redirect(url_for("supplies"))
 
+        last_supply = Supply.query.filter_by(customer_id=cust_id).order_by(desc(Supply.created_dt)).first()
         new_supply = Supply()
         #TODO other date than now   new_supply.created_dt =
         new_supply.customer_id = cust_id
@@ -79,7 +91,7 @@ def supplyProducts():
         db.session.commit()
 
         #variable for reporting purposes
-        report = {'sender': g.user.nickname, 'customer': cust.name, 'order_no': cust.order_no, 'products': [],
+        report = {'sender': g.user.nickname, 'customer': cust, 'date': new_supply.created_dt, 'order_no': cust.order_no, 'products': [],
                   'closed_requests': [], 'changed_requests': [], 'oversent_requests': False}
 
         for id in ids:
@@ -157,13 +169,36 @@ def supplyProducts():
                         report['oversent_requests'] = True
                     report['products'].append(report_details)
 
+        #set new nohinsho number
+        if not cust.order_no:
+            cust.order_no = 1
+        else:
+            if last_supply:
+                date_old = datetime.datetime(*map(int, re.split('[^\d]', str(last_supply.created_dt))[:-1]))
+                date_new = datetime.datetime(*map(int, re.split('[^\d]', str(new_supply.created_dt))[:-1]))
+                if date_old.year == date_new.year:
+                    if date_old.month == date_new.month:
+                        cust.order_no += 1
+                    else:
+                        cust.order_no += 1
+            else:
+                cust.order_no = 1
+        db.session.add(cust)
+
         db.session.commit()
 
         flash(gettext('New supply sent sucessfully.'))
-        print(report)
+        print report
+
+        #prepare data for xls
+        product_ids=[]
+        for p in report['products']:
+            product_ids.append([p['product'].id, p['qty']])
+        session['new_supply_data'] = {'date': report['date'], 'customer': cust.id, 'products': product_ids}
 
         return render_template('supplies/supplyReport.html',
                            title=gettext("Supply Report"),
+                           custType=custType,
                            report=report)
 
 
@@ -175,33 +210,10 @@ def supplyProducts():
                 rp.product.cust_request_qty = rp.product.customer_request_qty(cust.id)
                 if rp.product.cust_request_qty > 0:
                     products.append(rp.product)
+    products = sorted(products, key=lambda k: (k.maker_id, k.code))
     return render_template('supplies/supplyProducts.html',
                            custType=custType,
                            customer=cust,
-                           products=products)
-
-
-@app.route('/supplies/entersupply', methods=['GET', 'POST'])
-@login_required
-def receiveSupply():
-    formQuantities = ProductQuantityForm(request.form)
-    maker_id = request.form['maker_id']
-    if not maker_id:
-        flash(gettext("Maker not found."))
-        return redirect(url_for("supplies"))
-
-    if formQuantities.validate_on_submit():
-        pass
-
-    #if not validated return to maker select
-    products = Product.query.order_by(Product.maker_id, Product.code)\
-        .filter_by(maker_id=int(maker_id),
-                   active_flg=True).all()
-    formMaker = SelectMakerForm()
-    return render_template('supplies/newSupply.html',
-                           title=gettext("New Supply"),
-                           formMaker=formMaker,
-                           formQuantities=formQuantities,
                            products=products)
 
 
@@ -216,3 +228,37 @@ def supply(id):
                             supply=supply,
                             CUSTOMER_TYPES=CUSTOMER_TYPES,
                             products=products)
+
+
+@app.route('/supplies/createnohinsho')
+@login_required
+def createNohinsho():
+    xlsdata = session['new_supply_data']
+    #session['new_supply_data'] = None
+    date = xlsdata['date']
+    customer = Customer.query.filter_by(id=xlsdata['customer']).first()
+    products = []
+    pr = xlsdata['products']
+    if not pr:
+        flash(gettext('No product data!'))
+        return redirect(url_for("supplies"))
+    for p in pr:
+        products.append({'product': Product.query.filter_by(id=p[0]).first(), 'qty': p[1]})
+    products = sorted(products, key=lambda k: (k['product'].maker_id, k['product'].code))
+
+    if xlsdata:
+        xls = CreateXls()
+        nohinsho = xls.nohinsho(date, customer, products)
+        match = re.search(r"[^a-zA-Z](nohinsho)[^a-zA-Z]", nohinsho)
+        pos = match.start(1)
+        filename = nohinsho[pos:]
+        return redirect(url_for('download_file', filename=filename))
+
+    flash(gettext('Invalid data received.'))
+    return redirect(url_for("supplies"))
+
+
+@app.route('/download/<path:filename>')
+@login_required
+def download_file(filename):
+    return app.send_static_file(filename)

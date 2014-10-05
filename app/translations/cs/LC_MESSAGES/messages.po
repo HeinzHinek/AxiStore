@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-10-02 16:12+0900\n"
-"PO-Revision-Date: 2014-10-02 16:32+0900\n"
+"POT-Creation-Date: 2014-10-05 20:28+0900\n"
+"PO-Revision-Date: 2014-10-05 20:33+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -81,12 +81,64 @@ msgstr "Kategorie úspěšně pozměněna."
 msgid "Edit Category"
 msgstr "Editace kategorie"
 
+#: app/viewsContact.py:18
+msgid "Contacts"
+msgstr "Kontakty"
+
+#: app/viewsContact.py:37
+msgid "New contact successfully added."
+msgstr "Nový kontakt úspěšně přidán."
+
+#: app/viewsContact.py:40 app/templates/settings/addContact.html:16
+msgid "Add New Contact"
+msgstr "Přidat nový kontakt"
+
+#: app/viewsContact.py:49
+msgid "Contact not found."
+msgstr "Kontakt nenalezen."
+
+#: app/viewsContact.py:77
+msgid "Contact successfully changed."
+msgstr "Kontakt úspěšně pozměněn."
+
+#: app/viewsContact.py:81 app/templates/settings/editContact.html:15
+msgid "Edit Contact"
+msgstr "Upravit kontakt"
+
+#: app/viewsCustomer.py:18
+msgid "Customers"
+msgstr "Zákazníci"
+
+#: app/viewsCustomer.py:38
+msgid "New customer successfully added."
+msgstr "Nový zákazník úspěšně přidán."
+
+#: app/viewsCustomer.py:41 app/templates/settings/addCustomer.html:24
+msgid "Add New Customer"
+msgstr "Přidat zákazníka"
+
+#: app/viewsCustomer.py:50 app/viewsRequest.py:48
+msgid "Customer not found."
+msgstr "Zákazník nenalezen."
+
+#: app/viewsCustomer.py:58
+msgid "This operation is not allowed at the moment."
+msgstr "Tato operace není momentálně podporována."
+
+#: app/viewsCustomer.py:73
+msgid "Customer successfully changed."
+msgstr "Zákazník úspěšně pozměněn."
+
+#: app/viewsCustomer.py:79 app/templates/settings/editCustomer.html:30
+msgid "Edit Customer"
+msgstr "Upravit zákazníka"
+
 #: app/viewsDelivery.py:17 app/templates/base.html:52
 msgid "Deliveries"
 msgstr "Dodávky"
 
 #: app/viewsDelivery.py:32 app/viewsDelivery.py:54 app/viewsMaker.py:43
-#: app/viewsOrder.py:33 app/viewsOrder.py:55 app/viewsSupply.py:190
+#: app/viewsOrder.py:33 app/viewsOrder.py:55
 msgid "Maker not found."
 msgstr "Výrobce nenalezen."
 
@@ -135,7 +187,7 @@ msgstr "Přidat výrobce"
 msgid "Maker successfully changed."
 msgstr "Výrobce úspěšně pozměněn."
 
-#: app/viewsMaker.py:64 app/templates/settings/editMaker.html:15
+#: app/viewsMaker.py:65 app/templates/settings/editMaker.html:15
 msgid "Edit Maker"
 msgstr "Editace výrobce"
 
@@ -182,10 +234,6 @@ msgstr "Objednávky od zákazníka"
 #: app/viewsRequest.py:44
 msgid "No customer id."
 msgstr "Chybí id zákazníka."
-
-#: app/viewsRequest.py:48
-msgid "Customer not found."
-msgstr "Zákazník nenalezen."
 
 #: app/viewsRequest.py:51
 msgid "Invalid customer!"
@@ -235,11 +283,11 @@ msgstr "Nový uživatel úspěšně přidán."
 msgid "Add New User"
 msgstr "Přidat nového uživatele"
 
-#: app/viewsSettings.py:63
+#: app/viewsSettings.py:64
 msgid "Data Import"
 msgstr "Import dat"
 
-#: app/viewsSettings.py:71
+#: app/viewsSettings.py:72
 msgid "Data Export"
 msgstr "Export dat"
 
@@ -247,41 +295,49 @@ msgstr "Export dat"
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
-#: app/viewsSupply.py:18
+#: app/viewsSupply.py:21
 msgid "Supplies"
 msgstr "Dodávky zákazníkům"
 
-#: app/viewsSupply.py:45 app/viewsSupply.py:202
+#: app/viewsSupply.py:56
 msgid "New Supply"
 msgstr "Nová dodávka zákazníkovi"
 
-#: app/viewsSupply.py:53
+#: app/viewsSupply.py:64
 msgid "No customer data!"
 msgstr "Chybí data zákazníka!"
 
-#: app/viewsSupply.py:60
+#: app/viewsSupply.py:71
 msgid "Customer not found!"
 msgstr "Zákazník nenalezen!"
 
-#: app/viewsSupply.py:71
+#: app/viewsSupply.py:82
 msgid "No product quantities!"
 msgstr "Chybí počty produktu!"
 
-#: app/viewsSupply.py:106
+#: app/viewsSupply.py:118
 msgid "No requested products!"
 msgstr "Žádné objednané produkty! "
 
-#: app/viewsSupply.py:162
+#: app/viewsSupply.py:190
 msgid "New supply sent sucessfully."
 msgstr "Nová dodávka úspěšně odeslána."
 
-#: app/viewsSupply.py:166
+#: app/viewsSupply.py:200
 msgid "Supply Report"
 msgstr "Zpráva o dodávce zákazníkovi"
 
-#: app/viewsSupply.py:215 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:227 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "Detaily dodávky zákazníkovi"
+
+#: app/viewsSupply.py:243
+msgid "No product data!"
+msgstr "Chybí data produktu!"
+
+#: app/viewsSupply.py:257
+msgid "Invalid data received."
+msgstr "Přijata neplatná data!"
 
 #: app/templates/base.html:41 app/templates/stock.html:104
 msgid "Stock"
@@ -361,18 +417,26 @@ msgid "Manage users"
 msgstr "Správa uživatelů"
 
 #: app/templates/settings.html:13
-msgid "Manage makers"
-msgstr "Správa výrobců"
-
-#: app/templates/settings.html:17
 msgid "Manage product categories"
 msgstr "Správa kategorií produktů"
 
-#: app/templates/settings.html:22
+#: app/templates/settings.html:16
+msgid "Manage makers"
+msgstr "Správa výrobců"
+
+#: app/templates/settings.html:21
+msgid "Manage customers"
+msgstr "Správa zákazníků"
+
+#: app/templates/settings.html:24
+msgid "Manage contacts"
+msgstr "Správa kontaktů"
+
+#: app/templates/settings.html:29
 msgid "Import data from csv"
 msgstr "Importovat data z csv souboru"
 
-#: app/templates/settings.html:25
+#: app/templates/settings.html:32
 msgid "Export data as csv"
 msgstr "Exportovat data jako csv soubor"
 
@@ -380,16 +444,16 @@ msgstr "Exportovat data jako csv soubor"
 msgid "Stock overview"
 msgstr "Přehled skladu"
 
-#: app/templates/stock.html:75 app/templates/deliveries/deliveryReport.html:15
-#: app/templates/supplies/supplyReport.html:15
+#: app/templates/stock.html:75 app/templates/deliveries/deliveryReport.html:16
+#: app/templates/supplies/supplyReport.html:21
 msgid "Product Code"
 msgstr "Kód produktu"
 
 #: app/templates/stock.html:82 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:26
-#: app/templates/deliveries/deliveryReport.html:16
-#: app/templates/deliveries/deliveryReport.html:56
-#: app/templates/deliveries/deliveryReport.html:78
+#: app/templates/deliveries/deliveryReport.html:17
+#: app/templates/deliveries/deliveryReport.html:57
+#: app/templates/deliveries/deliveryReport.html:79
 #: app/templates/orders/order.html:26 app/templates/orders/orders.html:36
 #: app/templates/orders/productorders.html:23
 #: app/templates/product/addProduct.html:75
@@ -398,7 +462,7 @@ msgstr "Kód produktu"
 #: app/templates/requests/createRequest.html:202
 #: app/templates/requests/createRequest.html:218
 #: app/templates/requests/productrequests.html:23
-#: app/templates/supplies/supplyReport.html:16
+#: app/templates/supplies/supplyReport.html:22
 msgid "Maker"
 msgstr "Výrobce"
 
@@ -407,19 +471,19 @@ msgid "All"
 msgstr "Vše"
 
 #: app/templates/stock.html:100 app/templates/deliveries/delivery.html:39
-#: app/templates/deliveries/deliveryReport.html:17
+#: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:39
 #: app/templates/requests/createRequest.html:187
 #: app/templates/requests/createRequest.html:203
 #: app/templates/requests/createRequest.html:219
 #: app/templates/requests/request.html:44
 #: app/templates/supplies/supply.html:43
-#: app/templates/supplies/supplyReport.html:17
+#: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
 msgstr "Popis ČJ"
 
 #: app/templates/stock.html:101 app/templates/deliveries/delivery.html:40
-#: app/templates/deliveries/deliveryReport.html:18
+#: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:40
 #: app/templates/requests/createRequest.html:190
 #: app/templates/requests/createRequest.html:204
@@ -427,7 +491,7 @@ msgstr "Popis ČJ"
 #: app/templates/requests/request.html:45
 #: app/templates/supplies/supply.html:44
 #: app/templates/supplies/supplyProducts.html:99
-#: app/templates/supplies/supplyReport.html:18
+#: app/templates/supplies/supplyReport.html:24
 msgid "Description JP"
 msgstr "Popis JP"
 
@@ -460,7 +524,11 @@ msgstr "Čist."
 #: app/templates/orders/orders.html:58 app/templates/orders/orders.html:60
 #: app/templates/requests/requests.html:47
 #: app/templates/requests/requests.html:49
-#: app/templates/settings/makers.html:33 app/templates/settings/makers.html:35
+#: app/templates/settings/contacts.html:34
+#: app/templates/settings/contacts.html:36
+#: app/templates/settings/customers.html:36
+#: app/templates/settings/customers.html:38
+#: app/templates/settings/makers.html:36 app/templates/settings/makers.html:38
 #: app/templates/settings/users.html:35 app/templates/settings/users.html:37
 #: app/templates/supplies/supplies.html:56
 #: app/templates/supplies/supplies.html:58
@@ -473,7 +541,11 @@ msgstr "Předchozí"
 #: app/templates/orders/orders.html:63 app/templates/orders/orders.html:65
 #: app/templates/requests/requests.html:52
 #: app/templates/requests/requests.html:54
-#: app/templates/settings/makers.html:38 app/templates/settings/makers.html:40
+#: app/templates/settings/contacts.html:39
+#: app/templates/settings/contacts.html:41
+#: app/templates/settings/customers.html:41
+#: app/templates/settings/customers.html:43
+#: app/templates/settings/makers.html:41 app/templates/settings/makers.html:43
 #: app/templates/settings/users.html:40 app/templates/settings/users.html:42
 #: app/templates/supplies/supplies.html:61
 #: app/templates/supplies/supplies.html:63
@@ -508,8 +580,8 @@ msgstr "ID dodávky"
 #: app/templates/deliveries/deliveries.html:34
 #: app/templates/deliveries/delivery.html:20
 #: app/templates/requests/requests.html:19
-#: app/templates/supplies/supplyReport.html:54
-#: app/templates/supplies/supplyReport.html:76
+#: app/templates/supplies/supplyReport.html:60
+#: app/templates/supplies/supplyReport.html:82
 msgid "Received"
 msgstr "Přijato"
 
@@ -527,6 +599,8 @@ msgstr "Detaily dodávky od výrobce "
 #: app/templates/product/editProduct.html:54
 #: app/templates/requests/request.html:9
 #: app/templates/settings/editCategory.html:16
+#: app/templates/settings/editContact.html:21
+#: app/templates/settings/editCustomer.html:36
 #: app/templates/settings/editMaker.html:18
 #: app/templates/supplies/supply.html:9
 msgid "Back to the list"
@@ -541,14 +615,14 @@ msgid "Product code"
 msgstr "Kód produktu"
 
 #: app/templates/deliveries/delivery.html:41
-#: app/templates/deliveries/deliveryReport.html:19
+#: app/templates/deliveries/deliveryReport.html:20
 #: app/templates/orders/order.html:41
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:221
 #: app/templates/requests/productrequests.html:46
 #: app/templates/requests/request.html:46
 #: app/templates/supplies/supply.html:45
-#: app/templates/supplies/supplyReport.html:19
+#: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
 msgstr "Množství"
 
@@ -569,11 +643,11 @@ msgstr "Dodávka od výrobce: "
 msgid "Recieved by: "
 msgstr "Příjemce: "
 
-#: app/templates/deliveries/deliveryReport.html:12
+#: app/templates/deliveries/deliveryReport.html:13
 msgid "Received products: "
 msgstr "Přijaté produkty: "
 
-#: app/templates/deliveries/deliveryReport.html:41
+#: app/templates/deliveries/deliveryReport.html:42
 msgid ""
 "* The received quantity is higher than ordered total. Value in () shows sum "
 "of all orders for given product."
@@ -581,24 +655,24 @@ msgstr ""
 "* Přijaté množství je větší než úhrn objednávek. Hodnota v () představuje "
 "součet množství všech objednávek daného produktu."
 
-#: app/templates/deliveries/deliveryReport.html:50
+#: app/templates/deliveries/deliveryReport.html:51
 msgid "Completed and closed orders to maker: "
 msgstr "Zkompletované a uzavřené objednávky výrobci: "
 
-#: app/templates/deliveries/deliveryReport.html:53
-#: app/templates/deliveries/deliveryReport.html:75
+#: app/templates/deliveries/deliveryReport.html:54
+#: app/templates/deliveries/deliveryReport.html:76
 #: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
 #: app/templates/orders/productorders.html:43
 #: app/templates/requests/productrequests.html:43
 #: app/templates/requests/request.html:18
 #: app/templates/requests/requests.html:18
-#: app/templates/supplies/supplyReport.html:53
-#: app/templates/supplies/supplyReport.html:75
+#: app/templates/supplies/supplyReport.html:59
+#: app/templates/supplies/supplyReport.html:81
 msgid "Order ID"
 msgstr "ID objednávky"
 
-#: app/templates/deliveries/deliveryReport.html:54
-#: app/templates/deliveries/deliveryReport.html:76
+#: app/templates/deliveries/deliveryReport.html:55
+#: app/templates/deliveries/deliveryReport.html:77
 #: app/templates/orders/order.html:20 app/templates/orders/orders.html:34
 #: app/templates/orders/productorders.html:44
 #: app/templates/requests/productrequests.html:44
@@ -606,30 +680,30 @@ msgstr "ID objednávky"
 msgid "Placed"
 msgstr "Zadáno"
 
-#: app/templates/deliveries/deliveryReport.html:55
-#: app/templates/deliveries/deliveryReport.html:77
+#: app/templates/deliveries/deliveryReport.html:56
+#: app/templates/deliveries/deliveryReport.html:78
 #: app/templates/orders/order.html:24 app/templates/orders/orders.html:35
 #: app/templates/orders/productorders.html:45
 #: app/templates/requests/productrequests.html:45
 msgid "Ordered by"
 msgstr "Objednatel"
 
-#: app/templates/deliveries/deliveryReport.html:72
+#: app/templates/deliveries/deliveryReport.html:73
 msgid "Not fully completed but partially delivered orders to maker: "
 msgstr "Neuzavřené, ale částečně dodané objednávky výrobci: "
 
-#: app/templates/deliveries/deliveryReport.html:97
-#: app/templates/supplies/supplyReport.html:97
+#: app/templates/deliveries/deliveryReport.html:98
+#: app/templates/supplies/supplyReport.html:107
 msgid "To stock"
 msgstr "Na sklad"
 
-#: app/templates/deliveries/deliveryReport.html:98
-#: app/templates/supplies/supplyReport.html:98
+#: app/templates/deliveries/deliveryReport.html:99
+#: app/templates/supplies/supplyReport.html:108
 msgid "To deliveries"
 msgstr "Na dodávky"
 
-#: app/templates/deliveries/deliveryReport.html:99
-#: app/templates/supplies/supplyReport.html:99
+#: app/templates/deliveries/deliveryReport.html:100
+#: app/templates/supplies/supplyReport.html:109
 msgid "To orders"
 msgstr "Na objednávky"
 
@@ -655,8 +729,11 @@ msgstr "Pokračovat"
 #: app/templates/product/addProduct.html:160
 #: app/templates/product/editProduct.html:166
 #: app/templates/settings/addCategory.html:40
+#: app/templates/settings/addContact.html:143
+#: app/templates/settings/addCustomer.html:139
 #: app/templates/settings/addMaker.html:40
 #: app/templates/settings/addUser.html:96
+#: app/templates/settings/editCustomer.html:150
 #: app/templates/supplies/supplyProducts.html:123
 msgid "Cancel"
 msgstr "Zrušit"
@@ -843,13 +920,14 @@ msgstr "Objednávky produktu od zákazníků"
 #: app/templates/requests/requests.html:33
 #: app/templates/supplies/supplies.html:42
 #: app/templates/supplies/supply.html:28
+#: app/templates/supplies/supplyReport.html:14
 msgid "order no."
 msgstr "č. obj."
 
 #: app/templates/requests/request.html:24
 #: app/templates/requests/requests.html:20
-#: app/templates/supplies/supplyReport.html:55
-#: app/templates/supplies/supplyReport.html:77
+#: app/templates/supplies/supplyReport.html:61
+#: app/templates/supplies/supplyReport.html:83
 msgid "Received by"
 msgstr "Příjemce"
 
@@ -861,8 +939,8 @@ msgstr "Č. obj."
 #: app/templates/requests/requests.html:21
 #: app/templates/supplies/supplies.html:32
 #: app/templates/supplies/supply.html:26
-#: app/templates/supplies/supplyReport.html:56
-#: app/templates/supplies/supplyReport.html:78
+#: app/templates/supplies/supplyReport.html:62
+#: app/templates/supplies/supplyReport.html:84
 msgid "Customer"
 msgstr "Zákazník"
 
@@ -895,6 +973,82 @@ msgstr "Název kategorie v japonštině"
 msgid "Save category"
 msgstr "Uložit kategorii"
 
+#: app/templates/settings/addContact.html:28
+#: app/templates/settings/editContact.html:31
+msgid "Company name"
+msgstr "Název společnosti"
+
+#: app/templates/settings/addContact.html:42
+#: app/templates/settings/addCustomer.html:78
+#: app/templates/settings/editContact.html:45
+#: app/templates/settings/editCustomer.html:88
+msgid "Phone number"
+msgstr "Telefonní číslo"
+
+#: app/templates/settings/addContact.html:56
+#: app/templates/settings/addCustomer.html:92
+#: app/templates/settings/addUser.html:53
+#: app/templates/settings/editContact.html:59
+#: app/templates/settings/editCustomer.html:102
+msgid "Email"
+msgstr "Email"
+
+#: app/templates/settings/addContact.html:71
+#: app/templates/settings/editContact.html:74
+msgid "Invoice address details"
+msgstr "Detaily adresy na fakturu"
+
+#: app/templates/settings/addContact.html:76
+#: app/templates/settings/editContact.html:79
+msgid "Post code"
+msgstr "Poštovní číslo"
+
+#: app/templates/settings/addContact.html:99
+#: app/templates/settings/editContact.html:102
+msgid "Address 1"
+msgstr "Adresa 1"
+
+#: app/templates/settings/addContact.html:113
+#: app/templates/settings/editContact.html:116
+msgid "Address 2"
+msgstr "Adresa 2"
+
+#: app/templates/settings/addContact.html:127
+#: app/templates/settings/editContact.html:130
+msgid "Address 3"
+msgstr "Adresa 3"
+
+#: app/templates/settings/addContact.html:142
+#: app/templates/settings/addCustomer.html:138
+#: app/templates/settings/editCustomer.html:148
+msgid "Save customer"
+msgstr "Uložit zákazníka"
+
+#: app/templates/settings/addCustomer.html:36
+#: app/templates/settings/editCustomer.html:46
+msgid "Customer nickname"
+msgstr "Zkrácené jméno zákazníka"
+
+#: app/templates/settings/addCustomer.html:50
+#: app/templates/settings/editCustomer.html:60
+msgid "Customer first name"
+msgstr "Křestní jméno zákazníka"
+
+#: app/templates/settings/addCustomer.html:64
+#: app/templates/settings/editCustomer.html:74
+msgid "Customer surname"
+msgstr "Příjmení zákazníka"
+
+#: app/templates/settings/addCustomer.html:106
+#: app/templates/settings/editCustomer.html:116
+msgid "Company"
+msgstr "Společnost"
+
+#: app/templates/settings/addCustomer.html:120
+#: app/templates/settings/editCustomer.html:130
+msgid "Base discount"
+msgstr "Základní sleva"
+
 #: app/templates/settings/addMaker.html:11
 #: app/templates/settings/editMaker.html:26
 msgid "Maker name"
@@ -922,10 +1076,6 @@ msgstr "Heslo uživatele"
 msgid "Password confirmation"
 msgstr "Kontrola hesla"
 
-#: app/templates/settings/addUser.html:53
-msgid "Email"
-msgstr "Email"
-
 #: app/templates/settings/addUser.html:67
 msgid "User role"
 msgstr "Uživatelská role"
@@ -949,6 +1099,39 @@ msgstr "Přidat kategorii produktů"
 #: app/templates/settings/categories.html:47
 msgid "Category ID"
 msgstr "ID kategorie"
+
+#: app/templates/settings/contacts.html:5
+msgid "List of Contacts"
+msgstr "Seznam kontaktů"
+
+#: app/templates/settings/contacts.html:11
+msgid "Add contact"
+msgstr "Přidat kontakt"
+
+#: app/templates/settings/contacts.html:17
+msgid "Contact ID"
+msgstr "ID kontaktu"
+
+#: app/templates/settings/contacts.html:18
+#: app/templates/settings/customers.html:19
+msgid "Company Name"
+msgstr "Název společnosti"
+
+#: app/templates/settings/customers.html:5
+msgid "List of Customers"
+msgstr "Seznam zákazníků"
+
+#: app/templates/settings/customers.html:11
+msgid "Add customer"
+msgstr "Přidat zákazníka"
+
+#: app/templates/settings/customers.html:17
+msgid "Customer ID"
+msgstr "ID zákazníka"
+
+#: app/templates/settings/customers.html:18
+msgid "Customer Name"
+msgstr "Jméno zákazníka"
 
 #: app/templates/settings/dataexport.html:5
 msgid "Export of Data"
@@ -987,7 +1170,27 @@ msgstr "Chcete opravdu smazat tuto kategorii?"
 msgid "Delete category"
 msgstr "Smazat kategorii"
 
-#: app/templates/settings/editMaker.html:8
+#: app/templates/settings/editContact.html:9
+msgid "Do you really want to delete this contact?"
+msgstr "Chcete opravdu smazat tento kontakt?"
+
+#: app/templates/settings/editContact.html:144
+msgid "Save contact"
+msgstr "Uložit kontakt"
+
+#: app/templates/settings/editContact.html:145
+msgid "Delete contact"
+msgstr "Smazat kontakt"
+
+#: app/templates/settings/editCustomer.html:9
+msgid "Do you really want to delete this customer?"
+msgstr "Chcete opravdu smazat tohoto zákazníka?"
+
+#: app/templates/settings/editCustomer.html:149
+msgid "Delete customer"
+msgstr "Smazat zákazníka"
+
+#: app/templates/settings/editMaker.html:9
 msgid "Do you really want to delete this maker?"
 msgstr "Chcete opravdu smazat tohoto výrobce?"
 
@@ -995,23 +1198,23 @@ msgstr "Chcete opravdu smazat tohoto výrobce?"
 msgid "Delete maker"
 msgstr "Smazat výrobce"
 
-#: app/templates/settings/makers.html:4
+#: app/templates/settings/makers.html:5
 msgid "List of Makers"
 msgstr "Seznam výrobců"
 
-#: app/templates/settings/makers.html:8
+#: app/templates/settings/makers.html:11
 msgid "Add maker"
 msgstr "Přidat výrobce"
 
-#: app/templates/settings/makers.html:14
+#: app/templates/settings/makers.html:17
 msgid "Maker ID"
 msgstr "ID výrobce"
 
-#: app/templates/settings/makers.html:15
+#: app/templates/settings/makers.html:18
 msgid "Maker's Name"
 msgstr "Název výrobce"
 
-#: app/templates/settings/makers.html:16
+#: app/templates/settings/makers.html:19
 msgid "Product Category"
 msgstr "Kategorie produktu"
 
@@ -1038,6 +1241,11 @@ msgstr "Role"
 #: app/templates/settings/users.html:17
 msgid "Language"
 msgstr "Jazyk"
+
+#: app/templates/supplies/createNohinsho.html:5
+#: app/templates/supplies/supplyReport.html:100
+msgid "Nohinsho download"
+msgstr "Stáhnout nóhinšo"
 
 #: app/templates/supplies/newSupply.html:8
 msgid "Select a customer to supply to!"
@@ -1110,15 +1318,15 @@ msgstr "Zpráva o nové dodávce zákazníkovi"
 msgid "Delivery to customer: "
 msgstr "Dodávka zákazníkovi: "
 
-#: app/templates/supplies/supplyReport.html:11
+#: app/templates/supplies/supplyReport.html:16
 msgid "Sent by: "
-msgstr "Odeslal:"
+msgstr "Odeslal: "
 
-#: app/templates/supplies/supplyReport.html:12
+#: app/templates/supplies/supplyReport.html:18
 msgid "Sent products: "
 msgstr "Odesláno produktů:"
 
-#: app/templates/supplies/supplyReport.html:41
+#: app/templates/supplies/supplyReport.html:47
 msgid ""
 "* The sent quantity is higher than requested total. Value in () shows sum of "
 "all orders of current customer for given product."
@@ -1126,11 +1334,11 @@ msgstr ""
 "* Odeslané množství je větší než úhrn objednávek. Hodnota v () představuje "
 "součet množství všech objednávek současného zákazníka daného produktu."
 
-#: app/templates/supplies/supplyReport.html:50
+#: app/templates/supplies/supplyReport.html:56
 msgid "Completed and closed orders from customer: "
 msgstr "Zkompletované a uzavřené objednávky od zákazníka: "
 
-#: app/templates/supplies/supplyReport.html:72
+#: app/templates/supplies/supplyReport.html:78
 msgid "Not fully completed but partially supplied orders from customer: "
 msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 

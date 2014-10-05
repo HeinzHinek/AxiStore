@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <h1>{{ _('List of Contacts') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+    <div style="text-align: right; padding: 10px 0px;">
+        <a href="{{ url_for('addContact') }}"><input type="button" class="btn btn-default" value="{{ _('Add contact') }}"></a>
+    </div>
+
+    {% if contacts %}
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>{{ _('Contact ID') }}</th>
+            <th>{{ _('Company Name') }}</th>
+        </tr>
+
+        {% for contact in contacts.items %}
+        <tr onclick="window.location.href = '{{ url_for("editContact", id=contact.id) }}'">
+        <td>{{ contact.id }}</td>
+        <td>{{ contact.company_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+
+    <!-- PAGINATION -->
+    <ul class="pager">
+        {% if contacts.has_prev or contacts.has_next %}
+        {% if contacts.has_prev %}
+        <li class="previous"><a href="{{ url_for('contacts', page = contacts.prev_num) }}"><< {{ _('Previous') }}</a></li>
+        {% else %}
+        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
+        {% endif %}
+        {% if contacts.has_next %}
+        <li class="next"><a href="{{ url_for('contacts', page = contacts.next_num) }}">{{ _('Next') }} >></a></li>
+        {% else %}
+        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
+        {% endif %}
+        {% endif %}
+    </ul>
+
+    {% endif %}
+</div>
+
+{% endblock %}

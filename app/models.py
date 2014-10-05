@@ -3,7 +3,6 @@
 from app import db
 from config import USER_ROLES, CUSTOMER_TYPES
 from datetime import datetime
-from sqlalchemy.sql import func
 from sqlalchemy.ext.hybrid import hybrid_property
 
 
@@ -164,8 +163,14 @@ class DeliveredProducts(db.Model):
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+    first_name = db.Column(db.String(50))
+    surname = db.Column(db.String(50))
+    phone = db.Column(db.Integer(16))
+    email = db.Column(db.String(120))
     customer_type = db.Column(db.SmallInteger, default=CUSTOMER_TYPES['TYPE_CUSTOMER'])
     order_no = db.Column(db.Integer)
+    base_discount = db.Column(db.Float)
+    contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'))
 
     requests = db.relationship('Request', backref='customer', lazy='dynamic')
     supplies = db.relationship('Supply', backref='customer', lazy='dynamic')
@@ -205,8 +210,7 @@ class Supply(db.Model):
     created_dt = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
-    products = db.relationship('SuppliedProducts',
-                               backref='supply')
+    products = db.relationship('SuppliedProducts', backref='supply')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()
@@ -218,3 +222,16 @@ class SuppliedProducts(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), primary_key=True)
     quantity = db.Column(db.Integer, default=1)
     product = db.relationship('Product', backref='supply_assocs')
+
+
+class Contact(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    company_name = db.Column(db.String(100))
+    post_code = db.Column(db.Integer(7))
+    address1 = db.Column(db.String(100))
+    address2 = db.Column(db.String(100))
+    address3 = db.Column(db.String(100))
+    phone = db.Column(db.Integer(16))
+    email = db.Column(db.String(120))
+
+    contact = db.relationship('Customer', backref='contact')
