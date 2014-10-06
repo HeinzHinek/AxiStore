@@ -2,11 +2,11 @@
 
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
-from forms import SelectCustomerForm, ProductQuantityForm, SelectOrderNumberFormAxm
+from forms import SelectCustomerForm, SelectOrderNumberFormAxm
 from models import Supply, Product, Customer, SuppliedProducts, Request
 from flask_login import login_required
 from sqlalchemy import desc
-from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES, NOHINSHO_PATH
+from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
 from xls import CreateXls
 import datetime, re
@@ -169,22 +169,24 @@ def supplyProducts():
                         report['oversent_requests'] = True
                     report['products'].append(report_details)
 
-        #set new nohinsho number
-        if not cust.order_no:
-            cust.order_no = 1
-        else:
-            if last_supply:
-                date_old = datetime.datetime(*map(int, re.split('[^\d]', str(last_supply.created_dt))[:-1]))
-                date_new = datetime.datetime(*map(int, re.split('[^\d]', str(new_supply.created_dt))[:-1]))
-                if date_old.year == date_new.year:
-                    if date_old.month == date_new.month:
-                        cust.order_no += 1
-                    else:
-                        cust.order_no += 1
-            else:
+        #set new nohinsho number if custType = customer
+        if cust.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']:
+            if not cust.order_no:
                 cust.order_no = 1
-        db.session.add(cust)
+            else:
+                if last_supply:
+                    date_old = datetime.datetime(*map(int, re.split('[^\d]', str(last_supply.created_dt))[:-1]))
+                    date_new = datetime.datetime(*map(int, re.split('[^\d]', str(new_supply.created_dt))[:-1]))
+                    if date_old.year == date_new.year:
+                        if date_old.month == date_new.month:
+                            cust.order_no += 1
+                        else:
+                            cust.order_no += 1
+                else:
+                    cust.order_no = 1
+            db.session.add(cust)
 
+    #FINAL COMMIT
         db.session.commit()
 
         flash(gettext('New supply sent sucessfully.'))

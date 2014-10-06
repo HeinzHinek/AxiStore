@@ -4,4 +4,5 @@ app.db
 search.db
 flask
 *.mo
+app/xls.py
 

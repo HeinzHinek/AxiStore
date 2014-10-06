@@ -12,7 +12,9 @@ from flask.ext.babel import gettext
 @login_required
 def addProduct():
     form = AddProductForm()
-    form.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
+    makers = Maker.query.all()
+    if makers:
+        form.maker.choices = [(a.id, a.name) for a in makers]
     if form.validate_on_submit():
         product = Product()
         product.code = form.code.data
@@ -43,7 +45,9 @@ def editProduct(id=0):
         flash(gettext('Product not found.'))
         return redirect(url_for('stock'))
     form = AddProductForm(obj=product)
-    form.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
+    makers = Maker.query.all()
+    if makers:
+        form.maker.choices = [(a.id, a.name) for a in makers]
     #for existing code validation
     form.request = request
     if form.validate_on_submit():
