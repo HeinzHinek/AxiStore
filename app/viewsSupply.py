@@ -16,7 +16,9 @@ import os, flask
 @app.route('/supplies/<int:page>')
 @login_required
 def supplies(page=1):
-    supplies = Supply.query.order_by(desc(Supply.id)).paginate(page, DEFAULT_PER_PAGE, False)
+    supplies = Supply.query\
+        .order_by(desc(Supply.created_dt))\
+        .paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('supplies/supplies.html',
                            title=gettext("Supplies"),
                            CUSTOMER_TYPES=CUSTOMER_TYPES,

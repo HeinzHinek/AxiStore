@@ -153,7 +153,7 @@ def stock(page=1):
                     products = products.order_by(having)
 
     products = products.order_by(Product.maker_id, Product.code)
-
+    print products
     products = products.paginate(page, current_user.products_per_page, False)
 
 #Query end

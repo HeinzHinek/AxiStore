@@ -14,7 +14,10 @@ import flask
 @app.route('/requests/<int:page>')
 @login_required
 def requests(page=1):
-    requests = Request.query.paginate(page, DEFAULT_PER_PAGE, False)
+    requests = Request.query\
+        .order_by(Request.active_flg.desc())\
+        .order_by(Request.created_dt)\
+        .paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('requests/requests.html',
                            title=gettext("Orders from Customers"),
                            CUSTOMER_TYPES=CUSTOMER_TYPES,

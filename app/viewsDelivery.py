@@ -12,7 +12,9 @@ from flask.ext.babel import gettext
 @app.route('/deliveries/<int:page>')
 @login_required
 def deliveries(page=1):
-    deliveries = Delivery.query.paginate(page, DEFAULT_PER_PAGE, False)
+    deliveries = Delivery.query\
+        .order_by(Delivery.created_dt.desc())\
+        .paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('deliveries/deliveries.html',
                            title=gettext("Deliveries"),
                            deliveries=deliveries)
@@ -111,8 +113,8 @@ def receiveDelivery():
                             if op.order.active_flg:
                                 if op.order.check_completely_delivered():
                                     while True:
-                                        if op.request in report['changed_orders']:
-                                            report['changed_orders'].remove(op.request)
+                                        if op.order in report['changed_orders']:
+                                            report['changed_orders'].remove(op.order)
                                         else:
                                             break
                                     report['closed_orders'].append(op.order)

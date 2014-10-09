@@ -152,16 +152,16 @@ $(document).ready( function() {
         <th>{{ _('Description JP') }}</th>
         <th style="text-align: right;">{{ _('Unit Price') }}</th>
         <th style="text-align: right;">{{ _('Retail Price') }}</th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:5] == 'stock' %}info{% endif %}">
             <div class="dropdown">{{ _('Stock') }}&nbsp;{{ build_sort_num_list('stock') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:3] == 'req' %}info{% endif %}">
             <div class="dropdown">{{ _('Req.') }}&nbsp;{{ build_sort_num_list('req') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:3] == 'ord' %}info{% endif %}">
             <div class="dropdown">{{ _('Ord.') }}&nbsp;{{ build_sort_num_list('ord') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px {% if session['order_type'] and session['order_type'][:3] == 'net' %}info{% endif %}">
             <div class="dropdown">{{ _('Net.') }}&nbsp;{{ build_sort_num_list('net') }}</div>
         </th>
     </tr>

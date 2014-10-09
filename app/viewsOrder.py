@@ -13,7 +13,10 @@ from flask.ext.babel import gettext
 @app.route('/orders/<int:page>')
 @login_required
 def orders(page=1):
-    orders = Order.query.paginate(page, DEFAULT_PER_PAGE, False)
+    orders = Order.query\
+        .order_by(Order.active_flg.desc())\
+        .order_by(Order.created_dt)\
+        .paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('orders/orders.html',
                            title=gettext("Orders to maker"),
                            orders=orders)
