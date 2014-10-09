@@ -26,6 +26,10 @@ class UserForm(Form):
                                      default=PRODUCTS_PER_PAGE)
 
 
+class SearchForm(Form):
+    search = StringField('search', [validators.length(min=2)])
+
+
 class AddProductForm(Form):
     code = StringField('code', [validators.data_required(),
                                 validators.length(min=3, max=20)])

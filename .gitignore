@@ -5,4 +5,6 @@ search.db
 flask
 *.mo
 app/xls.py
+app/static/csv
+app/static/nohinsho
 

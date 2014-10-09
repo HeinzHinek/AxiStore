@@ -18,7 +18,7 @@
     {% endif %}
 
     <script>
-        moment.locale('{{ g.user.language }}');
+        moment.locale('{{ g.user.language if g.user.language else 'en' }}');
     </script>
   </head>
 

@@ -52,3 +52,14 @@ body {
     border-top-width: 0;
     border-bottom: 4px solid #000000;
 }
+
+.clearfix:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}

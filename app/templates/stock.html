@@ -1,3 +1,17 @@
+{% macro build_sort_num_list(field) -%}
+<span class="glyphicon glyphicon-sort dropdown-toggle" id="dropdown_{{ field }}" data-toggle="dropdown" style="color: #2a6496;"></span>
+<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_{{ field }}">
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-1' }}">{{ _('descending') }}</a></li>
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-2' }}">{{ _('ascending') }}</a></li>
+    <li class="divider"></li>
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-3' }}">{{ _('descending > 0') }}</a></li>
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-4' }}">{{ _('ascending > 0') }}</a></li>
+    <li class="divider"></li>
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-5' }}">{{ _('descending <= 0') }}</a></li>
+    <li><a href="{{ url_for('stock') + '?ord=' + field + '-6' }}">{{ _('ascending <= 0') }}</a></li>
+</ul>
+{%- endmacro %}
+
 {% extends "base.html" %}
 {% block content %}
 
@@ -18,6 +32,12 @@
             }
         });
     });
+
+    function checkSearch() {
+        string = $('#search_bar').val();
+        if (string.length > 1) { return true; }
+        return false;
+    }
 
 $(document).ready( function() {
 
@@ -51,28 +71,59 @@ $(document).ready( function() {
 
 
 <div class="row">
-    <h1>{{ _('Stock overview') }}</h1>
-    {% include 'flash.html' %}
+    <div style="float: left;">
+        <h1>{{ _('Stock overview') }}</h1>
+    </div>
+    <div style="float: right; margin-top: 5px;">
+        <form action="{{ url_for('search') }}" method="post" name="form_search" class="form-inline">
+            <div class="input-group">
+                <div class="input-group-addon input-sm"><span class="glyphicon glyphicon-search"></span></div>
+                {{ form_search.search(id="search_bar", class="form-control input-sm", size=30) }}
+            </div>
+            <div class="input-group">
+                <input type="submit" class="btn btn-info form-control input-sm btn-sm" onclick="return checkSearch();" value="OK"/>
+            </div>
+            {% for error in form_search.errors.search %}<div>[{{error}}]</div>{% endfor %}
+        </form>
+        {% if curr_search %}
+            <div class="clearfix" style="margin-top: 5px; padding: 2px 5px; border: 1px solid #dddddd;
+                background-color: #eeeeee; border-radius: 3px; -webkit-box-shadow: 0 0 3px 3px #78AEFF; box-shadow: 0 0 3px 3px #78AEFF;">
+                <div style="float: left;">{{ _('Search results:') }}&nbsp;<span style="color: crimson;">{{ curr_search }}</span></div>
+                <div style="float: right;"><a href="{{ url_for('clearsearch') }}"><button type="button" class="close">&times;</button></a></div>
+            </div>
+        {% endif %}
+    </div>
 </div>
 
+<div class="row">{% include 'flash.html' %}</div>
+
 <div class="row">
+
 {% if categories %}
-<ul id="tabs-categories" class="nav nav-tabs" role="tablist">
-{% for category in categories %}
-  <li id="cat_{{ category.id }}"
-    {% if g.category_id == category.id %} class="active" {% endif %}
-    >
-    <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
-    </li>
-{% endfor %}
-</ul>
+    <ul id="tabs-categories" class="nav nav-tabs" role="tablist">
+    {% for category in categories %}
+        <li id="cat_{{ category.id }}" {% if g.category_id == category.id %} class="active" {% endif %} >
+            <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+        </li>
+    {% endfor %}
+    {% if curr_search %}
+        <li {% if g.category_id == None %} class="active" {% endif %} >
+            <a href="{{ url_for('search') }}" style="color: red;">{{ _('All') }}</a>
+        </li>
+    {% endif %}
+    </ul>
 {% endif %}
 
+
 {% if products %}
-<table class="table table-hover table-condensed table-striped table-responsive td-border-bottom-2px">
+<table class="table table-hover table-condensed table-striped table-responsive td-border-bottom-2px" style="font-size: 0.9em;">
 <thead>
     <tr>
-        <th class="td-border-left-1px">{{ _('Product Code') }}</th>
+        <th class="td-border-left-1px">{{ _('Product Code') }}&nbsp;
+            <a href="{{ url_for('stock') + '?ord=code-2' }}">
+                <span class="glyphicon glyphicon-arrow-down" style="color: #2a6496;"></span>
+            </a>
+        </th>
         <th>
             <div class="dropdown">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="makerChoice" data-toggle="dropdown" style="font-weight: bold;">
@@ -101,10 +152,18 @@ $(document).ready( function() {
         <th>{{ _('Description JP') }}</th>
         <th style="text-align: right;">{{ _('Unit Price') }}</th>
         <th style="text-align: right;">{{ _('Retail Price') }}</th>
-        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Stock') }}</th>
-        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Req.') }}</th>
-        <th style="text-align: right; width: 5%;" class="td-border-left-1px">{{ _('Ord.') }}</th>
-        <th style="text-align: right; width: 5%;" class="td-border-left-1px td-border-right-1px">{{ _('Net') }}</th>
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown">{{ _('Stock') }}&nbsp;{{ build_sort_num_list('stock') }}</div>
+        </th>
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown">{{ _('Req.') }}&nbsp;{{ build_sort_num_list('req') }}</div>
+        </th>
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown">{{ _('Ord.') }}&nbsp;{{ build_sort_num_list('ord') }}</div>
+        </th>
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px">
+            <div class="dropdown">{{ _('Net.') }}&nbsp;{{ build_sort_num_list('net') }}</div>
+        </th>
     </tr>
 </thead>
 <tbody>
@@ -117,11 +176,11 @@ $(document).ready( function() {
         <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_unit}}</td>
         <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_retail}}</td>
 
-        <form action="" method="post" name="stock">
+        <form action="" method="post" name="form">
             {{form.hidden_tag()}}
             {% if product.qty_stock == None %}
             <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px">?
-            {% elif product.qty_stock == 0 %}
+            {% elif product.qty_stock <= 0 %}
             <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
             {% else %}
             <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
@@ -130,6 +189,7 @@ $(document).ready( function() {
                     <p>{{ form.qty_stock( class="control", size=5, style="color: black; text-align: right;") }}
                     <input type="submit" class="submit-qty-stock-edit" value="OK">
                     <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="page" value="{{ products.page }}">
                     </p>
                 </div>
             </td>
@@ -143,8 +203,6 @@ $(document).ready( function() {
 
         {% if product.net_stock == None %}
         <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px">?
-        {% elif product.net_stock == 0 %}
-        <td style="text-align: right;" class="danger td-border-left-1px td-border-right-2px">{{product.net_stock}}
         {% elif product.net_stock < 0 %}
         <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-2px">{{product.net_stock}}
         {% else %}

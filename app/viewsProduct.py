@@ -121,6 +121,6 @@ def findProductAjax():
     if desc_CS:
         result = result.filter(Product.desc_CS.like('%' + desc_CS + '%'))
     if desc_JP:
-        result = result.filter(Product.desc_CS.like('%' + desc_JP + '%'))
+        result = result.filter(Product.desc_JP.like('%' + desc_JP + '%'))
     result = result.filter(Product.active_flg==True)
     return jsonify(result=[i.serialize for i in result.all()])

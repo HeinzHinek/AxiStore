@@ -4,6 +4,7 @@ from app import db
 from config import USER_ROLES, CUSTOMER_TYPES
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import func
 
 
 class User(db.Model):
@@ -47,6 +48,8 @@ class Product(db.Model):
     price_retail = db.Column(db.Integer, default=0)
     qty_stock = db.Column(db.Integer)
     active_flg = db.Column(db.Boolean, default=True)
+    requested_products = db.relationship('RequestedProducts')
+    ordered_products = db.relationship('OrderedProducts')
 
     @property
     def serialize(self):
@@ -81,6 +84,10 @@ class Product(db.Model):
                 order_qties += oa.quantity
                 order_qties -= oa.qty_delivered
         return order_qties
+
+    @hybrid_property
+    def net_stock(self):
+        return self.qty_stock - self.request_qty + self.order_qty
 
     def customer_request_qty(self, cust_id):
         req_qties = 0
@@ -117,7 +124,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
     active_flg = db.Column(db.Boolean, default=True)
-    products = db.relationship('OrderedProducts', backref='order')
+    products = db.relationship('OrderedProducts', backref='order', lazy='dynamic')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()
@@ -145,8 +152,7 @@ class Delivery(db.Model):
     created_dt = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
-    products = db.relationship('DeliveredProducts',
-                               backref='delivery')
+    products = db.relationship('DeliveredProducts', backref='delivery', lazy='dynamic')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()
@@ -177,12 +183,13 @@ class Customer(db.Model):
 
 
 class Request(db.Model):
+    __tablename__ = 'request'
     id = db.Column(db.Integer, primary_key=True)
     created_dt = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
     active_flg = db.Column(db.Boolean, default=True)
-    products = db.relationship('RequestedProducts', backref='request')
+    products = db.relationship('RequestedProducts', backref='request', lazy='dynamic')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()
@@ -203,6 +210,7 @@ class RequestedProducts(db.Model):
     quantity = db.Column(db.Integer, default=1)
     qty_supplied = db.Column(db.Integer, default=0)
     product = db.relationship('Product', backref='request_assocs')
+    requests = db.relationship('Request')
 
 
 class Supply(db.Model):
@@ -210,7 +218,7 @@ class Supply(db.Model):
     created_dt = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
-    products = db.relationship('SuppliedProducts', backref='supply')
+    products = db.relationship('SuppliedProducts', backref='supply', lazy='dynamic')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()
@@ -234,4 +242,4 @@ class Contact(db.Model):
     phone = db.Column(db.String(16))
     email = db.Column(db.String(120))
 
-    contact = db.relationship('Customer', backref='contact')
+    contact = db.relationship('Customer', backref='contact', lazy='dynamic')
