@@ -69,21 +69,35 @@ class Product(db.Model):
 
     @hybrid_property
     def request_qty(self):
-        req_qties = 0
-        for ra in self.request_assocs:
-            if ra.request.active_flg:
-                req_qties += ra.quantity
-                req_qties -= ra.qty_supplied
-        return req_qties
+        return sum(op.quantity - op.qty_supplied
+                   for op in self.requested_products)
+
+    @request_qty.expression
+    def request_qty(cls):
+        return (db.select([db.func.coalesce(
+            db.func.sum(
+                db.func.coalesce(
+                    RequestedProducts.quantity - RequestedProducts.qty_supplied, 0)
+            ), 0)])
+            .where(RequestedProducts.product_id == cls.id)
+            .label("diff_requests")
+        )
 
     @hybrid_property
     def order_qty(self):
-        order_qties = 0
-        for oa in self.order_assocs:
-            if oa.order.active_flg:
-                order_qties += oa.quantity
-                order_qties -= oa.qty_delivered
-        return order_qties
+        return sum(op.quantity - op.qty_delivered
+                   for op in self.ordered_products)
+
+    @order_qty.expression
+    def order_qty(cls):
+        return (db.select([db.func.coalesce(
+            db.func.sum(
+                db.func.coalesce(
+                    OrderedProducts.quantity - OrderedProducts.qty_delivered, 0)
+            ), 0)])
+            .where(OrderedProducts.product_id == cls.id)
+            .label("diff_orders")
+        )
 
     @hybrid_property
     def net_stock(self):

@@ -7,7 +7,8 @@ from models import User, Product, Category, Maker, OrderedProducts, RequestedPro
 from flask_login import current_user, login_required
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES
 from flask.ext.babel import gettext
-from sqlalchemy import or_, func
+from sqlalchemy import or_, func, select, alias
+from flask_sqlalchemy import Pagination
 
 
 @app.before_request
@@ -90,11 +91,9 @@ def stock(page=1):
         products = products.filter(or_(Product.code.like('%' + session['search_string'] + '%'),
                                        (Product.desc_CS.like('%' + session['search_string'] + '%')),
                                        (Product.desc_JP.like('%' + session['search_string'] + '%'))))
-
     if g.maker_id is not None:
         products = products.filter(Product.maker_id == int(g.maker_id))
         g.category_id = Maker.query.filter_by(id=g.maker_id).one().category_id
-
     if g.category_id:
         curr_category = Category.query.filter_by(id=g.category_id).one()
         products = products.filter_by(category_id=int(g.category_id))
@@ -105,26 +104,14 @@ def stock(page=1):
     #Custom ordering
     if session['order_type']:
         order_type = session['order_type'].split('-')
-        property = None
-        having = None
         if order_type[0] == 'stock':
             property = Product.qty_stock
         elif order_type[0] == 'req':
-            products = products.outerjoin(Product.requested_products)\
-                .group_by(Product.id)
-            having = (func.sum(RequestedProducts.quantity) - func.sum(RequestedProducts.qty_supplied))
+            property = Product.request_qty
         elif order_type[0] == 'ord':
-            products = products.outerjoin(Product.ordered_products) \
-                .group_by(Product.id)
-            having = (func.sum(OrderedProducts.quantity) - func.sum(OrderedProducts.qty_delivered))
+            property = Product.order_qty
         elif order_type[0] == 'net':
-            products = products.outerjoin(Product.requested_products)
-            products = products.outerjoin(Product.ordered_products)
-            products = products.group_by(Product.id)
-            reqs = func.coalesce((func.sum(RequestedProducts.quantity) - func.sum(RequestedProducts.qty_supplied)), 0)
-            ords = func.coalesce((func.sum(OrderedProducts.quantity) - func.sum(OrderedProducts.qty_delivered)), 0)
-
-            having = (Product.qty_stock - reqs + ords)
+            property = (Product.qty_stock - Product.request_qty + Product.order_qty)
         else:
             session['order_type'] = None
             property = None
@@ -132,30 +119,17 @@ def stock(page=1):
         style = order_type[1]
         if style:
             if style == '3' or style == '4':
-                if not having:
-                    products = products.filter(property > 0)
-                else:
-                    products = products.having(having > 0)
+                products = products.filter(property > 0)
             if style == '5' or style == '6':
-                if not having:
-                    products = products.filter(property <= 0)
-                else:
-                    products = products.having((having == None) | (having <= 0))
+                products = products.filter(property <= 0)
             if style == '1' or style == '3' or style == '5':
-                if not having:
-                    products = products.order_by(property.desc())
-                else:
-                    products = products.order_by(having.desc())
+                products = products.order_by(property.desc())
             else:
-                if not having:
-                    products = products.order_by(property)
-                else:
-                    products = products.order_by(having)
+                products = products.order_by(property)
 
     products = products.order_by(Product.maker_id, Product.code)
     print products
     products = products.paginate(page, current_user.products_per_page, False)
-
 #Query end
 
     categories = Category.query.order_by(Category.order.asc()).all()
