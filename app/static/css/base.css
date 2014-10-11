@@ -60,6 +60,61 @@ body {
    clear: both;
 }
 
-.dropdown-toggle {
+.sorter {
     cursor: pointer;
+}
+
+.sorter:hover {
+    color: black !important;
+    text-shadow: 0 0 5px #0080FF;
+}
+
+.row-indicator-left {
+    padding: 0px !important;
+    background-color: transparent !important;
+    width: 7px;
+}
+
+.row-indicator-right {
+    padding: 0px !important;
+    background-color: transparent !important;
+    width: 7px;
+}
+
+.row-indicator-left-on {
+    padding: 0px !important;
+    width: 7px;
+    background: #cfe7fa; /* Old browsers */
+    background: -moz-linear-gradient(left,  #cfe7fa 0%, #6393c1 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#cfe7fa), color-stop(100%,#6393c1)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  #cfe7fa 0%,#6393c1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  #cfe7fa 0%,#6393c1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  #cfe7fa 0%,#6393c1 100%); /* IE10+ */
+    background: linear-gradient(to right,  #cfe7fa 0%,#6393c1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=1 ); /* IE6-9 */
+    -webkit-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+}
+
+.row-indicator-right-on {
+    padding: 0px !important;
+    width: 7px;
+    background: #6393c1; /* Old browsers */
+    background: -moz-linear-gradient(left,  #6393c1 0%, #cfe7fa 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#6393c1), color-stop(100%,#cfe7fa)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  #6393c1 0%,#cfe7fa 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  #6393c1 0%,#cfe7fa 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  #6393c1 0%,#cfe7fa 100%); /* IE10+ */
+    background: linear-gradient(to right,  #6393c1 0%,#cfe7fa 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6393c1', endColorstr='#cfe7fa',GradientType=1 ); /* IE6-9 */
+    -webkit-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.tr-product td {
+    vertical-align: middle !important;
+}
+
+.focused-tr {
+    color: crimson;
 }

@@ -36,7 +36,7 @@ def createOrder():
                 flash(gettext("Maker not found."))
                 return redirect(url_for("orders"))
 
-            products = Product.query.order_by(Product.maker_id, Product.code)\
+            products = Product.query.order_by(Product.net_stock, Product.maker_id, Product.code)\
                 .filter_by(maker_id=int(maker_id),
                            active_flg=True).all()
             for p in products:

@@ -1,15 +1,41 @@
 {% macro build_sort_num_list(field) -%}
-<span class="glyphicon glyphicon-sort dropdown-toggle" id="dropdown_{{ field }}" data-toggle="dropdown" style="color: #2a6496;"></span>
-<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_{{ field }}">
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-1' }}">{{ _('descending') }}</a></li>
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-2' }}">{{ _('ascending') }}</a></li>
-    <li class="divider"></li>
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-3' }}">{{ _('descending > 0') }}</a></li>
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-4' }}">{{ _('ascending > 0') }}</a></li>
-    <li class="divider"></li>
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-5' }}">{{ _('descending <= 0') }}</a></li>
-    <li><a href="{{ url_for('stock') + '?ord=' + field + '-6' }}">{{ _('ascending <= 0') }}</a></li>
-</ul>
+    {% set order_num = 0 %}
+    {% if session['order_type'] and session['order_type'][:3] == field[:3] %}
+        {% set order_num = (session['order_type'][-1:]|int) %}
+    {% endif %}
+
+    {% set glyph = {0: 'sort', 1: 'sort-by-attributes-alt', 2: 'sort-by-attributes',
+        3: 'sort-by-attributes-alt', 4: 'sort-by-attributes',
+        5: 'sort-by-attributes-alt', 6: 'sort-by-attributes'} %}
+    {% set color = {0: 'grey', 1: '#2a6496', 2: '#2a6496', 3: '#006600', 4: '#006600', 5: '#CC0000', 6: '#CC0000'} %}
+    <span class="glyphicon glyphicon-{{ glyph[order_num]|string }} dropdown-toggle sorter" id="dropdown_{{ field }}" data-toggle="dropdown"
+          style="color: {{ color[order_num]|string }};"></span>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_{{ field }}">
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-1' }}">{{ _('descending') }}</a></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-2' }}">{{ _('ascending') }}</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-3' }}">{{ _('descending > 0') }}</a></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-4' }}">{{ _('ascending > 0') }}</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-5' }}">{{ _('descending <= 0') }}</a></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-6' }}">{{ _('ascending <= 0') }}</a></li>
+    </ul>
+{%- endmacro %}
+
+{% macro build_sort_str_list(field) -%}
+    {% set order_num = 0 %}
+    {% if session['order_type'] and session['order_type'][:3] == field[:3] %}
+        {% set order_num = (session['order_type'][-1:]|int) %}
+    {% endif %}
+
+    {% set glyph = {0: 'sort', 1: 'sort-by-attributes-alt', 2: 'sort-by-attributes'} %}
+    {% set color = {0: 'grey', 1: '#2a6496', 2: '#2a6496'} %}
+    <span class="glyphicon glyphicon-{{ glyph[order_num]|string }} dropdown-toggle sorter" id="dropdown_{{ field }}" data-toggle="dropdown"
+          style="color: {{ color[order_num]|string }};"></span>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_{{ field }}">
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-2' }}">{{ _('ascending') }}</a></li>
+        <li><a href="{{ url_for('stock') + '?ord=' + field + '-1' }}">{{ _('descending') }}</a></li>
+    </ul>
 {%- endmacro %}
 
 {% extends "base.html" %}
@@ -21,6 +47,7 @@
 <script>
     $(function() {
         $( "#tabs-categories" ).sortable({
+            items: "> li:not(:first)",
             axis: 'x',
             update: function (event, ui) {
                 var data = $(this).sortable('serialize');
@@ -66,6 +93,14 @@ $(document).ready( function() {
         }
     });
 
+    $('.product-row').hover(function() {
+        $(this).find('.row-indicator-left').addClass('row-indicator-left-on');
+        $(this).find('.row-indicator-right').addClass('row-indicator-right-on');
+    }, function() {
+        $(this).find('.row-indicator-left').removeClass('row-indicator-left-on');
+        $(this).find('.row-indicator-right').removeClass('row-indicator-right-on');
+    });
+
 });
 </script>
 
@@ -97,31 +132,30 @@ $(document).ready( function() {
 
 <div class="row">{% include 'flash.html' %}</div>
 
-<div class="row">
+<div class="row" style="margin: 0 -40px 0 -40px !important;">
 
 {% if categories %}
-    <ul id="tabs-categories" class="nav nav-tabs" role="tablist">
-    {% for category in categories %}
-        <li id="cat_{{ category.id }}" {% if g.category_id == category.id %} class="active" {% endif %} >
-            <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+    <ul id="tabs-categories" class="nav nav-tabs" role="tablist" style="margin: 0 6px 0 7px;">
+        <li {% if g.category_id == None or g.category_id == 0 %} class="active" {% endif %} >
+            <a href="{{ url_for('stock', search=session['search_string'], cat=0) }}" style="color: red;">{{ _('All') }}</a>
         </li>
-    {% endfor %}
-    {% if curr_search %}
-        <li {% if g.category_id == None %} class="active" {% endif %} >
-            <a href="{{ url_for('search') }}" style="color: red;">{{ _('All') }}</a>
-        </li>
-    {% endif %}
+        {% for category in categories %}
+            <li id="cat_{{ category.id }}" {% if g.category_id == category.id %} class="active" {% endif %} >
+                <a href="{{ url_for('stock') + '?cat=' + (category.id|string) }}">{{ category.name_CS }}</a>
+            </li>
+        {% endfor %}
     </ul>
 {% endif %}
 
 
 {% if products %}
-<table class="table table-hover table-condensed table-striped table-responsive td-border-bottom-2px" style="font-size: 0.9em;">
+<table class="table table-hover table-condensed table-striped table-responsive" style="font-size: 0.9em;">
 <thead>
     <tr>
+        <th class="no-border row-indicator-left"></th>
         <th class="td-border-left-1px">{{ _('Product Code') }}&nbsp;
             <a href="{{ url_for('stock') + '?ord=code-2' }}">
-                <span class="glyphicon glyphicon-arrow-down" style="color: #2a6496;"></span>
+                <span class="glyphicon glyphicon-arrow-down sorter" style="color: grey;"></span>
             </a>
         </th>
         <th>
@@ -148,42 +182,44 @@ $(document).ready( function() {
                 </ul>
             </div>
         </th>
-        <th>{{ _('Description CS') }}</th>
-        <th>{{ _('Description JP') }}</th>
-        <th style="text-align: right;">{{ _('Unit Price') }}</th>
-        <th style="text-align: right;">{{ _('Retail Price') }}</th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:5] == 'stock' %}info{% endif %}">
+        <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
+        <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
+        <th style="text-align: right;"><div class="dropdown">{{ _('Unit Price') }}&nbsp;{{ build_sort_str_list('unitp') }}</div></th>
+        <th style="text-align: right;"><div class="dropdown">{{ _('Retail Price') }}&nbsp;{{ build_sort_str_list('retap') }}</div></th>
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
             <div class="dropdown">{{ _('Stock') }}&nbsp;{{ build_sort_num_list('stock') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:3] == 'req' %}info{% endif %}">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
             <div class="dropdown">{{ _('Req.') }}&nbsp;{{ build_sort_num_list('req') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px {% if session['order_type'] and session['order_type'][:3] == 'ord' %}info{% endif %}">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
             <div class="dropdown">{{ _('Ord.') }}&nbsp;{{ build_sort_num_list('ord') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px {% if session['order_type'] and session['order_type'][:3] == 'net' %}info{% endif %}">
+        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px">
             <div class="dropdown">{{ _('Net.') }}&nbsp;{{ build_sort_num_list('net') }}</div>
         </th>
+        <th class="no-border row-indicator-right"></th>
     </tr>
 </thead>
 <tbody>
     {% for product in products.items %}
-    <tr id="{{ product.id }}">
-        <td class="clickable-td td-redir-edit td-border-left-2px">{{product.code}}</td>
-        <td class="clickable-td td-redir-edit">{{product.maker.name}}</td>
-        <td class="clickable-td td-redir-edit">{{product.desc_CS}}</td>
-        <td class="clickable-td td-redir-edit">{{product.desc_JP}}</td>
-        <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_unit}}</td>
-        <td class="clickable-td td-redir-edit" style="text-align: right;">{{product.price_retail}}</td>
+    <tr id="{{ product.id }}" class="product-row">
+        <td class="no-border row-indicator-left"></td>
+        <td class="clickable-td td-redir-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.code}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_CS}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_JP}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_retail}}</td>
 
         <form action="" method="post" name="form">
             {{form.hidden_tag()}}
             {% if product.qty_stock == None %}
-            <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px">?
+            <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">?
             {% elif product.qty_stock <= 0 %}
-            <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
+            <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.qty_stock}}
             {% else %}
-            <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
+            <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.qty_stock}}
             {% endif %}
                 <div class="div-qty-stock-edit" style="display: none; position: absolute;">
                     <p>{{ form.qty_stock( class="control", size=5, style="color: black; text-align: right;") }}
@@ -195,21 +231,21 @@ $(document).ready( function() {
             </td>
         </form>
 
-        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
+        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}"
                 onclick="window.location.href = '{{ url_for("productrequests", id=product.id) }}'">{{ product.request_qty }}</td>
 
-        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
+        <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}"
                 onclick="window.location.href = '{{ url_for("productorders", id=product.id) }}'">{{ product.order_qty }}</td>
 
         {% if product.net_stock == None %}
-        <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px">?
+        <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">?
         {% elif product.net_stock < 0 %}
-        <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-2px">{{product.net_stock}}
+        <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.net_stock}}
         {% else %}
-        <td style="text-align: right;" class="td-border-left-1px td-border-right-2px">{{product.net_stock}}
+        <td style="text-align: right;" class="td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.net_stock}}
         {% endif %}
         </td>
-
+        <td class="no-border row-indicator-right"></td>
     </tr>
     {% endfor %}
 </tbody>

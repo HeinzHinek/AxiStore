@@ -80,7 +80,7 @@ class Product(db.Model):
                     RequestedProducts.quantity - RequestedProducts.qty_supplied, 0)
             ), 0)])
             .where(RequestedProducts.product_id == cls.id)
-            .label("diff_requests")
+            .label("request_qty")
         )
 
     @hybrid_property
@@ -96,7 +96,7 @@ class Product(db.Model):
                     OrderedProducts.quantity - OrderedProducts.qty_delivered, 0)
             ), 0)])
             .where(OrderedProducts.product_id == cls.id)
-            .label("diff_orders")
+            .label("order_qty")
         )
 
     @hybrid_property

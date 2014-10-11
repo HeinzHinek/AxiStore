@@ -3,12 +3,11 @@
 from flask import render_template, request, g, session, flash, redirect, url_for
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm
-from models import User, Product, Category, Maker, OrderedProducts, RequestedProducts, Order
+from models import User, Product, Category, Maker
 from flask_login import current_user, login_required
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES
 from flask.ext.babel import gettext
-from sqlalchemy import or_, func, select, alias
-from flask_sqlalchemy import Pagination
+from sqlalchemy import or_
 
 
 @app.before_request
@@ -63,6 +62,7 @@ def before_request():
     if not hasattr(g.user, 'products_per_page'):
         g.user.products_per_page = PRODUCTS_PER_PAGE
 
+
 @app.after_request
 def after_request(response):
     db.session.expire_all()
@@ -104,7 +104,15 @@ def stock(page=1):
     #Custom ordering
     if session['order_type']:
         order_type = session['order_type'].split('-')
-        if order_type[0] == 'stock':
+        if order_type[0] == 'csdesc':
+            property = Product.desc_CS
+        elif order_type[0] == 'jpdesc':
+            property = Product.desc_CS
+        elif order_type[0] == 'unitp':
+            property = Product.price_unit
+        elif order_type[0] == 'retap':
+            property = Product.price_retail
+        elif order_type[0] == 'stock':
             property = Product.qty_stock
         elif order_type[0] == 'req':
             property = Product.request_qty
@@ -128,7 +136,6 @@ def stock(page=1):
                 products = products.order_by(property)
 
     products = products.order_by(Product.maker_id, Product.code)
-    print products
     products = products.paginate(page, current_user.products_per_page, False)
 #Query end
 
