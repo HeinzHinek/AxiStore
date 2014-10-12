@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, request, g, session, flash, redirect, url_for
+from flask import render_template, request, g, session, flash, redirect, url_for, json
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm
-from models import User, Product, Category, Maker
+from models import User, Product, Category, Maker, Request
 from flask_login import current_user, login_required
-from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES
+from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES
 from flask.ext.babel import gettext
 from sqlalchemy import or_
+from datetime import datetime
+import calendar
 
 
 @app.before_request
@@ -106,6 +108,8 @@ def stock(page=1):
         order_type = session['order_type'].split('-')
         if order_type[0] == 'csdesc':
             property = Product.desc_CS
+        elif order_type[0] == 'maker':
+            property = Product.maker_id
         elif order_type[0] == 'jpdesc':
             property = Product.desc_CS
         elif order_type[0] == 'unitp':
@@ -236,3 +240,38 @@ def get_locale():
     if g.user.is_authenticated():
         lang = g.user.language
     return lang
+
+
+@app.route('/prepareReqGraphData', methods=['POST'])
+@login_required
+def prepareReqGraphData():
+    data = request.form['data'] if request.form['data'] else None
+    date = datetime.strptime(data[:24].encode('utf-8'), "%a %b %d %Y %H:%M:%S")
+    begin_date = datetime(date.year, date.month, 1)
+    today = datetime.now()
+    if date.year == today.year and date.month == today.month:
+        last_day = today.day
+    else:
+        last_day = calendar.monthrange(date.year, date.month)[1]
+    end_date = datetime(date.year, date.month, last_day)
+    reqs = Request.query\
+        .filter(Request.created_dt >= begin_date)\
+        .filter(Request.created_dt <= end_date)\
+        .all()
+    data = []
+    cust = 0
+    axm = 0
+    for i in range(1, last_day + 1):
+        item = {}
+        item['date'] = str(date.strftime("%b")) + " " + str(i)
+        for r in reqs:
+            if r.created_dt.day == i and r.customer is not None:
+                if r.customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']:
+                    cust += 1
+                elif r.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+                    axm += 1
+        item['customers'] = cust
+        item['AxM'] = axm
+        data.append(item)
+    print data
+    return json.dumps(data);

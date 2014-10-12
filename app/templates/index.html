@@ -1,5 +1,73 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ _('Hi, ') }}{{user.nickname}}!</h1>
-{% include 'flash.html' %}
+
+<script src="/static/js/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="/static/js/amcharts/serial.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var chartData = [{}];
+
+var chart2 = AmCharts.makeChart("requests_graph", {
+    "type": "serial",
+    "categoryField": "date",
+    "startEffect": "easeOutSine",
+    "startDuration": 0.5,
+    "graphs": [{
+        "valueField": "customers",
+        "bullet": "round",
+        "fillAlphas": 0.6,
+        "balloonText": "[[customers]]"
+    }, {
+        "valueField": "AxM",
+        "bullet": "square",
+        "fillAlphas": 0.6,
+        "balloonText": "[[AxM]]"
+    }],
+    "chartCursor": {
+        "categoryBalloonDateFormat": "MMM YYYY"
+    },
+    "categoryAxis": {
+        "autoGridCount": true,
+        "gridCount": chartData.length,
+        "gridPosition": "start",
+        "labelRotation": 90
+    },
+    "valueAxes": [{
+        "stackType": "regular"
+    }]
+});
+
+$(document).ready(function() {
+    get_new_data_req_graph();
+});
+
+function get_new_data_req_graph(month) {
+    if(month == null) { month = new Date();}
+    $.post('/prepareReqGraphData', {
+        data: month
+    }).done(function(result) {
+        if (result) {
+            chartData = JSON.parse(result);
+            chart2.dataProvider = chartData;
+            chart2.validateData();
+        }
+    }).fail(function() {
+        alert('Data transfer failed!');
+    });
+}
+</script>
+
+<div class="row">
+    <h1>{{ _('Hi, ') }}{{user.nickname}}!</h1>
+    {% include 'flash.html' %}
+</div>
+<br/>
+
+<div class="row">
+    <div class="col-md-6" style="text-align: center;">
+        <label>{{ _('Orders from customers') }}</label>
+        <div id="requests_graph" style="width: 100%; height: 400px;"></div>
+    </div>
+</div>
+
 {% endblock %}

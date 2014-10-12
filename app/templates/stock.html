@@ -159,7 +159,7 @@ $(document).ready( function() {
             </a>
         </th>
         <th>
-            <div class="dropdown">
+            <div class="dropdown" style="display: inline-block;">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="makerChoice" data-toggle="dropdown" style="font-weight: bold;">
                     {% if curr_maker_name %}
                     {{ curr_maker_name }}
@@ -181,6 +181,7 @@ $(document).ready( function() {
                     {% endfor %}
                 </ul>
             </div>
+            <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
         </th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
         <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
