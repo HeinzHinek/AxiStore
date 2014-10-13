@@ -3,12 +3,12 @@
 from flask import render_template, request, g, session, flash, redirect, url_for, json
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm
-from models import User, Product, Category, Maker, Request
+from models import User, Product, Category, Maker, Request, RequestedProducts
 from flask_login import current_user, login_required
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES
 from flask.ext.babel import gettext
-from sqlalchemy import or_
-from datetime import datetime
+from sqlalchemy import or_, func
+from datetime import datetime, timedelta
 import calendar
 
 
@@ -246,14 +246,14 @@ def get_locale():
 @login_required
 def prepareReqGraphData():
     data = request.form['data'] if request.form['data'] else None
-    date = datetime.strptime(data[:24].encode('utf-8'), "%a %b %d %Y %H:%M:%S")
+    date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
     today = datetime.now()
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:
         last_day = calendar.monthrange(date.year, date.month)[1]
-    end_date = datetime(date.year, date.month, last_day)
+    end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
     reqs = Request.query\
         .filter(Request.created_dt >= begin_date)\
         .filter(Request.created_dt <= end_date)\
@@ -273,5 +273,67 @@ def prepareReqGraphData():
         item['customers'] = cust
         item['AxM'] = axm
         data.append(item)
-    print data
-    return json.dumps(data);
+    return json.dumps(data)
+
+
+@app.route('/prepareValueProportionGraphData', methods=['POST'])
+@login_required
+def prepareValueProportionGraphData():
+    data = request.form['data'] if request.form['data'] else None
+    date = datetime(int(data[:4]), int(data[4:]), 1)
+    begin_date = datetime(date.year, date.month, 1)
+    today = datetime.now()
+    if date.year == today.year and date.month == today.month:
+        last_day = today.day
+    else:
+        last_day = calendar.monthrange(date.year, date.month)[1]
+    end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
+    products = RequestedProducts.query\
+        .join(Product)\
+        .join(Maker)\
+        .join(Request)\
+        .with_entities(Maker.name,
+                       func.sum(Product.price_retail * RequestedProducts.quantity))\
+        .filter(Request.created_dt >= begin_date)\
+        .filter(Request.created_dt <= end_date)\
+        .group_by(Product.maker_id)\
+        .order_by(func.sum(Product.price_retail * RequestedProducts.quantity).desc())\
+        .all()
+    data = []
+    for p in products:
+        item = {}
+        item['maker'] = p[0]
+        item['total'] = p[1]
+        data.append(item)
+    return json.dumps(data)
+
+@app.route('/prepareQuantityProportionGraphData', methods=['POST'])
+@login_required
+def prepareQuantityProportionGraphData():
+    data = request.form['data'] if request.form['data'] else None
+    date = datetime(int(data[:4]), int(data[4:]), 1)
+    begin_date = datetime(date.year, date.month, 1)
+    today = datetime.now()
+    if date.year == today.year and date.month == today.month:
+        last_day = today.day
+    else:
+        last_day = calendar.monthrange(date.year, date.month)[1]
+    end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
+    products = RequestedProducts.query\
+        .join(Product)\
+        .join(Maker)\
+        .join(Request)\
+        .with_entities(Maker.name,
+                       func.sum(RequestedProducts.quantity))\
+        .filter(Request.created_dt >= begin_date)\
+        .filter(Request.created_dt <= end_date)\
+        .group_by(Product.maker_id)\
+        .order_by(func.sum(RequestedProducts.quantity).desc())\
+        .all()
+    data = []
+    for p in products:
+        item = {}
+        item['maker'] = p[0]
+        item['total'] = p[1]
+        data.append(item)
+    return json.dumps(data)

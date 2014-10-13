@@ -3,24 +3,34 @@
 
 <script src="/static/js/amcharts/amcharts.js" type="text/javascript"></script>
 <script src="/static/js/amcharts/serial.js" type="text/javascript"></script>
+<script src="/static/js/amcharts/pie.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 var chartData = [{}];
+var curr_year = new Date().getFullYear();
+var curr_month = new Date().getMonth()+1;
+var month_btns = {1: "btn-jan", 2: "btn-feb", 3: "btn-mar", 4: "btn-apr", 5: "btn-may", 6: "btn-jun",
+                  7: "btn-jul", 8: "btn-aug", 9: "btn-sep", 10: "btn-oct", 11: "btn-nov", 12: "btn-dec"}
 
-var chart2 = AmCharts.makeChart("requests_graph", {
+var chart_req = AmCharts.makeChart("requests_graph", {
     "type": "serial",
     "categoryField": "date",
     "startEffect": "easeOutSine",
     "startDuration": 0.5,
+    "legend": {
+
+    },
     "graphs": [{
         "valueField": "customers",
         "bullet": "round",
-        "fillAlphas": 0.6,
+        "fillAlphas": 0.8,
+        "title": "{{ _('customers') }}",
         "balloonText": "[[customers]]"
     }, {
         "valueField": "AxM",
         "bullet": "square",
-        "fillAlphas": 0.6,
+        "fillAlphas": 0.8,
+        "title": "{{ _('Axis Mart') }}",
         "balloonText": "[[AxM]]"
     }],
     "chartCursor": {
@@ -37,19 +47,145 @@ var chart2 = AmCharts.makeChart("requests_graph", {
     }]
 });
 
-$(document).ready(function() {
-    get_new_data_req_graph();
+var chart_value_proportion = AmCharts.makeChart("value_proportion_graph", {
+	"type": "pie",
+	"angle": 45,
+	"balloonText": "[[title]]<br><span style='font-size:14px'><b>&#165;[[value]]</b> ([[percents]]%)</span>",
+    "legend": {},
+	"labelsEnabled": false,
+	"depth3D": 15,
+	"pullOutDuration": 0.5,
+	"startDuration": 0.5,
+	"startEffect": "easeOutSine",
+	"titleField": "maker",
+	"valueField": "total"
 });
 
-function get_new_data_req_graph(month) {
-    if(month == null) { month = new Date();}
+var chart_quantity_proportion = AmCharts.makeChart("quantity_proportion_graph", {
+	"type": "pie",
+	"angle": 45,
+	"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]&nbsp;{{ _('pcs') }}</b> ([[percents]]%)</span>",
+	"legend": {},
+	"labelsEnabled": false,
+	"depth3D": 15,
+	"pullOutDuration": 0.5,
+	"startDuration": 0.5,
+	"startEffect": "easeOutSine",
+	"titleField": "maker",
+	"valueField": "total"
+});
+
+
+$(document).ready(function() {
+    setup_year_select();
+    set_current_dates();
+    draw_graphs();
+
+    $('.month-btn').click( function() {
+        $('.month-btn').removeClass('btn-info');
+        $(this).addClass('btn-info');
+        for (m in month_btns) {
+            if (month_btns[m] == $(this).attr('id')) {
+                curr_month = m;
+                break;
+            }
+        }
+        draw_graphs();
+    });
+
+    $('#year-select').change( function() {
+        curr_year = $(this).val();
+        disable_future_buttons();
+        draw_graphs();
+    });
+
+});
+
+function setup_year_select() {
+    this_year = new Date().getFullYear();
+    for (i=2013; i<=this_year; i++) {
+        $('#year-select').append($("<option/>", {
+            value: i,
+            text: i
+        }));
+    }
+}
+
+function set_current_dates() {
+    $('#year-select').val(curr_year);
+    var currId = '#' + month_btns[curr_month];
+    $(currId).addClass("btn-info");
+    disable_future_buttons();
+}
+
+function disable_future_buttons() {
+    if (curr_year >= new Date().getFullYear()) {
+        var monthnow = new Date().getMonth()+1;
+        for (i=1; i<=12; i++) {
+            if (i > monthnow) {
+                var thisid = '#' + month_btns[i];
+                $(thisid).attr('disabled', 'disabled');
+            }
+        }
+        if (curr_month > monthnow) {
+            $('.month-btn').removeClass('btn-info');
+            curr_month = monthnow;
+            var currId = '#' + month_btns[curr_month];
+            $(currId).addClass("btn-info");
+        }
+    } else {
+        for (i=1; i<=12; i++) {
+            var thisid = '#' + month_btns[i];
+            $(thisid).removeAttr('disabled');
+        }
+    }
+}
+
+function draw_graphs() {
+    get_new_data_req_graph(curr_year, curr_month);
+    get_new_data_value_value_proportion_graph(curr_year, curr_month);
+    get_new_data_quantity_value_proportion_graph(curr_year, curr_month);
+}
+
+function get_new_data_req_graph(year, month) {
     $.post('/prepareReqGraphData', {
-        data: month
+        data: '' + year.toString() + month.toString()
     }).done(function(result) {
         if (result) {
             chartData = JSON.parse(result);
-            chart2.dataProvider = chartData;
-            chart2.validateData();
+            chart_req.dataProvider = chartData;
+            chart_req.validateData();
+             chart_req.animateAgain();
+        }
+    }).fail(function() {
+        alert('Data transfer failed!');
+    });
+}
+
+function get_new_data_value_value_proportion_graph(year, month) {
+    $.post('/prepareValueProportionGraphData', {
+        data: '' + year.toString() + month.toString()
+    }).done(function(result) {
+        if (result) {
+            chartData = JSON.parse(result);
+            chart_value_proportion.dataProvider = chartData;
+            chart_value_proportion.validateData();
+            chart_value_proportion.animateAgain();
+        }
+    }).fail(function() {
+        alert('Data transfer failed!');
+    });
+}
+
+function get_new_data_quantity_value_proportion_graph(year, month) {
+    $.post('/prepareQuantityProportionGraphData', {
+        data: '' + year.toString() + month.toString()
+    }).done(function(result) {
+        if (result) {
+            chartData = JSON.parse(result);
+            chart_quantity_proportion.dataProvider = chartData;
+            chart_quantity_proportion.validateData();
+            chart_quantity_proportion.animateAgain();
         }
     }).fail(function() {
         alert('Data transfer failed!');
@@ -57,17 +193,48 @@ function get_new_data_req_graph(month) {
 }
 </script>
 
-<div class="row">
-    <h1>{{ _('Hi, ') }}{{user.nickname}}!</h1>
+<style>
+body { background-color: #eeeeee; }
+</style>
+
+<div class="row" style="text-align: center;">
+    <h1>{{ _('AxiStore quick summary') }}</h1>
     {% include 'flash.html' %}
 </div>
-<br/>
 
 <div class="row">
-    <div class="col-md-6" style="text-align: center;">
+    <div class="col-md-4"><div class="graph-div" style="margin: 10px -10px !important;">
         <label>{{ _('Orders from customers') }}</label>
-        <div id="requests_graph" style="width: 100%; height: 400px;"></div>
+        <div id="requests_graph" style="width: 100%; height: 300px;"></div>
+    </div></div>
+    <div class="col-md-4"><div class="graph-div" style="margin: 10px -10px !important;">
+        <label>{{ _('Ordered products total value') }}</label>
+        <div id="value_proportion_graph" style="width: 100%; height: 300px;"></div>
+    </div></div>
+    <div class="col-md-4"><div class="graph-div" style="margin: 10px -10px !important;">
+        <label>{{ _('Ordered products total quantity') }}</label>
+        <div id="quantity_proportion_graph" style="width: 100%; height: 300px;"></div>
+    </div></div>
+</div>
+
+<div class="row">
+    <div class="graph-div" style="margin: 0 5px !important; text-align: left;">
+        <label>{{ _('Data for:') }}&nbsp;</label>
+        <button id="btn-jan" class="btn month-btn btn-sm">{{ _('Jan') }}</button>
+        <button id="btn-feb" class="btn month-btn btn-sm">{{ _('Feb') }}</button>
+        <button id="btn-mar" class="btn month-btn btn-sm">{{ _('Mar') }}</button>
+        <button id="btn-apr" class="btn month-btn btn-sm">{{ _('Apr') }}</button>
+        <button id="btn-may" class="btn month-btn btn-sm">{{ _('May') }}</button>
+        <button id="btn-jun" class="btn month-btn btn-sm">{{ _('Jun') }}</button>
+        <button id="btn-jul" class="btn month-btn btn-sm">{{ _('Jul') }}</button>
+        <button id="btn-aug" class="btn month-btn btn-sm">{{ _('Aug') }}</button>
+        <button id="btn-sep" class="btn month-btn btn-sm">{{ _('Sep') }}</button>
+        <button id="btn-oct" class="btn month-btn btn-sm">{{ _('Oct') }}</button>
+        <button id="btn-nov" class="btn month-btn btn-sm">{{ _('Nov') }}</button>
+        <button id="btn-dec" class="btn month-btn btn-sm">{{ _('Dec') }}</button>&nbsp;
+        <select id="year-select" class="form-control input-sm" style="width: 100px; display: inline-block;"></select>
     </div>
 </div>
+<br/>
 
 {% endblock %}

@@ -132,7 +132,7 @@ $(document).ready( function() {
 
 <div class="row">{% include 'flash.html' %}</div>
 
-<div class="row" style="margin: 0 -40px 0 -40px !important;">
+<div class="row" style="margin: 0 -40px -40px -40px !important;">
 
 {% if categories %}
     <ul id="tabs-categories" class="nav nav-tabs" role="tablist" style="margin: 0 6px 0 7px;">
@@ -149,7 +149,7 @@ $(document).ready( function() {
 
 
 {% if products %}
-<table class="table table-hover table-condensed table-striped table-responsive" style="font-size: 0.9em;">
+<table class="table table-hover table-condensed table-striped table-responsive table-stock" style="font-size: 0.9em;">
 <thead>
     <tr>
         <th class="no-border row-indicator-left"></th>
@@ -289,5 +289,4 @@ $(document).ready( function() {
 </div>
 {% endif %}
 </div>
-
 {% endblock %}

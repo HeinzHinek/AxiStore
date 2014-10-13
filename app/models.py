@@ -37,6 +37,7 @@ class User(db.Model):
 
 
 class Product(db.Model):
+    __tablename__ = 'product'
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(20))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))

@@ -33,9 +33,10 @@ class SearchForm(Form):
 class AddProductForm(Form):
     code = StringField('code', [validators.data_required(),
                                 validators.length(min=3, max=20)])
-    maker = QuerySelectField(query_factory=Maker.query.all,
-                             get_pk=lambda a: a.id,
-                             get_label=lambda a: a.name)
+    maker = SelectField('maker', coerce=int)
+    #maker = QuerySelectField(query_factory=Maker.query.all(),
+    #                         get_pk=lambda a: a.id,
+    #                         get_label=lambda a: a.name)
     desc_CS = StringField('desc_CS', [validators.data_required(),
                                       validators.length(max=300)])
     desc_JP = StringField('desc_CS', [validators.data_required(),

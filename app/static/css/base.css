@@ -24,6 +24,10 @@ body {
     border: none !important;
 }
 
+.table-stock td {
+    vertical-align: middle !important;
+}
+
 .table-hover td.clickable-td {
     cursor: pointer;
 }
@@ -117,4 +121,12 @@ body {
 
 .focused-tr {
     color: crimson;
+}
+
+.graph-div {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 15px -5px rgba(0,0,0,.5);
 }
