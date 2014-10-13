@@ -303,7 +303,7 @@ def prepareValueProportionGraphData():
     for p in products:
         item = {}
         item['maker'] = p[0]
-        item['total'] = p[1]
+        item['total'] = str(p[1])
         data.append(item)
     return json.dumps(data)
 
@@ -334,6 +334,6 @@ def prepareQuantityProportionGraphData():
     for p in products:
         item = {}
         item['maker'] = p[0]
-        item['total'] = p[1]
+        item['total'] = str(p[1])
         data.append(item)
     return json.dumps(data)
