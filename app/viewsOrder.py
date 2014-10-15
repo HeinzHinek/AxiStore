@@ -3,7 +3,7 @@
 from flask import render_template, redirect, flash, url_for, request, g
 from app import app, db
 from forms import SelectMakerForm, ProductQuantityForm
-from models import Order, Product, OrderedProducts
+from models import Order, Product, OrderedProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
 from flask.ext.babel import gettext
@@ -26,12 +26,13 @@ def orders(page=1):
 @login_required
 def createOrder():
     formMaker = SelectMakerForm()
+    formMaker.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
     formQuantities = ProductQuantityForm()
     products = None
     if formMaker.is_submitted():
         if formMaker.validate_on_submit():
 
-            maker_id = formMaker.maker.data.id
+            maker_id = formMaker.maker.data
             if not maker_id:
                 flash(gettext("Maker not found."))
                 return redirect(url_for("orders"))
@@ -87,6 +88,7 @@ def placeOrder():
         .filter_by(maker_id=int(maker_id),
                    active_flg=True).all()
     formMaker = SelectMakerForm()
+    formMaker.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
     return render_template('orders/createOrder.html',
                            title=gettext("Place new order to maker"),
                            formMaker=formMaker,

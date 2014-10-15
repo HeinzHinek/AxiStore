@@ -22,10 +22,11 @@ def makers(page=1):
 @login_required
 def addMaker():
     form = AddMakerForm()
+    form.category.choices = [(a.id, a.name_CS) for a in Category.query.all()]
     if form.validate_on_submit():
         maker = Maker()
         maker.name = form.name.data
-        maker.category_id = form.category.data.id
+        maker.category_id = form.category.data
         db.session.add(maker)
         db.session.commit()
         flash(gettext("New maker successfully added."))
@@ -54,7 +55,7 @@ def editMaker(id=0):
 
         #update maker
         maker.name = form.name.data
-        maker.category_id = form.category.data.id
+        maker.category_id = form.category.data
         db.session.add(maker)
         db.session.commit()
         flash(gettext("Maker successfully changed."))

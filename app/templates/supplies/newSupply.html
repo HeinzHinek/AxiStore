@@ -3,7 +3,7 @@
 
 <script>
 function checkValues() {
-    if ($('#select_cust').val() == '') {
+    if ($('#select_cust').val() == 0) {
         $('#select_cust').addClass('td-border-highlighted');
         alert("{{ _('Select a customer to supply to!') }}");
         return false;

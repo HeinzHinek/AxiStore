@@ -18,7 +18,7 @@ function checkValues() {
     }
 
     {% if custType == 'cust' %}
-        if ($('#select_cust').val() == '__None') {
+        if ($('#select_cust').val() == 0) {
             $('#select_cust').addClass('td-border-highlighted');
             alert("{{ _('Select a customer to receive order from!') }}");
             return false;

@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddCustomerForm
-from models import Customer
+from models import Customer, Contact
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
@@ -23,6 +23,9 @@ def customers(page=1):
 @login_required
 def addCustomer():
     form = AddCustomerForm()
+    company_choices = [(a.id, a.company_name) for a in Contact.query.all()]
+    company_choices = [(0, '')] + company_choices
+    form.company.choices = company_choices
     if form.validate_on_submit():
         customer = Customer()
         customer.name = form.name.data
@@ -30,8 +33,8 @@ def addCustomer():
         customer.surname = form.surname.data
         customer.phone = form.phone.data
         customer.email = form.email.data
-        if form.company.data and form.company.data != '':
-            customer.contact_id = form.company.data.id
+        if form.company.data and form.company.data != 0:
+            customer.contact_id = form.company.data
         customer.base_discount = int(form.base_discount.data)/100.0
         db.session.add(customer)
         db.session.commit()
@@ -50,6 +53,9 @@ def editCustomer(id=0):
         flash(gettext('Customer not found.'))
         return redirect(url_for('customers'))
     form = AddCustomerForm(obj=customer)
+    company_choices = [(a.id, a.company_name) for a in Contact.query.all()]
+    company_choices = [(0, '')] + company_choices
+    form.company.choices = company_choices
     if form.is_submitted():
         #delete maker
         if 'delete' in request.form:
@@ -65,8 +71,10 @@ def editCustomer(id=0):
             customer.surname = form.surname.data
             customer.phone = form.phone.data
             customer.email = form.email.data
-            if form.company.data and form.company.data != '':
-                customer.contact_id = form.company.data.id
+            if form.company.data and form.company.data != '' and form.company.data != 0:
+                customer.contact_id = form.company.data
+            else:
+                customer.contact_id = None
             customer.base_discount = int(form.base_discount.data)/100.0
             db.session.add(customer)
             db.session.commit()

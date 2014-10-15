@@ -33,6 +33,10 @@ def newSupply():
         cust = 'cust'
     if cust == 'cust':
         formCustomer = SelectCustomerForm()
+        cust_customers = Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()
+        cust_customers = [(a.id, a.name) for a in cust_customers]
+        cust_customers = [(0, '')] + cust_customers
+        formCustomer.customer.choices = cust_customers
     elif cust == 'axm':
         formCustomer = SelectOrderNumberFormAxm()
         all_orders = Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_AXM']).all()

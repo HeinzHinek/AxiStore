@@ -2,11 +2,10 @@
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, HiddenField, FileField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
-from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, CUSTOMER_TYPES
-from models import Product, Maker, Category, Customer, Contact
+from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE
+from models import Product
 from flask.ext.babel import gettext
 import wtforms
 
@@ -34,9 +33,6 @@ class AddProductForm(Form):
     code = StringField('code', [validators.data_required(),
                                 validators.length(min=3, max=20)])
     maker = SelectField('maker', coerce=int)
-    #maker = QuerySelectField(query_factory=Maker.query.all(),
-    #                         get_pk=lambda a: a.id,
-    #                         get_label=lambda a: a.name)
     desc_CS = StringField('desc_CS', [validators.data_required(),
                                       validators.length(max=300)])
     desc_JP = StringField('desc_CS', [validators.data_required(),
@@ -80,9 +76,7 @@ class AddUserForm(Form):
 class AddMakerForm(Form):
     name = StringField('name', [validators.data_required(),
                                 validators.length(max=50)])
-    category = QuerySelectField(query_factory=Category.query.all,
-                                get_pk=lambda a: a.id,
-                                get_label=lambda a: a.name_CS + ' / ' + a.name_JP)
+    category = SelectField('category', coerce=int)
 
 
 class AddCategoryForm(Form):
@@ -98,9 +92,7 @@ class EditQtyStockForm(Form):
 
 
 class SelectMakerForm(Form):
-    maker = QuerySelectField(query_factory=Maker.query.all,
-                             get_pk=lambda a: a.id,
-                             get_label=lambda a: a.name)
+    maker = SelectField('maker', coerce=int)
 
 
 class ProductQuantityWithHiddenForm(wtforms.Form):
@@ -117,24 +109,13 @@ class UploadForm(Form):
 
 
 class SelectCustomerForm(Form):
-    customer = QuerySelectField('customer',
-                                [validators.data_required],
-                                query_factory=Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all,
-                                get_pk=lambda a: a.id,
-                                get_label=lambda a: a.name,
-                                allow_blank=True)
-    maker = QuerySelectField(query_factory=Maker.query.all,
-                             get_pk=lambda a: a.id,
-                             get_label=lambda a: a.name,
-                             allow_blank=True)
+    customer = SelectField('customer', coerce=int)
+    maker = SelectField('maker', coerce=int)
 
 
 class OrderNumberForm(Form):
     order_no = IntegerField('order_no', [validators.data_required, validators.NumberRange(min=0, max=99999)])
-    maker = QuerySelectField(query_factory=Maker.query.all,
-                             get_pk=lambda a: a.id,
-                             get_label=lambda a: a.name,
-                             allow_blank=True)
+    maker = SelectField('maker', coerce=int)
 
 
 class SelectOrderNumberFormAxm(Form):
@@ -149,10 +130,7 @@ class AddCustomerForm(Form):
     phone = TelField('phone', [validators.length(max=16)])
     email = EmailField('email', [validators.data_required(),
                                  validators.length(max=120)])
-    company = QuerySelectField(query_factory=Contact.query.all,
-                             get_pk=lambda a: a.id,
-                             get_label=lambda a: a.company_name,
-                             allow_blank=True)
+    company = SelectField('company', coerce=int)
     base_discount = IntegerField('base_discount', [validators.input_required(),
                                                    validators.NumberRange(min=0, max=100)])
 

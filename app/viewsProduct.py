@@ -18,7 +18,7 @@ def addProduct():
     if form.validate_on_submit():
         product = Product()
         product.code = form.code.data
-        product.maker_id = form.maker.data.id
+        product.maker_id = form.maker.data
         product.desc_CS = form.desc_CS.data
         product.desc_JP = form.desc_JP.data
         product.price_unit = form.price_unit.data

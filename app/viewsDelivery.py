@@ -24,12 +24,13 @@ def deliveries(page=1):
 @login_required
 def newDelivery():
     formMaker = SelectMakerForm()
+    formMaker.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
     formQuantities = ProductQuantityForm()
     products = None
     if formMaker.is_submitted():
         if formMaker.validate_on_submit():
 
-            maker_id = formMaker.maker.data.id
+            maker_id = formMaker.maker.data
             if not maker_id:
                 flash(gettext("Maker not found."))
                 return redirect(url_for("deliveries"))
@@ -159,6 +160,7 @@ def receiveDelivery():
         .filter_by(maker_id=int(maker_id),
                    active_flg=True).all()
     formMaker = SelectMakerForm()
+    formMaker.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
     return render_template('deliveries/newDelivery.html',
                            title=gettext("New Delivery"),
                            formMaker=formMaker,

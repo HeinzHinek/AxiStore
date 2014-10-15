@@ -3,7 +3,7 @@
 from flask import render_template, redirect, flash, url_for, g
 from app import app, db
 from forms import SelectCustomerForm, OrderNumberForm
-from models import Request, Product, RequestedProducts, Customer
+from models import Request, Product, RequestedProducts, Customer, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
@@ -32,8 +32,16 @@ def createRequest():
         cust = 'cust'
     if cust == 'cust':
         formCustomer = SelectCustomerForm()
+        cust_customers = Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()
+        cust_customers = [(a.id, a.name) for a in cust_customers]
+        cust_customers = [(0, '')] + cust_customers
+        formCustomer.customer.choices = cust_customers
     else:
         formCustomer = OrderNumberForm()
+    makers = Maker.query.all()
+    maker_choices = [(a.id, a.name) for a in makers]
+    maker_choices = [(0, '')] + maker_choices
+    formCustomer.maker.choices = maker_choices
     if formCustomer.is_submitted():
         ids = {}
         for attr in flask.request.form:
@@ -42,7 +50,7 @@ def createRequest():
                 ids[key] = flask.request.form[attr]
         if ids:
             if cust == 'cust':
-                cust_id = int(formCustomer.customer.data.id)
+                cust_id = int(formCustomer.customer.data)
                 if not cust_id:
                     flash(gettext("No customer id."))
                     return redirect(url_for("requests"))
