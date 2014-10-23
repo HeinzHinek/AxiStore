@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-10-13 17:19+0900\n"
-"PO-Revision-Date: 2014-10-13 17:21+0900\n"
+"POT-Creation-Date: 2014-10-23 17:52+0900\n"
+"PO-Revision-Date: 2014-10-23 17:52+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "このページのアクセスにはログインが必要です。"
 
-#: app/forms.py:67
+#: app/forms.py:63
 msgid "Passwords must match"
 msgstr "確認用のパスワードが異なっています"
 
@@ -108,27 +108,27 @@ msgstr "連絡先の編集"
 msgid "Customers"
 msgstr "お客様一覧"
 
-#: app/viewsCustomer.py:38
+#: app/viewsCustomer.py:41
 msgid "New customer successfully added."
 msgstr "新しいお客様が追加されました。"
 
-#: app/viewsCustomer.py:41 app/templates/settings/addCustomer.html:24
+#: app/viewsCustomer.py:44 app/templates/settings/addCustomer.html:24
 msgid "Add New Customer"
 msgstr "お客様の登録"
 
-#: app/viewsCustomer.py:50 app/viewsRequest.py:51
+#: app/viewsCustomer.py:53 app/viewsRequest.py:59
 msgid "Customer not found."
 msgstr "お客様は不明です。"
 
-#: app/viewsCustomer.py:58
+#: app/viewsCustomer.py:64
 msgid "This operation is not allowed at the moment."
 msgstr "この操作は現在のところ使えません。"
 
-#: app/viewsCustomer.py:73
+#: app/viewsCustomer.py:81
 msgid "Customer successfully changed."
 msgstr "お客様の情報が変更されました。"
 
-#: app/viewsCustomer.py:79 app/templates/settings/editCustomer.html:30
+#: app/viewsCustomer.py:87 app/templates/settings/editCustomer.html:30
 msgid "Edit Customer"
 msgstr "お客様の情報を編集"
 
@@ -136,24 +136,24 @@ msgstr "お客様の情報を編集"
 msgid "Deliveries"
 msgstr "入庫"
 
-#: app/viewsDelivery.py:34 app/viewsDelivery.py:56 app/viewsMaker.py:43
-#: app/viewsOrder.py:36 app/viewsOrder.py:58
+#: app/viewsDelivery.py:35 app/viewsDelivery.py:57 app/viewsMaker.py:44
+#: app/viewsOrder.py:37 app/viewsOrder.py:59
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
-#: app/viewsDelivery.py:44 app/viewsDelivery.py:163
+#: app/viewsDelivery.py:45 app/viewsDelivery.py:165
 msgid "New Delivery"
 msgstr "新規入庫"
 
-#: app/viewsDelivery.py:150
+#: app/viewsDelivery.py:151
 msgid "New delivery received sucessfully."
 msgstr "入庫に成功しました。"
 
-#: app/viewsDelivery.py:154
+#: app/viewsDelivery.py:155
 msgid "Delivery Report"
 msgstr "入庫レポート"
 
-#: app/viewsDelivery.py:176
+#: app/viewsDelivery.py:178
 msgid "Delivery details"
 msgstr "入庫の詳細"
 
@@ -174,19 +174,19 @@ msgstr "ログイン"
 msgid "Makers"
 msgstr "メーカー"
 
-#: app/viewsMaker.py:31
+#: app/viewsMaker.py:32
 msgid "New maker successfully added."
 msgstr "新しいメーカーが追加されました。"
 
-#: app/viewsMaker.py:34 app/templates/settings/addMaker.html:3
+#: app/viewsMaker.py:35 app/templates/settings/addMaker.html:3
 msgid "Add New Maker"
 msgstr "新しいメーカーを追加する"
 
-#: app/viewsMaker.py:60
+#: app/viewsMaker.py:61
 msgid "Maker successfully changed."
 msgstr "メーカーが変更されました。"
 
-#: app/viewsMaker.py:65 app/templates/settings/editMaker.html:15
+#: app/viewsMaker.py:66 app/templates/settings/editMaker.html:15
 msgid "Edit Maker"
 msgstr "メーカーを変更する"
 
@@ -194,15 +194,15 @@ msgstr "メーカーを変更する"
 msgid "Orders to maker"
 msgstr "発注"
 
-#: app/viewsOrder.py:46 app/viewsOrder.py:91
+#: app/viewsOrder.py:47 app/viewsOrder.py:93
 msgid "Place new order to maker"
 msgstr "新規発注を入力する"
 
-#: app/viewsOrder.py:104 app/templates/orders/order.html:5
+#: app/viewsOrder.py:106 app/templates/orders/order.html:5
 msgid "Order details"
 msgstr "発注の詳細"
 
-#: app/viewsOrder.py:118
+#: app/viewsOrder.py:120
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
@@ -214,7 +214,7 @@ msgstr "新しい製品は追加されました。"
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:45 app/viewsRequest.py:85
+#: app/viewsProduct.py:45 app/viewsRequest.py:93
 msgid "Product not found."
 msgstr "製品は不明です。"
 
@@ -230,43 +230,43 @@ msgstr "製品を変更する"
 msgid "Orders from Customers"
 msgstr "お客様からの受注"
 
-#: app/viewsRequest.py:47
+#: app/viewsRequest.py:55
 msgid "No customer id."
 msgstr "お客様のIDがありません。"
 
-#: app/viewsRequest.py:54
+#: app/viewsRequest.py:62
 msgid "Invalid customer!"
 msgstr "お客様のデータが不正です！"
 
-#: app/viewsRequest.py:60
+#: app/viewsRequest.py:68
 msgid "No order number."
 msgstr "注文番号がありません。"
 
-#: app/viewsRequest.py:64
+#: app/viewsRequest.py:72
 msgid "Order number already exists!"
 msgstr "注文番号はすでに登録しています！"
 
-#: app/viewsRequest.py:72
+#: app/viewsRequest.py:80
 msgid "Invalid data received!"
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsRequest.py:93
+#: app/viewsRequest.py:101
 msgid "Order created successfully."
 msgstr "注文の登録が成功しました。"
 
-#: app/viewsRequest.py:97
+#: app/viewsRequest.py:105
 msgid "Order data not sent."
 msgstr "注文のデータが受信されませんでした。"
 
-#: app/viewsRequest.py:101
+#: app/viewsRequest.py:109
 msgid "Accept order from customer"
 msgstr "受注を受け取る"
 
-#: app/viewsRequest.py:113 app/templates/requests/request.html:5
+#: app/viewsRequest.py:121 app/templates/requests/request.html:5
 msgid "Order from customer details"
 msgstr "受注の詳細"
 
-#: app/viewsRequest.py:132
+#: app/viewsRequest.py:140
 msgid "Orders from customers for product"
 msgstr "製品に対する受注"
 
@@ -298,43 +298,43 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 msgid "Supplies"
 msgstr "供給"
 
-#: app/viewsSupply.py:58
+#: app/viewsSupply.py:62
 msgid "New Supply"
 msgstr "新規供給"
 
-#: app/viewsSupply.py:66
+#: app/viewsSupply.py:70
 msgid "No customer data!"
 msgstr "お客様のデータがありません！"
 
-#: app/viewsSupply.py:73
+#: app/viewsSupply.py:77
 msgid "Customer not found!"
 msgstr "お客様は不明です！"
 
-#: app/viewsSupply.py:84
+#: app/viewsSupply.py:88
 msgid "No product quantities!"
 msgstr "製品個数がありません！"
 
-#: app/viewsSupply.py:120
+#: app/viewsSupply.py:124
 msgid "No requested products!"
 msgstr "注文された製品がありません！"
 
-#: app/viewsSupply.py:194
+#: app/viewsSupply.py:198
 msgid "New supply sent sucessfully."
 msgstr "新規供給の発送が成功しました。"
 
-#: app/viewsSupply.py:204
+#: app/viewsSupply.py:208
 msgid "Supply Report"
 msgstr "供給の報告"
 
-#: app/viewsSupply.py:231 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:235 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "供給の詳細"
 
-#: app/viewsSupply.py:247
+#: app/viewsSupply.py:251
 msgid "No product data!"
 msgstr "製品のデータがありません！"
 
-#: app/viewsSupply.py:261
+#: app/viewsSupply.py:265
 msgid "Invalid data received."
 msgstr "受信されたデータは不正です！"
 
@@ -408,83 +408,87 @@ msgstr "ログアウト"
 msgid "Login"
 msgstr "ログイン"
 
-#: app/templates/index.html:27
+#: app/templates/index.html:27 app/templates/index.html:62
 msgid "customers"
 msgstr "お客様"
 
-#: app/templates/index.html:33
+#: app/templates/index.html:33 app/templates/index.html:68
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:67
+#: app/templates/index.html:102
 msgid "pcs"
 msgstr "個"
 
-#: app/templates/index.html:201
+#: app/templates/index.html:252
 msgid "AxiStore quick summary"
 msgstr "AxiStore：クイックビュー"
 
-#: app/templates/index.html:207
+#: app/templates/index.html:259
 msgid "Orders from customers"
 msgstr "お客様からの受注"
 
-#: app/templates/index.html:211
+#: app/templates/index.html:263
+msgid "Supplies to customers"
+msgstr "お客様への供給"
+
+#: app/templates/index.html:269
 msgid "Ordered products total value"
 msgstr "受注商品の小売価格総計"
 
-#: app/templates/index.html:215
+#: app/templates/index.html:273
 msgid "Ordered products total quantity"
 msgstr "受注商品の個数総計"
 
-#: app/templates/index.html:222
+#: app/templates/index.html:281
 msgid "Data for:"
 msgstr "期間："
 
-#: app/templates/index.html:223
+#: app/templates/index.html:282
 msgid "Jan"
 msgstr "1月"
 
-#: app/templates/index.html:224
+#: app/templates/index.html:283
 msgid "Feb"
 msgstr "2月"
 
-#: app/templates/index.html:225
+#: app/templates/index.html:284
 msgid "Mar"
 msgstr "3月"
 
-#: app/templates/index.html:226
+#: app/templates/index.html:285
 msgid "Apr"
 msgstr "4月"
 
-#: app/templates/index.html:227
+#: app/templates/index.html:286
 msgid "May"
 msgstr "5月"
 
-#: app/templates/index.html:228
+#: app/templates/index.html:287
 msgid "Jun"
 msgstr "6月"
 
-#: app/templates/index.html:229
+#: app/templates/index.html:288
 msgid "Jul"
 msgstr "7月"
 
-#: app/templates/index.html:230
+#: app/templates/index.html:289
 msgid "Aug"
 msgstr "8月"
 
-#: app/templates/index.html:231
+#: app/templates/index.html:290
 msgid "Sep"
 msgstr "9月"
 
-#: app/templates/index.html:232
+#: app/templates/index.html:291
 msgid "Oct"
 msgstr "10月"
 
-#: app/templates/index.html:233
+#: app/templates/index.html:292
 msgid "Nov"
 msgstr "11月"
 
-#: app/templates/index.html:234
+#: app/templates/index.html:293
 msgid "Dec"
 msgstr "12月"
 

@@ -47,6 +47,41 @@ var chart_req = AmCharts.makeChart("requests_graph", {
     }]
 });
 
+var chart_sup = AmCharts.makeChart("supplies_graph", {
+    "type": "serial",
+    "categoryField": "date",
+    "startEffect": "easeOutSine",
+    "startDuration": 0.5,
+    "legend": {
+
+    },
+    "graphs": [{
+        "valueField": "customers",
+        "bullet": "round",
+        "fillAlphas": 0.8,
+        "title": "{{ _('customers') }}",
+        "balloonText": "[[customers]]"
+    }, {
+        "valueField": "AxM",
+        "bullet": "square",
+        "fillAlphas": 0.8,
+        "title": "{{ _('Axis Mart') }}",
+        "balloonText": "[[AxM]]"
+    }],
+    "chartCursor": {
+        "categoryBalloonDateFormat": "MMM YYYY"
+    },
+    "categoryAxis": {
+        "autoGridCount": true,
+        "gridCount": chartData.length,
+        "gridPosition": "start",
+        "labelRotation": 90
+    },
+    "valueAxes": [{
+        "stackType": "regular"
+    }]
+});
+
 var chart_value_proportion = AmCharts.makeChart("value_proportion_graph", {
 	"type": "pie",
 	"angle": 45,
@@ -143,6 +178,7 @@ function disable_future_buttons() {
 
 function draw_graphs() {
     get_new_data_req_graph(curr_year, curr_month);
+    get_new_data_sup_graph(curr_year, curr_month);
     get_new_data_value_value_proportion_graph(curr_year, curr_month);
     get_new_data_quantity_value_proportion_graph(curr_year, curr_month);
 }
@@ -155,7 +191,22 @@ function get_new_data_req_graph(year, month) {
             chartData = JSON.parse(result);
             chart_req.dataProvider = chartData;
             chart_req.validateData();
-             chart_req.animateAgain();
+            chart_req.animateAgain();
+        }
+    }).fail(function() {
+        alert('Data transfer failed!');
+    });
+}
+
+function get_new_data_sup_graph(year, month) {
+    $.post('/prepareSupGraphData', {
+        data: '' + year.toString() + month.toString()
+    }).done(function(result) {
+        if (result) {
+            chartData = JSON.parse(result);
+            chart_sup.dataProvider = chartData;
+            chart_sup.validateData();
+            chart_sup.animateAgain();
         }
     }).fail(function() {
         alert('Data transfer failed!');
@@ -207,6 +258,10 @@ body { background-color: #eeeeee; }
         <div class="graph-div" style="margin: 10px -10px !important;">
             <label>{{ _('Orders from customers') }}</label>
             <div id="requests_graph" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="graph-div" style="margin: 10px -10px !important;">
+            <label>{{ _('Supplies to customers') }}</label>
+            <div id="supplies_graph" style="width: 100%; height: 400px;"></div>
         </div>
     </div>
     <div class="col-md-6">

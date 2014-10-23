@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-10-13 17:19+0900\n"
-"PO-Revision-Date: 2014-10-13 17:20+0900\n"
+"POT-Creation-Date: 2014-10-23 17:52+0900\n"
+"PO-Revision-Date: 2014-10-23 17:52+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "K přístupu na tuto stránku je nutné přihlášení."
 
-#: app/forms.py:67
+#: app/forms.py:63
 msgid "Passwords must match"
 msgstr "Kontrolní heslo není stejné"
 
@@ -109,27 +109,27 @@ msgstr "Upravit kontakt"
 msgid "Customers"
 msgstr "Zákazníci"
 
-#: app/viewsCustomer.py:38
+#: app/viewsCustomer.py:41
 msgid "New customer successfully added."
 msgstr "Nový zákazník úspěšně přidán."
 
-#: app/viewsCustomer.py:41 app/templates/settings/addCustomer.html:24
+#: app/viewsCustomer.py:44 app/templates/settings/addCustomer.html:24
 msgid "Add New Customer"
 msgstr "Přidat zákazníka"
 
-#: app/viewsCustomer.py:50 app/viewsRequest.py:51
+#: app/viewsCustomer.py:53 app/viewsRequest.py:59
 msgid "Customer not found."
 msgstr "Zákazník nenalezen."
 
-#: app/viewsCustomer.py:58
+#: app/viewsCustomer.py:64
 msgid "This operation is not allowed at the moment."
 msgstr "Tato operace není momentálně podporována."
 
-#: app/viewsCustomer.py:73
+#: app/viewsCustomer.py:81
 msgid "Customer successfully changed."
 msgstr "Zákazník úspěšně pozměněn."
 
-#: app/viewsCustomer.py:79 app/templates/settings/editCustomer.html:30
+#: app/viewsCustomer.py:87 app/templates/settings/editCustomer.html:30
 msgid "Edit Customer"
 msgstr "Upravit zákazníka"
 
@@ -137,24 +137,24 @@ msgstr "Upravit zákazníka"
 msgid "Deliveries"
 msgstr "Dodávky"
 
-#: app/viewsDelivery.py:34 app/viewsDelivery.py:56 app/viewsMaker.py:43
-#: app/viewsOrder.py:36 app/viewsOrder.py:58
+#: app/viewsDelivery.py:35 app/viewsDelivery.py:57 app/viewsMaker.py:44
+#: app/viewsOrder.py:37 app/viewsOrder.py:59
 msgid "Maker not found."
 msgstr "Výrobce nenalezen."
 
-#: app/viewsDelivery.py:44 app/viewsDelivery.py:163
+#: app/viewsDelivery.py:45 app/viewsDelivery.py:165
 msgid "New Delivery"
 msgstr "Nová dodávka"
 
-#: app/viewsDelivery.py:150
+#: app/viewsDelivery.py:151
 msgid "New delivery received sucessfully."
 msgstr "Nová dodávka úspěšně přijata."
 
-#: app/viewsDelivery.py:154
+#: app/viewsDelivery.py:155
 msgid "Delivery Report"
 msgstr "Zpráva o dodávce"
 
-#: app/viewsDelivery.py:176
+#: app/viewsDelivery.py:178
 msgid "Delivery details"
 msgstr "Detaily dodávky"
 
@@ -175,19 +175,19 @@ msgstr "Přihlášení"
 msgid "Makers"
 msgstr "Výrobci"
 
-#: app/viewsMaker.py:31
+#: app/viewsMaker.py:32
 msgid "New maker successfully added."
 msgstr "Nový výrobce úspěšně přidán."
 
-#: app/viewsMaker.py:34 app/templates/settings/addMaker.html:3
+#: app/viewsMaker.py:35 app/templates/settings/addMaker.html:3
 msgid "Add New Maker"
 msgstr "Přidat výrobce"
 
-#: app/viewsMaker.py:60
+#: app/viewsMaker.py:61
 msgid "Maker successfully changed."
 msgstr "Výrobce úspěšně pozměněn."
 
-#: app/viewsMaker.py:65 app/templates/settings/editMaker.html:15
+#: app/viewsMaker.py:66 app/templates/settings/editMaker.html:15
 msgid "Edit Maker"
 msgstr "Editace výrobce"
 
@@ -195,15 +195,15 @@ msgstr "Editace výrobce"
 msgid "Orders to maker"
 msgstr "Objednávky výrobci"
 
-#: app/viewsOrder.py:46 app/viewsOrder.py:91
+#: app/viewsOrder.py:47 app/viewsOrder.py:93
 msgid "Place new order to maker"
 msgstr "Zadat novou objednávku výrobci"
 
-#: app/viewsOrder.py:104 app/templates/orders/order.html:5
+#: app/viewsOrder.py:106 app/templates/orders/order.html:5
 msgid "Order details"
 msgstr "Detaily objednávky"
 
-#: app/viewsOrder.py:118
+#: app/viewsOrder.py:120
 msgid "Orders to maker for product"
 msgstr "Objednávky produktu výrobci"
 
@@ -215,7 +215,7 @@ msgstr "Nový produkt úspěšně přidán."
 msgid "Add new product"
 msgstr "Přidat nový produkt"
 
-#: app/viewsProduct.py:45 app/viewsRequest.py:85
+#: app/viewsProduct.py:45 app/viewsRequest.py:93
 msgid "Product not found."
 msgstr "Produkt nenalezen."
 
@@ -231,43 +231,43 @@ msgstr "Editace produktu"
 msgid "Orders from Customers"
 msgstr "Objednávky od zákazníka"
 
-#: app/viewsRequest.py:47
+#: app/viewsRequest.py:55
 msgid "No customer id."
 msgstr "Chybí id zákazníka."
 
-#: app/viewsRequest.py:54
+#: app/viewsRequest.py:62
 msgid "Invalid customer!"
 msgstr "Neplatný zákazník!"
 
-#: app/viewsRequest.py:60
+#: app/viewsRequest.py:68
 msgid "No order number."
 msgstr "Chybí číslo objednávky."
 
-#: app/viewsRequest.py:64
+#: app/viewsRequest.py:72
 msgid "Order number already exists!"
 msgstr "Číslo objednávky již existuje!"
 
-#: app/viewsRequest.py:72
+#: app/viewsRequest.py:80
 msgid "Invalid data received!"
 msgstr "Přijata neplatná data!"
 
-#: app/viewsRequest.py:93
+#: app/viewsRequest.py:101
 msgid "Order created successfully."
 msgstr "Nová objednávka úspěšně vytvořena."
 
-#: app/viewsRequest.py:97
+#: app/viewsRequest.py:105
 msgid "Order data not sent."
 msgstr "Data objednávky neodaslána."
 
-#: app/viewsRequest.py:101
+#: app/viewsRequest.py:109
 msgid "Accept order from customer"
 msgstr "Přijmout objednávku od zákazníka"
 
-#: app/viewsRequest.py:113 app/templates/requests/request.html:5
+#: app/viewsRequest.py:121 app/templates/requests/request.html:5
 msgid "Order from customer details"
 msgstr "Detaily objednávky od zákazníka"
 
-#: app/viewsRequest.py:132
+#: app/viewsRequest.py:140
 msgid "Orders from customers for product"
 msgstr "Objednávky produktu zákazníky"
 
@@ -299,43 +299,43 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 msgid "Supplies"
 msgstr "Dodávky zákazníkům"
 
-#: app/viewsSupply.py:58
+#: app/viewsSupply.py:62
 msgid "New Supply"
 msgstr "Nová dodávka zákazníkovi"
 
-#: app/viewsSupply.py:66
+#: app/viewsSupply.py:70
 msgid "No customer data!"
 msgstr "Chybí data zákazníka!"
 
-#: app/viewsSupply.py:73
+#: app/viewsSupply.py:77
 msgid "Customer not found!"
 msgstr "Zákazník nenalezen!"
 
-#: app/viewsSupply.py:84
+#: app/viewsSupply.py:88
 msgid "No product quantities!"
 msgstr "Chybí počty produktu!"
 
-#: app/viewsSupply.py:120
+#: app/viewsSupply.py:124
 msgid "No requested products!"
 msgstr "Žádné objednané produkty! "
 
-#: app/viewsSupply.py:194
+#: app/viewsSupply.py:198
 msgid "New supply sent sucessfully."
 msgstr "Nová dodávka úspěšně odeslána."
 
-#: app/viewsSupply.py:204
+#: app/viewsSupply.py:208
 msgid "Supply Report"
 msgstr "Zpráva o dodávce zákazníkovi"
 
-#: app/viewsSupply.py:231 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:235 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "Detaily dodávky zákazníkovi"
 
-#: app/viewsSupply.py:247
+#: app/viewsSupply.py:251
 msgid "No product data!"
 msgstr "Chybí data produktu!"
 
-#: app/viewsSupply.py:261
+#: app/viewsSupply.py:265
 msgid "Invalid data received."
 msgstr "Přijata neplatná data!"
 
@@ -409,83 +409,87 @@ msgstr "Odhlášení"
 msgid "Login"
 msgstr "Přihlášení"
 
-#: app/templates/index.html:27
+#: app/templates/index.html:27 app/templates/index.html:62
 msgid "customers"
 msgstr "zákazníci"
 
-#: app/templates/index.html:33
+#: app/templates/index.html:33 app/templates/index.html:68
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:67
+#: app/templates/index.html:102
 msgid "pcs"
 msgstr "ks"
 
-#: app/templates/index.html:201
+#: app/templates/index.html:252
 msgid "AxiStore quick summary"
 msgstr "AxiStore: stručný přehled"
 
-#: app/templates/index.html:207
+#: app/templates/index.html:259
 msgid "Orders from customers"
 msgstr "Objednávky od zákazníků"
 
-#: app/templates/index.html:211
+#: app/templates/index.html:263
+msgid "Supplies to customers"
+msgstr "Dodávky zákazníkům"
+
+#: app/templates/index.html:269
 msgid "Ordered products total value"
 msgstr "Součty maloobch. cen objednaného zboží"
 
-#: app/templates/index.html:215
+#: app/templates/index.html:273
 msgid "Ordered products total quantity"
 msgstr "Součty počtů kusů objednaného zboží"
 
-#: app/templates/index.html:222
+#: app/templates/index.html:281
 msgid "Data for:"
 msgstr "Data za období:"
 
-#: app/templates/index.html:223
+#: app/templates/index.html:282
 msgid "Jan"
 msgstr "Leden"
 
-#: app/templates/index.html:224
+#: app/templates/index.html:283
 msgid "Feb"
 msgstr "Únor"
 
-#: app/templates/index.html:225
+#: app/templates/index.html:284
 msgid "Mar"
 msgstr "Březen"
 
-#: app/templates/index.html:226
+#: app/templates/index.html:285
 msgid "Apr"
 msgstr "Duben"
 
-#: app/templates/index.html:227
+#: app/templates/index.html:286
 msgid "May"
 msgstr "Květen"
 
-#: app/templates/index.html:228
+#: app/templates/index.html:287
 msgid "Jun"
 msgstr "Červen"
 
-#: app/templates/index.html:229
+#: app/templates/index.html:288
 msgid "Jul"
 msgstr "Červenec"
 
-#: app/templates/index.html:230
+#: app/templates/index.html:289
 msgid "Aug"
 msgstr "Srpen"
 
-#: app/templates/index.html:231
+#: app/templates/index.html:290
 msgid "Sep"
 msgstr "Září"
 
-#: app/templates/index.html:232
+#: app/templates/index.html:291
 msgid "Oct"
 msgstr "Říjen"
 
-#: app/templates/index.html:233
+#: app/templates/index.html:292
 msgid "Nov"
 msgstr "Listopad"
 
-#: app/templates/index.html:234
+#: app/templates/index.html:293
 msgid "Dec"
 msgstr "Prosinec"
 

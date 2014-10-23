@@ -3,7 +3,7 @@
 from flask import render_template, request, g, session, flash, redirect, url_for, json
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm
-from models import User, Product, Category, Maker, Request, RequestedProducts
+from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
 from flask_login import current_user, login_required
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES
 from flask.ext.babel import gettext
@@ -275,6 +275,39 @@ def prepareReqGraphData():
         data.append(item)
     return json.dumps(data)
 
+@app.route('/prepareSupGraphData', methods=['POST'])
+@login_required
+def prepareSupGraphData():
+    data = request.form['data'] if request.form['data'] else None
+    date = datetime(int(data[:4]), int(data[4:]), 1)
+    begin_date = datetime(date.year, date.month, 1)
+    today = datetime.now()
+    if date.year == today.year and date.month == today.month:
+        last_day = today.day
+    else:
+        last_day = calendar.monthrange(date.year, date.month)[1]
+    end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
+    sups = Supply.query\
+        .filter(Request.created_dt >= begin_date)\
+        .filter(Request.created_dt <= end_date)\
+        .all()
+    data = []
+    cust = 0
+    axm = 0
+    for i in range(1, last_day + 1):
+        item = {}
+        item['date'] = str(date.strftime("%b")) + " " + str(i)
+        for r in sups:
+            if r.created_dt.day == i and r.customer is not None:
+                if r.customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']:
+                    cust += 1
+                elif r.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+                    axm += 1
+        item['customers'] = cust
+        item['AxM'] = axm
+        data.append(item)
+    return json.dumps(data)
+
 
 @app.route('/prepareValueProportionGraphData', methods=['POST'])
 @login_required
@@ -306,6 +339,7 @@ def prepareValueProportionGraphData():
         item['total'] = str(p[1])
         data.append(item)
     return json.dumps(data)
+
 
 @app.route('/prepareQuantityProportionGraphData', methods=['POST'])
 @login_required
