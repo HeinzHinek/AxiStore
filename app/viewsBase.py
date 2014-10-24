@@ -288,8 +288,8 @@ def prepareSupGraphData():
         last_day = calendar.monthrange(date.year, date.month)[1]
     end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
     sups = Supply.query\
-        .filter(Request.created_dt >= begin_date)\
-        .filter(Request.created_dt <= end_date)\
+        .filter(Supply.created_dt >= begin_date)\
+        .filter(Supply.created_dt <= end_date)\
         .all()
     data = []
     cust = 0
@@ -297,11 +297,11 @@ def prepareSupGraphData():
     for i in range(1, last_day + 1):
         item = {}
         item['date'] = str(date.strftime("%b")) + " " + str(i)
-        for r in sups:
-            if r.created_dt.day == i and r.customer is not None:
-                if r.customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']:
+        for s in sups:
+            if s.created_dt.day == i and s.customer is not None:
+                if s.customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']:
                     cust += 1
-                elif r.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+                elif s.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
                     axm += 1
         item['customers'] = cust
         item['AxM'] = axm
