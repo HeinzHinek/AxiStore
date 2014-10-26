@@ -6,6 +6,7 @@ from forms import AddProductForm
 from models import Product, Maker
 from flask_login import login_required
 from flask.ext.babel import gettext
+from imageHelper import getImgUrls
 
 
 @app.route('/addProduct', methods=['GET', 'POST'])
@@ -74,9 +75,11 @@ def editProduct(id=0):
         flash(gettext("Product successfully changed."))
         return redirect(url_for("stock"))
     selected = product.maker_id
+    imgUrls = getImgUrls(product.id)
     return render_template('product/editProduct.html',
                            title=gettext("Edit Product"),
                            product=product,
+                           imgUrls=imgUrls,
                            selected_category=selected,
                            form=form)
 

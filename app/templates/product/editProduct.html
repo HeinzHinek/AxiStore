@@ -29,6 +29,8 @@
 
     $(document).ready(function() {
 
+        $(".fancybox").fancybox();
+
         $("#maker_select").val({{ selected_category }});
 
         $('#code_input').focusout(function() {
@@ -39,133 +41,216 @@
             return confirm("{{ _('Do you really want to delete this product?') }}");
         });
 
-        $("input[type=text]").click(function(){
+        $("input[type=text]").click(function() {
             this.select();
         });
 
+        $(document).on('click', '.del-img-btn', function() {
+            path = $(this).parent().find('.prod-img').attr('src').split('?')[0];
+            var thumb = $(this).closest('.thumbnail');
+            if (confirm("{{ _('Do you really want to delete this image?') }}")) {
+                $.post('/deleteProductImage', {
+                    path: path
+                }).done(function(result) {
+                    if(result['result'] === 'OK') {
+                        $(thumb).css('background-color', '#D53E40');
+                        thumb.fadeOut('slow', function(){
+                            thumb.remove();
+                        });
+                    }
+                }).fail(function() {
+
+                });
+            }
+        });
     });
 
+    $(function() {
+        $('#upload-img-btn').click(function() {
+            var form_data = new FormData($('#upload-image')[0]);
+            $.ajax({
+                type: 'POST',
+                url: '/uploadProductImage',
+                data: form_data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                async: false,
+                success: function(data) {
+                    if (data['result'] === 'OK') {
+                        var new_img_path = data['url'].split('app')[1] + '?' + new Date().getTime();
+                        var $new_thumb = '<div class="thumbnail" style="width: 160px !important; height: 170px !important; display: inline-block; line-height: 160px; text-align: center; position: relative;">'
+                                + '<div style="display: inline-block; vertical-align: middle; padding: 0; margin: 0;">'
+                                + '<button class="btn btn-xs btn-danger del-img-btn" style="position: absolute; right: 5px; top: 5px;">&#x2716;</button>'
+                                + '<a class="fancybox" rel="group" href="' + new_img_path + '">'
+                                    + '<img class="prod-img" src="' + new_img_path + '" style="max-width: 150px; max-height: 150px;" />'
+                                + '</a>'
+                                + '</div>'
+                            + '</div>';
+                        $('#product_pic_div').append($new_thumb);
+                    }
+                },
+            });
+            return false;
+        });
+    });
 </script>
 
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-<h1>{{ _('Edit Product') }}</h1>
-{% include 'flash.html' %}
-<div>
-    <a href="{{ url_for('stock') }}">{{ _('Back to the list') }}</a>
+<div class="row">
+    <h1>{{ _('Edit Product') }}</h1>
+    {% include 'flash.html' %}
+    <div>
+        <a href="{{ url_for('stock') }}">{{ _('Back to the list') }}</a>
+    </div>
+</div>
+<br/>
+
+<div class="row">
+<div class="col-md-6">
+    <form action="" method="post" name="editProduct">
+        {{form.hidden_tag()}}
+        <table class="table no-border">
+            <tr>
+                <td>
+                <label>{{ _('Product code') }}:</label>
+                <div class="input-group">
+                    {{form.code(id='code_input', size=60, class="form-control")}}
+                    <span class="input-group-addon" style="width: 50px;">
+                        <i id="icon_id_check_ok" class="glyphicon glyphicon-ok" style="display: none; color: #009900"></i>
+                        <i id="icon_id_check_ng" class="glyphicon glyphicon-remove" style="display: none; color: red"></i>
+                    </span>
+                </div>
+                {% for error in form.errors.code %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Maker') }}:</label>
+                <div class="input-group">
+                    {{form.maker(id="maker_select", class="form-control")}}
+                </div>
+                {% for error in form.errors.maker %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Czech description') }}:</label>
+                <div class="input-group">
+                    {{form.desc_CS(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.desc_CS %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Japanese description') }}:</label>
+                <div class="input-group">
+                    {{form.desc_JP(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.desc_JP %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Unit price') }}:</label>
+                <div class="input-group">
+                    {{form.price_unit(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.price_unit %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Retail price') }}:</label>
+                <div class="input-group">
+                    {{form.price_retail(size=80, class="form-control")}}
+                </div>
+                {% for error in form.errors.price_retail %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>{{ _('Quantity on stock') }}:</label>
+                <div class="input-group">
+                    {{ form.qty_stock(size=20, class="form-control", style="text-align: right") }}
+                </div>
+                {% for error in form.errors.qty_stock %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="orig_code" value="{{ product.code }}"/>
+                    <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
+                    <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock")}}'" value="{{ _('Cancel') }}"/>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 
-<form action="" method="post" name="editProduct">
-    {{form.hidden_tag()}}
-    <table class="table no-border">
-        <tr>
-            <td>
-            <label>{{ _('Product code') }}:</label>
-            <div class="input-group">
-                {{form.code(id='code_input', size=60, class="form-control")}}
-                <span class="input-group-addon" style="width: 50px;">
-                    <i id="icon_id_check_ok" class="glyphicon glyphicon-ok" style="display: none; color: #009900"></i>
-                    <i id="icon_id_check_ng" class="glyphicon glyphicon-remove" style="display: none; color: red"></i>
-                </span>
+<div class="col-md-6">
+    <h2>{{ _('Product images') }}</h2>
+    <div id="product_pic_div">
+        {% for url in imgUrls %}
+            <div class="thumbnail" style="width: 160px !important; height: 170px !important; display: inline-block; line-height: 160px; text-align: center; position: relative;">
+                <div style="display: inline-block; vertical-align: middle; padding: 0; margin: 0;">
+                <button class="btn btn-xs btn-danger del-img-btn" style="position: absolute; right: 5px; top: 5px;">&#x2716;</button>
+                <a class="fancybox" rel="group" href="{{ url.split('app')[1] }}">
+                    <img class="prod-img" src="{{ url.split('app')[1] }}" style="max-width: 150px; max-height: 150px;" />
+                </a>
+                </div>
             </div>
-            {% for error in form.errors.code %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Maker') }}:</label>
-            <div class="input-group">
-                {{form.maker(id="maker_select", class="form-control")}}
-            </div>
-            {% for error in form.errors.maker %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Czech description') }}:</label>
-            <div class="input-group">
-                {{form.desc_CS(size=80, class="form-control")}}
-            </div>
-            {% for error in form.errors.desc_CS %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Japanese description') }}:</label>
-            <div class="input-group">
-                {{form.desc_JP(size=80, class="form-control")}}
-            </div>
-            {% for error in form.errors.desc_JP %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Unit price') }}:</label>
-            <div class="input-group">
-                {{form.price_unit(size=80, class="form-control")}}
-            </div>
-            {% for error in form.errors.price_unit %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Retail price') }}:</label>
-            <div class="input-group">
-                {{form.price_retail(size=80, class="form-control")}}
-            </div>
-            {% for error in form.errors.price_retail %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            <label>{{ _('Quantity on stock') }}:</label>
-            <div class="input-group">
-                {{ form.qty_stock(size=20, class="form-control", style="text-align: right") }}
-            </div>
-            {% for error in form.errors.qty_stock %}
-            <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                [{{error}}]
-            </div>
-            {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="hidden" name="orig_code" value="{{ product.code }}"/>
-                <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
-                <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock")}}'" value="{{ _('Cancel') }}"/>
-            </td>
-        </tr>
-    </table>
-</form>
+        {% endfor %}
+    </div>
+    <div class="well">
+        <form id="upload-image" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <label style="display: inline-block; margin-right: 10px;">{{ _('New image:') }}</label>
+                <input name="file" type="file" class="btn" style="display: inline-block;">
+                <input name="prod_id" type="hidden" value="{{ product.id }}"/>
+                <button id="upload-img-btn" class="btn btn-info btn-sm" style="display: inline-block;">{{ _('upload') }}</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+</div>
 {% endblock %}

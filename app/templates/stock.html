@@ -43,6 +43,8 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 <script>
     $(function() {
@@ -67,6 +69,8 @@
     }
 
 $(document).ready( function() {
+
+    $(".fancybox").fancybox();
 
     $('.td-redir-edit').click( function() {
         id = $(this).parent().attr('id');
@@ -183,6 +187,7 @@ $(document).ready( function() {
             </div>
             <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
         </th>
+        <th></th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
         <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
         <th style="text-align: right;"><div class="dropdown">{{ _('Unit Price') }}&nbsp;{{ build_sort_str_list('unitp') }}</div></th>
@@ -208,6 +213,11 @@ $(document).ready( function() {
         <td class="no-border row-indicator-left"></td>
         <td class="clickable-td td-redir-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.code}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
+        <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
+            {% if product.img_url %}
+                <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}"><span class="glyphicon glyphicon-picture"></span></a>
+            {% endif %}
+        </td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_CS}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_JP}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>

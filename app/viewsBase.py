@@ -9,6 +9,7 @@ from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES
 from flask.ext.babel import gettext
 from sqlalchemy import or_, func
 from datetime import datetime, timedelta
+from imageHelper import getImgUrls
 import calendar
 
 
@@ -165,6 +166,11 @@ def stock(page=1):
             flash(gettext('Input value error.'))
         page = request.form['page'] if request.form['product_id'] else 1
         return redirect(url_for("stock", page=page))
+
+    for p in products.items:
+        urls = getImgUrls(p.id)
+        if urls:
+            p.img_url = urls[0]
 
     return render_template("stock.html",
                            title=gettext('Stock condition'),
