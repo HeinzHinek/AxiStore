@@ -45,7 +45,7 @@ def deleteProductImage():
 def getImgUrls(id):
     urls = []
     for ext in IMG_EXTENSIONS:
-        urls.extend(glob.glob(PRODUCT_IMG_PATH + 'prod_' + str(id) + '*' + ext))
+        urls.extend(glob.glob(PRODUCT_IMG_PATH + 'prod_' + str(id) + '_' + '*' + ext))
     urls = sorted(urls)
     return urls
 
