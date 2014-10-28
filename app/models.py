@@ -192,6 +192,12 @@ class Customer(db.Model):
     base_discount = db.Column(db.Float)
     contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'))
 
+    company_name = db.Column(db.String(100))
+    post_code = db.Column(db.Integer())
+    address1 = db.Column(db.String(100))
+    address2 = db.Column(db.String(100))
+    address3 = db.Column(db.String(100))
+
     requests = db.relationship('Request', backref='customer', lazy='dynamic')
     supplies = db.relationship('Supply', backref='customer', lazy='dynamic')
 
