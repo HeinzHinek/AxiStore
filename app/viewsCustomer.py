@@ -23,19 +23,19 @@ def customers(page=1):
 @login_required
 def addCustomer():
     form = AddCustomerForm()
-    company_choices = [(a.id, a.company_name) for a in Contact.query.all()]
-    company_choices = [(0, '')] + company_choices
-    form.company.choices = company_choices
     if form.validate_on_submit():
         customer = Customer()
+
         customer.name = form.name.data
-        customer.first_name = form.first_name.data
-        customer.surname = form.surname.data
-        customer.phone = form.phone.data
         customer.email = form.email.data
-        if form.company.data and form.company.data != 0:
-            customer.contact_id = form.company.data
         customer.base_discount = int(form.base_discount.data)/100.0
+
+        customer.company_name = form.company_name.data
+        customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+        customer.address1 = form.address1.data
+        customer.address2 = form.address2.data
+        customer.address3 = form.address3.data
+
         db.session.add(customer)
         db.session.commit()
         flash(gettext("New customer successfully added."))
@@ -53,11 +53,9 @@ def editCustomer(id=0):
         flash(gettext('Customer not found.'))
         return redirect(url_for('customers'))
     form = AddCustomerForm(obj=customer)
-    company_choices = [(a.id, a.company_name) for a in Contact.query.all()]
-    company_choices = [(0, '')] + company_choices
-    form.company.choices = company_choices
+
     if form.is_submitted():
-        #delete maker
+        #delete customer
         if 'delete' in request.form:
             #db.session.delete(customer)
             #db.session.commit()
@@ -65,26 +63,31 @@ def editCustomer(id=0):
             return redirect(url_for("customers"))
 
         if form.validate():
-            #update maker
+            #update customer
             customer.name = form.name.data
-            customer.first_name = form.first_name.data
-            customer.surname = form.surname.data
-            customer.phone = form.phone.data
             customer.email = form.email.data
-            if form.company.data and form.company.data != '' and form.company.data != 0:
-                customer.contact_id = form.company.data
-            else:
-                customer.contact_id = None
             customer.base_discount = int(form.base_discount.data)/100.0
+
+            customer.company_name = form.company_name.data
+            customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+            customer.address1 = form.address1.data
+            customer.address2 = form.address2.data
+            customer.address3 = form.address3.data
+
             db.session.add(customer)
             db.session.commit()
             flash(gettext("Customer successfully changed."))
             return redirect(url_for("customers"))
 
     form.base_discount.data = int(customer.base_discount*100) if customer.base_discount else 0
-    selected = customer.contact.id if customer.contact else 0
+    if customer.post_code:
+        post_code = str(customer.post_code)
+    else:
+        post_code = ''
+    form.post_code1.data = post_code[:3]
+    form.post_code2.data = post_code[3:]
+
     return render_template('settings/editCustomer.html',
                            title=gettext("Edit Customer"),
                            customer=customer,
-                           selected=selected,
                            form=form)

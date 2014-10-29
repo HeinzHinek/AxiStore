@@ -15,13 +15,17 @@
     <table class="table table-hover table-striped">
         <tr>
             <th>{{ _('Contact ID') }}</th>
-            <th>{{ _('Company Name') }}</th>
+            <th>{{ _('First Name') }}</th>
+            <th>{{ _('Surname') }}
+            <th>{{ _('Company') }}</th>
         </tr>
 
         {% for contact in contacts.items %}
         <tr onclick="window.location.href = '{{ url_for("editContact", id=contact.id) }}'">
         <td>{{ contact.id }}</td>
-        <td>{{ contact.company_name }}</td>
+        <td>{{ contact.first_name }}</td>
+        <td>{{ contact.surname }}</td>
+        <td>{{ contact.customer.company_name }}</td>
         </tr>
         {% endfor %}
     </table>

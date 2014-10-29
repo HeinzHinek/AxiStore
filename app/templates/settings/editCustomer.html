@@ -3,7 +3,6 @@
 
 <script>
 $(document).ready(function() {
-    $("#company_select").val({{ selected }});
 
     $("#btn_delete").click(function() {
         return confirm("{{ _('Do you really want to delete this customer?') }}");
@@ -57,67 +56,11 @@ $(document).ready(function() {
                 </tr>
                 <tr>
                     <td>
-                        <label>{{ _('Customer first name') }}:</label>
-                        <div class="input-group">
-                            {{form.first_name(size=80, class="form-control input-sm")}}
-                        </div>
-                        {% for error in form.errors.first_name %}
-                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            [{{error}}]
-                        </div>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>{{ _('Customer surname') }}:</label>
-                        <div class="input-group">
-                            {{form.surname(size=80, class="form-control input-sm")}}
-                        </div>
-                        {% for error in form.errors.surname %}
-                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            [{{error}}]
-                        </div>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>{{ _('Phone number') }}:</label>
-                        <div class="input-group">
-                            {{form.phone(size=80, class="form-control input-sm")}}
-                        </div>
-                        {% for error in form.errors.phone %}
-                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            [{{error}}]
-                        </div>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         <label>{{ _('Email') }}:</label>
                         <div class="input-group">
                             {{form.email(size=80, class="form-control input-sm")}}
                         </div>
                         {% for error in form.errors.email %}
-                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            [{{error}}]
-                        </div>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>{{ _('Company') }}:</label>
-                        <div class="input-group">
-                            {{form.company(id="company_select", class="form-control input-sm")}}
-                        </div>
-                        {% for error in form.errors.company %}
                         <div class="alert alert-danger" role="alert" style="max-width: 400px;">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             [{{error}}]
@@ -135,6 +78,91 @@ $(document).ready(function() {
                             <div style="float: left; font-size: 1.4em;">&nbsp;%</div>
                         </div>
                         {% for error in form.errors.base_discount %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h3>{{ _('Invoice address details') }}</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Company name') }}:</label>
+                        <div class="input-group">
+                            {{form.company_name(size=80, class="form-control input-sm")}}
+                        </div>
+                        {% for error in form.errors.company_name %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Post code') }}:</label>
+                        <div class="input-group">
+                            <div style="float: left; font-size: 1.4em;">〒&nbsp;</div>
+                            <div style="float: left;">{{form.post_code1(size=1, class="form-control input-sm nums_only", maxlength="3", style="text-align: center")}}</div>
+                            <div style="float: left; font-size: 1.5em;">&nbsp;-&nbsp;</div>
+                            <div style="float: left;">{{form.post_code2(size=2, class="form-control input-sm nums_only", maxlength="4", style="text-align: center")}}</div>
+                        </div>
+                        {% for error in form.errors.post_code1 %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                        {% for error in form.errors.post_code2 %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Address 1') }}:</label>
+                        <div class="input-group">
+                            {{form.address1(size=80, class="form-control input-sm")}}
+                        </div>
+                        {% for error in form.errors.address1 %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Address 2') }}:</label>
+                        <div class="input-group">
+                            {{form.address2(size=80, class="form-control input-sm")}}
+                        </div>
+                        {% for error in form.errors.address2 %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Address 3') }}:</label>
+                        <div class="input-group">
+                            {{form.address3(size=80, class="form-control input-sm")}}
+                        </div>
+                        {% for error in form.errors.address3 %}
                         <div class="alert alert-danger" role="alert" style="max-width: 400px;">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             [{{error}}]

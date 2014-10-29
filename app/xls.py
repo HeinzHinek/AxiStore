@@ -15,7 +15,7 @@ class CreateXls():
         filename = os.path.join(NOHINSHO_PATH, ('Nohinsho_' + chr(64 + int(customer.order_no)) + '_' + cust_name + '_' + date.strftime("%Y%m%d") + '.xlsx'))
 
         workbook = xlsxwriter.Workbook(filename)
-        worksheet = workbook.add_worksheet(unicode('納品書', 'utf-8'))
+        worksheet = workbook.add_worksheet(unicode(date.strftime("%b%d"), 'utf-8'))
 
         align_right = workbook.add_format({
             'align': 'right'
@@ -175,12 +175,12 @@ class CreateXls():
 
         worksheet.merge_range('A2:H2', unicode('納品書' + chr(64 + int(customer.order_no)), 'utf-8'), title_format)
 
-        worksheet.merge_range('A4:D4', customer.contact.company_name, comp_name_format)
+        worksheet.merge_range('A4:D4', customer.company_name, comp_name_format)
         worksheet.write('E4', unicode('御中', 'utf-8'))
-        worksheet.write('A5', str.decode('〒', 'utf-8') + unicode(customer.contact.post_code)[:3] + unicode('-') + unicode(customer.contact.post_code)[3:]\
-                        + unicode(' ') + customer.contact.address1)
-        worksheet.write('A6', customer.contact.address2)
-        worksheet.write('A7', customer.contact.address3)
+        worksheet.write('A5', str.decode('〒', 'utf-8') + unicode(customer.post_code)[:3] + unicode('-') + unicode(customer.post_code)[3:]\
+                        + unicode(' ') + customer.address1)
+        worksheet.write('A6', customer.address2)
+        worksheet.write('A7', customer.address3)
 
         worksheet.write('H4', unicode('Axis Mundi株式会社', 'utf-8'), our_address_format)
         worksheet.write('H5', unicode('〒 160-0022', 'utf-8'), our_address_format)

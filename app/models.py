@@ -194,7 +194,7 @@ class Customer(db.Model):
     address2 = db.Column(db.String(100))
     address3 = db.Column(db.String(100))
 
-    contact = db.relationship('Contact', backref='contact', lazy='dynamic')
+    contact = db.relationship('Contact', backref='customer', lazy='dynamic')
 
     requests = db.relationship('Request', backref='customer', lazy='dynamic')
     supplies = db.relationship('Supply', backref='customer', lazy='dynamic')

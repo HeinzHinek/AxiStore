@@ -125,17 +125,10 @@ class SelectOrderNumberFormAxm(Form):
 class AddCustomerForm(Form):
     name = StringField('name', [validators.data_required(),
                                 validators.length(max=50)])
-    first_name = StringField('first_name', [validators.length(max=50)])
-    surname = StringField('surname', [validators.length(max=50)])
-    phone = TelField('phone', [validators.length(max=16)])
     email = EmailField('email', [validators.data_required(),
                                  validators.length(max=120)])
-    company = SelectField('company', coerce=int)
     base_discount = IntegerField('base_discount', [validators.input_required(),
                                                    validators.NumberRange(min=0, max=100)])
-
-
-class AddContactForm(Form):
     company_name = StringField('company_name', [validators.data_required(),
                                 validators.length(max=100)])
     post_code1 = StringField('post_code1', [validators.length(max=3),
@@ -145,6 +138,14 @@ class AddContactForm(Form):
     address1 = StringField('address1', [validators.length(max=100)])
     address2 = StringField('address2', [validators.length(max=100)])
     address3 = StringField('address3', [validators.length(max=100)])
+
+
+
+class AddContactForm(Form):
+    first_name = StringField('first_name', [validators.length(max=50)])
+    surname = StringField('surname', [validators.length(max=50)])
     phone = TelField('phone', [validators.length(max=16)])
     email = EmailField('email', [validators.data_required(),
                                  validators.length(max=120)])
+
+    customer = SelectField('customer', coerce=int)

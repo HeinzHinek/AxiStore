@@ -23,7 +23,7 @@
         <tr onclick="window.location.href = '{{ url_for("editCustomer", id=customer.id) }}'">
         <td>{{ customer.id }}</td>
         <td>{{ customer.name }}</td>
-        <td>{{ customer.contact.company_name }}</td>
+        <td>{{ customer.company_name }}</td>
         </tr>
         {% endfor %}
     </table>
