@@ -183,22 +183,18 @@ class DeliveredProducts(db.Model):
 class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-
-    first_name = db.Column(db.String(50))
-    surname = db.Column(db.String(50))
-
-    phone = db.Column(db.String(16))
     email = db.Column(db.String(120))
     customer_type = db.Column(db.SmallInteger, default=CUSTOMER_TYPES['TYPE_CUSTOMER'])
     order_no = db.Column(db.Integer)
     base_discount = db.Column(db.Float)
-    contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'))
 
     company_name = db.Column(db.String(100))
     post_code = db.Column(db.Integer())
     address1 = db.Column(db.String(100))
     address2 = db.Column(db.String(100))
     address3 = db.Column(db.String(100))
+
+    contact = db.relationship('Contact', backref='contact', lazy='dynamic')
 
     requests = db.relationship('Request', backref='customer', lazy='dynamic')
     supplies = db.relationship('Supply', backref='customer', lazy='dynamic')
@@ -207,19 +203,14 @@ class Customer(db.Model):
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    company_name = db.Column(db.String(100))
-    post_code = db.Column(db.Integer())
-    address1 = db.Column(db.String(100))
-    address2 = db.Column(db.String(100))
-    address3 = db.Column(db.String(100))
-
     first_name = db.Column(db.String(50))
     surname = db.Column(db.String(50))
-
     phone = db.Column(db.String(16))
     email = db.Column(db.String(120))
 
-    contact = db.relationship('Customer', backref='contact', lazy='dynamic')
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+
+
 
 
 class Request(db.Model):
