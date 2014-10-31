@@ -40,6 +40,7 @@ class AddProductForm(Form):
     price_unit = FloatField('price_unit', [validators.number_range(min=0)])
     price_retail = FloatField('price_retail', [validators.number_range(min=0)])
     qty_stock = IntegerField('qty_stock', [validators.NumberRange(min=0, max=99999)], default=0)
+    axm_node = StringField('axm_node', [validators.length(max=300)])
 
     #for validation
     request = None

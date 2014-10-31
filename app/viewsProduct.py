@@ -25,13 +25,14 @@ def addProduct():
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
+        product.axm_node = form.axm_node.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id
         db.session.add(product)
         db.session.commit()
         flash(gettext("New product successfully added."))
-        return redirect(url_for("stock"))
+        return redirect(url_for("editProduct", id=product.id))
     return render_template("product/addProduct.html",
                            title=gettext('Add new product'),
                            form=form)
@@ -67,6 +68,7 @@ def editProduct(id=0):
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
+        product.axm_node = form.axm_node.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id

@@ -5,7 +5,7 @@ from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
 from flask_login import current_user, login_required
-from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES
+from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
 from flask.ext.babel import gettext
 from sqlalchemy import or_, func
 from datetime import datetime, timedelta
@@ -180,6 +180,7 @@ def stock(page=1):
                            curr_search=curr_search,
                            form=form,
                            form_search=SearchForm(),
+                           axm_product_url=AXM_PRODUCT_URL,
                            products=products)
 
 

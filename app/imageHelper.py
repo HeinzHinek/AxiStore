@@ -22,7 +22,7 @@ def uploadProductImage():
             suffix = str(int(last_no) + 1) + '.' + ext
         else:
             suffix = "1." + file.filename.split('.')[-1]
-        filename = PRODUCT_IMG_PATH + 'prod_' + str(prod_id) + '_' + suffix
+        filename = PRODUCT_IMG_PATH + 'prod_' + str(prod_id) + '_' + suffix.lower()
         file.save(filename)
         result = 'OK'
     return jsonify({'result': result, 'url': filename})

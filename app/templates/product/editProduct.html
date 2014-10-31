@@ -217,6 +217,21 @@
             </tr>
             <tr>
                 <td>
+                    <label>{{ _('Axis Mart node number') }}:</label>
+                    <div class="input-group">
+                        {{ form.axm_node(size=20, class="form-control", style="text-align: right") }}
+                    </div>
+                    {% for error in form.errors.axm_node %}
+                    <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        [{{error}}]
+                    </div>
+                    {% endfor %}
+                </td>
+            </tr>
+            <br/>
+            <tr>
+                <td>
                     <input type="hidden" name="orig_code" value="{{ product.code }}"/>
                     <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
                     <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock")}}'" value="{{ _('Cancel') }}"/>

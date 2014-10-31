@@ -47,6 +47,8 @@
 <script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 <script>
+ var axm_url = '{{ axm_product_url }}';
+
     $(function() {
         $( "#tabs-categories" ).sortable({
             items: "> li:not(:first)",
@@ -103,6 +105,15 @@ $(document).ready( function() {
     }, function() {
         $(this).find('.row-indicator-left').removeClass('row-indicator-left-on');
         $(this).find('.row-indicator-right').removeClass('row-indicator-right-on');
+    });
+
+    $('.axm_link').bind('click', function(event) {
+        var node = $(this).attr('id').split('-')[1];
+        var target_url = axm_url + node;
+        if (event.ctrlKey) {
+            target_url = target_url + '/edit';
+        }
+        window.open(target_url);
     });
 
 });
@@ -190,6 +201,7 @@ $(document).ready( function() {
         <th></th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
         <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
+        <th><span class="glyphicon glyphicon-shopping-cart"></span></th>
         <th style="text-align: right;"><div class="dropdown">{{ _('Unit Price') }}&nbsp;{{ build_sort_str_list('unitp') }}</div></th>
         <th style="text-align: right;"><div class="dropdown">{{ _('Retail Price') }}&nbsp;{{ build_sort_str_list('retap') }}</div></th>
         <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
@@ -215,11 +227,20 @@ $(document).ready( function() {
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
         <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
             {% if product.img_url %}
-                <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}"><span class="glyphicon glyphicon-picture"></span></a>
+                <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}">
+                    <span class="glyphicon glyphicon-picture"></span>
+                </a>
             {% endif %}
         </td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_CS}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_JP}}</td>
+        <td class="clickable-td {% if not product.axm_node %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
+            {% if product.axm_node %}
+                <a class="axm_link" id="axm_node-{{ product.axm_node }}">
+                    <span class="glyphicon glyphicon-share"></span>
+                </a>
+            {% endif %}
+        </td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_retail}}</td>
 

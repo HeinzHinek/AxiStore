@@ -47,6 +47,8 @@ class Product(db.Model):
     price_unit = db.Column(db.Integer, default=0)
     price_retail = db.Column(db.Integer, default=0)
     qty_stock = db.Column(db.Integer)
+    axm_node = db.Column(db.Unicode(300))
+
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
     ordered_products = db.relationship('OrderedProducts')
