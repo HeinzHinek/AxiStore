@@ -259,7 +259,7 @@ def passwordChange():
         else:
             if new_pass != conf_pass:
                 flash(gettext('New password must match confirmation!'))
-            elif old_pass != current_user.password:
+            elif not check_password_hash(current_user.password, old_pass):
                 flash(gettext('Current password is incorrect!'))
             return redirect(url_for('passwordChange'))
         return redirect(url_for('user'))

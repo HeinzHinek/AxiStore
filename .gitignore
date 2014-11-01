@@ -8,4 +8,5 @@ app/xls.py
 app/static/csv
 app/static/nohinsho
 app/static/img/product
+db_up.sh
 
