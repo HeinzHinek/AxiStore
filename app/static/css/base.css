@@ -16,6 +16,12 @@ body {
     float: right;
 }
 
+.custom-alert {
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+}
+
 .no-border {
     border: none !important;
 }
@@ -123,8 +129,7 @@ body {
     color: crimson;
 }
 
-.graph-div {
-    text-align: center;
+.shadowed-div {
     padding: 10px;
     border-radius: 5px;
     background-color: #FFFFFF;

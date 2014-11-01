@@ -2,9 +2,10 @@
 
 from flask import render_template, request, g, session, flash, redirect, url_for, json
 from app import app, db, lm, babel
-from forms import UserForm, EditQtyStockForm, SearchForm
+from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
 from flask_login import current_user, login_required
+from werkzeug.security import generate_password_hash, check_password_hash
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
 from flask.ext.babel import gettext
 from sqlalchemy import or_, func
@@ -211,6 +212,15 @@ def user():
     form = UserForm(obj=current_user)
     if form.validate_on_submit():
         user = current_user
+        new_nick = form.nickname.data
+        check_nick = User.query.filter_by(nickname=new_nick).all()
+
+        # user nickname already exists
+        if len(check_nick) > 0 and new_nick != user.nickname:
+            flash(gettext('Selected nickname is already in use!'))
+            return redirect(url_for('user'))
+
+        user.nickname = new_nick
         user.language = form.language.data
         user.products_per_page = form.products_per_page.data\
                                  if form.products_per_page.data\
@@ -226,6 +236,36 @@ def user():
                                    else PRODUCTS_PER_PAGE)
     return render_template('user.html',
                            title=gettext("User's Page"),
+                           form=form)
+
+
+@app.route('/user/passwordchange', methods=['GET', 'POST'])
+@login_required
+def passwordChange():
+    form = PasswordChangeForm()
+    if form.validate_on_submit():
+        old_pass = form.old_password.data
+        new_pass = form.new_password.data
+        conf_pass = form.new_password_confirm.data
+
+        # Password change
+        if new_pass == conf_pass and check_password_hash(current_user.password, old_pass):
+            user = current_user
+            user.password = generate_password_hash(new_pass)
+            db.session.add(user)
+            db.session.commit()
+            flash(gettext('User password successfully changed.'))
+
+        else:
+            if new_pass != conf_pass:
+                flash(gettext('New password must match confirmation!'))
+            elif old_pass != current_user.password:
+                flash(gettext('Current password is incorrect!'))
+            return redirect(url_for('passwordChange'))
+        return redirect(url_for('user'))
+
+    return render_template('/settings/passwordchange.html',
+                           title=gettext("Password Change"),
                            form=form)
 
 
@@ -355,6 +395,7 @@ def prepareQuantityProportionGraphData():
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
     today = datetime.now()
+    print "LOCAL TOMESTAMP: " + today
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:

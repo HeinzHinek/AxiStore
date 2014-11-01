@@ -1,0 +1,18 @@
+{% macro render_field(field) %}
+<dt>{{ field.label }}
+<dd>{{ field(**kwargs)|safe }}
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <div role="alert" class="alert-danger custom-alert" onload="showAlert">
+        <button type="button" class="close" data-dismiss="alert" tabindex="-1">&times;</button>
+        [{{error}}]
+    </div>
+    {% endfor %}
+    <script type="text/javascript">
+        $('.alert-danger').hide();
+        $('.alert-danger').show('fast');
+    </script>
+    {% endif %}
+</dd>
+<br/>
+{% endmacro %}

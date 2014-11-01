@@ -18,11 +18,27 @@ class LoginForm(Form):
 
 
 class UserForm(Form):
+    nickname = StringField(gettext('Nickname'), [validators.data_required(),
+                                        validators.length(min=5, max=30)])
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
-    language = SelectField('user_language', choices=lang)
-    products_per_page = IntegerField('products_per_page', [validators.NumberRange(min=3)],
+    language = SelectField('Select your preferred language', choices=lang)
+    products_per_page = IntegerField('Select number of products displayed per page', [validators.NumberRange(min=3)],
                                      default=PRODUCTS_PER_PAGE)
+
+
+class PasswordChangeForm(Form):
+    old_password = PasswordField(gettext(('Current password')),
+                                 [validators.data_required(),
+                                  validators.length(min=5, max=30)])
+    new_password = PasswordField(gettext('New password'),
+                                 [validators.data_required(),
+                                  validators.length(min=5, max=30),
+                                  validators.equal_to('new_password_confirm',
+                                                      message=gettext('New password must match confirmation!'))])
+    new_password_confirm = PasswordField(gettext('New password confirmation'),
+                                         [validators.data_required(),
+                                          validators.length(min=5, max=30)])
 
 
 class SearchForm(Form):
@@ -57,21 +73,21 @@ class AddProductForm(Form):
 
 
 class AddUserForm(Form):
-    nickname = StringField('nickname', [validators.data_required(),
+    nickname = StringField(gettext('User nickname'), [validators.data_required(),
                                         validators.length(max=64)])
-    password = PasswordField('password', [validators.data_required(),
+    password = PasswordField(gettext('User password'), [validators.data_required(),
                                           validators.length(min=5, max=30),
                                           validators.EqualTo('confirm', message=gettext('Passwords must match'))])
-    confirm = PasswordField('confirm password')
-    email = EmailField('email', [validators.data_required(),
+    confirm = PasswordField(gettext('Password confirmation'))
+    email = EmailField(gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
 
     role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
-    role = SelectField('role', choices=role)
+    role = SelectField(gettext('User role'), choices=role)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
-    language = SelectField('language', choices=lang)
+    language = SelectField(gettext('User language'), choices=lang)
 
 
 class AddMakerForm(Form):

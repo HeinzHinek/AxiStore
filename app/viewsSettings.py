@@ -5,6 +5,7 @@ from app import app, db
 from models import Product, User
 from forms import UploadForm, AddUserForm
 from flask_login import login_required
+from werkzeug.security import generate_password_hash
 from flask.ext.babel import gettext
 from flask_login import current_user
 from config import CSV_PATH
@@ -34,7 +35,7 @@ def addUser():
     if form.validate_on_submit():
         user = User()
         user.nickname = form.nickname.data
-        user.password = form.password.data
+        user.password = generate_password_hash(form.password.data)
         user.email = form.email.data
         user.role = form.role.data
         user.language = form.language.data

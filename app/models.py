@@ -9,7 +9,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     nickname = db.Column(db.String(64), index = True, unique = True)
-    password = db.Column(db.String(64))
+    password = db.Column(db.String(150))
     email = db.Column(db.String(120), index = True, unique = True)
     role = db.Column(db.SmallInteger, default = USER_ROLES['ROLE_USER'])
     language = db.Column(db.String(3))

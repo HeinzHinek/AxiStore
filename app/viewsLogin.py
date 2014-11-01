@@ -5,6 +5,7 @@ from app import app
 from forms import LoginForm
 from models import User
 from flask_login import login_user, logout_user
+from werkzeug.security import check_password_hash
 from flask.ext.babel import gettext
 
 
@@ -17,9 +18,12 @@ def login():
         #session['remember_me'] = form.remember_me.data
         nickname = form.nickname.data
         password = form.password.data
-        user = User.query.filter_by(nickname=nickname, password=password).first()
+        user = User.query.filter_by(nickname=nickname).first()
         if user is None:
-            flash(gettext('Username or Password is invalid'), 'error')
+            flash(gettext('Entered username is unknown.'), 'error')
+            return redirect(url_for('login'))
+        if not check_password_hash(user.password, password):
+            flash(gettext('Password is incorrect!'), 'error')
             return redirect(url_for('login'))
         login_user(user)
         flash(gettext("Logged in successfully."))
