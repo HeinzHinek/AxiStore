@@ -2,8 +2,8 @@
 
 from flask import render_template, flash, redirect, request, url_for
 from app import app, db
-from models import Product, User
-from forms import UploadForm, AddUserForm
+from models import Product, User, Customer
+from forms import UploadForm, AddUserForm, EditUserForm
 from flask_login import login_required
 from werkzeug.security import generate_password_hash
 from flask.ext.babel import gettext
@@ -12,7 +12,7 @@ from config import CSV_PATH
 from werkzeug import secure_filename
 from sqlalchemy.engine.reflection import Inspector
 from collections import OrderedDict
-from config import USER_ROLES, LANGUAGES
+from config import USER_ROLES, LANGUAGES, CUSTOMER_TYPES
 import os
 import csv
 
@@ -32,12 +32,28 @@ def users(page=1):
 @login_required
 def addUser():
     form = AddUserForm()
+    customer_choices = [(a.id, a.name) for a in Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()]
+    customer_choices = [(0, '')] + customer_choices
+    form.customer.choices = customer_choices
     if form.validate_on_submit():
+        if len(User.query.filter_by(nickname=form.nickname.data).all()) > 0:
+            flash(gettext("Selected username already exists!"))
+            return redirect(url_for('users'))
+
         user = User()
         user.nickname = form.nickname.data
         user.password = generate_password_hash(form.password.data)
         user.email = form.email.data
         user.role = form.role.data
+
+        if int(form.role.data) == USER_ROLES['ROLE_CUSTOMER']:
+            if form.customer.data and form.customer.data != '' and form.customer.data != 0:
+                user.customer_id = form.customer.data
+            else:
+                user.customer_id = None
+        else:
+            user.customer_id = None
+
         user.language = form.language.data
         db.session.add(user)
         db.session.commit()
@@ -45,6 +61,45 @@ def addUser():
         return redirect(url_for("users"))
     return render_template('settings/addUser.html',
                            title=gettext("Add New User"),
+                           USER_ROLES=USER_ROLES,
+                           form=form)
+
+
+@app.route('/settings/edituser/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editUser(id=0):
+    user = User.query.filter_by(id=id).first()
+    form = EditUserForm(obj=user)
+    customer_choices = [(a.id, a.name) for a in Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()]
+    customer_choices = [(0, '')] + customer_choices
+    form.customer.choices = customer_choices
+    if form.validate_on_submit():
+        if len(User.query.filter_by(nickname=form.nickname.data).all()) > 1:
+            flash(gettext("Selected username already exists!"))
+            return redirect(url_for('users'))
+
+        user.nickname = form.nickname.data
+        user.email = form.email.data
+        user.role = form.role.data
+
+        if int(form.role.data) == USER_ROLES['ROLE_CUSTOMER']:
+            if form.customer.data and form.customer.data != '' and form.customer.data != 0:
+                user.customer_id = form.customer.data
+            else:
+                user.customer_id = None
+        else:
+            user.customer_id = None
+
+        user.language = form.language.data
+        db.session.add(user)
+        db.session.commit()
+        flash(gettext("User details succesfully changed."))
+        return redirect(url_for("users"))
+    selected = user.customer_id if user.customer_id else 0
+    return render_template('settings/editUser.html',
+                           title=gettext("Edit User"),
+                           USER_ROLES=USER_ROLES,
+                           selected=selected,
                            form=form)
 
 

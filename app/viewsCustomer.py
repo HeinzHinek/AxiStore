@@ -31,7 +31,10 @@ def addCustomer():
         customer.base_discount = int(form.base_discount.data)/100.0
 
         customer.company_name = form.company_name.data
-        customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+        if form.post_code1.data and form.post_code2.data:
+            customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+        else:
+            customer.post_code = None
         customer.address1 = form.address1.data
         customer.address2 = form.address2.data
         customer.address3 = form.address3.data
@@ -69,7 +72,10 @@ def editCustomer(id=0):
             customer.base_discount = int(form.base_discount.data)/100.0
 
             customer.company_name = form.company_name.data
-            customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+            if form.post_code1.data and form.post_code2.data:
+                customer.post_code = int(str(form.post_code1.data) + str(form.post_code2.data))
+            else:
+                customer.post_code = None
             customer.address1 = form.address1.data
             customer.address2 = form.address2.data
             customer.address3 = form.address3.data

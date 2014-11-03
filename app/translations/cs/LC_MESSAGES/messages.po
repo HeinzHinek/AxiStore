@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-10-23 17:52+0900\n"
-"PO-Revision-Date: 2014-10-23 17:52+0900\n"
+"PO-Revision-Date: 2014-11-03 13:34+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -257,7 +257,7 @@ msgstr "Nová objednávka úspěšně vytvořena."
 
 #: app/viewsRequest.py:105
 msgid "Order data not sent."
-msgstr "Data objednávky neodaslána."
+msgstr "Data objednávky neodeslána."
 
 #: app/viewsRequest.py:109
 msgid "Accept order from customer"

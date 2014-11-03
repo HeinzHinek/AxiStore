@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/shop.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/static/jssor/jssor.slider.mini.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".fancybox").fancybox();
+
+        var options = {
+            $AutoPlay: true,
+            $SlideWidth: 100,
+            $DisplayPieces: 1,
+            $SlideSpacing: 5
+        };
+        var jssor_slider = [];
+        $('.slider').each( function() {
+            var id = $(this).attr('id');
+            var i = id.split('-')[1];
+            jssor_slider[id] = new $JssorSlider$(id, options);
+        });
+    });
+</script>
+
+<style>
+    body { background-color: #eeeeee; }
+</style>
+
+<div class="row" style="text-align: center; margin-top: 10px;">
+    {% if products %}
+    {% for product in products.items %}
+        <div class="shadowed-div shop-item-div">
+            <div class="shop-wrapper-title clearfix">
+                <div class="shop-item-title" style="display: inline-block; float: left;">{{ product.desc_JP }}</div>
+                <div class="shop-item-code-wrapper clearfix">
+                    <span class="shop-item-code">{{ product.code }}</span>
+                </div>
+            </div>
+
+            <div class="slider" id="slider_container-{{ product.id }}" style="position: relative; top: 0px; left: 0px; width: 100%; height: 110px; display: inline-block; float: left;">
+                <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px;">
+                    {% for url in product.img_urls %}
+                    <div style="border: 1px solid #dddddd; border-radius: 3px;">
+                        <a u="image" class="fancybox" rel="group{{ product.id }}" href="{{ url }}">
+                            <img  src="{{ url }}"/>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div style="display: inline-block; float: right; height: 100px; padding: 0 5px; border: 1px solid #dddddd; border-radius: 2px;">
+                <table class="shop-item-table">
+                    <tr>
+                        <th>{{ _('Available:') }}</th>
+                        <td {% if (product.available) <= 0 %}style="color: crimson;"
+                            {% else %}style="font-weight: bold; color: green;"
+                            {% endif %}>{{ product.available }}&nbsp;{{ _('pcs') }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ _('On the way:') }}</th>
+                        <td {% if product.ontheway > 0 %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ _('Retail Price:') }}</th>
+                        <td>&#165;{{ product.price_retail }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ _('Your Price:') }}</th>
+                        <td {% if product.price_retail > product.customer_price %}style="font-weight: bold; color: darkblue;"{% endif %}>
+                            &#165;{{ product.customer_price }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

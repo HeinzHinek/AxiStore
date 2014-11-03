@@ -57,6 +57,11 @@ $(document).ready(function() {
     $('form').bind("keyup keypress", function(e) {
         var code = e.keyCode || e.which;
         if (code  == 13) {
+            var $focused = $(':focus');
+            if ($focused.hasClass('search-input')) {
+                $('#btn-search').trigger('click');
+                $focused.focus();
+            }
             e.preventDefault();
             return false;
         }
@@ -141,7 +146,7 @@ $(document).ready(function() {
                     {% if custType == 'cust' %}
                         <label>{{ _('Select customer') }}</label>
                         <div class="input-group">
-                            {{ formCustomer.customer(id="select_cust", class="form-control") }}
+                            {{ formCustomer.customer(id="select_cust", class="form-control", tabindex="1") }}
                         </div>
                         {% for error in formCustomer.errors.customer %}
                         <div class="alert alert-danger" role="alert" style="max-width: 400px;">
@@ -153,7 +158,7 @@ $(document).ready(function() {
                         <h3>{{ _('Customer from Axis Mart') }}</h3>
                         <label>{{ _('Enter order number:') }}</label>
                         <div class="input-group">
-                            {{ formCustomer.order_no(id="input_order_no", class="form-control nums_only", style="text-align: right;") }}
+                            {{ formCustomer.order_no(id="input_order_no", class="form-control nums_only", style="text-align: right;", tabindex="1") }}
                         </div>
                         {% for error in formCustomer.errors.order_no %}
                         <div class="alert alert-danger" role="alert" style="max-width: 400px;">
@@ -175,20 +180,20 @@ $(document).ready(function() {
 
                     <tr>
                         <th>{{ _('Maker') }}</th>
-                        <td colspan="2">{{ formCustomer.maker(id="sel-maker", class="form-control") }}</td>
+                        <td colspan="2">{{ formCustomer.maker(id="sel-maker", class="form-control search-input", tabindex="2") }}</td>
                     </tr>
                     <tr>
                         <th>{{ _('Code') }}</th>
-                        <td><input type="text" id="inp-code" size="40" class="form-control"/></td>
+                        <td><input type="text" id="inp-code" size="40" class="form-control search-input" tabindex="3"/></td>
                         <td rowspan="3" style="text-align: center; vertical-align: middle;">
-                            <input id="btn-search" type="button" value="{{ _('Search!') }}" class="btn btn-info" style="padding: 20px 5px;">
+                            <input id="btn-search" type="button" value="{{ _('Search!') }}" class="btn btn-info" tabindex="6" style="padding: 20px 5px;">
                         </td>
                     </tr><tr>
                         <th>{{ _('Description CS') }}</th>
-                        <td><input type="text" id="inp-desc_cs" size="40" class="form-control"/></td>
+                        <td><input type="text" id="inp-desc_cs" size="40" class="form-control search-input" tabindex="4"/></td>
                     </tr><tr>
                         <th>{{ _('Description JP') }}</th>
-                        <td><input type="text" id="inp-desc_jp" size="40" class="form-control"/></td>
+                        <td><input type="text" id="inp-desc_jp" size="40" class="form-control search-input" tabindex="5"/></td>
                     </tr>
                 </table>
 
@@ -196,7 +201,7 @@ $(document).ready(function() {
 
                 <table id="tbl-results" class="table table-bordered table-condensed">
                     <tr>
-                        <th colspan="5"><h4>{{ _('Search results') }}</h4></td>
+                        <th colspan="5"><h4>{{ _('Search results') }}</h4></th>
                     </tr><tr>
                         <th style="width: 10%;">{{ _('Code') }}</th>
                         <th style="width: 14%;">{{ _('Maker') }}</th>

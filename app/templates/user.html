@@ -15,9 +15,7 @@ body { background-color: #eeeeee; }
         {{form.hidden_tag()}}
         <div class="shadowed-div">
             {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}
-            <a href="{{ url_for('passwordChange') }}">
-                <input type="button" class="btn btn-sm btn-danger" value="{{ _('Change password') }}"></input>
-            </a>
+            <a class="btn btn-sm btn-danger" href="{{ url_for('passwordChange') }}">{{ _('Change password') }}</a>
         </div>
         <br/>
         <div class="shadowed-div">

@@ -14,15 +14,17 @@
     <th>{{ _('User ID') }}</th>
     <th>{{ _('Nickname') }}</th>
     <th>{{ _('Role') }}</th>
+    <th>{{ _('Company') }}</th>
     <th>{{ _('Language') }}</th>
 </tr>
 
 {% for user in users.items %}
-<tr>
-    <td>{{user.id}}</td>
-    <td>{{user.nickname}}</td>
-    <td>{{roles[user.role]}}</td>
-    <td>{{languages[user.language]}}</td>
+<tr onclick="window.location.href = '{{ url_for("editUser", id=user.id) }}'">
+    <td>{{ user.id }}</td>
+    <td>{{ user.nickname }}</td>
+    <td>{{ roles[user.role] }}
+    <td>{{ user.customer.name }}</td>
+    <td>{{ languages[user.language] }}</td>
 </tr>
 {% endfor %}
 </table>

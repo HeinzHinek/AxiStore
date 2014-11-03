@@ -1,7 +1,14 @@
 body {
     margin-top: 50px !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 60px !important;
     height: 100%;
+}
+
+@media (max-width: 979px) /* @grid-float-breakpoint -1 */
+{
+    body {
+        margin-top: 0px !important;
+    }
 }
 
 #footer {

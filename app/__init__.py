@@ -19,4 +19,4 @@ app.jinja_env.globals['momentjs'] = momentjs
 babel = Babel(app)
 
 from app import viewsBase, viewsLogin, viewsProduct, viewsMaker, viewsCategory, viewsOrder, viewsDelivery, \
-    viewsSettings, viewsRequest, viewsSupply, viewsCustomer, viewsContact, imageHelper
+    viewsSettings, viewsRequest, viewsSupply, viewsCustomer, viewsContact, viewsShop, imageHelper

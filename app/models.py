@@ -15,6 +15,8 @@ class User(db.Model):
     language = db.Column(db.String(3))
     products_per_page = db.Column(db.Integer, default = 20)
 
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+
     orders = db.relationship('Order', backref='orderer', lazy='dynamic')
     deliveries = db.relationship('Delivery', backref='recipient', lazy='dynamic')
     requests = db.relationship('Request', backref='receiver', lazy='dynamic')
@@ -197,6 +199,7 @@ class Customer(db.Model):
     address3 = db.Column(db.String(100))
 
     contact = db.relationship('Contact', backref='customer', lazy='dynamic')
+    user = db.relationship('User', backref='customer', lazy='dynamic')
 
     requests = db.relationship('Request', backref='customer', lazy='dynamic')
     supplies = db.relationship('Supply', backref='customer', lazy='dynamic')
@@ -211,8 +214,6 @@ class Contact(db.Model):
     email = db.Column(db.String(120))
 
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
-
-
 
 
 class Request(db.Model):

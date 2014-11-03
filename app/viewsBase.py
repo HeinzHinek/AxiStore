@@ -296,7 +296,6 @@ def prepareReqGraphData():
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
     today = datetime.utcnow() + timedelta(hours=9)
-    print "LOCAL TIMESTAMP: " + today.strftime("%A, %d. %B %Y %I:%M%p")
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:
@@ -329,7 +328,7 @@ def prepareSupGraphData():
     data = request.form['data'] if request.form['data'] else None
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
-    today = datetime.now()
+    today = datetime.utcnow() + timedelta(hours=9)
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:
@@ -363,7 +362,7 @@ def prepareValueProportionGraphData():
     data = request.form['data'] if request.form['data'] else None
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
-    today = datetime.now()
+    today = datetime.utcnow() + timedelta(hours=9)
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:
@@ -395,7 +394,7 @@ def prepareQuantityProportionGraphData():
     data = request.form['data'] if request.form['data'] else None
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
-    today = datetime.now()
+    today = datetime.utcnow() + timedelta(hours=9)
     if date.year == today.year and date.month == today.month:
         last_day = today.day
     else:

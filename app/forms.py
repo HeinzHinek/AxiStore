@@ -84,6 +84,22 @@ class AddUserForm(Form):
 
     role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
     role = SelectField(gettext('User role'), choices=role)
+    customer = SelectField('Customer', coerce=int)
+
+    inv_lang = dict((v, k) for k, v in LANGUAGES.items())
+    lang = [(v, k) for k, v in inv_lang.iteritems()]
+    language = SelectField(gettext('User language'), choices=lang)
+
+
+class EditUserForm(Form):
+    nickname = StringField(gettext('User nickname'), [validators.data_required(),
+                                        validators.length(max=64)])
+    email = EmailField(gettext('Email'), [validators.data_required(),
+                                 validators.length(max=120)])
+
+    role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
+    role = SelectField(gettext('User role'), choices=role)
+    customer = SelectField('Customer', coerce=int)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
