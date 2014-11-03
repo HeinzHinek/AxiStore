@@ -29,15 +29,15 @@ body { background-color: #eeeeee; }
     <form action="" method="post" name="addUser">
         {{form.hidden_tag()}}
         <dl>
-            {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}
-            {{ render_field(form.password, class="form-control", style="width: 100%;") }}
-            {{ render_field(form.confirm, class="form-control", style="width: 100%;") }}
-            {{ render_field(form.email, class="form-control", style="width: 100%;") }}
-            {{ render_field(form.role, id="role_select", class="form-control", style="width: 50%;") }}
+            {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}<br/>
+            {{ render_field(form.password, class="form-control", style="width: 100%;") }}<br/>
+            {{ render_field(form.confirm, class="form-control", style="width: 100%;") }}<br/>
+            {{ render_field(form.email, class="form-control", style="width: 100%;") }}<br/>
+            {{ render_field(form.role, id="role_select", class="form-control", style="width: 50%;") }}<br/>
             <div id="customer-select-div">
-                {{ render_field(form.customer, id="customer_select", class="form-control", style="width: 50%;") }}
+                {{ render_field(form.customer, id="customer_select", class="form-control", style="width: 50%;") }}<br/>
             </div>
-            {{ render_field(form.language, class="form-control", style="width: 50%;") }}
+            {{ render_field(form.language, class="form-control", style="width: 50%;") }}<br/>
         </dl>
         <input type="submit" value="{{ _('Save user') }}" class="btn btn-default">
         <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("users")}}'" value="{{ _('Cancel') }}"/>

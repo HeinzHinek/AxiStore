@@ -107,6 +107,24 @@ class Product(db.Model):
     def net_stock(self):
         return self.qty_stock - self.request_qty + self.order_qty
 
+    @hybrid_property
+    def available_qty(self):
+        n = self.qty_stock - self.request_qty
+        return n if n > 0 else 0
+
+    @available_qty.expression
+    def available_qty(cls):
+        return (db.select([Product.qty_stock - db.func.coalesce(
+            db.func.sum(
+                db.func.coalesce(
+                    RequestedProducts.quantity - RequestedProducts.qty_supplied, 0)
+            ), 0)])
+            .where(Product.id == cls.id)
+            .where(RequestedProducts.product_id == cls.id)
+            .label("available_qty")
+        )
+
+
     def customer_request_qty(self, cust_id):
         req_qties = 0
         for ra in self.request_assocs:

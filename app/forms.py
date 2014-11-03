@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, HiddenField, FileField
+from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
+    HiddenField, FileField, BooleanField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE
 from models import Product
-from flask.ext.babel import gettext
+from flask.ext.babel import lazy_gettext
 import wtforms
 
 
@@ -18,25 +19,25 @@ class LoginForm(Form):
 
 
 class UserForm(Form):
-    nickname = StringField(gettext('Nickname'), [validators.data_required(),
-                                        validators.length(min=5, max=30)])
+    nickname = StringField(lazy_gettext('Nickname'), [validators.data_required(),
+                                                      validators.length(min=5, max=30)])
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
-    language = SelectField('Select your preferred language', choices=lang)
-    products_per_page = IntegerField('Select number of products displayed per page', [validators.NumberRange(min=3)],
+    language = SelectField(lazy_gettext('Preferred language'), choices=lang)
+    products_per_page = IntegerField(lazy_gettext('Number of products displayed per page'), [validators.NumberRange(min=3)],
                                      default=PRODUCTS_PER_PAGE)
 
 
 class PasswordChangeForm(Form):
-    old_password = PasswordField(gettext(('Current password')),
+    old_password = PasswordField(lazy_gettext('Old password'),
                                  [validators.data_required(),
                                   validators.length(min=5, max=30)])
-    new_password = PasswordField(gettext('New password'),
+    new_password = PasswordField(lazy_gettext('New password'),
                                  [validators.data_required(),
                                   validators.length(min=5, max=30),
                                   validators.equal_to('new_password_confirm',
-                                                      message=gettext('New password must match confirmation!'))])
-    new_password_confirm = PasswordField(gettext('New password confirmation'),
+                                                      message=lazy_gettext('New password must match confirmation!'))])
+    new_password_confirm = PasswordField(lazy_gettext('New password confirmation'),
                                          [validators.data_required(),
                                           validators.length(min=5, max=30)])
 
@@ -69,41 +70,41 @@ class AddProductForm(Form):
                 pass
             else:
                 pass
-                #raise ValidationError(gettext('This product code is already in use!'))
+                #raise ValidationError(lazy_gettext('This product code is already in use!'))
 
 
 class AddUserForm(Form):
-    nickname = StringField(gettext('User nickname'), [validators.data_required(),
+    nickname = StringField(lazy_gettext('User nickname'), [validators.data_required(),
                                         validators.length(max=64)])
-    password = PasswordField(gettext('User password'), [validators.data_required(),
+    password = PasswordField(lazy_gettext('User password'), [validators.data_required(),
                                           validators.length(min=5, max=30),
-                                          validators.EqualTo('confirm', message=gettext('Passwords must match'))])
-    confirm = PasswordField(gettext('Password confirmation'))
-    email = EmailField(gettext('Email'), [validators.data_required(),
+                                          validators.EqualTo('confirm', message=lazy_gettext('Passwords must match'))])
+    confirm = PasswordField(lazy_gettext('Password confirmation'))
+    email = EmailField(lazy_gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
 
     role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
-    role = SelectField(gettext('User role'), choices=role)
+    role = SelectField(lazy_gettext('User role'), choices=role)
     customer = SelectField('Customer', coerce=int)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
-    language = SelectField(gettext('User language'), choices=lang)
+    language = SelectField(lazy_gettext('User language'), choices=lang)
 
 
 class EditUserForm(Form):
-    nickname = StringField(gettext('User nickname'), [validators.data_required(),
+    nickname = StringField(lazy_gettext('User nickname'), [validators.data_required(),
                                         validators.length(max=64)])
-    email = EmailField(gettext('Email'), [validators.data_required(),
+    email = EmailField(lazy_gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
 
     role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
-    role = SelectField(gettext('User role'), choices=role)
+    role = SelectField(lazy_gettext('User role'), choices=role)
     customer = SelectField('Customer', coerce=int)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
-    language = SelectField(gettext('User language'), choices=lang)
+    language = SelectField(lazy_gettext('User language'), choices=lang)
 
 
 class AddMakerForm(Form):
@@ -182,3 +183,8 @@ class AddContactForm(Form):
                                  validators.length(max=120)])
 
     customer = SelectField('customer', coerce=int)
+
+
+class ShopHeaderForm(Form):
+    category = SelectField(lazy_gettext('Category'), coerce=int)
+    available_only = BooleanField(lazy_gettext('Only available'))

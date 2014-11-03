@@ -2,6 +2,7 @@ body {
     margin-top: 50px !important;
     margin-bottom: 60px !important;
     height: 100%;
+    font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
 }
 
 @media (max-width: 979px) /* @grid-float-breakpoint -1 */
@@ -11,7 +12,7 @@ body {
     }
 }
 
-#footer {
+#pagination-footer {
     position: fixed;
     bottom: 0;
     right: 20px;

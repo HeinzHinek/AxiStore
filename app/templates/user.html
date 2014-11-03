@@ -14,17 +14,17 @@ body { background-color: #eeeeee; }
     <form action="" method="post" name="user">
         {{form.hidden_tag()}}
         <div class="shadowed-div">
-            {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}
+            {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}<br/>
             <a class="btn btn-sm btn-danger" href="{{ url_for('passwordChange') }}">{{ _('Change password') }}</a>
         </div>
         <br/>
         <div class="shadowed-div">
-            {{ render_field(form.language, class="form-control", style="width: 50%;") }}
+            {{ render_field(form.language, class="form-control", style="width: 50%;") }}<br/>
         </div>
         <br/>
         <div class="shadowed-div">
             {{ render_field(form.products_per_page, class="form-control",
-                style="width: 50%; text-align: right;", onclick="$(this).select()") }}
+                style="width: 50%; text-align: right;", onclick="$(this).select()") }}<br/>
         </div>
         <br/>
         <p><input type="submit" value="{{ _('Save settings') }}" class="btn btn-info"></p>

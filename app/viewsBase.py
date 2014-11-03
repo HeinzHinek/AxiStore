@@ -66,6 +66,17 @@ def before_request():
     if not hasattr(g.user, 'products_per_page'):
         g.user.products_per_page = PRODUCTS_PER_PAGE
 
+    # for shop - checkbox for available items only
+    available_only = request.args.get('avonly')
+    if available_only:
+        if available_only == 'true':
+            session['available_only'] = True
+        else:
+            session['available_only'] = False
+    else:
+        if 'available_only' not in session:
+            session['available_only'] = None
+
 
 @app.after_request
 def after_request(response):
