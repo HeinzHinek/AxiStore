@@ -6,7 +6,7 @@ from flask_login import login_required, current_user
 from flask.ext.babel import gettext
 from models import Product, Category
 from forms import ShopHeaderForm
-from config import NO_PHOTO_URL, USER_ROLES
+from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
 from imageHelper import getImgUrls
 
 
@@ -54,4 +54,5 @@ def shop(page=1):
                            title=gettext('AxiStore shop'),
                            products=products,
                            curr_category=g.category_id,
+                           axm_product_url=AXM_PRODUCT_URL_JA,
                            form=form)

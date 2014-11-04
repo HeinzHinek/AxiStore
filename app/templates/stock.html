@@ -195,8 +195,8 @@ $(document).ready( function() {
                     </a></li>
                     {% endfor %}
                 </ul>
+                <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
             </div>
-            <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
         </th>
         <th></th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>

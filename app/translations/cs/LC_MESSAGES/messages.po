@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-11-03 22:43+0900\n"
-"PO-Revision-Date: 2014-11-03 22:43+0900\n"
+"PO-Revision-Date: 2014-11-04 20:34+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -699,7 +699,7 @@ msgstr "Vše"
 #: app/templates/deliveries/deliveryReport.html:16
 #: app/templates/supplies/supplyReport.html:21
 msgid "Product Code"
-msgstr "Kód produktu"
+msgstr "Kód"
 
 #: app/templates/stock.html:182 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:26
@@ -746,13 +746,13 @@ msgstr "Popis JP"
 #: app/templates/stock.html:205 app/templates/orders/productorders.html:27
 #: app/templates/requests/productrequests.html:27
 msgid "Unit Price"
-msgstr "Nákupní cena"
+msgstr "Nák. cena"
 
 #: app/templates/stock.html:206 app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
 #: app/templates/supplies/supplyProducts.html:115
 msgid "Retail Price"
-msgstr "Maloobch. cena"
+msgstr "Mal. cena"
 
 #: app/templates/stock.html:211 app/templates/orders/createOrder.html:123
 msgid "Req."

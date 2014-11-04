@@ -29,7 +29,8 @@
             $AutoPlay: true,
             $SlideWidth: 100,
             $DisplayPieces: 1,
-            $SlideSpacing: 5
+            $SlideSpacing: 5,
+            $FillMode: 1
         };
         var jssor_slider = [];
         $('.slider').each( function() {
@@ -42,6 +43,53 @@
             var num = $(this).text();
             var formatted = ("" + num).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
             $(this).text(formatted);
+        });
+
+        $('.cart-arrow').click(function() {
+            var $input = $(this).closest('.bottom-icon-div').find('.order-amount-input');
+            var val = $input.val();
+            var num = parseInt(val);
+            if (!num) {
+                if (!val) {
+                    num = 0;
+                } else {
+                    num = val;
+                    return;
+                }
+            }
+            if ($(this).hasClass('cart-arrow-up')) {
+                $input.val(num+1);
+                $input.trigger('input');
+            } else {
+                if (num > 1) {
+                    $input.val(num-1);
+                    $input.trigger('input');
+                }
+            }
+        });
+
+        $(document).on('keyup', '.nums_only', function (e) {
+            if (e.keyCode != '9') {
+                this.value = this.value.replace(/[^0-9]/g,'');
+            }
+        });
+
+        $('.order-amount-input').on('input', function() {
+            var $av_qty_td = $(this).closest('.shop-item-div').find('.available-qty-td');
+            var $ow_qty_td = $(this).closest('.shop-item-div').find('.on-way-qty-td');
+            var available_qty = parseInt($av_qty_td.html().replace(/[^0-9]/g,''));
+            var on_way_qty = parseInt($ow_qty_td.html().replace(/[^0-9]/g,''));
+            num = parseInt($(this).val());
+            if (num > available_qty) {
+                $av_qty_td.addClass('over-available');
+            } else {
+                $av_qty_td.removeClass('over-available');
+            }
+            if (num > (available_qty + on_way_qty)) {
+                $ow_qty_td.addClass('over-available');
+            } else {
+                $ow_qty_td.removeClass('over-available');
+            }
         });
     });
 </script>
@@ -75,11 +123,11 @@
 
                 <div class="clearfix" style="margin-bottom: 10px;">
                     <div class="slider" id="slider_container-{{ product.id }}" style="position: relative; top: 0px; left: 0px; width: 100%; height: 100px; display: inline-block; float: left;">
-                        <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px;">
+                        <div u="slides" style="position: absolute; overflow: hidden; left: 0px; top: 0px; width: 100%; height: 100px;">
                             {% for url in product.img_urls %}
                             <div style="border: 1px solid #dddddd; border-radius: 3px;">
                                 <a u="image" class="fancybox" rel="group{{ product.id }}" href="{{ url }}">
-                                    <img  src="{{ url }}"/>
+                                    <img src="{{ url }}"/>
                                 </a>
                             </div>
                             {% endfor %}
@@ -90,21 +138,24 @@
                         <table class="shop-item-table">
                             <tr>
                                 <td class="left-td">{{ _('Available:') }}</td>
-                                <td class="right-td" {% if (product.available_qty) <= 0 %}style="color: crimson;"
+                                <td class="right-td available-qty-td" {% if (product.available_qty) <= 0 %}style="color: crimson;"
                                     {% else %}style="font-weight: bold; color: green;"
                                     {% endif %}>{{ product.available_qty }}&nbsp;{{ _('pcs') }}</td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('On the way:') }}</td>
-                                <td class="right-td" {% if product.ontheway > 0 %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
+                                <td class="right-td on-way-qty-td" {% if product.ontheway > 0 %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('Retail Price:') }}</td>
-                                <td class="right-td formatted-number">&#165;{{ product.price_retail }}</td>
+                                <td class="right-td formatted-number" {% if product.customer_price > 99999 %}style="font-size: 0.7em !important;"{% endif %}>
+                                    &#165;{{ product.price_retail }}
+                                </td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('Your Price:') }}</td>
-                                <td class="right-td formatted-number" {% if product.price_retail > product.customer_price %}style="font-weight: bold; color: darkblue;"{% endif %}>
+                                <td class="right-td formatted-number" style="{% if product.price_retail > product.customer_price %}color: darkblue;{% endif %}
+                                    {% if product.customer_price > 99999 %}font-size: 0.7em !important;{% endif %}">
                                     &#165;{{ product.customer_price }}
                                 </td>
                             </tr>
@@ -115,6 +166,23 @@
                 <div>
                     <div class="shop-item-code-wrapper label label-warning">
                         {{ product.code }}
+                    </div>
+
+                    <div class="bottom-icon-div">
+                        <div style="width: 24px; height: 24px; display: inline-block; float: left;">
+                            {% if product.axm_node %}
+                                <a href="{{ axm_product_url + product.axm_node }}" target="_blank">
+                                    <img src="/static/img/axismart.png" class="axm-icon-img"/>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div style="display: inline-block; float: left;">
+                            <input type="text" class="form-control input-sm order-amount-input nums_only" value="1"/>
+                        </div>
+                        <div class="noselect" style="display: inline-block; float: left;">
+                            <div class="cart-arrow cart-arrow-up"><span class="caret caret-reversed"></span></div>
+                            <div class="cart-arrow cart-arrow-down"><span class="caret"></span></div>
+                        </div>
                     </div>
                 </div>
             </div>
