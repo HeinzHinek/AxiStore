@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-03 22:43+0900\n"
-"PO-Revision-Date: 2014-11-03 22:47+0900\n"
+"POT-Creation-Date: 2014-11-05 17:35+0900\n"
+"PO-Revision-Date: 2014-11-05 17:38+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -43,7 +43,7 @@ msgstr "既存のパスワード"
 msgid "New password"
 msgstr "新しいパスワード"
 
-#: app/forms.py:39 app/viewsBase.py:272
+#: app/forms.py:39 app/viewsBase.py:282
 msgid "New password must match confirmation!"
 msgstr "新しいパスワードが確認用のパスワードと違います！"
 
@@ -86,51 +86,51 @@ msgstr "ユーザの言語"
 msgid "Category"
 msgstr "カテゴリー"
 
-#: app/forms.py:190 app/templates/shop/shop.html:61
+#: app/forms.py:190 app/templates/shop/shop.html:158
 msgid "Only available"
 msgstr "発注可能な商品のみ"
 
-#: app/viewsBase.py:92
+#: app/viewsBase.py:102
 msgid "Home"
 msgstr "Home"
 
-#: app/viewsBase.py:174
+#: app/viewsBase.py:184
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:176 app/viewsBase.py:178
+#: app/viewsBase.py:186 app/viewsBase.py:188
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
-#: app/viewsBase.py:188
+#: app/viewsBase.py:198
 msgid "Stock condition"
 msgstr "在庫状況"
 
-#: app/viewsBase.py:231
+#: app/viewsBase.py:241
 msgid "Selected nickname is already in use!"
 msgstr "入力されたユーザー名はすでに使用中です！"
 
-#: app/viewsBase.py:241
+#: app/viewsBase.py:251
 msgid "User settings sucessfully updated."
 msgstr "ユーザーの情報が更新されました。"
 
-#: app/viewsBase.py:249 app/templates/user.html:8
+#: app/viewsBase.py:259 app/templates/user.html:8
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:268
+#: app/viewsBase.py:278
 msgid "User password successfully changed."
 msgstr "パスワードが変更されました。"
 
-#: app/viewsBase.py:274
+#: app/viewsBase.py:284
 msgid "Current password is incorrect!"
 msgstr "既存のパスワードが違います！"
 
-#: app/viewsBase.py:279 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:289 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "パスワードの変更"
 
-#: app/viewsBase.py:287 app/templates/navbar_admin.html:55
+#: app/viewsBase.py:297 app/templates/navbar_admin.html:55
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
@@ -479,8 +479,8 @@ msgstr "お客様"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/shop/shop.html:95
-#: app/templates/shop/shop.html:99
+#: app/templates/index.html:102 app/templates/shop/shop.html:192
+#: app/templates/shop/shop.html:197
 msgid "pcs"
 msgstr "個"
 
@@ -556,8 +556,8 @@ msgstr "11月"
 msgid "Dec"
 msgstr "12月"
 
-#: app/templates/navbar_admin.html:16 app/templates/navbar_customer.html:17
-#: app/templates/stock.html:208 app/templates/orders/createOrder.html:122
+#: app/templates/navbar_admin.html:16 app/templates/stock.html:208
+#: app/templates/orders/createOrder.html:122
 msgid "Stock"
 msgstr "在庫"
 
@@ -617,16 +617,16 @@ msgstr "お客様への供給"
 msgid "Supply to Axis Mart order"
 msgstr "アクシスマート受注への供給"
 
-#: app/templates/navbar_admin.html:58 app/templates/navbar_customer.html:23
+#: app/templates/navbar_admin.html:58 app/templates/navbar_customer.html:22
 #, python-format
 msgid "%(nickname)s"
 msgstr "%(nickname)s"
 
-#: app/templates/navbar_admin.html:60 app/templates/navbar_customer.html:25
+#: app/templates/navbar_admin.html:60 app/templates/navbar_customer.html:24
 msgid "Logout"
 msgstr "ログアウト"
 
-#: app/templates/navbar_admin.html:63 app/templates/navbar_customer.html:28
+#: app/templates/navbar_admin.html:63 app/templates/navbar_customer.html:27
 msgid "Login"
 msgstr "ログイン"
 
@@ -829,7 +829,7 @@ msgstr "品番"
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:226
 #: app/templates/requests/productrequests.html:46
-#: app/templates/requests/request.html:46
+#: app/templates/requests/request.html:46 app/templates/shop/shop.html:259
 #: app/templates/supplies/supply.html:45
 #: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
@@ -955,6 +955,7 @@ msgstr "キャンセル"
 #: app/templates/requests/createRequest.html:206
 #: app/templates/requests/createRequest.html:222
 #: app/templates/requests/productrequests.html:21
+#: app/templates/shop/shop.html:256
 #: app/templates/supplies/supplyProducts.html:112
 msgid "Code"
 msgstr "品番"
@@ -1449,31 +1450,51 @@ msgstr "役割"
 msgid "Language"
 msgstr "言語"
 
-#: app/templates/shop/shop.html:58
+#: app/templates/shop/shop.html:155
 msgid "Category:"
 msgstr "カテゴリー"
 
-#: app/templates/shop/shop.html:64
+#: app/templates/shop/shop.html:161
 msgid "Search"
 msgstr "検索"
 
-#: app/templates/shop/shop.html:92
+#: app/templates/shop/shop.html:189
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:98
+#: app/templates/shop/shop.html:195
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:102
+#: app/templates/shop/shop.html:200
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:106
+#: app/templates/shop/shop.html:206
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:130
+#: app/templates/shop/shop.html:253
+msgid "Cart Content"
+msgstr "ショッピングカートの内容"
+
+#: app/templates/shop/shop.html:257
+msgid "Product Name"
+msgstr "品名"
+
+#: app/templates/shop/shop.html:258
+msgid "Price per unit"
+msgstr "1個単位価格"
+
+#: app/templates/shop/shop.html:260
+msgid "Subtotal"
+msgstr "小計"
+
+#: app/templates/shop/shop.html:261
+msgid "Remove"
+msgstr "削除"
+
+#: app/templates/shop/shop.html:276
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 

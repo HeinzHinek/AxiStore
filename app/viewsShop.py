@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, g, session
+from flask import render_template, g, session, request
 from flask_login import login_required, current_user
 from flask.ext.babel import gettext
 from models import Product, Category
@@ -56,3 +56,63 @@ def shop(page=1):
                            curr_category=g.category_id,
                            axm_product_url=AXM_PRODUCT_URL_JA,
                            form=form)
+
+
+@app.route('/shop/add_to_cart', methods=['POST'])
+@login_required
+def add_to_cart():
+    id = request.form['id'] if request.form['id'] else None
+    qty = request.form['qty'] if request.form['qty'] else None
+
+    if not id or not qty or not is_number(id) or not is_number(qty):
+        return "NG"
+
+    product = Product.query.filter_by(id=id).first()
+    if not product:
+        return "NG"
+
+    if 'cart' not in session:
+        session['cart'] = []
+
+    #SMAZAT!!!
+    session['cart'] = []
+
+    session['cart'].append({'id': id, 'qty': qty})
+
+    print session['cart']
+
+    discount = current_user.customer.base_discount if current_user.customer else 0
+    unrounded_price = product.price_retail * (1.0 - discount)
+    customer_price = int(5 * round(float(unrounded_price)/5))
+
+    html = "<tr>" \
+           "<td style='text-align: left;'>" + product.code + "</td>" \
+           "<td style='text-align: left;'>" + product.desc_JP + "</td>" \
+           "<td style='text-align: right;'>" + str(customer_price) + "</td>" \
+           "<td style='text-align: right;'>" + str(qty) + "</td>" \
+           "<td style='text-align: right;'>" + str(customer_price * int(qty)) + "</td>" \
+           "<td><button class='cart-item-remove-btn btn btn-danger btn-sm'>X</button>" \
+           "<input type='hidden' class='hidden-id' value='" + str(product.id) + "'/>" \
+           "<input type='hidden' class='hidden-qty' value='" + str(qty) + "'/>" \
+           "</td>" \
+           "</tr>"
+    return html
+
+
+@app.route('/shop/remove_from_cart', methods=['POST'])
+@login_required
+def remove_from_cart():
+    id = request.form['id'] if request.form['id'] else None
+    qty = request.form['qty'] if request.form['qty'] else None
+
+    if not id or not qty or not is_number(id) or not is_number(qty):
+        return "NG"
+    return "OK"
+
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False

@@ -1,4 +1,4 @@
-body {
+﻿body {
     margin-top: 50px !important;
     margin-bottom: 60px !important;
     height: 100%;
@@ -43,8 +43,6 @@ body {
 }
 
 .table-stock td {
-    white-space: nowrap;
-    oveflow: hidden;
     vertical-align: middle !important;
 }
 

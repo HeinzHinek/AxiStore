@@ -91,6 +91,55 @@
                 $ow_qty_td.removeClass('over-available');
             }
         });
+
+        $('#cart-btn').click(function() {
+            var cart = $('#cart');
+            if (cart.hasClass('cart-visible')){
+                cart.removeClass('cart-visible');
+            } else {
+                cart.addClass('cart-visible');
+            }
+        });
+
+        $('.cart-add-btn').click(function() {
+            var $input = $(this).closest('.bottom-icon-div').find('.order-amount-input');
+            var id = $(this).find('input[type="hidden"]').val();
+            var val = $input.val();
+            var qty = parseInt(val);
+            if (qty > 0) {
+                add_to_cart(id, qty);
+            }
+        });
+
+        $(document).on('click', '.cart-item-remove-btn', function() {
+            var id = $(this).parent().find('.hidden-id').val();
+            $(this).closest('tr').remove();
+        });
+
+    });
+
+    function add_to_cart(id, qty) {
+        $.post('/shop/add_to_cart', {
+            id: id,
+            qty: qty
+        }).done(function(result) {
+            if (result) {
+                $('#cart-table-body').append(result);
+            }
+        }).fail(function() {
+            alert('Data transfer failed!');
+        });
+    }
+
+    $.post('/shop/remove_from_cart', {
+            id: id,
+            qty: qty
+        }).done(function(result) {
+            if (result) {
+
+            }
+        }).fail(function() {
+            alert('Data transfer failed!');
     });
 </script>
 
@@ -109,7 +158,7 @@
                 <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Only available') }}</label>
             </div>
             <div style="float: right;">
-                <input type="submit" class="btn btn-info" value="{{ _('Search') }}"/>
+                <!-- <input type="submit" class="btn btn-info" value="{{ _('Search') }}"/> -->
             </div>
         </form>
     </div>
@@ -138,13 +187,14 @@
                         <table class="shop-item-table">
                             <tr>
                                 <td class="left-td">{{ _('Available:') }}</td>
-                                <td class="right-td available-qty-td" {% if (product.available_qty) <= 0 %}style="color: crimson;"
+                                <td class="right-td available-qty-td" {% if (product.available_qty) <= 0 %}style="color: red;"
                                     {% else %}style="font-weight: bold; color: green;"
                                     {% endif %}>{{ product.available_qty }}&nbsp;{{ _('pcs') }}</td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('On the way:') }}</td>
-                                <td class="right-td on-way-qty-td" {% if product.ontheway > 0 %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
+                                <td class="right-td on-way-qty-td" {% if product.ontheway <= 0 %}style="color: red;"
+                                    {% else %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('Retail Price:') }}</td>
@@ -183,10 +233,38 @@
                             <div class="cart-arrow cart-arrow-up"><span class="caret caret-reversed"></span></div>
                             <div class="cart-arrow cart-arrow-down"><span class="caret"></span></div>
                         </div>
+                        <div class="cart-add-btn clearfix btn btn-danger">
+                            <input type="hidden" value="{{ product.id }}"/>
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
+
+    <!-- CART -->
+
+    <div id="cart">
+        <div id="cart-btn" class="noselect btn btn-danger">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+        </div>
+        <div id="cart-body">
+            <h3>{{ _('Cart Content') }}</h3>
+            <table class="cart-table table table-striped table-condensed table-bordered">
+                <thead>
+                    <th style="width: 10%; text-align: left;">{{ _('Code') }}</th>
+                    <th style="width: 40%; text-align: left;">{{ _('Product Name') }}</th>
+                    <th style="width: 15%; text-align: right;">{{ _('Price per unit') }}</th>
+                    <th style="width: 10%; text-align: right;">{{ _('Quantity') }}</th>
+                    <th style="width: 20%; text-align: right;">{{ _('Subtotal') }}</th>
+                    <th style="width: 20%;">{{ _('Remove') }}</th>
+                </thead>
+                <tbody id="cart-table-body">
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- PAGINATION -->
     {% from "_pagination.html" import render_pager %}

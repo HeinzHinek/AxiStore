@@ -6,7 +6,7 @@ from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
 from flask_login import current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
+from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL, CUSTOMER_ALLOWED_URLS
 from flask.ext.babel import gettext
 from sqlalchemy import or_, func
 from datetime import datetime, timedelta
@@ -18,6 +18,16 @@ import calendar
 def before_request():
     g.user = current_user
     g.USER_ROLES = USER_ROLES
+
+    #TEMPORARY PROVISION!!!
+    if current_user.is_authenticated() and current_user.role and current_user.role == USER_ROLES['ROLE_CUSTOMER']:
+        check = False
+        for url in CUSTOMER_ALLOWED_URLS:
+            if request.path.startswith(url):
+                check = True
+                break
+        if not check:
+            return redirect(url_for('shop'))
 
     cat_id = request.args.get('cat')
     if cat_id:

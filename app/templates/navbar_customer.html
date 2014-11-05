@@ -14,7 +14,6 @@
             <ul class="nav navbar-nav">
                 {% if g.user.is_authenticated() %}
                 <li><a href="{{ url_for('shop') }}">{{ _('Shop') }}</a></li>
-                <li><a href="{{ url_for('stock') }}">{{ _('Stock') }}</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
