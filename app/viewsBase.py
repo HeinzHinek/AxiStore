@@ -4,9 +4,9 @@ from flask import render_template, request, g, session, flash, redirect, url_for
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, customer_allowed
 from werkzeug.security import generate_password_hash, check_password_hash
-from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL, CUSTOMER_ALLOWED_URLS
+from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
 from flask.ext.babel import gettext
 from sqlalchemy import or_, func
 from datetime import datetime, timedelta
@@ -18,16 +18,6 @@ import calendar
 def before_request():
     g.user = current_user
     g.USER_ROLES = USER_ROLES
-
-    #TEMPORARY PROVISION!!!
-    if current_user.is_authenticated() and current_user.role and current_user.role == USER_ROLES['ROLE_CUSTOMER']:
-        check = False
-        for url in CUSTOMER_ALLOWED_URLS:
-            if request.path.startswith(url):
-                check = True
-                break
-        if not check:
-            return redirect(url_for('shop'))
 
     cat_id = request.args.get('cat')
     if cat_id:
@@ -90,14 +80,17 @@ def before_request():
 
 @app.after_request
 def after_request(response):
-    db.session.expire_all()
+    #db.session.expire_all()
     return response
 
 
 @app.route('/')
 @app.route('/index')
+@customer_allowed
 @login_required
 def index():
+    if current_user.role > USER_ROLES['ROLE_USER']:
+        return redirect(url_for('shop'))
     return render_template("index.html",
                            title=gettext('Home'),
                            user=g.user)
@@ -228,8 +221,12 @@ def clearsearch():
 
 
 @app.route('/user', methods=['GET', 'POST'])
+@customer_allowed
 @login_required
 def user():
+    #if current_user.role > USER_ROLES['ROLE_ADMIN']:
+    #    abort(403)
+
     form = UserForm(obj=current_user)
     if form.validate_on_submit():
         user = current_user
@@ -261,6 +258,7 @@ def user():
 
 
 @app.route('/user/passwordchange', methods=['GET', 'POST'])
+@customer_allowed
 @login_required
 def passwordChange():
     form = PasswordChangeForm()
@@ -295,6 +293,14 @@ def passwordChange():
 def settings():
     return render_template('settings.html',
                            title=gettext("Settings"))
+
+
+@app.route('/clearsession')
+@customer_allowed
+@login_required
+def clear_session():
+    session.clear()
+    return redirect('login')
 
 
 @lm.user_loader

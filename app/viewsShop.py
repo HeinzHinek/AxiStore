@@ -2,16 +2,18 @@
 
 from app import app
 from flask import render_template, g, session, request
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
 from models import Product, Category
 from forms import ShopHeaderForm
 from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
 from imageHelper import getImgUrls
+from cart import Cart
 
 
 @app.route('/shop', methods=['GET', 'POST'])
 @app.route('/shop/<int:page>', methods=['GET', 'POST'])
+@customer_allowed
 @login_required
 def shop(page=1):
     products = Product.query.filter_by(active_flg=True)
@@ -58,7 +60,20 @@ def shop(page=1):
                            form=form)
 
 
+@app.route('/shop/open_cart', methods=['GET'])
+@customer_allowed
+@login_required
+def open_cart():
+    if 'cart' not in session:
+        cart = Cart()
+    else:
+        cart = session['cart']
+    return render_template('/shop/_cart_table.html',
+                           cart=cart)
+
+
 @app.route('/shop/add_to_cart', methods=['POST'])
+@customer_allowed
 @login_required
 def add_to_cart():
     id = request.form['id'] if request.form['id'] else None
@@ -71,43 +86,37 @@ def add_to_cart():
     if not product:
         return "NG"
 
+    discount = 0
+    if current_user.customer and current_user.customer.base_discount:
+        discount = current_user.customer.base_discount
+
     if 'cart' not in session:
-        session['cart'] = []
+        cart = Cart()
+    else:
+        cart = session['cart']
+    cart.add_to_cart(id, qty, discount)
+    session['cart'] = cart
 
-    #SMAZAT!!!
-    session['cart'] = []
-
-    session['cart'].append({'id': id, 'qty': qty})
-
-    print session['cart']
-
-    discount = current_user.customer.base_discount if current_user.customer else 0
-    unrounded_price = product.price_retail * (1.0 - discount)
-    customer_price = int(5 * round(float(unrounded_price)/5))
-
-    html = "<tr>" \
-           "<td style='text-align: left;'>" + product.code + "</td>" \
-           "<td style='text-align: left;'>" + product.desc_JP + "</td>" \
-           "<td style='text-align: right;'>" + str(customer_price) + "</td>" \
-           "<td style='text-align: right;'>" + str(qty) + "</td>" \
-           "<td style='text-align: right;'>" + str(customer_price * int(qty)) + "</td>" \
-           "<td><button class='cart-item-remove-btn btn btn-danger btn-sm'>X</button>" \
-           "<input type='hidden' class='hidden-id' value='" + str(product.id) + "'/>" \
-           "<input type='hidden' class='hidden-qty' value='" + str(qty) + "'/>" \
-           "</td>" \
-           "</tr>"
-    return html
+    return "OK"
 
 
 @app.route('/shop/remove_from_cart', methods=['POST'])
+@customer_allowed
 @login_required
 def remove_from_cart():
-    id = request.form['id'] if request.form['id'] else None
-    qty = request.form['qty'] if request.form['qty'] else None
-
-    if not id or not qty or not is_number(id) or not is_number(qty):
+    if 'cart' not in session:
         return "NG"
-    return "OK"
+
+    id = request.form['id'] if request.form['id'] else None
+    if not id or not is_number(id):
+        return "NG"
+
+    cart = session['cart']
+    result = cart.remove_from_cart(id)
+    if result:
+        session['cart'] = result
+
+    return "OK" if result else "NG"
 
 
 def is_number(s):

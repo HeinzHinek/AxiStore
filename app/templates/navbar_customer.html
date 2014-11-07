@@ -19,7 +19,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if g.user.is_authenticated() %}
                 {% autoescape false %}
-                <li>{{ _('%(nickname)s', nickname = '<a href="%s">%s</a>' % (url_for('user', nickname=g.user.nickname), g.user.nickname)) }}</li>
+                <li>{{ _('%(nickname)s', nickname = '<a href="%s">%s</a>' % (url_for('user'), g.user.nickname)) }}</li>
                 {% endautoescape %}
                 <li><a href="{{ url_for('logout') }}">{{ _('Logout') }}</a></li>
                 {% elif request.path == '/login' %}

@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 <script type="text/javascript" src="/static/jssor/jssor.slider.mini.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -93,54 +94,94 @@
         });
 
         $('#cart-btn').click(function() {
+            $('#cart-table-container').empty();
             var cart = $('#cart');
             if (cart.hasClass('cart-visible')){
                 cart.removeClass('cart-visible');
             } else {
-                cart.addClass('cart-visible');
+                $(this).addClass('cart-loading');
+                $(this).find('.glyphicon').hide();
+                $.get('/shop/open_cart').done(function(result) {
+                    if (result) {
+                        $('#cart-table-container').append(result);
+                        $('#cart-btn').removeClass('cart-loading');
+                        $('#cart-btn').find('.glyphicon').show();
+                        cart.addClass('cart-visible');
+                    }
+                }).fail(function() {
+                    alert('{{ _('Data transfer failed!') }}');
+                    $('#cart-btn').removeClass('cart-loading');
+                    $('#cart-btn').find('.glyphicon').show();
+                });
             }
         });
 
         $('.cart-add-btn').click(function() {
+            if ( $('#cart').hasClass('cart-visible') ) {
+                return false;
+            }
             var $input = $(this).closest('.bottom-icon-div').find('.order-amount-input');
             var id = $(this).find('input[type="hidden"]').val();
             var val = $input.val();
             var qty = parseInt(val);
             if (qty > 0) {
-                add_to_cart(id, qty);
+                add_to_cart(id, qty, this);
             }
         });
 
         $(document).on('click', '.cart-item-remove-btn', function() {
-            var id = $(this).parent().find('.hidden-id').val();
-            $(this).closest('tr').remove();
+            var id = $(this).closest('tr').find('.hidden-id').val();
+            remove_from_cart(id);
+            var tr = $(this).closest('tr');
+            $(tr).hide('fast', function() {
+                $(this).remove();
+            });
         });
 
     });
 
-    function add_to_cart(id, qty) {
+    function add_to_cart(id, qty, element) {
+        $(element).addClass('add-loading');
+        $(element).find('.glyphicon').hide();
         $.post('/shop/add_to_cart', {
             id: id,
             qty: qty
         }).done(function(result) {
-            if (result) {
-                $('#cart-table-body').append(result);
+            if (result === "OK") {
+                $(element).removeClass('add-loading');
+                $(element).find('.glyphicon').show();
+                var itemdiv = $(element).closest('.shop-item-div');
+                $(itemdiv).effect("transfer",{ to: $("#cart-btn") }, 500);
+                var curHeight = $(itemdiv).height();
+                var curLeft = $(itemdiv).css('left');
+                $(itemdiv).animate({
+                    'height': 0,
+                    'opacity': 0
+                }, 750, function() {
+                    $(this).remove();
+                });
+                $('#cart-btn').addClass('item-added-highlight')
+                .delay(1000).queue(function(){
+                    $(this).removeClass("item-added-highlight").dequeue();
+                });
             }
         }).fail(function() {
-            alert('Data transfer failed!');
+            $(element).removeClass('add-loading');
+            $(element).find('.glyphicon').show();
+            alert('{{ _('Data transfer failed!') }}');
         });
     }
 
-    $.post('/shop/remove_from_cart', {
-            id: id,
-            qty: qty
+    function remove_from_cart(id) {
+        $.post('/shop/remove_from_cart', {
+            id: id
         }).done(function(result) {
             if (result) {
-
             }
         }).fail(function() {
-            alert('Data transfer failed!');
-    });
+            alert('{{ _('Data transfer failed!') }}');
+        });
+    }
 </script>
 
 <style>
@@ -148,6 +189,8 @@
 </style>
 
 <div class="row" style="text-align: center; margin-top: 10px;">
+
+    {% include 'flash.html' %}
 
     <div class="shop-header shadowed-div">
         <form action="" method="post" name="shop" class="form-inline">
@@ -244,25 +287,15 @@
         {% endfor %}
 
     <!-- CART -->
-
     <div id="cart">
         <div id="cart-btn" class="noselect btn btn-danger">
             <span class="glyphicon glyphicon-shopping-cart"></span>
         </div>
         <div id="cart-body">
             <h3>{{ _('Cart Content') }}</h3>
-            <table class="cart-table table table-striped table-condensed table-bordered">
-                <thead>
-                    <th style="width: 10%; text-align: left;">{{ _('Code') }}</th>
-                    <th style="width: 40%; text-align: left;">{{ _('Product Name') }}</th>
-                    <th style="width: 15%; text-align: right;">{{ _('Price per unit') }}</th>
-                    <th style="width: 10%; text-align: right;">{{ _('Quantity') }}</th>
-                    <th style="width: 20%; text-align: right;">{{ _('Subtotal') }}</th>
-                    <th style="width: 20%;">{{ _('Remove') }}</th>
-                </thead>
-                <tbody id="cart-table-body">
-                </tbody>
-            </table>
+            <div id="cart-table-container">
+
+            </div>
         </div>
     </div>
 

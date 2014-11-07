@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import redirect, url_for, flash, request, render_template, g
+from flask import redirect, url_for, flash, request, render_template, g, session
 from app import app
 from forms import LoginForm
 from models import User
@@ -26,6 +26,8 @@ def login():
             flash(gettext('Password is incorrect!'), 'error')
             return redirect(url_for('login'))
         login_user(user)
+        if 'cart' in session:
+            session.pop('cart')
         flash(gettext("Logged in successfully."))
         return redirect(request.args.get("next") or url_for("index"))
     return render_template('login/login.html',

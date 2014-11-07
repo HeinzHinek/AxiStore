@@ -68,6 +68,7 @@ class Product(db.Model):
             'price_unit': self.price_unit,
             'price_retail': self.price_retail,
             'qty_stock': self.qty_stock,
+            'axm_node': self.axm_node,
             'active_flg': self.active_flg
         }
 
