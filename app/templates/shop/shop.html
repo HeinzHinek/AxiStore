@@ -134,6 +134,12 @@
             remove_from_cart(id);
             var tr = $(this).closest('tr');
             $(tr).hide('fast', function() {
+                var table = $(this).closest('table');
+                var trs = $(table).find('tr');
+                if (trs.length < 3) {
+                    $(table).remove();
+                    $('#no-items-msg').show();
+                }
                 $(this).remove();
             });
         });
@@ -148,6 +154,7 @@
             qty: qty
         }).done(function(result) {
             if (result === "OK") {
+                $('#no-items-msg').hide();
                 $(element).removeClass('add-loading');
                 $(element).find('.glyphicon').show();
                 var itemdiv = $(element).closest('.shop-item-div');
@@ -196,7 +203,7 @@
         <form action="" method="post" name="shop" class="form-inline">
             {{form.hidden_tag()}}
             <label>{{ _('Category:') }}&nbsp;</label>
-            {{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px;") }}
+            {{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}
             <div class="checkbox" style="margin: 0 10px;">
                 <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Only available') }}</label>
             </div>
@@ -293,8 +300,8 @@
         </div>
         <div id="cart-body">
             <h3>{{ _('Cart Content') }}</h3>
+            <div id="no-items-msg" style="display: none;"><h4>{{ _('Shopping cart is empty.') }}</h4></div>
             <div id="cart-table-container">
-
             </div>
         </div>
     </div>

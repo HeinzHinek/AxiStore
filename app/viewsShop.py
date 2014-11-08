@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from app import app
+from app import app, db
 from flask import render_template, g, session, request
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
-from models import Product, Category
+from models import Product, Category, Cart
 from forms import ShopHeaderForm
 from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
 from imageHelper import getImgUrls
-from cart import Cart
 
 
 @app.route('/shop', methods=['GET', 'POST'])
@@ -64,12 +63,16 @@ def shop(page=1):
 @customer_allowed
 @login_required
 def open_cart():
-    if 'cart' not in session:
-        cart = Cart()
-    else:
-        cart = session['cart']
+    cart_items = current_user.cart_items.all()
+    discount = 0
+    if current_user.role == USER_ROLES['ROLE_CUSTOMER'] and current_user.customer:
+        discount = current_user.customer.base_discount
+    for item in cart_items:
+        unrounded_price = item.product.price_retail * (1.0 - discount)
+        item.customer_price = int(5 * round(float(unrounded_price)/5))
+        item.subtotal = item.customer_price * item.quantity
     return render_template('/shop/_cart_table.html',
-                           cart=cart)
+                           cart_items=cart_items)
 
 
 @app.route('/shop/add_to_cart', methods=['POST'])
@@ -86,16 +89,15 @@ def add_to_cart():
     if not product:
         return "NG"
 
-    discount = 0
-    if current_user.customer and current_user.customer.base_discount:
-        discount = current_user.customer.base_discount
-
-    if 'cart' not in session:
-        cart = Cart()
+    existing = Cart.query.filter_by(product_id=id).first()
+    if existing:
+        existing.quantity += int(qty)
+        cart = existing
     else:
-        cart = session['cart']
-    cart.add_to_cart(id, qty, discount)
-    session['cart'] = cart
+        cart = Cart()
+        cart.add_to_cart(current_user.id, id, qty)
+    db.session.add(cart)
+    db.session.commit()
 
     return "OK"
 
@@ -104,19 +106,16 @@ def add_to_cart():
 @customer_allowed
 @login_required
 def remove_from_cart():
-    if 'cart' not in session:
-        return "NG"
 
     id = request.form['id'] if request.form['id'] else None
     if not id or not is_number(id):
         return "NG"
 
-    cart = session['cart']
-    result = cart.remove_from_cart(id)
-    if result:
-        session['cart'] = result
+    item_to_remove = Cart.query.filter_by(product_id=id).first()
+    db.session.delete(item_to_remove)
+    db.session.commit()
 
-    return "OK" if result else "NG"
+    return "OK"
 
 
 def is_number(s):

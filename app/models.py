@@ -21,6 +21,7 @@ class User(db.Model):
     deliveries = db.relationship('Delivery', backref='recipient', lazy='dynamic')
     requests = db.relationship('Request', backref='receiver', lazy='dynamic')
     supplies = db.relationship('Supply', backref='sender', lazy='dynamic')
+    cart_items = db.relationship('Cart', backref='user', lazy='dynamic')
 
     def is_authenticated(self):
         return True
@@ -54,6 +55,8 @@ class Product(db.Model):
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
     ordered_products = db.relationship('OrderedProducts')
+
+    cart = db.relationship('Cart', backref='product')
 
     @property
     def serialize(self):
@@ -283,3 +286,15 @@ class SuppliedProducts(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), primary_key=True)
     quantity = db.Column(db.Integer, default=1)
     product = db.relationship('Product', backref='supply_assocs')
+
+
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), primary_key=True)
+    quantity = db.Column(db.Integer, default=1)
+
+    def add_to_cart(self, user_id, product_id, qty):
+        self.user_id  = user_id
+        self.product_id = product_id
+        self.quantity = qty

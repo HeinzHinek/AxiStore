@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-05 17:35+0900\n"
-"PO-Revision-Date: 2014-11-05 17:38+0900\n"
+"POT-Creation-Date: 2014-11-08 18:32+0900\n"
+"PO-Revision-Date: 2014-11-08 18:33+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -43,7 +43,7 @@ msgstr "既存のパスワード"
 msgid "New password"
 msgstr "新しいパスワード"
 
-#: app/forms.py:39 app/viewsBase.py:282
+#: app/forms.py:39 app/viewsBase.py:280
 msgid "New password must match confirmation!"
 msgstr "新しいパスワードが確認用のパスワードと違います！"
 
@@ -86,51 +86,51 @@ msgstr "ユーザの言語"
 msgid "Category"
 msgstr "カテゴリー"
 
-#: app/forms.py:190 app/templates/shop/shop.html:158
+#: app/forms.py:190 app/templates/shop/shop.html:208
 msgid "Only available"
 msgstr "発注可能な商品のみ"
 
-#: app/viewsBase.py:102
+#: app/viewsBase.py:95
 msgid "Home"
 msgstr "Home"
 
-#: app/viewsBase.py:184
+#: app/viewsBase.py:177
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:186 app/viewsBase.py:188
+#: app/viewsBase.py:179 app/viewsBase.py:181
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
-#: app/viewsBase.py:198
+#: app/viewsBase.py:191
 msgid "Stock condition"
 msgstr "在庫状況"
 
-#: app/viewsBase.py:241
+#: app/viewsBase.py:238
 msgid "Selected nickname is already in use!"
 msgstr "入力されたユーザー名はすでに使用中です！"
 
-#: app/viewsBase.py:251
+#: app/viewsBase.py:248
 msgid "User settings sucessfully updated."
 msgstr "ユーザーの情報が更新されました。"
 
-#: app/viewsBase.py:259 app/templates/user.html:8
+#: app/viewsBase.py:256 app/templates/user.html:8
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:278
+#: app/viewsBase.py:276
 msgid "User password successfully changed."
 msgstr "パスワードが変更されました。"
 
-#: app/viewsBase.py:284
+#: app/viewsBase.py:282
 msgid "Current password is incorrect!"
 msgstr "既存のパスワードが違います！"
 
-#: app/viewsBase.py:289 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:287 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "パスワードの変更"
 
-#: app/viewsBase.py:297 app/templates/navbar_admin.html:55
+#: app/viewsBase.py:295 app/templates/navbar_admin.html:55
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
@@ -244,11 +244,11 @@ msgstr "入力されたユーザー名は不明です。"
 msgid "Password is incorrect!"
 msgstr "パスワードが違います！"
 
-#: app/viewsLogin.py:29
+#: app/viewsLogin.py:31
 msgid "Logged in successfully."
 msgstr "ログインに成功しました。"
 
-#: app/viewsLogin.py:32 app/templates/login/login.html:5
+#: app/viewsLogin.py:34 app/templates/login/login.html:5
 #: app/templates/login/login.html:48
 msgid "Sign In"
 msgstr "ログイン"
@@ -389,7 +389,7 @@ msgstr "データのエクスポート"
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/viewsShop.py:54
+#: app/viewsShop.py:55
 msgid "AxiStore shop"
 msgstr "AxiStoreショップ"
 
@@ -479,8 +479,8 @@ msgstr "お客様"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/shop/shop.html:192
-#: app/templates/shop/shop.html:197
+#: app/templates/index.html:102 app/templates/shop/shop.html:242
+#: app/templates/shop/shop.html:247
 msgid "pcs"
 msgstr "個"
 
@@ -829,8 +829,8 @@ msgstr "品番"
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:226
 #: app/templates/requests/productrequests.html:46
-#: app/templates/requests/request.html:46 app/templates/shop/shop.html:259
-#: app/templates/supplies/supply.html:45
+#: app/templates/requests/request.html:46
+#: app/templates/shop/_cart_table.html:7 app/templates/supplies/supply.html:45
 #: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
 msgstr "数量"
@@ -955,7 +955,7 @@ msgstr "キャンセル"
 #: app/templates/requests/createRequest.html:206
 #: app/templates/requests/createRequest.html:222
 #: app/templates/requests/productrequests.html:21
-#: app/templates/shop/shop.html:256
+#: app/templates/shop/_cart_table.html:4
 #: app/templates/supplies/supplyProducts.html:112
 msgid "Code"
 msgstr "品番"
@@ -1450,51 +1450,60 @@ msgstr "役割"
 msgid "Language"
 msgstr "言語"
 
-#: app/templates/shop/shop.html:155
-msgid "Category:"
-msgstr "カテゴリー"
-
-#: app/templates/shop/shop.html:161
-msgid "Search"
-msgstr "検索"
-
-#: app/templates/shop/shop.html:189
-msgid "Available:"
-msgstr "発注可能："
-
-#: app/templates/shop/shop.html:195
-msgid "On the way:"
-msgstr "取寄せ中："
-
-#: app/templates/shop/shop.html:200
-msgid "Retail Price:"
-msgstr "小売価格："
-
-#: app/templates/shop/shop.html:206
-msgid "Your Price:"
-msgstr "お客様の価格："
-
-#: app/templates/shop/shop.html:253
-msgid "Cart Content"
-msgstr "ショッピングカートの内容"
-
-#: app/templates/shop/shop.html:257
+#: app/templates/shop/_cart_table.html:5
 msgid "Product Name"
 msgstr "品名"
 
-#: app/templates/shop/shop.html:258
+#: app/templates/shop/_cart_table.html:6
 msgid "Price per unit"
 msgstr "1個単位価格"
 
-#: app/templates/shop/shop.html:260
+#: app/templates/shop/_cart_table.html:8
 msgid "Subtotal"
 msgstr "小計"
 
-#: app/templates/shop/shop.html:261
+#: app/templates/shop/_cart_table.html:9
 msgid "Remove"
 msgstr "削除"
 
-#: app/templates/shop/shop.html:276
+#: app/templates/shop/shop.html:112 app/templates/shop/shop.html:178
+#: app/templates/shop/shop.html:189
+msgid "Data transfer failed!"
+msgstr "データ通信は失敗しました！"
+
+#: app/templates/shop/shop.html:205
+msgid "Category:"
+msgstr "カテゴリー"
+
+#: app/templates/shop/shop.html:211
+msgid "Search"
+msgstr "検索"
+
+#: app/templates/shop/shop.html:239
+msgid "Available:"
+msgstr "発注可能："
+
+#: app/templates/shop/shop.html:245
+msgid "On the way:"
+msgstr "取寄せ中："
+
+#: app/templates/shop/shop.html:250
+msgid "Retail Price:"
+msgstr "小売価格："
+
+#: app/templates/shop/shop.html:256
+msgid "Your Price:"
+msgstr "お客様の価格："
+
+#: app/templates/shop/shop.html:302
+msgid "Cart Content"
+msgstr "ショッピングカートの内容"
+
+#: app/templates/shop/shop.html:303
+msgid "Shopping cart is empty."
+msgstr "ショッピングカートに商品がありません。"
+
+#: app/templates/shop/shop.html:316
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 
