@@ -89,7 +89,7 @@ def add_to_cart():
     if not product:
         return "NG"
 
-    existing = Cart.query.filter_by(product_id=id).first()
+    existing = Cart.query.filter_by(user_id=current_user.id, product_id=id).first()
     if existing:
         existing.quantity += int(qty)
         cart = existing
