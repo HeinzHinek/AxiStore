@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from app import app, db
-from flask import render_template, g, session, request
+from flask import render_template, g, session, request, json, redirect, url_for
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
 from models import Product, Category, Cart
@@ -59,6 +59,15 @@ def shop(page=1):
                            form=form)
 
 
+@app.route('/shop/placeorder', methods=['GET', 'POST'])
+@customer_allowed
+@login_required
+def placeorder():
+    return redirect(url_for('logout'))
+
+
+# AJAX methods below
+
 @app.route('/shop/open_cart', methods=['GET'])
 @customer_allowed
 @login_required
@@ -68,7 +77,8 @@ def open_cart():
     if current_user.role == USER_ROLES['ROLE_CUSTOMER'] and current_user.customer:
         discount = current_user.customer.base_discount
     for item in cart_items:
-        unrounded_price = item.product.price_retail * (1.0 - discount)
+        base_price = item.product.price_retail if item.product.price_retail else 0
+        unrounded_price = base_price * (1.0 - discount)
         item.customer_price = int(5 * round(float(unrounded_price)/5))
         item.subtotal = item.customer_price * item.quantity
     return render_template('/shop/_cart_table.html',
@@ -116,6 +126,27 @@ def remove_from_cart():
     db.session.commit()
 
     return "OK"
+
+
+@app.route('/shop/update_cart', methods=['POST'])
+@customer_allowed
+@login_required
+def update_cart():
+    data = request.form['data'] if request.form['data'] else None
+    values = json.loads(data)
+    for item in values:
+        id = int(item[0])
+        qty = int(item[1])
+        cart_item = Cart.query.filter_by(user_id=current_user.id, product_id=id).first();
+        if not cart_item:
+            return "NG"
+        if qty > 0:
+            cart_item.quantity = qty
+            db.session.add(cart_item)
+        else:
+            db.session.delete(cart_item)
+    db.session.commit()
+    return open_cart()
 
 
 def is_number(s):

@@ -19,6 +19,7 @@
 
     <script>
         moment.locale('{{ g.user.language if g.user.language else 'en' }}');
+        $.ajaxSetup({ cache: false });
     </script>
 </head>
 

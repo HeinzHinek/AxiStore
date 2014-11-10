@@ -1,27 +1,37 @@
 {% if cart_items %}
-    <table class="cart-table table table-striped table-condensed ">
-        <thead>
-            <th style="width: 10%; text-align: left;">{{ _('Code') }}</th>
-            <th style="width: 40%; text-align: left;">{{ _('Product Name') }}</th>
-            <th style="width: 15%; text-align: right;">{{ _('Price per unit') }}</th>
-            <th style="width: 10%; text-align: right;">{{ _('Quantity') }}</th>
-            <th style="width: 20%; text-align: right;">{{ _('Subtotal') }}</th>
-            <th style="width: 20%; text-align: center;">{{ _('Remove') }}</th>
-        </thead>
-        <tbody id="cart-table-body">
-            {% for item in cart_items %}
-            <tr>
-                <input type="hidden" class="hidden-id" value="{{ item.product.id }}"/>
-                <td style="text-align: left;">{{ item.product.code }}</td>
-                <td style="text-align: left;">{{ item.product.desc_JP }}</td>
-                <td style="text-align: right;">{{ item.customer_price }}</td>
-                <td style="text-align: right;">{{ item.quantity }}</td>
-                <td style="text-align: right;">{{ item.subtotal }}</td>
-                <td style="text-align: center;"><button class="btn btn-danger btn-xs cart-item-remove-btn">&times;</button></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="cart-table-div">
+        <table class="cart-table table table-striped table-condensed table-bordered">
+            <thead>
+                <th style="width: 10%; text-align: left;">{{ _('Code') }}</th>
+                <th style="width: 49%; text-align: left;">{{ _('Product Name') }}</th>
+                <th style="width: 12%; text-align: right;">{{ _('Price per unit') }}</th>
+                <th style="width: 12%; min-width: 50px; text-align: center;">{{ _('Quantity') }}</th>
+                <th style="width: 12%; text-align: right;">{{ _('Subtotal') }}</th>
+                <th style="width: 5%; text-align: center;">{{ _('Remove') }}</th>
+            </thead>
+            <tbody id="cart-table-body">
+                {% for item in cart_items %}
+                <tr class="cart-row">
+                    <input type="hidden" class="hidden-id" value="{{ item.product.id }}"/>
+                    <input type="hidden" class="hidden-qty" value="{{ item.quantity }}"/>
+                    <td style="text-align: left;">{{ item.product.code }}</td>
+                    <td style="text-align: left;">{{ item.product.desc_JP }}</td>
+                    <td style="text-align: right;" class="price-td">{{ item.customer_price }}</td>
+                    <td style="text-align: right;">
+                        <input type="text" class="nums_only qty-edit-input form-control input-sm" value="{{ item.quantity }}" style="text-align: right;"/>
+                    </td>
+                    <td style="text-align: right;" class="subtotal-td">{{ item.subtotal }}</td>
+                    <td style="text-align: center;"><button class="btn btn-danger btn-xs cart-item-remove-btn">&times;</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="text-align: right;">
+            <input type="button" class="btn btn-warning" id="cart-update-btn" style="min-width: 120px; display: none;" value="{{ _('Update cart') }}"/>
+            <a href="#" class="btn btn-info" id="cart-submit-btn" style="min-width: 120px;">{{ _('To order') }}</a>
+        </div>
+    </div>
+
 {% else %}
     <script>
         $('#no-items-msg').show();

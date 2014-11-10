@@ -141,6 +141,8 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+
+    -webkit-backface-visibility: hidden
 }
 
 .cart-visible {
@@ -166,6 +168,33 @@
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
     transition: all 1s ease;
+}
+
+@media all and (max-width: 980px) {
+    #cart-btn {
+        width: 40px;
+        height: 40px;
+        left: -40px;
+        line-height: 40px;
+        font-size: 22px;
+    }
+
+    .cart-visible {
+        margin-left: 0px;
+        left: 40px;
+    }
+
+    .cart-table {
+        font-size: 0.8em;
+    }
+
+    .cart-visible input[type="text"] {
+        padding: 0px !important;
+    }
+
+    .cart-visible td {
+        oveflow: hidden;
+    }
 }
 
 #cart-body {
@@ -202,4 +231,8 @@
                 url('/static/img/ajax-loader-big.gif')
                 50% 50%
                 no-repeat;
+}
+
+.changed-tr-text {
+    color: red;
 }

@@ -8,6 +8,8 @@
 <script type="text/javascript" src="/static/js/jquery-ui.js"></script>
 
 <script>
+    var unchanged = true;
+
     $(document).ready(function() {
         $("#category-select").val( {{ curr_category }} );
 
@@ -103,10 +105,11 @@
                 $(this).find('.glyphicon').hide();
                 $.get('/shop/open_cart').done(function(result) {
                     if (result) {
-                        $('#cart-table-container').append(result);
+                        $('#cart-table-container').html(result);
                         $('#cart-btn').removeClass('cart-loading');
                         $('#cart-btn').find('.glyphicon').show();
                         cart.addClass('cart-visible');
+                        unchanged = true;
                     }
                 }).fail(function() {
                     alert('{{ _('Data transfer failed!') }}');
@@ -121,7 +124,7 @@
                 return false;
             }
             var $input = $(this).closest('.bottom-icon-div').find('.order-amount-input');
-            var id = $(this).find('input[type="hidden"]').val();
+            var id = $(this).find('.hidden-id').val();
             var val = $input.val();
             var qty = parseInt(val);
             if (qty > 0) {
@@ -137,11 +140,78 @@
                 var table = $(this).closest('table');
                 var trs = $(table).find('tr');
                 if (trs.length < 3) {
-                    $(table).remove();
+                    $('.cart-table-div').remove();
                     $('#no-items-msg').show();
                 }
                 $(this).remove();
+                check_changed();
             });
+        });
+
+        $(document).on('click', '#cart-update-btn', function() {
+            var data = new Array();
+            $('.changed-tr').each(function() {
+                var id = $(this).find('.hidden-id').val();
+                var qty = $(this).find('.qty-edit-input').val();
+                data.push([id, qty]);
+            });
+            $(this).attr('disabled', 'disabled');
+            $(this).removeClass('btn-warning');
+            $(this).addClass('btn-danger');
+            $(this).addClass('add-loading');
+            $(this).val('');
+            $.post('/shop/update_cart', {
+                data: JSON.stringify(data)
+            }).done(function(result) {
+                if (result) {
+                    $('#cart-table-container').empty();
+                    $('#cart-table-container').html(result);
+                    unchanged = true;
+                }
+            }).fail(function() {
+                alert('{{ _('Data transfer failed!') }}');
+            });
+        });
+
+        $(document).on('keyup', '.qty-edit-input', function() {
+            var tr = $(this).closest('tr');
+            var subtotal_td = $(tr).find('.subtotal-td');
+            var orig_value = $(tr).find('.hidden-qty').val();
+
+            var price = parseInt( $(tr).find('.price-td').html() );
+            var quantity = $(this).val();
+            if ( quantity == '') {
+                quantity = 0;
+            }
+            $(subtotal_td).html( String( price * parseInt( quantity ) ) );
+
+            if ( $(this).val() == orig_value ) {
+                $(this).removeClass('changed-tr-text');
+                $(subtotal_td).removeClass('changed-tr-text');
+                $(tr).removeClass('changed-tr');
+                check_changed();
+                return false;
+            }
+
+            $('#cart-submit-btn').attr('disabled', 'disabled');
+            $(this).addClass('changed-tr-text');
+            $(subtotal_td).addClass('changed-tr-text');
+            $(tr).addClass('changed-tr');
+            if (unchanged) {
+                unchanged = false;
+                $('#cart-update-btn').show('fast');
+            }
+        });
+
+        $(document).on('focusout', '.qty-edit-input', function() {
+            if ( $(this).val() == '' ) {
+                $(this).val('0');
+            }
+        });
+
+        $(document).on('click', '#cart-submit-btn', function() {
+            alert( "{{ _('This function will be available soon!') }}" );
+            return false;
         });
 
     });
@@ -159,14 +229,6 @@
                 $(element).find('.glyphicon').show();
                 var itemdiv = $(element).closest('.shop-item-div');
                 $(itemdiv).effect("transfer",{ to: $("#cart-btn") }, 500);
-                var curHeight = $(itemdiv).height();
-                var curLeft = $(itemdiv).css('left');
-                $(itemdiv).animate({
-                    'height': 0,
-                    'opacity': 0
-                }, 750, function() {
-                    $(this).remove();
-                });
                 $('#cart-btn').addClass('item-added-highlight')
                 .delay(1000).queue(function(){
                     $(this).removeClass("item-added-highlight").dequeue();
@@ -189,6 +251,16 @@
             alert('{{ _('Data transfer failed!') }}');
         });
     }
+
+    function check_changed() {
+        var changed = $('.changed-tr');
+        if (changed.length < 1) {
+            $('#cart-update-btn').hide('fast');
+            $('#cart-submit-btn').removeAttr('disabled');
+            unchanged = true;
+        }
+    }
+
 </script>
 
 <style>
@@ -284,7 +356,7 @@
                             <div class="cart-arrow cart-arrow-down"><span class="caret"></span></div>
                         </div>
                         <div class="cart-add-btn clearfix btn btn-danger">
-                            <input type="hidden" value="{{ product.id }}"/>
+                            <input type="hidden" class="hidden-id" value="{{ product.id }}"/>
                             <span class="glyphicon glyphicon-share-alt"></span>
                             <span class="glyphicon glyphicon-shopping-cart"></span>
                         </div>
