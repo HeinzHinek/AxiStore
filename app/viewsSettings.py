@@ -40,6 +40,14 @@ def addUser():
             flash(gettext("Selected username already exists!"))
             return redirect(url_for('users'))
 
+        new_email = form.email.data
+        check_mail = User.query.filter_by(email=new_email).all()
+
+        #user mail already exists
+        if len(check_mail) > 0:
+            flash(gettext('Selected email is already in use!'))
+            return redirect(url_for('users'))
+
         user = User()
         user.nickname = form.nickname.data
         user.password = generate_password_hash(form.password.data)
@@ -76,6 +84,14 @@ def editUser(id=0):
     if form.validate_on_submit():
         if len(User.query.filter_by(nickname=form.nickname.data).all()) > 1:
             flash(gettext("Selected username already exists!"))
+            return redirect(url_for('users'))
+
+        new_email = form.email.data
+        check_mail = User.query.filter_by(email=new_email).all()
+
+        #user mail already exists
+        if len(check_mail) > 0 and new_email != user.email:
+            flash(gettext('Selected email is already in use!'))
             return redirect(url_for('users'))
 
         user.nickname = form.nickname.data
