@@ -18,12 +18,21 @@
             $("#available-only-check").closest('label').css('font-weight', 'bold');
         {% endif %}
 
+        {% if session['on_way_only'] %}
+            $("#on-way-only-check").attr('checked', 'checked');
+            $("#on-way-only-check").closest('label').css('font-weight', 'bold');
+        {% endif %}
+
         $("#category-select").change(function() {
             window.location = "{{ url_for('shop') }}" + '?cat=' + $(this).val();
         });
 
         $("#available-only-check").change(function() {
             window.location = "{{ url_for('shop') }}" + '?avonly=' + this.checked;
+        });
+
+        $("#on-way-only-check").change(function() {
+            window.location = "{{ url_for('shop') }}" + '?owonly=' + this.checked;
         });
 
         $(".fancybox").fancybox();
@@ -209,11 +218,6 @@
             }
         });
 
-        $(document).on('click', '#cart-submit-btn', function() {
-            alert( "{{ _('This function will be available soon!') }}" );
-            return false;
-        });
-
     });
 
     function add_to_cart(id, qty, element) {
@@ -277,7 +281,7 @@
             <label>{{ _('Category:') }}&nbsp;</label>
             {{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}
             <div class="checkbox" style="margin: 0 10px;">
-                <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Only available') }}</label>
+                <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Available items only') }}&nbsp;</label>
             </div>
             <div style="float: right;">
                 <!-- <input type="submit" class="btn btn-info" value="{{ _('Search') }}"/> -->
@@ -315,8 +319,8 @@
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('On the way:') }}</td>
-                                <td class="right-td on-way-qty-td" {% if product.ontheway <= 0 %}style="color: red;"
-                                    {% else %}style="font-weight: bold; color: green;"{% endif %}>{{ product.ontheway }}&nbsp;{{ _('pcs') }}</td>
+                                <td class="right-td on-way-qty-td" {% if product.on_way_qty <= 0 %}style="color: red;"
+                                    {% else %}style="font-weight: bold; color: green;"{% endif %}>{{ product.on_way_qty }}&nbsp;{{ _('pcs') }}</td>
                             </tr>
                             <tr>
                                 <td class="left-td">{{ _('Retail Price:') }}</td>

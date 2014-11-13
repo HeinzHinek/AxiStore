@@ -28,7 +28,7 @@
         </table>
         <div style="text-align: right;">
             <input type="button" class="btn btn-warning" id="cart-update-btn" style="min-width: 120px; display: none;" value="{{ _('Update cart') }}"/>
-            <a href="#" class="btn btn-info" id="cart-submit-btn" style="min-width: 120px;">{{ _('To order') }}</a>
+            <a href="{{ url_for('placeorder') }}" class="btn btn-info" id="cart-submit-btn" style="min-width: 120px;">{{ _('To order') }}</a>
         </div>
     </div>
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-10 18:11+0900\n"
-"PO-Revision-Date: 2014-11-10 18:13+0900\n"
+"POT-Creation-Date: 2014-11-13 16:26+0900\n"
+"PO-Revision-Date: 2014-11-13 16:49+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -27,110 +27,126 @@ msgstr "このページのアクセスにはログインが必要です。"
 msgid "Nickname"
 msgstr "ユーザー名"
 
-#: app/forms.py:26
-msgid "Preferred language"
-msgstr "ユーザの言語"
-
-#: app/forms.py:27
-msgid "Number of products displayed per page"
-msgstr "1ページに表示する商品数"
-
-#: app/forms.py:32
-msgid "Old password"
-msgstr "既存のパスワード"
-
-#: app/forms.py:35
-msgid "New password"
-msgstr "新しいパスワード"
-
-#: app/forms.py:39 app/viewsBase.py:280
-msgid "New password must match confirmation!"
-msgstr "新しいパスワードが確認用のパスワードと違います！"
-
-#: app/forms.py:40
-msgid "New password confirmation"
-msgstr "パスワードの確認"
-
-#: app/forms.py:77 app/forms.py:96
-msgid "User nickname"
-msgstr "ユーザー名"
-
-#: app/forms.py:79
-msgid "User password"
-msgstr "ユーザーのパスワード"
-
-#: app/forms.py:81
-msgid "Passwords must match"
-msgstr "確認用のパスワードが異なっています"
-
-#: app/forms.py:82
-msgid "Password confirmation"
-msgstr "パスワードの確認"
-
-#: app/forms.py:83 app/forms.py:98 app/templates/settings/addContact.html:70
+#: app/forms.py:24 app/forms.py:85 app/forms.py:100
+#: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
 #: app/templates/settings/editContact.html:73
 #: app/templates/settings/editCustomer.html:59
 msgid "Email"
 msgstr "Eメール"
 
-#: app/forms.py:87 app/forms.py:102
+#: app/forms.py:28
+msgid "Preferred language"
+msgstr "ユーザの言語"
+
+#: app/forms.py:29
+msgid "Number of products displayed per page"
+msgstr "1ページに表示する商品数"
+
+#: app/forms.py:34
+msgid "Old password"
+msgstr "既存のパスワード"
+
+#: app/forms.py:37
+msgid "New password"
+msgstr "新しいパスワード"
+
+#: app/forms.py:41 app/viewsBase.py:288
+msgid "New password must match confirmation!"
+msgstr "新しいパスワードが確認用のパスワードと違います！"
+
+#: app/forms.py:42
+msgid "New password confirmation"
+msgstr "パスワードの確認"
+
+#: app/forms.py:79 app/forms.py:98
+msgid "User nickname"
+msgstr "ユーザー名"
+
+#: app/forms.py:81
+msgid "User password"
+msgstr "ユーザーのパスワード"
+
+#: app/forms.py:83
+msgid "Passwords must match"
+msgstr "確認用のパスワードが異なっています"
+
+#: app/forms.py:84
+msgid "Password confirmation"
+msgstr "パスワードの確認"
+
+#: app/forms.py:89 app/forms.py:104
 msgid "User role"
 msgstr "ユーザーの役割"
 
-#: app/forms.py:92 app/forms.py:107
+#: app/forms.py:94 app/forms.py:109
 msgid "User language"
 msgstr "ユーザの言語"
 
-#: app/forms.py:189
+#: app/forms.py:191
 msgid "Category"
 msgstr "カテゴリー"
 
-#: app/forms.py:190 app/templates/shop/shop.html:280
-msgid "Only available"
+#: app/forms.py:192
+msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/viewsBase.py:95
+#: app/forms.py:196 app/templates/deliveries/newDelivery.html:126
+#: app/templates/orders/createOrder.html:171
+#: app/templates/requests/createRequest.html:230
+#: app/templates/supplies/supplyProducts.html:136
+msgid "Submit"
+msgstr "確認"
+
+#: app/mailer.py:33 app/templates/shop/orderconfirm.html:26
+msgid "Thank you for your order!"
+msgstr "ご注文をありがとうございます！"
+
+#: app/viewsBase.py:94
 msgid "Home"
 msgstr "Home"
 
-#: app/viewsBase.py:177
+#: app/viewsBase.py:176
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:179 app/viewsBase.py:181
+#: app/viewsBase.py:178 app/viewsBase.py:180
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
-#: app/viewsBase.py:191
+#: app/viewsBase.py:190
 msgid "Stock condition"
 msgstr "在庫状況"
 
-#: app/viewsBase.py:238
+#: app/viewsBase.py:237
 msgid "Selected nickname is already in use!"
 msgstr "入力されたユーザー名はすでに使用中です！"
 
-#: app/viewsBase.py:248
+#: app/viewsBase.py:245
+msgid "Selected email is already in use!"
+msgstr "入力されたメールアドレスはすでに使用中です！"
+
+#: app/viewsBase.py:256
 msgid "User settings sucessfully updated."
 msgstr "ユーザーの情報が更新されました。"
 
-#: app/viewsBase.py:256 app/templates/user.html:8
+#: app/viewsBase.py:264 app/templates/user.html:8
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:276
+#: app/viewsBase.py:284
 msgid "User password successfully changed."
 msgstr "パスワードが変更されました。"
 
-#: app/viewsBase.py:282
+#: app/viewsBase.py:290
 msgid "Current password is incorrect!"
 msgstr "既存のパスワードが違います！"
 
-#: app/viewsBase.py:287 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:295 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "パスワードの変更"
 
-#: app/viewsBase.py:295 app/templates/navbar_admin.html:55
+#: app/viewsBase.py:303 app/templates/navbar_admin.html:55
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
@@ -297,7 +313,7 @@ msgstr "新しい製品は追加されました。"
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:47 app/viewsRequest.py:93
+#: app/viewsProduct.py:47 app/viewsRequest.py:93 app/viewsShop.py:80
 msgid "Product not found."
 msgstr "製品は不明です。"
 
@@ -333,7 +349,7 @@ msgstr "注文番号はすでに登録しています！"
 msgid "Invalid data received!"
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsRequest.py:101
+#: app/viewsRequest.py:101 app/viewsShop.py:93
 msgid "Order created successfully."
 msgstr "注文の登録が成功しました。"
 
@@ -389,9 +405,34 @@ msgstr "データのエクスポート"
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/viewsShop.py:55
+#: app/viewsShop.py:51
 msgid "AxiStore shop"
 msgstr "AxiStoreショップ"
+
+#: app/viewsShop.py:70
+msgid ""
+"We apologize but your customer data is insufficient. Please, contact our "
+"customer support."
+msgstr ""
+"申し訳ありませんが、お客様の顧客データは足りません。お手数ですが、カストマー"
+"サポートにお問い合わせください。"
+
+#: app/viewsShop.py:116 app/templates/orders/createOrder.html:173
+#: app/templates/orders/orders.html:9
+msgid "Place order"
+msgstr "発注を入力"
+
+#: app/viewsShop.py:130
+msgid ""
+"Unfortunatelly, your request could not be processed. Please, contact our "
+"customer support."
+msgstr ""
+"申し訳ありませんが、お客様の発注が処理できません。お手数ですが、カストマーサ"
+"ポートにお問い合わせください。"
+
+#: app/viewsShop.py:149
+msgid "Order Confirmation"
+msgstr "発注の確認"
 
 #: app/viewsSupply.py:23
 msgid "Supplies"
@@ -479,8 +520,12 @@ msgstr "お客様"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/shop/shop.html:314
-#: app/templates/shop/shop.html:319
+#: app/templates/index.html:102 app/templates/mail/order_confirm.html:32
+#: app/templates/mail/order_confirm.html:38
+#: app/templates/shop/orderconfirm.html:49
+#: app/templates/shop/orderconfirm.html:55
+#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
+#: app/templates/shop/shop.html:318 app/templates/shop/shop.html:323
 msgid "pcs"
 msgstr "個"
 
@@ -769,7 +814,7 @@ msgstr "正味"
 msgid "Change password"
 msgstr "パスワードの変更"
 
-#: app/templates/user.html:30
+#: app/templates/user.html:34
 msgid "Save settings"
 msgstr "設定を保存"
 
@@ -825,12 +870,14 @@ msgstr "品番"
 
 #: app/templates/deliveries/delivery.html:41
 #: app/templates/deliveries/deliveryReport.html:20
-#: app/templates/orders/order.html:41
+#: app/templates/mail/order_confirm.html:24 app/templates/orders/order.html:41
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:226
 #: app/templates/requests/productrequests.html:46
 #: app/templates/requests/request.html:46
-#: app/templates/shop/_cart_table.html:8 app/templates/supplies/supply.html:45
+#: app/templates/shop/_cart_table.html:8
+#: app/templates/shop/orderconfirm.html:41
+#: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:45
 #: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
 msgstr "数量"
@@ -949,6 +996,7 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 #: app/templates/deliveries/newDelivery.html:101
+#: app/templates/mail/order_confirm.html:21
 #: app/templates/orders/createOrder.html:119
 #: app/templates/orders/productorders.html:21
 #: app/templates/requests/createRequest.html:186
@@ -956,6 +1004,8 @@ msgstr "キャンセル"
 #: app/templates/requests/createRequest.html:222
 #: app/templates/requests/productrequests.html:21
 #: app/templates/shop/_cart_table.html:5
+#: app/templates/shop/orderconfirm.html:38
+#: app/templates/shop/placeorder.html:34
 #: app/templates/supplies/supplyProducts.html:112
 msgid "Code"
 msgstr "品番"
@@ -973,13 +1023,6 @@ msgstr "日本語の品名"
 #: app/templates/deliveries/newDelivery.html:104
 msgid "Delivered Quantity"
 msgstr "入庫数量"
-
-#: app/templates/deliveries/newDelivery.html:126
-#: app/templates/orders/createOrder.html:171
-#: app/templates/requests/createRequest.html:230
-#: app/templates/supplies/supplyProducts.html:136
-msgid "Submit"
-msgstr "確認"
 
 #: app/templates/deliveries/newDelivery.html:127
 #: app/templates/orders/createOrder.html:172
@@ -1003,6 +1046,110 @@ msgstr "パスワード"
 msgid "Remember Me"
 msgstr "パスワードを記録"
 
+#: app/templates/mail/order_confirm.html:1
+msgid "Thank you for your order at AxiStore!"
+msgstr "AxiStoreにてご注文をいただきありがとうございます！"
+
+#: app/templates/mail/order_confirm.html:3
+msgid "jap:sama"
+msgstr "様"
+
+#: app/templates/mail/order_confirm.html:5
+msgid "Dear"
+msgstr "様"
+
+#: app/templates/mail/order_confirm.html:8
+msgid ""
+"Thank you for ordering at AxiStore. Your order has been accepted and "
+"processed."
+msgstr ""
+"AxiStoreをご利用いただき、誠にありがとうございます。ご注文を承りました。"
+
+#: app/templates/mail/order_confirm.html:9
+msgid ""
+"Ordered products will be sent as soon as possible, usually within three "
+"working days in case the products are on stock."
+msgstr ""
+"ご注文の商品をなるべく早く発送いたします。在庫にあるものの場合、普段は3日以内"
+"の発送となります。"
+
+#: app/templates/mail/order_confirm.html:10
+msgid ""
+"If your order contains products currently not on stock, the delivery date "
+"may take over two weeks."
+msgstr ""
+"現在のところ在庫のない商品は、納期が2週間を超えることもあります。ご了承くださ"
+"い。"
+
+#: app/templates/mail/order_confirm.html:11
+msgid "In such case an Axis Mundi member will contact you via email or phone."
+msgstr ""
+"その場合にアクシス・ムンディの担当者が直接にメールまたはお電話でご案内をさせ"
+"ていただきます。"
+
+#: app/templates/mail/order_confirm.html:13
+#: app/templates/shop/orderconfirm.html:33
+msgid "Order details:"
+msgstr "発注の詳細："
+
+#: app/templates/mail/order_confirm.html:22
+#: app/templates/shop/_cart_table.html:6
+#: app/templates/shop/orderconfirm.html:39
+#: app/templates/shop/placeorder.html:35
+msgid "Product Name"
+msgstr "品名"
+
+#: app/templates/mail/order_confirm.html:23
+#: app/templates/shop/orderconfirm.html:40
+#: app/templates/shop/placeorder.html:36
+msgid "Your Price"
+msgstr "お客様の価格"
+
+#: app/templates/mail/order_confirm.html:25
+#: app/templates/shop/_cart_table.html:9
+#: app/templates/shop/orderconfirm.html:42
+#: app/templates/shop/placeorder.html:38
+msgid "Subtotal"
+msgstr "小計"
+
+#: app/templates/mail/order_confirm.html:37
+#: app/templates/shop/orderconfirm.html:54
+#: app/templates/shop/placeorder.html:51
+msgid "Total:"
+msgstr "合計："
+
+#: app/templates/mail/order_confirm.html:43
+msgid "Thank you for being an Axis Mundi customer."
+msgstr "アクシス・ムンディをご愛顧いただきありがとうございます。"
+
+#: app/templates/mail/order_confirm.html:44
+msgid "Yours sincerely"
+msgstr "今後ともよろしくお願い申し上げます。"
+
+#: app/templates/mail/order_confirm.html:46
+msgid "Axis Mundi Ltd."
+msgstr "Axis Mundi株式会社"
+
+#: app/templates/mail/order_confirm.html:47
+msgid "160-0022"
+msgstr "〒160-0022"
+
+#: app/templates/mail/order_confirm.html:48
+msgid "Tokyo-to Shinuku-ku"
+msgstr "東京都新宿区"
+
+#: app/templates/mail/order_confirm.html:49
+msgid "Shinjuku 2-6-3"
+msgstr "新宿2-6-3"
+
+#: app/templates/mail/order_confirm.html:50
+msgid "Towa Shinjuku Cope 810"
+msgstr "藤和新宿コープ810"
+
+#: app/templates/mail/order_confirm.html:51
+msgid "TEL: 03-6380-6454"
+msgstr "電話番号：03-6380-6454"
+
 #: app/templates/orders/createOrder.html:82
 msgid "Place a new order to maker"
 msgstr "新規発注を入力する"
@@ -1010,11 +1157,6 @@ msgstr "新規発注を入力する"
 #: app/templates/orders/createOrder.html:126
 msgid "Order Quantity"
 msgstr "発注数量"
-
-#: app/templates/orders/createOrder.html:173
-#: app/templates/orders/orders.html:9
-msgid "Place order"
-msgstr "発注を入力"
 
 #: app/templates/orders/order.html:42
 msgid "Delivered"
@@ -1450,17 +1592,9 @@ msgstr "役割"
 msgid "Language"
 msgstr "言語"
 
-#: app/templates/shop/_cart_table.html:6
-msgid "Product Name"
-msgstr "品名"
-
 #: app/templates/shop/_cart_table.html:7
 msgid "Price per unit"
 msgstr "1個単位価格"
-
-#: app/templates/shop/_cart_table.html:9
-msgid "Subtotal"
-msgstr "小計"
 
 #: app/templates/shop/_cart_table.html:10
 msgid "Remove"
@@ -1474,48 +1608,83 @@ msgstr "カートの更新"
 msgid "To order"
 msgstr "発注へ"
 
-#: app/templates/shop/shop.html:115 app/templates/shop/shop.html:172
-#: app/templates/shop/shop.html:240 app/templates/shop/shop.html:251
+#: app/templates/shop/orderconfirm.html:27
+msgid ""
+"Your order has been received and a confirmation sent to your email address: "
+msgstr ""
+"お客様のご注文を承りました。確認メールは次のメールアドレスに送信されました："
+
+#: app/templates/shop/orderconfirm.html:61
+#: app/templates/shop/placeorder.html:27
+msgid "Back to the shop"
+msgstr "ショップへ戻る"
+
+#: app/templates/shop/placeorder.html:25
+msgid "Check your order before sending"
+msgstr "発注の前に内容をご確認ください"
+
+#: app/templates/shop/placeorder.html:33
+msgid "Image"
+msgstr "画像"
+
+#: app/templates/shop/placeorder.html:57
+msgid "No products to order."
+msgstr "発注商品がありません。"
+
+#: app/templates/shop/placeorder.html:63
+msgid "Order items listed above?"
+msgstr "以上の商品を発注しますか？"
+
+#: app/templates/shop/placeorder.html:67
+msgid "No, return to shop"
+msgstr "いいえ、ショップに戻る"
+
+#: app/templates/shop/placeorder.html:68
+msgid "Yes, order!"
+msgstr "はい、発注します！"
+
+#: app/templates/shop/shop.html:124 app/templates/shop/shop.html:181
+#: app/templates/shop/shop.html:244 app/templates/shop/shop.html:255
 msgid "Data transfer failed!"
 msgstr "データ通信は失敗しました！"
 
-#: app/templates/shop/shop.html:213
-msgid "This function will be available soon!"
-msgstr "この機能は近い内にご利用いただけるようになります！"
-
-#: app/templates/shop/shop.html:277
+#: app/templates/shop/shop.html:281
 msgid "Category:"
 msgstr "カテゴリー"
 
-#: app/templates/shop/shop.html:283
+#: app/templates/shop/shop.html:284
+msgid "Available items only"
+msgstr "発注可能な商品のみ"
+
+#: app/templates/shop/shop.html:287
 msgid "Search"
 msgstr "検索"
 
-#: app/templates/shop/shop.html:311
+#: app/templates/shop/shop.html:315
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:317
+#: app/templates/shop/shop.html:321
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:322
+#: app/templates/shop/shop.html:326
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:328
+#: app/templates/shop/shop.html:332
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:374
+#: app/templates/shop/shop.html:378
 msgid "Cart Content"
 msgstr "ショッピングカートの内容"
 
-#: app/templates/shop/shop.html:375
+#: app/templates/shop/shop.html:379
 msgid "Shopping cart is empty."
 msgstr "ショッピングカートに商品がありません。"
 
-#: app/templates/shop/shop.html:388
+#: app/templates/shop/shop.html:392
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 
@@ -1651,3 +1820,9 @@ msgstr "完了ではないが部分的に入庫した受注："
 
 #~ msgid "Current password"
 #~ msgstr "新しいパスワード"
+
+#~ msgid "Only available"
+#~ msgstr "発注可能な商品のみ"
+
+#~ msgid "This function will be available soon!"
+#~ msgstr "この機能は近い内にご利用いただけるようになります！"

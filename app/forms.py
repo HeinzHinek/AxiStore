@@ -2,7 +2,7 @@
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
-    HiddenField, FileField, BooleanField
+    HiddenField, FileField, BooleanField, SubmitField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE
@@ -21,6 +21,8 @@ class LoginForm(Form):
 class UserForm(Form):
     nickname = StringField(lazy_gettext('Nickname'), [validators.data_required(),
                                                       validators.length(min=5, max=30)])
+    email = EmailField(lazy_gettext('Email'), [validators.data_required(),
+                                 validators.length(max=120)])
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
     language = SelectField(lazy_gettext('Preferred language'), choices=lang)
@@ -187,4 +189,8 @@ class AddContactForm(Form):
 
 class ShopHeaderForm(Form):
     category = SelectField(lazy_gettext('Category'), coerce=int)
-    available_only = BooleanField(lazy_gettext('Only available'))
+    available_only = BooleanField(lazy_gettext('Available item only'))
+
+
+class CartOrderForm(Form):
+    submit = SubmitField(lazy_gettext('Submit'))

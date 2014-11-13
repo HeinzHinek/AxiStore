@@ -4,6 +4,7 @@ from app import db
 from config import USER_ROLES, CUSTOMER_TYPES
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import case
 
 
 class User(db.Model):
@@ -111,11 +112,13 @@ class Product(db.Model):
     def net_stock(self):
         return self.qty_stock - self.request_qty + self.order_qty
 
+    # for shop info
     @hybrid_property
     def available_qty(self):
         n = self.qty_stock - self.request_qty
         return n if n > 0 else 0
 
+    # for shop info
     @available_qty.expression
     def available_qty(cls):
         return (db.select([Product.qty_stock - db.func.coalesce(
@@ -128,6 +131,13 @@ class Product(db.Model):
             .label("available_qty")
         )
 
+    # for shop info
+    @hybrid_property
+    def on_way_qty(self):
+        n = self.order_qty
+        if self.available_qty <= 0:
+            n += self.qty_stock - self.request_qty
+        return n if n > 0 else 0
 
     def customer_request_qty(self, cust_id):
         req_qties = 0

@@ -1,0 +1,39 @@
+{{ _('Thank you for your order at AxiStore!') }}
+
+{% if g.user.language == 'jp' %}
+{{ g.user.nickname }}{{ _('jap:sama') }}
+{% else %}
+{{ _('Dear') }} {{ g.user.nickname }}!
+{% endif %}
+
+{{ _('Thank you for ordering at AxiStore. Your order has been accepted and processed.') }}
+{{ _('Ordered products will be sent as soon as possible, usually within three working days in case the products are on stock.') }}
+{{ _('If your order contains products currently not on stock, the delivery date may take over two weeks.') }}
+{{ _('In such case an Axis Mundi member will contact you via email or phone.') }}
+
+{{ _('Order details:') }}
+--------------------------------------
+{% for rp in requested_products %}
+{{ _('Item number') }}: {{ loop.index }}
+    {{ _('Code') }}: {{ rp.product.code }}
+    {{ _('Product Name') }}: {{ rp.product.desc_JP }}
+    {{ _('Your Price') }}: {{ rp.customer_price }}{{ _('JPY') }}
+    {{ _('Quantity') }}: {{ rp.quantity }}{{ _('pcs') }}
+    {{ _('Subtotal') }}: {{ rp.subtotal }}{{ _('JPY') }}
+    ----------------------------------
+{% endfor %}
+
+{{ _('Total:') }}
+    {{ pieces }}{{ _('pcs') }}
+    {{ total }}{{ _('JPY') }}
+--------------------------------------
+
+{{ _('Thank you for being an Axis Mundi customer.') }}
+{{ _('Yours sincerely') }}
+
+{{ _('Axis Mundi Ltd.') }}
+{{ _('160-0022') }}
+{{ _('Tokyo-to Shinuku-ku') }}
+{{ _('Shinjuku 2-6-3') }}
+{{ _('Towa Shinjuku Cope 810') }}
+{{ _('TEL: 03-6380-6454') }}

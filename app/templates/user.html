@@ -19,6 +19,10 @@ body { background-color: #eeeeee; }
         </div>
         <br/>
         <div class="shadowed-div">
+            {{ render_field(form.email, class="form-control", style="width: 50%;") }}<br/>
+        </div>
+        <br/>
+        <div class="shadowed-div">
             {{ render_field(form.language, class="form-control", style="width: 50%;") }}<br/>
         </div>
         <br/>

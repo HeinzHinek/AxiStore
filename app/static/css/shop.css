@@ -1,5 +1,5 @@
 .shop-header {
-    width: 500px;
+    width: 600px;
     text-align: left;
     margin: 0 auto;
 }
@@ -37,6 +37,7 @@
 
 .shop-item-table {
     font-size: 1.2em;
+    white-space: nowrap;
 }
 
 .shop-item-table .left-td {
@@ -171,6 +172,14 @@
 }
 
 @media all and (max-width: 980px) {
+    body {
+        padding: 0px;
+    }
+
+    div.container {
+        padding: 0px 0px;
+    }
+
     #cart-btn {
         width: 40px;
         height: 40px;
@@ -235,4 +244,12 @@
 
 .changed-tr-text {
     color: red;
+}
+
+.cart-order-check-table {
+    font-size: 1.2em !important;
+}
+
+.cart-order-check-table td {
+    vertical-align: middle !important;
 }

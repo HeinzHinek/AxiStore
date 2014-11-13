@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from app import app, db
-from flask import render_template, g, session, request, json, redirect, url_for
+from app import app, db, mailer
+from flask import render_template, g, session, request, json, redirect, url_for, flash
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
-from models import Product, Category, Cart
-from forms import ShopHeaderForm
-from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
+from models import Product, Category, Cart, Request, RequestedProducts
+from forms import ShopHeaderForm, CartOrderForm
+from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA, MAIL_USERNAME
 from imageHelper import getImgUrls
 
 
@@ -31,11 +31,7 @@ def shop(page=1):
     if current_user.role == USER_ROLES['ROLE_CUSTOMER'] and current_user.customer:
         discount = current_user.customer.base_discount
     for p in products.items:
-        p.ontheway = p.order_qty
-        if p.available_qty <= 0:
-            p.ontheway += p.qty_stock - p.request_qty
-            if p.ontheway < 0:
-                p.ontheway = 0
+
         if not p.price_retail:
             p.price_retail = 0
         unrounded_price = p.price_retail * (1.0 - discount)
@@ -63,11 +59,100 @@ def shop(page=1):
 @customer_allowed
 @login_required
 def placeorder():
-    return redirect(url_for('logout'))
+
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+
+    form = CartOrderForm()
+    if form.validate_on_submit():
+        new_request = Request()
+        new_request.user_id = current_user.id
+        if not current_user.customer:
+            flash(gettext("We apologize but your customer data is insufficient. Please, contact our customer support."))
+            return redirect(url_for("shop"))
+        new_request.customer_id = current_user.customer.id
+        new_request.active_flg = True
+        db.session.add(new_request)
+        db.session.commit()
+
+        for item in cart_items:
+            new_product = db.session.query(Product).filter_by(id=item.product_id).first()
+            if not new_product:
+                flash(gettext("Product not found."))
+                return redirect(url_for("shop"))
+            rp = RequestedProducts(quantity=item.quantity)
+            rp.product = new_product
+            rp.request_id = new_request.id
+            new_request.products.append(rp)
+            db.session.delete(item)
+
+        db.session.commit()
+
+        # send confirmation email
+        mailer.order_confirmation(current_user, new_request)
+
+        flash(gettext("Order created successfully."))
+        return redirect(url_for("orderconfirm", req_id=new_request.id))
+
+    discount = 0
+    if current_user.role == USER_ROLES['ROLE_CUSTOMER'] and current_user.customer:
+        discount = current_user.customer.base_discount
+    total = 0
+    pieces = 0
+    for item in cart_items:
+        if not item.product.price_retail:
+            item.product.price_retail = 0
+        unrounded_price = item.product.price_retail * (1.0 - discount)
+        item.customer_price = int(5 * round(float(unrounded_price)/5))
+        total += item.customer_price * item.quantity
+        pieces += item.quantity
+
+        urls = getImgUrls(item.product.id)
+        if urls:
+            item.img_url = urls[0].split('app')[1]
+        else:
+            item.img_url = NO_PHOTO_URL.split('app')[1]
+
+    return render_template('/shop/placeorder.html',
+                           title=gettext('Place order'),
+                           cart_items=cart_items,
+                           total=total,
+                           pieces=pieces,
+                           form=form)
+
+
+@app.route('/shop/orderconfirm')
+@customer_allowed
+@login_required
+def orderconfirm():
+    req_id = request.args.get('req_id')
+    req = Request.query.filter_by(id=req_id).first()
+    if not req:
+        flash(gettext("Unfortunatelly, your request could not be processed. Please, contact our customer support."))
+        redirect(url_for('shop'))
+
+    requested_products = RequestedProducts.query.filter_by(request_id=req_id).all()
+    discount = 0
+    if current_user.role == USER_ROLES['ROLE_CUSTOMER'] and current_user.customer:
+        discount = current_user.customer.base_discount
+    total = 0
+    pieces = 0
+    for rp in requested_products:
+        if not rp.product.price_retail:
+            rp.product.price_retail = 0
+        unrounded_price = rp.product.price_retail * (1.0 - discount)
+        rp.customer_price = int(5 * round(float(unrounded_price)/5))
+        rp.subtotal = rp.customer_price * rp.quantity
+        total += rp.subtotal
+        pieces += rp.quantity
+
+    return render_template('/shop/orderconfirm.html',
+                           title=gettext('Order Confirmation'),
+                           requested_products=requested_products,
+                           total=total,
+                           pieces=pieces)
 
 
 # AJAX methods below
-
 @app.route('/shop/open_cart', methods=['GET'])
 @customer_allowed
 @login_required

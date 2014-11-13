@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/shop.css" rel="stylesheet">
+
+<script>
+    $(document).ready(function() {
+        $('.formatted-number').each(function() {
+            var num = $(this).text();
+            var formatted = ("" + num).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            $(this).text(formatted);
+        });
+    });
+</script>
+
+<style>
+    body { background-color: #eeeeee; margin-bottom: 20px !important; }
+</style>
+
+<div class="row" style="text-align: center; margin-top: 10px;">
+
+    {% include 'flash.html' %}
+    <br/>
+    <div class="shadowed-div" style="padding-left: 20px; padding-right: 20px;">
+        <h2>{{ _('Check your order before sending') }}</h2>
+        <div style="text-align: left; margin: 0 5px;">
+            <a href="{{ url_for('shop') }}">{{ _('Back to the shop') }}</a>
+        </div>
+        <br/>
+        {% if cart_items %}
+        <table class="cart-order-check-table table table-striped table-condensed table-bordered" style="border: none !important;">
+            <tr>
+                <th style="width: 90px; text-align: center;">{{ _('Image') }}</th>
+                <th style="text-align: center;">{{ _('Code') }}</th>
+                <th style="text-align: center;">{{ _('Product Name') }}</th>
+                <th style="text-align: center;">{{ _('Your Price') }}</th>
+                <th style="text-align: center;">{{ _('Quantity') }}</th>
+                <th style="text-align: center;">{{ _('Subtotal') }}</th>
+            </tr>
+            {% for item in cart_items %}
+                <tr>
+                    <td style="height: 90px;"><img src="{{ item.img_url }}" style="max-width: 80px; max-height: 80px;"/></td>
+                    <td>{{ item.product.code }}</td>
+                    <td>{{ item.product.desc_JP }}</td>
+                    <td class="formatted-number">&#165;{{ item.customer_price }}</td>
+                    <td>{{ item.quantity }}{{ _('pcs') }}</td>
+                    <td class="formatted-number">&#165;{{ item.customer_price * item.quantity }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th colspan="4" style="background-color: transparent !important; text-align: right; border-left: none !important; border-bottom: none !important;">{{ _('Total:') }}</th>
+                <th class="formatted-number" style="background-color: transparent !important; text-align: center;">{{ pieces }}{{ _('pcs') }}</th>
+                <th class="formatted-number" style="background-color: transparent !important; text-align: center;">&#165;{{ total }}</th>
+            </tr>
+        </table>
+        {% else %}
+        <h4>{{ _('No products to order.') }}</h4>
+        {% endif %}
+    </div>
+
+    {% if cart_items %}
+    <div class="shadowed-div" style="float: right; margin-top: 10px;">
+        <h4 style="font-weight: bold; color: crimson;">{{ _('Order items listed above?') }}</h4>
+        <form action="" method="post" name="placeorder" class="form-inline">
+            {{form.hidden_tag()}}
+            <div style="text-align: right;">
+                <a href="{{ url_for('shop') }}" class="btn btn-info" style="min-width: 150px;">{{ _('No, return to shop') }}</a>
+                {{ form.submit(class="btn btn-danger", style="min-width: 150px;", value=gettext('Yes, order!')) }}
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

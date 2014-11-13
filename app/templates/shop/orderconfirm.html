@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/shop.css" rel="stylesheet">
+
+<script>
+    $(document).ready(function() {
+        $('.formatted-number').each(function() {
+            var num = $(this).text();
+            var formatted = ("" + num).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            $(this).text(formatted);
+        });
+    });
+</script>
+
+<style>
+    body { background-color: #eeeeee; margin-bottom: 20px !important; }
+</style>
+
+<div class="row" style="text-align: center; margin-top: 10px;">
+
+    {% include 'flash.html' %}
+
+    <br/>
+    <div class="shadowed-div" style="padding-left: 20px; padding-right: 20px;">
+        <h3>{{ _('Thank you for your order!') }}</h3>
+        <h4>{{ _('Your order has been received and a confirmation sent to your email address: ') }}
+            {% if g.user.email %}
+                <span style="color: darkblue;">{{ g.user.email }}</span>
+            {% endif %}
+        </h4>
+        <div style="text-align: left;">
+            <label style="font-size: 1.1em;">{{ _('Order details:') }}</label>
+        </div>
+        <div>
+            <table class="cart-order-check-table table table-striped table-condensed table-bordered" style="border: none !important;">
+                <tr>
+                    <th style="text-align: center;">{{ _('Code') }}</th>
+                    <th style="text-align: center;">{{ _('Product Name') }}</th>
+                    <th style="text-align: center;">{{ _('Your Price') }}</th>
+                    <th style="text-align: center;">{{ _('Quantity') }}</th>
+                    <th style="text-align: center;">{{ _('Subtotal') }}</th>
+                </tr>
+                {% for rp in requested_products %}
+                    <tr>
+                        <td>{{ rp.product.code }}</td>
+                        <td>{{ rp.product.desc_JP }}</td>
+                        <td class="formatted-number">&#165;{{ rp.customer_price }}</td>
+                        <td>{{ rp.quantity }}{{ _('pcs') }}</td>
+                        <td class="formatted-number">&#165;{{ rp.subtotal }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="3" style="background-color: transparent !important; text-align: right; border-left: none !important; border-bottom: none !important;">{{ _('Total:') }}</th>
+                    <th class="formatted-number" style="background-color: transparent !important; text-align: center;">{{ pieces }}{{ _('pcs') }}</th>
+                    <th class="formatted-number" style="background-color: transparent !important; text-align: center;">&#165;{{ total }}</th>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <a href="{{ url_for('shop') }}" class="btn btn-info">{{ _('Back to the shop') }}</a>
+        </div>
+        <br/>
+    </div>
+
+</div>
+
+{% endblock %}

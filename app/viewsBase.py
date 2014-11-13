@@ -77,7 +77,6 @@ def before_request():
         if 'available_only' not in session:
             session['available_only'] = None
 
-
 @app.after_request
 def after_request(response):
     #db.session.expire_all()
@@ -238,7 +237,16 @@ def user():
             flash(gettext('Selected nickname is already in use!'))
             return redirect(url_for('user'))
 
+        new_email = form.email.data
+        check_mail = User.query.filter_by(email=new_email).all()
+
+        #user mail already exists
+        if len(check_mail) > 0 and new_email != user.email:
+            flash(gettext('Selected email is already in use!'))
+            return redirect(url_for('user'))
+
         user.nickname = new_nick
+        user.email = new_email
         user.language = form.language.data
         user.products_per_page = form.products_per_page.data\
                                  if form.products_per_page.data\
