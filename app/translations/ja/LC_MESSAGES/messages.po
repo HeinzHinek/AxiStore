@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-13 16:26+0900\n"
-"PO-Revision-Date: 2014-11-13 16:49+0900\n"
+"POT-Creation-Date: 2014-11-14 12:01+0900\n"
+"PO-Revision-Date: 2014-11-14 12:03+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -91,7 +91,11 @@ msgstr "カテゴリー"
 msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/forms.py:196 app/templates/deliveries/newDelivery.html:126
+#: app/forms.py:193 app/templates/shop/shop.html:301
+msgid "Search"
+msgstr "検索"
+
+#: app/forms.py:197 app/templates/deliveries/newDelivery.html:126
 #: app/templates/orders/createOrder.html:171
 #: app/templates/requests/createRequest.html:230
 #: app/templates/supplies/supplyProducts.html:136
@@ -122,7 +126,7 @@ msgstr "在庫状況"
 msgid "Selected nickname is already in use!"
 msgstr "入力されたユーザー名はすでに使用中です！"
 
-#: app/viewsBase.py:245
+#: app/viewsBase.py:245 app/viewsSettings.py:48 app/viewsSettings.py:94
 msgid "Selected email is already in use!"
 msgstr "入力されたメールアドレスはすでに使用中です！"
 
@@ -264,8 +268,8 @@ msgstr "パスワードが違います！"
 msgid "Logged in successfully."
 msgstr "ログインに成功しました。"
 
-#: app/viewsLogin.py:34 app/templates/login/login.html:5
-#: app/templates/login/login.html:48
+#: app/viewsLogin.py:34 app/templates/login/login.html:16
+#: app/templates/login/login.html:61
 msgid "Sign In"
 msgstr "ログイン"
 
@@ -313,7 +317,7 @@ msgstr "新しい製品は追加されました。"
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:47 app/viewsRequest.py:93 app/viewsShop.py:80
+#: app/viewsProduct.py:47 app/viewsRequest.py:93 app/viewsShop.py:113
 msgid "Product not found."
 msgstr "製品は不明です。"
 
@@ -349,7 +353,7 @@ msgstr "注文番号はすでに登録しています！"
 msgid "Invalid data received!"
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsRequest.py:101 app/viewsShop.py:93
+#: app/viewsRequest.py:101 app/viewsShop.py:126
 msgid "Order created successfully."
 msgstr "注文の登録が成功しました。"
 
@@ -373,43 +377,48 @@ msgstr "製品に対する受注"
 msgid "User List"
 msgstr "ユーザーの一覧"
 
-#: app/viewsSettings.py:40 app/viewsSettings.py:78
+#: app/viewsSettings.py:40 app/viewsSettings.py:86
 msgid "Selected username already exists!"
 msgstr "入力されたユーザー名はすでに登録されています！"
 
-#: app/viewsSettings.py:60
+#: app/viewsSettings.py:68
 msgid "New user successfully added."
 msgstr "新しいユーザーが追加されました。"
 
-#: app/viewsSettings.py:63 app/templates/settings/addUser.html:24
+#: app/viewsSettings.py:71 app/templates/settings/addUser.html:24
 msgid "Add New User"
 msgstr "新しいユーザーを追加する"
 
-#: app/viewsSettings.py:96
+#: app/viewsSettings.py:112
 msgid "User details succesfully changed."
 msgstr "ユーザーの情報が変更されました。"
 
-#: app/viewsSettings.py:100 app/templates/settings/editUser.html:26
+#: app/viewsSettings.py:116 app/templates/settings/editUser.html:26
 msgid "Edit User"
 msgstr "ユーザーの情報を編集"
 
-#: app/viewsSettings.py:120
+#: app/viewsSettings.py:136
 msgid "Data Import"
 msgstr "データのインポート"
 
-#: app/viewsSettings.py:128
+#: app/viewsSettings.py:144
 msgid "Data Export"
 msgstr "データのエクスポート"
 
-#: app/viewsSettings.py:149
+#: app/viewsSettings.py:165
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/viewsShop.py:51
+#: app/viewsShop.py:57 app/templates/stock.html:155
+#: app/templates/stock.html:189
+msgid "All"
+msgstr "全て"
+
+#: app/viewsShop.py:60
 msgid "AxiStore shop"
 msgstr "AxiStoreショップ"
 
-#: app/viewsShop.py:70
+#: app/viewsShop.py:103
 msgid ""
 "We apologize but your customer data is insufficient. Please, contact our "
 "customer support."
@@ -417,12 +426,12 @@ msgstr ""
 "申し訳ありませんが、お客様の顧客データは足りません。お手数ですが、カストマー"
 "サポートにお問い合わせください。"
 
-#: app/viewsShop.py:116 app/templates/orders/createOrder.html:173
+#: app/viewsShop.py:149 app/templates/orders/createOrder.html:173
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "発注を入力"
 
-#: app/viewsShop.py:130
+#: app/viewsShop.py:163
 msgid ""
 "Unfortunatelly, your request could not be processed. Please, contact our "
 "customer support."
@@ -430,7 +439,7 @@ msgstr ""
 "申し訳ありませんが、お客様の発注が処理できません。お手数ですが、カストマーサ"
 "ポートにお問い合わせください。"
 
-#: app/viewsShop.py:149
+#: app/viewsShop.py:182
 msgid "Order Confirmation"
 msgstr "発注の確認"
 
@@ -525,7 +534,7 @@ msgstr "Axis Mart"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:318 app/templates/shop/shop.html:323
+#: app/templates/shop/shop.html:341 app/templates/shop/shop.html:346
 msgid "pcs"
 msgstr "個"
 
@@ -731,13 +740,9 @@ msgstr "昇順 <= 0"
 msgid "Stock overview"
 msgstr "在庫の状況"
 
-#: app/templates/stock.html:141
+#: app/templates/stock.html:141 app/templates/shop/shop.html:308
 msgid "Search results:"
 msgstr "検索結果"
-
-#: app/templates/stock.html:155 app/templates/stock.html:189
-msgid "All"
-msgstr "全て"
 
 #: app/templates/stock.html:171
 #: app/templates/deliveries/deliveryReport.html:16
@@ -1034,15 +1039,15 @@ msgstr "修正"
 msgid "Receive products"
 msgstr "製品を入庫"
 
-#: app/templates/login/login.html:13
+#: app/templates/login/login.html:26
 msgid "Enter your user id"
 msgstr "ユーザーＩＤ"
 
-#: app/templates/login/login.html:28
+#: app/templates/login/login.html:41
 msgid "Enter your password"
 msgstr "パスワード"
 
-#: app/templates/login/login.html:42
+#: app/templates/login/login.html:55
 msgid "Remember Me"
 msgstr "パスワードを記録"
 
@@ -1643,48 +1648,48 @@ msgstr "いいえ、ショップに戻る"
 msgid "Yes, order!"
 msgstr "はい、発注します！"
 
-#: app/templates/shop/shop.html:124 app/templates/shop/shop.html:181
-#: app/templates/shop/shop.html:244 app/templates/shop/shop.html:255
+#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
+#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
 msgid "Data transfer failed!"
 msgstr "データ通信は失敗しました！"
 
-#: app/templates/shop/shop.html:281
+#: app/templates/shop/shop.html:292
 msgid "Category:"
 msgstr "カテゴリー"
 
-#: app/templates/shop/shop.html:284
+#: app/templates/shop/shop.html:296
 msgid "Available items only"
 msgstr "発注可能な商品のみ"
 
-#: app/templates/shop/shop.html:287
-msgid "Search"
-msgstr "検索"
+#: app/templates/shop/shop.html:309
+msgid "Clear search"
+msgstr "検索の解除"
 
-#: app/templates/shop/shop.html:315
+#: app/templates/shop/shop.html:338
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:321
+#: app/templates/shop/shop.html:344
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:326
+#: app/templates/shop/shop.html:349
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:332
+#: app/templates/shop/shop.html:355
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:378
+#: app/templates/shop/shop.html:401
 msgid "Cart Content"
 msgstr "ショッピングカートの内容"
 
-#: app/templates/shop/shop.html:379
+#: app/templates/shop/shop.html:402
 msgid "Shopping cart is empty."
 msgstr "ショッピングカートに商品がありません。"
 
-#: app/templates/shop/shop.html:392
+#: app/templates/shop/shop.html:415
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 
