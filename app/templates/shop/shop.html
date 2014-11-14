@@ -11,7 +11,11 @@
     var unchanged = true;
 
     $(document).ready(function() {
-        $("#category-select").val( {{ curr_category }} );
+        {% if curr_category %}
+            $("#category-select").val( {{ curr_category }} );
+        {% else %}
+            $("#category-select").val(0);
+        {% endif %}
 
         {% if session['available_only'] %}
             $("#available-only-check").attr('checked', 'checked');
@@ -265,6 +269,12 @@
         }
     }
 
+    function checkSearch() {
+        string = $('#search_bar').val();
+        if (string.length > 1) { return true; }
+        return false;
+    }
+
 </script>
 
 <style>
@@ -275,18 +285,31 @@
 
     {% include 'flash.html' %}
 
-    <div class="shop-header shadowed-div">
-        <form action="" method="post" name="shop" class="form-inline">
+    <div class="shop-header shadowed-div" style="padding-top: 30px; margin-top: -30px;">
+        <form action="{{ url_for('restrict') }}" method="post" name="shop" class="form-inline clearfix">
             {{form.hidden_tag()}}
-            <label>{{ _('Category:') }}&nbsp;</label>
-            {{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}
-            <div class="checkbox" style="margin: 0 10px;">
+            <div style="float: left; display: inline-block; white-space: nowrap;">
+                <span style="display: inline-block;"><label>{{ _('Category:') }}&nbsp;</label></span>
+                <span style="display: inline-block;">{{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}</span>
+            </div>
+            <div class="checkbox" style="margin: 5px; 10px; float: left;">
                 <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Available items only') }}&nbsp;</label>
             </div>
-            <div style="float: right;">
-                <!-- <input type="submit" class="btn btn-info" value="{{ _('Search') }}"/> -->
+
+            <div style="float: right; display: inline-block; white-space: nowrap; overflow: hidden;">
+                <span style="display: inline-block;">{{ form.search(id="search_bar", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}</span>
+                <span style="display: inline-block;"><input type="submit" class="btn btn-info btn-sm" onclick="return checkSearch();" value="{{ _('Search') }}"/></span>
             </div>
         </form>
+        {% if curr_search %}
+            <div class="clearfix" style="margin-top: 10px; padding: 2px 5px; border: 1px solid #dddddd; position: relative;
+                background-color: #eeeeee; border-radius: 3px; -webkit-box-shadow: 0 0 3px 3px #78AEFF; box-shadow: 0 0 3px 3px #78AEFF;">
+                <div style="text-align: center; font-size: 1.2em;">
+                    {{ _('Search results:') }}:&nbsp;<span style="color: crimson;">{{ curr_search }}</span>&nbsp;&nbsp;&nbsp;
+                    <a href="{{ url_for('clearshopsearch') }}" class="btn btn-warning btn-xs">{{ _('Clear search') }}</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     {% if products.items %}

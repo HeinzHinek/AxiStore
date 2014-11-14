@@ -8,6 +8,7 @@ from models import Product, Category, Cart, Request, RequestedProducts
 from forms import ShopHeaderForm, CartOrderForm
 from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA, MAIL_USERNAME
 from imageHelper import getImgUrls
+from sqlalchemy import or_
 
 
 @app.route('/shop', methods=['GET', 'POST'])
@@ -17,9 +18,15 @@ from imageHelper import getImgUrls
 def shop(page=1):
     products = Product.query.filter_by(active_flg=True)
 
-    if not g.category_id:
-        g.category = Category.query.first().id
-    products = products.filter_by(category_id=int(g.category_id))
+    curr_search = None
+    if session['search_string']:
+        curr_search = session['search_string']
+        products = products.filter(or_(Product.code.like('%' + session['search_string'] + '%'),
+                                       (Product.desc_CS.like('%' + session['search_string'] + '%')),
+                                       (Product.desc_JP.like('%' + session['search_string'] + '%'))))
+
+    if g.category_id:
+        products = products.filter_by(category_id=int(g.category_id))
 
     if session['available_only'] is True:
         products = products.filter(Product.available_qty > 0)
@@ -46,13 +53,39 @@ def shop(page=1):
         else:
             p.img_urls.append(NO_PHOTO_URL.split('app')[1])
     form = ShopHeaderForm()
-    form.category.choices = [(a.id, a.name_JP) for a in Category.query.all()]
+    categories = [(a.id, a.name_JP) for a in Category.query.all()]
+    categories = [(0, gettext('All'))] + categories
+    form.category.choices = categories
     return render_template('/shop/shop.html',
                            title=gettext('AxiStore shop'),
                            products=products,
                            curr_category=g.category_id,
                            axm_product_url=AXM_PRODUCT_URL_JA,
+                           curr_search=curr_search,
                            form=form)
+
+
+@app.route('/shop/restrict', methods=['POST'])
+@customer_allowed
+@login_required
+def restrict():
+    form = ShopHeaderForm(request.form)
+    if form.is_submitted():
+        string = form.search.data
+        if string:
+            if len(string) > 1:
+                return redirect(url_for('shop', search=string))
+    if session['search_string']:
+        return redirect(url_for('shop', search=session['search_string']))
+    return redirect('shop')
+
+
+@app.route('/clearshopsearch')
+@customer_allowed
+@login_required
+def clearshopsearch():
+    session['search_string'] = None
+    return redirect(url_for('shop'))
 
 
 @app.route('/shop/placeorder', methods=['GET', 'POST'])

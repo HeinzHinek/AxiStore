@@ -190,6 +190,7 @@ class AddContactForm(Form):
 class ShopHeaderForm(Form):
     category = SelectField(lazy_gettext('Category'), coerce=int)
     available_only = BooleanField(lazy_gettext('Available item only'))
+    search = StringField(lazy_gettext('Search'), [validators.length(min=2)])
 
 
 class CartOrderForm(Form):

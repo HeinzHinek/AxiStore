@@ -1,5 +1,5 @@
 .shop-header {
-    width: 600px;
+    width: 80%;
     text-align: left;
     margin: 0 auto;
 }
@@ -178,6 +178,10 @@
 
     div.container {
         padding: 0px 0px;
+    }
+
+    .shop-header {
+        margin-top: -50px !important;
     }
 
     #cart-btn {

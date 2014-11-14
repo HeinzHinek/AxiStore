@@ -129,9 +129,9 @@ $(document).ready( function() {
             <div class="input-group">
                 <div class="input-group-addon input-sm"><span class="glyphicon glyphicon-search"></span></div>
                 {{ form_search.search(id="search_bar", class="form-control input-sm", size=30) }}
-            </div>
-            <div class="input-group">
-                <input type="submit" class="btn btn-info form-control input-sm btn-sm" onclick="return checkSearch();" value="OK"/>
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-info form-control input-sm btn-sm" onclick="return checkSearch();" value="OK"/>
+                </span>
             </div>
             {% for error in form_search.errors.search %}<div>[{{error}}]</div>{% endfor %}
         </form>
