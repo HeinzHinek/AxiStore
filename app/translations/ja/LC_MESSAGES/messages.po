@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2014-11-14 12:01+0900\n"
-"PO-Revision-Date: 2014-11-14 12:03+0900\n"
+"PO-Revision-Date: 2014-11-17 12:49+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -1068,29 +1068,28 @@ msgid ""
 "Thank you for ordering at AxiStore. Your order has been accepted and "
 "processed."
 msgstr ""
-"AxiStoreをご利用いただき、誠にありがとうございます。ご注文を承りました。"
+"AxiStoreをご利用いただき、誠にありがとうございます。商品のご注文を承りまし"
+"た。"
 
 #: app/templates/mail/order_confirm.html:9
 msgid ""
 "Ordered products will be sent as soon as possible, usually within three "
 "working days in case the products are on stock."
-msgstr ""
-"ご注文の商品をなるべく早く発送いたします。在庫にあるものの場合、普段は3日以内"
-"の発送となります。"
+msgstr "在庫のある商品に関しましては、３営業日以内に発送させて頂きます。"
 
 #: app/templates/mail/order_confirm.html:10
 msgid ""
 "If your order contains products currently not on stock, the delivery date "
 "may take over two weeks."
 msgstr ""
-"現在のところ在庫のない商品は、納期が2週間を超えることもあります。ご了承くださ"
-"い。"
+"なお、在庫切れの商品に関しましては、納品までに2～3週間程かかる場合がございま"
+"すのであしからずご了承ください。"
 
 #: app/templates/mail/order_confirm.html:11
 msgid "In such case an Axis Mundi member will contact you via email or phone."
 msgstr ""
-"その場合にアクシス・ムンディの担当者が直接にメールまたはお電話でご案内をさせ"
-"ていただきます。"
+"納品までにお時間がかかる場合は、弊社よりメール又はお電話にてご連絡させていた"
+"だきます。"
 
 #: app/templates/mail/order_confirm.html:13
 #: app/templates/shop/orderconfirm.html:33
@@ -1129,7 +1128,7 @@ msgstr "アクシス・ムンディをご愛顧いただきありがとうござ
 
 #: app/templates/mail/order_confirm.html:44
 msgid "Yours sincerely"
-msgstr "今後ともよろしくお願い申し上げます。"
+msgstr "よろしくお願いいたします。"
 
 #: app/templates/mail/order_confirm.html:46
 msgid "Axis Mundi Ltd."
