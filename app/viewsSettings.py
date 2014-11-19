@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, flash, redirect, request, url_for
+from flask import render_template, flash, redirect, request, url_for, json
 from app import app, db
-from models import Product, User, Customer
+from models import Product, User, Customer, Catalog, CatalogedProducts
 from forms import UploadForm, AddUserForm, EditUserForm
 from flask_login import login_required
 from werkzeug.security import generate_password_hash
@@ -117,6 +117,76 @@ def editUser(id=0):
                            USER_ROLES=USER_ROLES,
                            selected=selected,
                            form=form)
+
+
+@app.route('/settings/editcatalog', methods=['GET'])
+@login_required
+def editCatalog():
+    catalog = Catalog.query.order_by(Catalog.order).all()
+
+    return render_template('settings/editCatalog.html',
+                           title=gettext("Edit Catalog"),
+                           catalog=catalog)
+
+
+# AJAX
+@app.route('/settings/savecatalog', methods=['POST'])
+@login_required
+def saveCatalog():
+    data = json.loads(request.form['data'])
+    if not data:
+        return "0"
+
+    order = 1
+    super_id = None
+    for item in data:
+        id = int(item['id'].split('_')[1])
+        indent = int(item['indent'])
+        name_cs = item['name_cs']
+        name_jp = item['name_jp']
+
+        if id > 0:
+            c = Catalog.query.filter_by(id=id).first()
+        else:
+            c = Catalog()
+            db.session.add(c)
+            db.session.commit()
+
+        if indent >= 0:
+            if indent == 0:
+                super_id = c.id
+                c.super_id = None
+                c.order = order
+            else:
+
+                # Check whether child wasn't moved to another parent,
+                # if so, add this parent to all products that have this child in catalog
+                if c.super_id != super_id:
+                    cataloged_products_to_update = CatalogedProducts.query.filter_by(catalog_id=c.id).all()
+                    for cpu in cataloged_products_to_update:
+                        control_catalog_product = CatalogedProducts.query.filter_by(product_id=cpu.product_id)\
+                            .filter_by(catalog_id=super_id).first()
+                        if not control_catalog_product:
+                            product = Product.query.filter_by(id=cpu.product_id).first()
+                            if product:
+                                cp = CatalogedProducts()
+                                cp.product_id = cpu.product_id
+                                cp.catalog_id = super_id
+                                db.session.add(cp)
+                                db.session.commit()
+                c.super_id = super_id
+                c.order = order
+            c.name_CS = name_cs
+            c.name_JP = name_jp
+            db.session.add(c)
+            order += 1
+        else:
+            for cp in c.products:
+                db.session.delete(cp)
+            db.session.delete(c)
+
+    db.session.commit()
+    return "ok"
 
 
 @app.route('/settings/dataimport', methods=['GET', 'POST'])

@@ -21,9 +21,9 @@ def shop(page=1):
     curr_search = None
     if session['search_string']:
         curr_search = session['search_string']
-        products = products.filter(or_(Product.code.like('%' + session['search_string'] + '%'),
-                                       (Product.desc_CS.like('%' + session['search_string'] + '%')),
-                                       (Product.desc_JP.like('%' + session['search_string'] + '%'))))
+        products = products.filter(or_(Product.code.ilike('%' + session['search_string'] + '%'),
+                                       (Product.desc_CS.ilike('%' + session['search_string'] + '%')),
+                                       (Product.desc_JP.ilike('%' + session['search_string'] + '%'))))
 
     if g.category_id:
         products = products.filter_by(category_id=int(g.category_id))

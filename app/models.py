@@ -56,6 +56,7 @@ class Product(db.Model):
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
     ordered_products = db.relationship('OrderedProducts')
+    catalog_terms = db.relationship('CatalogedProducts')
 
     cart = db.relationship('Cart', backref='product')
 
@@ -166,6 +167,23 @@ class Category(db.Model):
 
     makers = db.relationship('Maker', backref='category', lazy='dynamic')
     products = db.relationship('Product', backref='category', lazy='dynamic')
+
+
+class Catalog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    super_id = db.Column(db.Integer)
+    name_CS = db.Column(db.String(50))
+    name_JP = db.Column(db.String(50))
+    order = db.Column(db.Integer)
+
+    products = db.relationship('CatalogedProducts', backref='catalog', lazy='dynamic')
+
+
+class CatalogedProducts(db.Model):
+    __tablename__ = 'catalogedproducts'
+    catalog_id = db.Column(db.Integer, db.ForeignKey('catalog.id'), primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), primary_key=True)
+    product = db.relationship('Product', backref='catalog_assocs')
 
 
 class Order(db.Model):

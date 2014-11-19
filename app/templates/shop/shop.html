@@ -283,8 +283,6 @@
 
 <div class="row" style="text-align: center; margin-top: 10px;">
 
-    {% include 'flash.html' %}
-
     <div class="shop-header shadowed-div" style="padding-top: 30px; margin-top: -30px;">
         <form action="{{ url_for('restrict') }}" method="post" name="shop" class="form-inline clearfix">
             {{form.hidden_tag()}}
@@ -312,11 +310,21 @@
         {% endif %}
     </div>
 
+    {% include 'flash.html' %}
+
     {% if products.items %}
         {% for product in products.items %}
             <div class="shadowed-div shop-item-div">
                 <div class="shop-wrapper-title clearfix">
-                    <div class="shop-item-title label label-success" style="display: inline-block; float: left;">{{ product.desc_JP }}</div>
+                    <div class="shop-item-title label label-success" style="display: inline-block; float: left;">
+                        {% if g.user.role < 2 %}
+                            <a href="{{ url_for('editProduct', id=product.id) }}" style="text-decoration: none; color: white;">
+                                {{ product.desc_JP }}
+                            </a>
+                        {% else %}
+                            {{ product.desc_JP }}
+                        {% endif %}
+                    </div>
                 </div>
 
                 <div class="clearfix" style="margin-bottom: 10px;">

@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script>
+var new_id = 1
+
+    $(document).ready(function() {
+        $('.new-root-term-input').keyup(function(e) {
+            if (e.keyCode == 13 && !($('#add-root-term-btn').attr('disabled'))) {
+                $('#add-root-term-btn').trigger('click');
+            }
+            var name_cs = $('#new-root-term-cs').val();
+            var name_jp = $('#new-root-term-jp').val();
+            if (name_cs.length > 1 && name_jp.length > 1) {
+                $('#add-root-term-btn').removeAttr('disabled');
+            } else {
+                $('#add-root-term-btn').attr('disabled', 'disabled');
+            }
+        });
+
+        $('#add-root-term-btn').click(function() {
+            var name_cs = $('#new-root-term-cs').val();
+            var name_jp = $('#new-root-term-jp').val();
+            add_root_term(name_cs, name_jp);
+            $('#new-root-term-cs').val('');
+            $('#new-root-term-jp').val('');
+            $('#add-root-term-div').hide('fast');
+            $('#save-btn').show('fast');
+        });
+
+        $(document).on('click', '.increase-indent', function() {
+            if ($(this).closest('tr').is('.item-row:first')) {
+                return;
+            }
+            $(this).after("<td class='td-small-unit filler-td'></td>");
+            $(this).siblings('.name-cs').attr('colspan', '1');
+            $(this).closest('tr').attr('indent', '1');
+            $(this).find('span').removeClass('glyphicon-chevron-right');
+            $(this).find('span').addClass('glyphicon-chevron-left');
+            $(this).removeClass('increase-indent');
+            $(this).addClass('decrease-indent');
+            $('#save-btn').show('fast');
+        });
+
+        $(document).on('click', '.decrease-indent', function() {
+            $(this).siblings('.filler-td').remove();
+            $(this).siblings('.name-cs').attr('colspan', '2');
+            $(this).closest('tr').attr('indent', '0');
+            $(this).find('span').removeClass('glyphicon-chevron-left');
+            $(this).find('span').addClass('glyphicon-chevron-right');
+            $(this).removeClass('decrease-indent');
+            $(this).addClass('increase-indent');
+            $('#save-btn').show('fast');
+        });
+
+        $(document).on('click', '.delete-term-td', function() {
+            $(this).closest('tr').attr('indent', '-1');
+            $(this).closest('tr').hide();
+            checkFirstIndent();
+            $('#save-btn').show('fast');
+        });
+
+        $(document).on('keyup', '.name-cs, .name-jp', function() {
+            $('#save-btn').show('fast');
+        });
+    });
+
+    function add_root_term(name_cs, name_jp) {
+        $('#terms-table').append("<tr id='term_-" + new_id + "' indent='0' class='item-row'><td class='increase-indent td-small-unit horizontal'><span class='glyphicon glyphicon-chevron-right'></span></td>"
+            + "<td class='td-small-unit'><span class='vertical glyphicon glyphicon-resize-vertical'></span></td>"
+            + "<td class='name-cs' colspan='2'><div contenteditable>" + name_cs + "</div></td><td class='name-jp'><div contenteditable>" + name_jp + "</div></td>"
+            + "<td class='delete-term-td td-small-unit'><span class='glyphicon glyphicon-remove'></span></td></tr>");
+        new_id++;
+    }
+
+    var fixHelper = function(e, tr) {
+        var $originals = tr.children();
+        var $helper = tr.clone();
+        $helper.children().each(function(index) {
+            // Set helper cell sizes to match the original sizes
+            $(this).width($originals.eq(index).width());
+        });
+        return $helper;
+    }
+
+    $(function() {
+        $("#terms-table tbody").sortable({
+            helper: fixHelper,
+            axis: 'y',
+            items: "tr",
+            handle: ".glyphicon-resize-vertical",
+            update: function() {
+                checkFirstIndent();
+                $('#save-btn').show('fast');
+            }
+        });
+    });
+
+    function checkFirstIndent() {
+        var table = document.getElementById('terms-table');
+        var rowLength = table.rows.length;
+        for(var i=1; i<rowLength; i+=1){
+            var row = table.rows[i];
+            if ($(row).css('display') == 'none') {
+                continue;
+            }
+            var indent = $(row).attr('indent');
+            if (indent == 1) {
+                $(row).find('.decrease-indent').trigger('click');
+            } else {
+                return;
+            }
+        }
+    }
+
+    function prepareData() {
+        $('#save-btn').attr('disabled', 'disabled');
+        var ids = $("#terms-table tbody").sortable('toArray', { attribute: 'id' });
+        var indents = $("#terms-table tbody").sortable('toArray', { attribute: 'indent' });
+        if (ids.length != indents.length) {
+            alert("Unexpected error!");
+            return false;
+        }
+        var data = [];
+        for (var i = 0; i < ids.length; i++) {
+            var curr_id = '#' + ids[i]
+            var name_cs = $(curr_id).find('.name-cs').text();
+            var name_jp = $(curr_id).find('.name-jp').text();
+            data.push({'id': ids[i], 'indent': indents[i], 'name_cs': name_cs, 'name_jp': name_jp});
+        }
+        $.post('/settings/savecatalog', {
+            data: JSON.stringify(data)
+        }).done(function(result) {
+            if (result) {
+                location.reload();
+            }
+        }).fail(function() {
+            alert('{{ _('Data transfer failed!') }}');
+        });
+
+    }
+
+    $(window).bind('beforeunload', function() {
+        if ( $('#save-btn').css('display') != 'none') {
+            if ( $('#save-btn').prop('disabled') == false )  {
+                return "{{ _('There are unsaved items.') }}";
+            }
+        }
+    });
+</script>
+
+<div class="row">
+    <h1>{{ _('Edit Catalog') }}</h1>
+    {% include 'flash.html' %}
+    <br/>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div id="terms-view-div" class="inner-shadow-div" style="background-color: #f3f3f3;">
+            <table id="terms-table" class="table table-bordered table-condensed noselect" style="border: none !important;">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="border: none !important; background-color: transparent;"></th>
+                        <th colspan="2">{{ _('Czech Description') }}</th>
+                        <th style="width: 44%">{{ _('Japanese Description') }}</th>
+                        <th style="border: none !important; background-color: transparent;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if catalog %}
+                    {% for term in catalog %}
+                        <tr id="term_{{ term.id }}" class="item-row" {% if term.super_id %} indent="1" {% else %} indent="0" {% endif %}>
+                            {% if term.super_id %}
+                                <td class="decrease-indent td-small-unit horizontal"><span class="glyphicon glyphicon-chevron-left"></span></td>
+                                <td class="td-small-unit filler-td"></td>
+                                <td class="td-small-unit"><span class="vertical glyphicon glyphicon-resize-vertical"></span></td>
+                                <td class="name-cs"><div contenteditable>{{ term.name_CS }}</div></td>
+                            {% else %}
+                                <td class="increase-indent td-small-unit horizontal"><span class="glyphicon glyphicon-chevron-right"></span></td>
+                                <td class="td-small-unit"><span class="vertical glyphicon glyphicon-resize-vertical"></span></td>
+                                <td class="name-cs" colspan="2"><div contenteditable>{{ term.name_CS }}</div></td>
+                            {% endif %}
+                            <td class="name-jp"><div contenteditable>{{ term.name_JP }}</div></td>
+                            <td class="delete-term-td td-small-unit"><span class="glyphicon glyphicon-remove"></span></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+            <div style="text-align: right;">
+                <a href ="{{ url_for('settings') }}" class="btn btn-info btn-sm">{{ _('Back') }}</a>
+                <input type="button" id="save-btn" class="btn btn-danger btn-sm" onclick="return prepareData();" value="{{ _('Save changes') }}" style="display: none;"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <span class="btn btn-info btn-sm" onclick="$('#add-root-term-div').show('fast'); $('#new-root-term-cs').focus();">{{ _('Add new root term') }}</span>
+        <div id="add-root-term-div" style="display: none; border: 1px solid #dddddd; padding: 10px;">
+            <div class="clearfix">
+                <span style="float: left;"><h4>{{ _('New root term') }}</h4></span>
+                <span class="btn btn-danger btn-xs" style="float: right;" onclick="$('#add-root-term-div').hide('fast');">{{ _('close') }}</span>
+            </div>
+            <div>
+                <table style="table" class="invisible-table">
+                    <tr>
+                        <td>
+                            <label>{{ _('Czech description') }}</label>
+                        </td>
+                        <td>
+                            <input type="text" id="new-root-term-cs" class="form-control input-sm new-root-term-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>{{ _('Japanese description') }}</label>
+                        </td>
+                        <td>
+                            <input type="text" id="new-root-term-jp" class="form-control input-sm new-root-term-input"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <a id="add-root-term-btn" class="btn btn-info btn-sm" disabled="disabled">{{ _('Add term') }}</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

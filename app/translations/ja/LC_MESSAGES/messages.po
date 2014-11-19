@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-14 12:01+0900\n"
-"PO-Revision-Date: 2014-11-17 12:49+0900\n"
+"POT-Creation-Date: 2014-11-19 18:23+0900\n"
+"PO-Revision-Date: 2014-11-19 18:29+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -91,7 +91,7 @@ msgstr "カテゴリー"
 msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/forms.py:193 app/templates/shop/shop.html:301
+#: app/forms.py:193 app/templates/shop/shop.html:299
 msgid "Search"
 msgstr "検索"
 
@@ -309,23 +309,23 @@ msgstr "発注の詳細"
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsProduct.py:34
+#: app/viewsProduct.py:44
 msgid "New product successfully added."
 msgstr "新しい製品は追加されました。"
 
-#: app/viewsProduct.py:37 app/templates/product/addProduct.html:45
+#: app/viewsProduct.py:48 app/templates/product/addProduct.html:66
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:47 app/viewsRequest.py:93 app/viewsShop.py:113
+#: app/viewsProduct.py:62 app/viewsRequest.py:93 app/viewsShop.py:113
 msgid "Product not found."
 msgstr "製品は不明です。"
 
-#: app/viewsProduct.py:77
+#: app/viewsProduct.py:111
 msgid "Product successfully changed."
 msgstr "製品が変更されました。"
 
-#: app/viewsProduct.py:82 app/templates/product/editProduct.html:103
+#: app/viewsProduct.py:129 app/templates/product/editProduct.html:131
 msgid "Edit Product"
 msgstr "製品を変更する"
 
@@ -397,20 +397,24 @@ msgstr "ユーザーの情報が変更されました。"
 msgid "Edit User"
 msgstr "ユーザーの情報を編集"
 
-#: app/viewsSettings.py:136
+#: app/viewsSettings.py:128 app/templates/settings/editCatalog.html:155
+msgid "Edit Catalog"
+msgstr "カタログの編集"
+
+#: app/viewsSettings.py:206
 msgid "Data Import"
 msgstr "データのインポート"
 
-#: app/viewsSettings.py:144
+#: app/viewsSettings.py:214
 msgid "Data Export"
 msgstr "データのエクスポート"
 
-#: app/viewsSettings.py:165
+#: app/viewsSettings.py:235
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/viewsShop.py:57 app/templates/stock.html:155
-#: app/templates/stock.html:189
+#: app/viewsShop.py:57 app/templates/stock.html:161
+#: app/templates/stock.html:195
 msgid "All"
 msgstr "全て"
 
@@ -487,6 +491,14 @@ msgstr "製品のデータがありません！"
 msgid "Invalid data received."
 msgstr "受信されたデータは不正です！"
 
+#: app/templates/_catalog.html:66
+msgid "Close"
+msgstr "閉じる"
+
+#: app/templates/_catalog.html:101
+msgid "OK"
+msgstr "OK"
+
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
 #: app/templates/deliveries/deliveries.html:56
 #: app/templates/deliveries/deliveries.html:58
@@ -534,7 +546,7 @@ msgstr "Axis Mart"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:341 app/templates/shop/shop.html:346
+#: app/templates/shop/shop.html:349 app/templates/shop/shop.html:354
 msgid "pcs"
 msgstr "個"
 
@@ -610,7 +622,7 @@ msgstr "11月"
 msgid "Dec"
 msgstr "12月"
 
-#: app/templates/navbar_admin.html:16 app/templates/stock.html:208
+#: app/templates/navbar_admin.html:16 app/templates/stock.html:215
 #: app/templates/orders/createOrder.html:122
 msgid "Stock"
 msgstr "在庫"
@@ -693,22 +705,26 @@ msgid "Manage product categories"
 msgstr "製品カテゴリーの管理"
 
 #: app/templates/settings.html:16
+msgid "Manage catalog terms"
+msgstr "カタログキーワードの管理"
+
+#: app/templates/settings.html:21
 msgid "Manage makers"
 msgstr "メーカーの管理"
 
-#: app/templates/settings.html:21
+#: app/templates/settings.html:24
 msgid "Manage customers"
 msgstr "お客様の管理"
 
-#: app/templates/settings.html:24
+#: app/templates/settings.html:27
 msgid "Manage contacts"
 msgstr "連絡先の管理"
 
-#: app/templates/settings.html:29
+#: app/templates/settings.html:32
 msgid "Import data from csv"
 msgstr "CSVファイルからデータをインポート"
 
-#: app/templates/settings.html:32
+#: app/templates/settings.html:35
 msgid "Export data as csv"
 msgstr "CSVファイルとしてデータをエキスポート"
 
@@ -736,29 +752,29 @@ msgstr "降順 <= 0"
 msgid "ascending <= 0"
 msgstr "昇順 <= 0"
 
-#: app/templates/stock.html:125
+#: app/templates/stock.html:131
 msgid "Stock overview"
 msgstr "在庫の状況"
 
-#: app/templates/stock.html:141 app/templates/shop/shop.html:308
+#: app/templates/stock.html:147 app/templates/shop/shop.html:306
 msgid "Search results:"
 msgstr "検索結果"
 
-#: app/templates/stock.html:171
+#: app/templates/stock.html:177
 #: app/templates/deliveries/deliveryReport.html:16
 #: app/templates/supplies/supplyReport.html:21
 msgid "Product Code"
 msgstr "品番"
 
-#: app/templates/stock.html:182 app/templates/deliveries/deliveries.html:36
+#: app/templates/stock.html:188 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:26
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
 #: app/templates/orders/order.html:26 app/templates/orders/orders.html:36
 #: app/templates/orders/productorders.html:23
-#: app/templates/product/addProduct.html:75
-#: app/templates/product/editProduct.html:136
+#: app/templates/product/addProduct.html:96
+#: app/templates/product/editProduct.html:164
 #: app/templates/requests/createRequest.html:182
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
@@ -767,7 +783,7 @@ msgstr "品番"
 msgid "Maker"
 msgstr "メーカー"
 
-#: app/templates/stock.html:202 app/templates/deliveries/delivery.html:39
+#: app/templates/stock.html:209 app/templates/deliveries/delivery.html:39
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:39
 #: app/templates/requests/createRequest.html:192
@@ -779,7 +795,7 @@ msgstr "メーカー"
 msgid "Description CS"
 msgstr "チェコ語の説明"
 
-#: app/templates/stock.html:203 app/templates/deliveries/delivery.html:40
+#: app/templates/stock.html:210 app/templates/deliveries/delivery.html:40
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:40
 #: app/templates/requests/createRequest.html:195
@@ -792,26 +808,26 @@ msgstr "チェコ語の説明"
 msgid "Description JP"
 msgstr "日本語の説明"
 
-#: app/templates/stock.html:205 app/templates/orders/productorders.html:27
+#: app/templates/stock.html:212 app/templates/orders/productorders.html:27
 #: app/templates/requests/productrequests.html:27
 msgid "Unit Price"
 msgstr "単価"
 
-#: app/templates/stock.html:206 app/templates/orders/productorders.html:29
+#: app/templates/stock.html:213 app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
 #: app/templates/supplies/supplyProducts.html:115
 msgid "Retail Price"
 msgstr "小売価格"
 
-#: app/templates/stock.html:211 app/templates/orders/createOrder.html:123
+#: app/templates/stock.html:218 app/templates/orders/createOrder.html:123
 msgid "Req."
 msgstr "受注"
 
-#: app/templates/stock.html:214 app/templates/orders/createOrder.html:124
+#: app/templates/stock.html:221 app/templates/orders/createOrder.html:124
 msgid "Ord."
 msgstr "発注"
 
-#: app/templates/stock.html:217 app/templates/orders/createOrder.html:125
+#: app/templates/stock.html:224 app/templates/orders/createOrder.html:125
 msgid "Net."
 msgstr "正味"
 
@@ -854,8 +870,8 @@ msgid "Delivery from maker details"
 msgstr "メーカーから入荷の詳細"
 
 #: app/templates/deliveries/delivery.html:9 app/templates/orders/order.html:9
-#: app/templates/product/addProduct.html:48
-#: app/templates/product/editProduct.html:106
+#: app/templates/product/addProduct.html:69
+#: app/templates/product/editProduct.html:134
 #: app/templates/requests/request.html:9
 #: app/templates/settings/editCategory.html:16
 #: app/templates/settings/editContact.html:21
@@ -866,8 +882,8 @@ msgid "Back to the list"
 msgstr "一覧へ戻る"
 
 #: app/templates/deliveries/delivery.html:38
-#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:57
-#: app/templates/product/editProduct.html:118
+#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:78
+#: app/templates/product/editProduct.html:146
 #: app/templates/requests/request.html:43
 #: app/templates/supplies/supply.html:42
 msgid "Product code"
@@ -987,8 +1003,8 @@ msgstr "次へ"
 #: app/templates/deliveries/newDelivery.html:129
 #: app/templates/orders/createOrder.html:106
 #: app/templates/orders/createOrder.html:174
-#: app/templates/product/addProduct.html:175
-#: app/templates/product/editProduct.html:237
+#: app/templates/product/addProduct.html:216
+#: app/templates/product/editProduct.html:286
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:168
@@ -1184,58 +1200,70 @@ msgstr "チェコ語の品名"
 msgid "Product name JP"
 msgstr "日本語の品名"
 
-#: app/templates/product/addProduct.html:89
-#: app/templates/product/editProduct.html:150
+#: app/templates/product/addProduct.html:110
+#: app/templates/product/editProduct.html:178
+#: app/templates/settings/editCatalog.html:211
 msgid "Czech description"
 msgstr "チェコ語の説明"
 
-#: app/templates/product/addProduct.html:103
-#: app/templates/product/editProduct.html:164
+#: app/templates/product/addProduct.html:124
+#: app/templates/product/editProduct.html:192
+#: app/templates/settings/editCatalog.html:219
 msgid "Japanese description"
 msgstr "日本語の説明"
 
-#: app/templates/product/addProduct.html:117
-#: app/templates/product/editProduct.html:178
+#: app/templates/product/addProduct.html:138
+#: app/templates/product/editProduct.html:206
 msgid "Unit price"
 msgstr "単価"
 
-#: app/templates/product/addProduct.html:131
-#: app/templates/product/editProduct.html:192
+#: app/templates/product/addProduct.html:152
+#: app/templates/product/editProduct.html:220
 msgid "Retail price"
 msgstr "小売価格"
 
-#: app/templates/product/addProduct.html:145
-#: app/templates/product/editProduct.html:206
+#: app/templates/product/addProduct.html:166
+#: app/templates/product/editProduct.html:234
 msgid "Quantity on stock"
 msgstr "在庫数"
 
-#: app/templates/product/addProduct.html:159
-#: app/templates/product/editProduct.html:220
+#: app/templates/product/addProduct.html:180
+#: app/templates/product/editProduct.html:248
 msgid "Axis Mart node number"
 msgstr "アクシスマートのURL「ノード」番号"
 
-#: app/templates/product/addProduct.html:174
-#: app/templates/product/editProduct.html:236
+#: app/templates/product/addProduct.html:195
+#: app/templates/product/editProduct.html:263
+msgid "Catalog terms"
+msgstr "カタログキーワード"
+
+#: app/templates/product/addProduct.html:197
+#: app/templates/product/editProduct.html:265
+msgid "Edit terms"
+msgstr "キーワードを編集"
+
+#: app/templates/product/addProduct.html:215
+#: app/templates/product/editProduct.html:285
 msgid "Save product"
 msgstr "製品を保存"
 
-#: app/templates/product/editProduct.html:41
+#: app/templates/product/editProduct.html:48
 msgid "Do you really want to delete this product?"
 msgstr "本当にこの製品を削除しますか？"
 
-#: app/templates/product/editProduct.html:51
+#: app/templates/product/editProduct.html:58
 msgid "Do you really want to delete this image?"
 msgstr "本当にこの画像を削除しますか？"
 
-#: app/templates/product/editProduct.html:245
+#: app/templates/product/editProduct.html:294
 msgid "Product images"
 msgstr "製品の画像"
 
-#: app/templates/product/editProduct.html:261
+#: app/templates/product/editProduct.html:310
 msgid "New image:"
 msgstr "新しい画像："
 
-#: app/templates/product/editProduct.html:264
+#: app/templates/product/editProduct.html:313
 msgid "upload"
 msgstr "アップロード"
 
@@ -1520,6 +1548,48 @@ msgstr "データは次のコラム順で並べないといけない："
 msgid "Do NOT use quotation marks around strings!"
 msgstr "文字列をクォーテーションマークで囲まないこと！"
 
+#: app/templates/settings/editCatalog.html:140
+#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
+#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
+msgid "Data transfer failed!"
+msgstr "データ通信は失敗しました！"
+
+#: app/templates/settings/editCatalog.html:148
+msgid "There are unsaved items."
+msgstr "保存されていない項目があります。"
+
+#: app/templates/settings/editCatalog.html:167
+msgid "Czech Description"
+msgstr "チェコ語の説明"
+
+#: app/templates/settings/editCatalog.html:168
+msgid "Japanese Description"
+msgstr "日本語の説明"
+
+#: app/templates/settings/editCatalog.html:194
+msgid "Back"
+msgstr "戻る"
+
+#: app/templates/settings/editCatalog.html:195
+msgid "Save changes"
+msgstr "変更を保存する"
+
+#: app/templates/settings/editCatalog.html:201
+msgid "Add new root term"
+msgstr "新規ルートキーワードを追加"
+
+#: app/templates/settings/editCatalog.html:204
+msgid "New root term"
+msgstr "新規ルートキーワード"
+
+#: app/templates/settings/editCatalog.html:205
+msgid "close"
+msgstr "閉じる"
+
+#: app/templates/settings/editCatalog.html:228
+msgid "Add term"
+msgstr "キーワードを追加"
+
 #: app/templates/settings/editCategory.html:6
 msgid "Do you really want to delete this category?"
 msgstr "本当にこのカテゴリーを削除しますか？"
@@ -1647,48 +1717,43 @@ msgstr "いいえ、ショップに戻る"
 msgid "Yes, order!"
 msgstr "はい、発注します！"
 
-#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
-#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
-msgid "Data transfer failed!"
-msgstr "データ通信は失敗しました！"
-
-#: app/templates/shop/shop.html:292
+#: app/templates/shop/shop.html:290
 msgid "Category:"
 msgstr "カテゴリー"
 
-#: app/templates/shop/shop.html:296
+#: app/templates/shop/shop.html:294
 msgid "Available items only"
 msgstr "発注可能な商品のみ"
 
-#: app/templates/shop/shop.html:309
+#: app/templates/shop/shop.html:307
 msgid "Clear search"
 msgstr "検索の解除"
 
-#: app/templates/shop/shop.html:338
+#: app/templates/shop/shop.html:346
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:344
+#: app/templates/shop/shop.html:352
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:349
+#: app/templates/shop/shop.html:357
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:355
+#: app/templates/shop/shop.html:363
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:401
+#: app/templates/shop/shop.html:409
 msgid "Cart Content"
 msgstr "ショッピングカートの内容"
 
-#: app/templates/shop/shop.html:402
+#: app/templates/shop/shop.html:410
 msgid "Shopping cart is empty."
 msgstr "ショッピングカートに商品がありません。"
 
-#: app/templates/shop/shop.html:415
+#: app/templates/shop/shop.html:423
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 

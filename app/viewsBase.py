@@ -105,9 +105,9 @@ def stock(page=1):
     curr_search = None
     if session['search_string']:
         curr_search = session['search_string']
-        products = products.filter(or_(Product.code.like('%' + session['search_string'] + '%'),
-                                       (Product.desc_CS.like('%' + session['search_string'] + '%')),
-                                       (Product.desc_JP.like('%' + session['search_string'] + '%'))))
+        products = products.filter(or_(Product.code.ilike('%' + session['search_string'] + '%'),
+                                       (Product.desc_CS.ilike('%' + session['search_string'] + '%')),
+                                       (Product.desc_JP.ilike('%' + session['search_string'] + '%'))))
     if g.maker_id is not None:
         products = products.filter(Product.maker_id == int(g.maker_id))
         g.category_id = Maker.query.filter_by(id=g.maker_id).one().category_id
@@ -324,6 +324,7 @@ def get_locale():
     return lang
 
 
+# AJAX functions below
 @app.route('/prepareReqGraphData', methods=['POST'])
 @login_required
 def prepareReqGraphData():

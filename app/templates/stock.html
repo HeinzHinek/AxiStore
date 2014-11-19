@@ -76,7 +76,7 @@ $(document).ready( function() {
 
     $('.td-redir-edit').click( function() {
         id = $(this).parent().attr('id');
-        window.location.href = '{{ url_for("editProduct") }}' + '/' + id;
+        window.location.href = '{{ url_for("editProduct") }}' + '/' + id + '?stock_page={{ products.page }}';
     });
 
     $('.td-qty-edit').click( function() {
@@ -114,6 +114,12 @@ $(document).ready( function() {
             target_url = target_url + '/edit';
         }
         window.open(target_url);
+    });
+
+    $('.catalog-a').hover(function() {
+        $(this).siblings(".catalog-terms-hover-div").show('fast');
+    }, function() {
+        $(this).siblings(".catalog-terms-hover-div").hide('fast');
     });
 
 });
@@ -198,7 +204,8 @@ $(document).ready( function() {
                 <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
             </div>
         </th>
-        <th></th>
+        <th><span class="glyphicon glyphicon-book"></span></th>
+        <th><span class="glyphicon glyphicon-camera"></span></th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
         <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
         <th><span class="glyphicon glyphicon-shopping-cart"></span></th>
@@ -225,6 +232,22 @@ $(document).ready( function() {
         <td class="no-border row-indicator-left"></td>
         <td class="clickable-td td-redir-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.code}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">
+            {% if product.catalog_terms|length < 1 %}
+                <span class="glyphicon glyphicon-remove" style="color: crimson;"></span>
+            {% else %}
+                <a class="catalog-a"><span class="glyphicon glyphicon-ok"></span></a>
+                <div class="catalog-terms-hover-div" style="display: none; position: absolute; z-index: 1000;">
+                    {% for term in product.catalog_terms %}
+                        {% if term.catalog.super_id == None %}
+                            <label class="label label-sm label-warning" style="display: block; margin: 0 0 0 10px;">{{ term.catalog.name_CS }}</label>
+                        {% else %}
+                            <label class="label label-sm label-success" style="display: block; margin: 0 0 0 20px;">{{ term.catalog.name_CS }}</label>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </td>
         <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
             {% if product.img_url %}
                 <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}">

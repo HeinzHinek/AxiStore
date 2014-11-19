@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from forms import AddProductForm
-from models import Product, Maker
+from models import Product, Maker, Catalog, CatalogedProducts
 from flask_login import login_required
 from flask.ext.babel import gettext
 from imageHelper import getImgUrls
@@ -17,6 +17,7 @@ def addProduct():
     if makers:
         form.maker.choices = [(a.id, a.name) for a in makers]
     if form.validate_on_submit():
+
         product = Product()
         product.code = form.code.data
         product.maker_id = form.maker.data
@@ -31,10 +32,21 @@ def addProduct():
             product.category_id = category_id
         db.session.add(product)
         db.session.commit()
+
+        term_ids_str = request.form.getlist('term')
+        for id in term_ids_str:
+            t = CatalogedProducts()
+            t.product_id = product.id
+            t.catalog_id = int(id)
+            db.session.add(t)
+        db.session.commit()
+
         flash(gettext("New product successfully added."))
         return redirect(url_for("editProduct", id=product.id))
+    catalog = prepare_catalog()
     return render_template("product/addProduct.html",
                            title=gettext('Add new product'),
+                           catalog=catalog,
                            form=form)
 
 
@@ -42,10 +54,13 @@ def addProduct():
 @app.route('/editproduct/<int:id>', methods=['GET', 'POST'])
 @login_required
 def editProduct(id=0):
+    # for stock: return to the same page
+    stock_page = request.args.get('stock_page') if request.args.get('stock_page') else 1
+
     product = Product.query.filter_by(id=id).first()
     if product == None:
         flash(gettext('Product not found.'))
-        return redirect(url_for('stock'))
+        return redirect(url_for('stock', page=stock_page))
     form = AddProductForm(obj=product)
     makers = Maker.query.all()
     if makers:
@@ -54,11 +69,30 @@ def editProduct(id=0):
     form.request = request
     if form.validate_on_submit():
 
+        new_ids_str = request.form.getlist('term')
+        new_ids = []
+        for id in new_ids_str:
+            new_ids.append(int(id))
+        old_ids = []
+        for term in product.catalog_terms:
+            old_ids.append(term.catalog_id)
+
+        for id in old_ids:
+            if id not in new_ids:
+                t = CatalogedProducts.query.filter_by(catalog_id=id).first()
+                db.session.delete(t)
+        for id in new_ids:
+            if id not in old_ids:
+                t = CatalogedProducts()
+                t.product_id = product.id
+                t.catalog_id = id
+                db.session.add(t)
+
         #delete product
         if 'delete' in request.form:
             db.session.delete(product)
             db.session.commit()
-            return redirect(url_for("stock"))
+            return redirect(url_for("stock", page=stock_page))
 
         #update product
         product.code = form.code.data
@@ -75,15 +109,47 @@ def editProduct(id=0):
         db.session.add(product)
         db.session.commit()
         flash(gettext("Product successfully changed."))
-        return redirect(url_for("stock"))
-    selected = product.maker_id
+        return redirect(url_for("stock", page=stock_page))
+    selected_maker = product.maker_id
     imgUrls = getImgUrls(product.id)
+
+    catalog = prepare_catalog()
+
+    terms = product.catalog_terms
+    terms.sort(key=lambda x: x.catalog.order)
+    selected_catalog_terms = []
+    for term in terms:
+        if term.catalog.super_id == None:
+            level = 0
+        else:
+            level = 1
+        selected_catalog_terms.append([term.catalog.id, level, unicode(term.catalog.name_CS)])
+
     return render_template('product/editProduct.html',
                            title=gettext("Edit Product"),
                            product=product,
+                           catalog=catalog,
                            imgUrls=imgUrls,
-                           selected_category=selected,
+                           selected_maker=selected_maker,
+                           selected_catalog_terms=selected_catalog_terms,
+                           stock_page=stock_page,
                            form=form)
+
+
+def prepare_catalog():
+    root_terms = Catalog.query.filter(Catalog.super_id == None)\
+        .order_by(Catalog.order)\
+        .all()
+    catalog = []
+    for rt in root_terms:
+        chi = []
+        children = Catalog.query.filter_by(super_id=rt.id)\
+            .order_by(Catalog.order)\
+            .all()
+        for child in children:
+            chi.append(child)
+        catalog.append([rt, chi])
+    return catalog
 
 
 @app.route('/checkProductId', methods=['POST'])

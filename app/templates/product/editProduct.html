@@ -31,7 +31,14 @@
 
         $(".fancybox").fancybox();
 
-        $("#maker_select").val({{ selected_category }});
+        $("#maker_select").val({{ selected_maker }});
+
+        var original_catalog_terms = []
+        {% for term in selected_catalog_terms %}
+            var temp = [ {{ term[0] }}, {{ term[1] }}, "{{ term[2] }}" ];
+            original_catalog_terms.push( temp );
+        {% endfor %}
+        fillCategoryTerms(original_catalog_terms);
 
         $('#code_input').focusout(function() {
             checkProductId($(this).val());
@@ -94,6 +101,27 @@
             return false;
         });
     });
+
+    function categoryDataReady() {
+        var checked = returnChecked();
+        fillCategoryTerms(checked);
+    }
+
+    function fillCategoryTerms(checked) {
+        $('#product-catalog-terms-container').empty();
+        for (var i=0; i<checked.length; i++) {
+            var new_id = 'term-' + checked[i][0]
+            if (checked[i][1] == '0') {
+                $('#parent-template').clone().attr('id', new_id).appendTo('#product-catalog-terms-container');
+            } else {
+                $('#child-template').clone().attr('id', new_id).appendTo('#product-catalog-terms-container');
+            }
+            $('#' + new_id).find('label').html(checked[i][2]);
+            $('#' + new_id).css('display', 'block');
+            var hidden = "<input type='hidden' name='term' value=" + checked[i][0] + " />";
+            $(hidden).appendTo( '#' + new_id );
+        }
+    }
 </script>
 
 <link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
@@ -103,7 +131,7 @@
     <h1>{{ _('Edit Product') }}</h1>
     {% include 'flash.html' %}
     <div>
-        <a href="{{ url_for('stock') }}">{{ _('Back to the list') }}</a>
+        <a href="{{ url_for('stock', page=stock_page) }}">{{ _('Back to the list') }}</a>
     </div>
 </div>
 <br/>
@@ -177,7 +205,7 @@
                 <td>
                 <label>{{ _('Unit price') }}:</label>
                 <div class="input-group">
-                    {{form.price_unit(size=80, class="form-control")}}
+                    {{form.price_unit(size=20, class="form-control")}}
                 </div>
                 {% for error in form.errors.price_unit %}
                 <div class="alert alert-danger" role="alert" style="max-width: 400px;">
@@ -191,7 +219,7 @@
                 <td>
                 <label>{{ _('Retail price') }}:</label>
                 <div class="input-group">
-                    {{form.price_retail(size=80, class="form-control")}}
+                    {{form.price_retail(size=20, class="form-control")}}
                 </div>
                 {% for error in form.errors.price_retail %}
                 <div class="alert alert-danger" role="alert" style="max-width: 400px;">
@@ -229,12 +257,33 @@
                     {% endfor %}
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <div class="well">
+                        <label>{{ _('Catalog terms') }}:</label>
+
+                        <input type="button" class="btn btn-info btn-sm" style="float: right;" value="{{ _('Edit terms') }}" onclick="showCategoriesPicker();"/>
+
+                        <div id="parent-template" style="display: none;">
+                            <label class="label label-success term-label-parent"></label>
+                        </div>
+                        <div id="child-template" style="display: none; margin-left: 20px;">
+                            <label class="label label-warning term-label-child"></label>
+                        </div>
+
+                        <div id="product-catalog-terms-container">
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
             <br/>
             <tr>
                 <td>
                     <input type="hidden" name="orig_code" value="{{ product.code }}"/>
+                    <input type="hidden" name="stock_page" value="{{ stock_page }}"/>
                     <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
-                    <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock")}}'" value="{{ _('Cancel') }}"/>
+                    <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock", page=stock_page)}}'" value="{{ _('Cancel') }}"/>
                 </td>
             </tr>
         </table>
@@ -268,4 +317,9 @@
 </div>
 
 </div>
+
+<!-- Catalog div -->
+{% from "_catalog.html" import render_catalog %}
+{{ render_catalog(catalog, product.catalog_terms) }}
+
 {% endblock %}

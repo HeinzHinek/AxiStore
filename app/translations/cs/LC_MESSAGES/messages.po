@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-14 12:01+0900\n"
-"PO-Revision-Date: 2014-11-14 12:02+0900\n"
+"POT-Creation-Date: 2014-11-19 18:23+0900\n"
+"PO-Revision-Date: 2014-11-19 18:25+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -92,7 +92,7 @@ msgstr "Kategorie"
 msgid "Available item only"
 msgstr "Pouze dostupné"
 
-#: app/forms.py:193 app/templates/shop/shop.html:301
+#: app/forms.py:193 app/templates/shop/shop.html:299
 msgid "Search"
 msgstr "Hledat"
 
@@ -310,23 +310,23 @@ msgstr "Detaily objednávky"
 msgid "Orders to maker for product"
 msgstr "Objednávky produktu výrobci"
 
-#: app/viewsProduct.py:34
+#: app/viewsProduct.py:44
 msgid "New product successfully added."
 msgstr "Nový produkt úspěšně přidán."
 
-#: app/viewsProduct.py:37 app/templates/product/addProduct.html:45
+#: app/viewsProduct.py:48 app/templates/product/addProduct.html:66
 msgid "Add new product"
 msgstr "Přidat nový produkt"
 
-#: app/viewsProduct.py:47 app/viewsRequest.py:93 app/viewsShop.py:113
+#: app/viewsProduct.py:62 app/viewsRequest.py:93 app/viewsShop.py:113
 msgid "Product not found."
 msgstr "Produkt nenalezen."
 
-#: app/viewsProduct.py:77
+#: app/viewsProduct.py:111
 msgid "Product successfully changed."
 msgstr "Produkt úspěšně pozměněn."
 
-#: app/viewsProduct.py:82 app/templates/product/editProduct.html:103
+#: app/viewsProduct.py:129 app/templates/product/editProduct.html:131
 msgid "Edit Product"
 msgstr "Editace produktu"
 
@@ -398,20 +398,24 @@ msgstr "Detaily zákazníka úspěšně pozměněny."
 msgid "Edit User"
 msgstr "Editace uživatele"
 
-#: app/viewsSettings.py:136
+#: app/viewsSettings.py:128 app/templates/settings/editCatalog.html:155
+msgid "Edit Catalog"
+msgstr "Editace Katalogu"
+
+#: app/viewsSettings.py:206
 msgid "Data Import"
 msgstr "Import dat"
 
-#: app/viewsSettings.py:144
+#: app/viewsSettings.py:214
 msgid "Data Export"
 msgstr "Export dat"
 
-#: app/viewsSettings.py:165
+#: app/viewsSettings.py:235
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
-#: app/viewsShop.py:57 app/templates/stock.html:155
-#: app/templates/stock.html:189
+#: app/viewsShop.py:57 app/templates/stock.html:161
+#: app/templates/stock.html:195
 msgid "All"
 msgstr "Vše"
 
@@ -488,6 +492,14 @@ msgstr "Chybí data produktu!"
 msgid "Invalid data received."
 msgstr "Přijata neplatná data!"
 
+#: app/templates/_catalog.html:66
+msgid "Close"
+msgstr "Zavřít"
+
+#: app/templates/_catalog.html:101
+msgid "OK"
+msgstr "OK"
+
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
 #: app/templates/deliveries/deliveries.html:56
 #: app/templates/deliveries/deliveries.html:58
@@ -535,7 +547,7 @@ msgstr "Axis Mart"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:341 app/templates/shop/shop.html:346
+#: app/templates/shop/shop.html:349 app/templates/shop/shop.html:354
 msgid "pcs"
 msgstr "ks"
 
@@ -611,7 +623,7 @@ msgstr "Listopad"
 msgid "Dec"
 msgstr "Prosinec"
 
-#: app/templates/navbar_admin.html:16 app/templates/stock.html:208
+#: app/templates/navbar_admin.html:16 app/templates/stock.html:215
 #: app/templates/orders/createOrder.html:122
 msgid "Stock"
 msgstr "Sklad"
@@ -694,22 +706,26 @@ msgid "Manage product categories"
 msgstr "Správa kategorií produktů"
 
 #: app/templates/settings.html:16
+msgid "Manage catalog terms"
+msgstr "Správa výrazů katalogu"
+
+#: app/templates/settings.html:21
 msgid "Manage makers"
 msgstr "Správa výrobců"
 
-#: app/templates/settings.html:21
+#: app/templates/settings.html:24
 msgid "Manage customers"
 msgstr "Správa zákazníků"
 
-#: app/templates/settings.html:24
+#: app/templates/settings.html:27
 msgid "Manage contacts"
 msgstr "Správa kontaktů"
 
-#: app/templates/settings.html:29
+#: app/templates/settings.html:32
 msgid "Import data from csv"
 msgstr "Importovat data z csv souboru"
 
-#: app/templates/settings.html:32
+#: app/templates/settings.html:35
 msgid "Export data as csv"
 msgstr "Exportovat data jako csv soubor"
 
@@ -737,29 +753,29 @@ msgstr "sestupně <= 0"
 msgid "ascending <= 0"
 msgstr "vzestupně <= 0"
 
-#: app/templates/stock.html:125
+#: app/templates/stock.html:131
 msgid "Stock overview"
 msgstr "Přehled skladu"
 
-#: app/templates/stock.html:141 app/templates/shop/shop.html:308
+#: app/templates/stock.html:147 app/templates/shop/shop.html:306
 msgid "Search results:"
 msgstr "Výsledky hledání"
 
-#: app/templates/stock.html:171
+#: app/templates/stock.html:177
 #: app/templates/deliveries/deliveryReport.html:16
 #: app/templates/supplies/supplyReport.html:21
 msgid "Product Code"
 msgstr "Kód"
 
-#: app/templates/stock.html:182 app/templates/deliveries/deliveries.html:36
+#: app/templates/stock.html:188 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:26
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
 #: app/templates/orders/order.html:26 app/templates/orders/orders.html:36
 #: app/templates/orders/productorders.html:23
-#: app/templates/product/addProduct.html:75
-#: app/templates/product/editProduct.html:136
+#: app/templates/product/addProduct.html:96
+#: app/templates/product/editProduct.html:164
 #: app/templates/requests/createRequest.html:182
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
@@ -768,7 +784,7 @@ msgstr "Kód"
 msgid "Maker"
 msgstr "Výrobce"
 
-#: app/templates/stock.html:202 app/templates/deliveries/delivery.html:39
+#: app/templates/stock.html:209 app/templates/deliveries/delivery.html:39
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:39
 #: app/templates/requests/createRequest.html:192
@@ -780,7 +796,7 @@ msgstr "Výrobce"
 msgid "Description CS"
 msgstr "Popis ČJ"
 
-#: app/templates/stock.html:203 app/templates/deliveries/delivery.html:40
+#: app/templates/stock.html:210 app/templates/deliveries/delivery.html:40
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:40
 #: app/templates/requests/createRequest.html:195
@@ -793,26 +809,26 @@ msgstr "Popis ČJ"
 msgid "Description JP"
 msgstr "Popis JP"
 
-#: app/templates/stock.html:205 app/templates/orders/productorders.html:27
+#: app/templates/stock.html:212 app/templates/orders/productorders.html:27
 #: app/templates/requests/productrequests.html:27
 msgid "Unit Price"
 msgstr "Nák. cena"
 
-#: app/templates/stock.html:206 app/templates/orders/productorders.html:29
+#: app/templates/stock.html:213 app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
 #: app/templates/supplies/supplyProducts.html:115
 msgid "Retail Price"
 msgstr "Mal. cena"
 
-#: app/templates/stock.html:211 app/templates/orders/createOrder.html:123
+#: app/templates/stock.html:218 app/templates/orders/createOrder.html:123
 msgid "Req."
 msgstr "Popt."
 
-#: app/templates/stock.html:214 app/templates/orders/createOrder.html:124
+#: app/templates/stock.html:221 app/templates/orders/createOrder.html:124
 msgid "Ord."
 msgstr "Obj."
 
-#: app/templates/stock.html:217 app/templates/orders/createOrder.html:125
+#: app/templates/stock.html:224 app/templates/orders/createOrder.html:125
 msgid "Net."
 msgstr "Čist."
 
@@ -855,8 +871,8 @@ msgid "Delivery from maker details"
 msgstr "Detaily dodávky od výrobce "
 
 #: app/templates/deliveries/delivery.html:9 app/templates/orders/order.html:9
-#: app/templates/product/addProduct.html:48
-#: app/templates/product/editProduct.html:106
+#: app/templates/product/addProduct.html:69
+#: app/templates/product/editProduct.html:134
 #: app/templates/requests/request.html:9
 #: app/templates/settings/editCategory.html:16
 #: app/templates/settings/editContact.html:21
@@ -867,8 +883,8 @@ msgid "Back to the list"
 msgstr "Zpět na seznam"
 
 #: app/templates/deliveries/delivery.html:38
-#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:57
-#: app/templates/product/editProduct.html:118
+#: app/templates/orders/order.html:38 app/templates/product/addProduct.html:78
+#: app/templates/product/editProduct.html:146
 #: app/templates/requests/request.html:43
 #: app/templates/supplies/supply.html:42
 msgid "Product code"
@@ -988,8 +1004,8 @@ msgstr "Pokračovat"
 #: app/templates/deliveries/newDelivery.html:129
 #: app/templates/orders/createOrder.html:106
 #: app/templates/orders/createOrder.html:174
-#: app/templates/product/addProduct.html:175
-#: app/templates/product/editProduct.html:237
+#: app/templates/product/addProduct.html:216
+#: app/templates/product/editProduct.html:286
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:168
@@ -1186,58 +1202,70 @@ msgstr "Název produktu CS"
 msgid "Product name JP"
 msgstr "Název produktu JP"
 
-#: app/templates/product/addProduct.html:89
-#: app/templates/product/editProduct.html:150
+#: app/templates/product/addProduct.html:110
+#: app/templates/product/editProduct.html:178
+#: app/templates/settings/editCatalog.html:211
 msgid "Czech description"
 msgstr "Popis česky"
 
-#: app/templates/product/addProduct.html:103
-#: app/templates/product/editProduct.html:164
+#: app/templates/product/addProduct.html:124
+#: app/templates/product/editProduct.html:192
+#: app/templates/settings/editCatalog.html:219
 msgid "Japanese description"
 msgstr "Popis japonsky"
 
-#: app/templates/product/addProduct.html:117
-#: app/templates/product/editProduct.html:178
+#: app/templates/product/addProduct.html:138
+#: app/templates/product/editProduct.html:206
 msgid "Unit price"
 msgstr "Nákupní cena"
 
-#: app/templates/product/addProduct.html:131
-#: app/templates/product/editProduct.html:192
+#: app/templates/product/addProduct.html:152
+#: app/templates/product/editProduct.html:220
 msgid "Retail price"
 msgstr "Maloobch. cena"
 
-#: app/templates/product/addProduct.html:145
-#: app/templates/product/editProduct.html:206
+#: app/templates/product/addProduct.html:166
+#: app/templates/product/editProduct.html:234
 msgid "Quantity on stock"
 msgstr "Množsví na skladě"
 
-#: app/templates/product/addProduct.html:159
-#: app/templates/product/editProduct.html:220
+#: app/templates/product/addProduct.html:180
+#: app/templates/product/editProduct.html:248
 msgid "Axis Mart node number"
 msgstr "Číslo \"node\" na Axis Martu"
 
-#: app/templates/product/addProduct.html:174
-#: app/templates/product/editProduct.html:236
+#: app/templates/product/addProduct.html:195
+#: app/templates/product/editProduct.html:263
+msgid "Catalog terms"
+msgstr "Výrazy katalogu"
+
+#: app/templates/product/addProduct.html:197
+#: app/templates/product/editProduct.html:265
+msgid "Edit terms"
+msgstr "Editace termínů"
+
+#: app/templates/product/addProduct.html:215
+#: app/templates/product/editProduct.html:285
 msgid "Save product"
 msgstr "Uložit produkt"
 
-#: app/templates/product/editProduct.html:41
+#: app/templates/product/editProduct.html:48
 msgid "Do you really want to delete this product?"
 msgstr "Chcete opravdu smazat tento produkt?"
 
-#: app/templates/product/editProduct.html:51
+#: app/templates/product/editProduct.html:58
 msgid "Do you really want to delete this image?"
 msgstr "Chcete opravdu smazat tento obrázek?"
 
-#: app/templates/product/editProduct.html:245
+#: app/templates/product/editProduct.html:294
 msgid "Product images"
 msgstr "Obrázky výrobku"
 
-#: app/templates/product/editProduct.html:261
+#: app/templates/product/editProduct.html:310
 msgid "New image:"
 msgstr "Nový obrázek:"
 
-#: app/templates/product/editProduct.html:264
+#: app/templates/product/editProduct.html:313
 msgid "upload"
 msgstr "nahrát"
 
@@ -1522,6 +1550,48 @@ msgstr "Data musí být seřazena podle tohoto pořadí sloupců:"
 msgid "Do NOT use quotation marks around strings!"
 msgstr "Nepoužívejte uvozovky kolem řetězců!"
 
+#: app/templates/settings/editCatalog.html:140
+#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
+#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
+msgid "Data transfer failed!"
+msgstr "Přenos dat selhal!"
+
+#: app/templates/settings/editCatalog.html:148
+msgid "There are unsaved items."
+msgstr "Některé položky nejsou uloženy."
+
+#: app/templates/settings/editCatalog.html:167
+msgid "Czech Description"
+msgstr "Popis česky"
+
+#: app/templates/settings/editCatalog.html:168
+msgid "Japanese Description"
+msgstr "Popis japonsky"
+
+#: app/templates/settings/editCatalog.html:194
+msgid "Back"
+msgstr "Zpět"
+
+#: app/templates/settings/editCatalog.html:195
+msgid "Save changes"
+msgstr "Uložit změny"
+
+#: app/templates/settings/editCatalog.html:201
+msgid "Add new root term"
+msgstr "Přidat nový kořenový termín"
+
+#: app/templates/settings/editCatalog.html:204
+msgid "New root term"
+msgstr "Nový kořenový termín"
+
+#: app/templates/settings/editCatalog.html:205
+msgid "close"
+msgstr "zavřít"
+
+#: app/templates/settings/editCatalog.html:228
+msgid "Add term"
+msgstr "Přidat termín"
+
 #: app/templates/settings/editCategory.html:6
 msgid "Do you really want to delete this category?"
 msgstr "Chcete opravdu smazat tuto kategorii?"
@@ -1649,48 +1719,43 @@ msgstr "Ne, vrátit se do obchodu"
 msgid "Yes, order!"
 msgstr "Ano, objednat!"
 
-#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
-#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
-msgid "Data transfer failed!"
-msgstr "Přenos dat selhal!"
-
-#: app/templates/shop/shop.html:292
+#: app/templates/shop/shop.html:290
 msgid "Category:"
 msgstr "Kategorie:"
 
-#: app/templates/shop/shop.html:296
+#: app/templates/shop/shop.html:294
 msgid "Available items only"
 msgstr "Pouze dostupné položky"
 
-#: app/templates/shop/shop.html:309
+#: app/templates/shop/shop.html:307
 msgid "Clear search"
 msgstr "Zrušit hledání"
 
-#: app/templates/shop/shop.html:338
+#: app/templates/shop/shop.html:346
 msgid "Available:"
 msgstr "Dostupné:"
 
-#: app/templates/shop/shop.html:344
+#: app/templates/shop/shop.html:352
 msgid "On the way:"
 msgstr "Na cestě:"
 
-#: app/templates/shop/shop.html:349
+#: app/templates/shop/shop.html:357
 msgid "Retail Price:"
 msgstr "Maloobch. cena"
 
-#: app/templates/shop/shop.html:355
+#: app/templates/shop/shop.html:363
 msgid "Your Price:"
 msgstr "Vaše cena:"
 
-#: app/templates/shop/shop.html:401
+#: app/templates/shop/shop.html:409
 msgid "Cart Content"
 msgstr "Obsah nákupního košíku"
 
-#: app/templates/shop/shop.html:402
+#: app/templates/shop/shop.html:410
 msgid "Shopping cart is empty."
 msgstr "Nákupní košík je prázdný."
 
-#: app/templates/shop/shop.html:415
+#: app/templates/shop/shop.html:423
 msgid "No products found."
 msgstr "Žádný produkt nenalezen."
 

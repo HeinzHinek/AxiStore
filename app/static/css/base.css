@@ -151,3 +151,93 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+.inner-shadow-div {
+    padding: 30px;
+    -webkit-box-shadow:inset 0 0 3px 3px #CCCCCC;
+    box-shadow:inset 0 0 3px 3px #CCCCCC;
+}
+
+.invisible-table {
+    boder: none;
+}
+
+.invisible-table td {
+    padding: 5px;
+}
+
+#terms-table td {
+    background-color: white;
+}
+
+#terms-table th {
+    padding: 5px 10px;
+    background-color: #666666;
+    color: white;
+}
+
+.td-small-unit {
+    border-right: none;
+    width: 30px;
+    text-align: center !important;
+    padding: 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.td-small-unit span.vertical {
+    vertical-align: middle !important;
+    font-size: 16px;
+    color: #666666;
+    cursor: move;
+}
+
+.td-small-unit span.vertical:hover {
+    color: #6666ff;
+}
+
+.changed-tr td {
+    background-color: #ffdddd !important;
+}
+
+.horizontal {
+    border-right: 3px double #dddddd !important;
+    color: green;
+    cursor: pointer;
+}
+
+.horizontal:hover {
+    color: lime;
+}
+
+.delete-term-td {
+    vertical-align: middle;
+    color: crimson;
+    cursor: pointer;
+}
+
+.delete-term-td:hover {
+    color: red;
+}
+
+.term-label-parent {
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    width: 270px;
+    font-size: 1.1em !important;
+    white-space: normal !important;
+    text-align: left !important;
+}
+
+.term-label-child {
+    display: inline-block !important;
+    padding: 5px 10px !important;
+    width: 250px;
+    font-size: 1em !important;
+    white-space: normal !important;
+    text-align: left !important;
+}

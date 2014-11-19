@@ -1,0 +1,155 @@
+{% macro render_catalog(catalog, selected_terms) %}
+
+<style>
+#modal-div {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 8% 5% 5% 5%;
+    background: rgb(25, 25, 25);
+    background: rgba(25, 25, 25, .5);
+    z-index: 1000;
+    display: none;
+}
+
+#catalog-selector-div {
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, .8);
+    padding: 10px;
+    position: relative;
+    border: 3px solid #cccccc;
+    overflow: auto;
+}
+
+#modal-div-close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 2000;
+    -webkit-box-shadow: 0px 0px 3px 3px #B0B0B0;
+    box-shadow: 0px 0px 3px 3px #B0B0B0;
+}
+
+.catalog-parent-container {
+    width: 100%;
+    height: 100%;
+}
+
+.parent-term-div {
+    min-width: 250px;
+    width: 250px;
+    padding: 0 5px 20px 5px;
+    background-color: #ffffff;
+    vertical-align: top;
+    -webkit-box-shadow: 2px 2px 3px 3px #DBDBDB;
+    box-shadow: 2px 2px 3px 3px #DBDBDB;
+}
+
+.child-term-div {
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
+.child-term-div:first-of-type {
+    margin-top: 5px;
+}
+</style>
+
+<script type="text/javascript" src="/static/js/freewall.js"></script>
+
+<div id="modal-div">
+    <div id="catalog-selector-div">
+        <div><button id="modal-div-close-btn" class="btn btn-danger btn-xs" onclick="$('#modal-div').hide('fast')">{{ _('Close') }}</button></div>
+        <div id="catalog-parent-container">
+        {% for term in catalog %}
+            <div class="parent-term-div well noselect">
+                <div style="padding: 10px 5px;;">
+                <label class="checkbox-inline" style="font-size: 1.1em; font-weight: bolder;">
+                    <input type="checkbox" class="parent-checkbox category-term-checkbox" termid="{{ term[0].id }}"
+                        termtext="{{ term[0].name_CS }}" termlevel="0"
+                        {% for cp in term[0].products %}
+                            {% if cp in selected_terms %} checked="checked" {% endif %}
+                        {% endfor %}
+                    />
+                    {{ term[0].name_CS }}
+                </label>
+                {% if term[1] %}
+                    {% for chi in term[1] %}
+                        <div class="child-term-div">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" class="child-checkbox category-term-checkbox" termid="{{ chi.id }}"
+                                    termtext="{{ chi.name_CS }}" termlevel="1"
+                                    {% for cp in chi.products %}
+                                        {% if cp in selected_terms %} checked="checked" {% endif %}
+                                    {% endfor %}
+                                />
+                                {{ chi.name_CS }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <br/>
+        <div style="text-align: center;">
+            <button id="modal-div-ok-btn" class="btn btn-info" onclick="$('#modal-div').hide('fast'); categoryDataReady();" style="min-width: 100px;">{{ _('OK') }}</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var wall = new freewall('#catalog-parent-container');
+
+    $(function() {
+        wall.reset({
+				selector: '.parent-term-div',
+				cellW: 250,
+				cellH: 'auto',
+				animate: true,
+				onResize: function() {
+					wall.fitWidth();
+				}
+	    });
+	    wall.fitWidth();
+    });
+
+    function showCategoriesPicker() {
+        $('#modal-div').show('fast', function() {
+            wall.fitWidth();
+        });
+    }
+
+    function returnChecked() {
+        var checkedBoxes = [];
+        $('.category-term-checkbox').each(function() {
+            if ( $(this).is(':checked') ) {
+                var id = $(this).attr('termid');
+                var text = $(this).attr('termtext');
+                var level = $(this).attr('termlevel');
+                checkedBoxes.push( [id, level, text] );
+            }
+        });
+        return checkedBoxes;
+    }
+
+    $(document).ready(function() {
+        $('.child-checkbox').change(function() {
+            if ( $(this).is(':checked') ) {
+                $(this).closest('.parent-term-div').find('.parent-checkbox').prop('checked', true);
+            }
+        });
+
+        $('.parent-checkbox').change(function() {
+            if ( !$(this).is(':checked') ) {
+                $(this).closest('.parent-term-div').find('.child-checkbox').prop('checked', false);
+            }
+        });
+    });
+</script>
+{% endmacro %}
