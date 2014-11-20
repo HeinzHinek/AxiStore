@@ -90,6 +90,7 @@ def editProduct(id=0):
                 t.product_id = product.id
                 t.catalog_id = id
                 db.session.add(t)
+        db.session.commit()
 
         #delete product
         if 'delete' in request.form:

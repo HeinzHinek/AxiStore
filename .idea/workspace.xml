@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewsProduct.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="viewsProduct.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/viewsProduct.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="3400">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8806306" vertical-offset="1071" max-vertical-offset="3417">
+              <caret line="92" column="27" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -53,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stock.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="stock.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/stock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29382715" vertical-offset="3961" max-vertical-offset="5440">
+            <state vertical-scroll-proportion="-4.576923" vertical-offset="3961" max-vertical-offset="5440">
               <caret line="240" column="86" selection-start-line="240" selection-start-column="86" selection-end-line="240" selection-end-column="86" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -168,8 +168,8 @@
         <option value="$PROJECT_DIR$/app/templates/product/editProduct.html" />
         <option value="$PROJECT_DIR$/app/viewsBase.py" />
         <option value="$PROJECT_DIR$/app/static/css/base.css" />
-        <option value="$PROJECT_DIR$/app/viewsProduct.py" />
         <option value="$PROJECT_DIR$/app/templates/stock.html" />
+        <option value="$PROJECT_DIR$/app/viewsProduct.py" />
       </list>
     </option>
   </component>
@@ -1055,22 +1055,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/viewsBase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5149" max-vertical-offset="7650">
-          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/viewsProduct.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="3400">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2752" max-vertical-offset="5593">
@@ -1081,7 +1065,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/stock.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29382715" vertical-offset="3961" max-vertical-offset="5440">
+        <state vertical-scroll-proportion="-4.576923" vertical-offset="3961" max-vertical-offset="5440">
           <caret line="240" column="86" selection-start-line="240" selection-start-column="86" selection-end-line="240" selection-end-column="86" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1120,6 +1104,22 @@
             <element signature="n#style#0;n#td#13;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#14;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/viewsBase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5149" max-vertical-offset="7650">
+          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/viewsProduct.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8806306" vertical-offset="1071" max-vertical-offset="3417">
+          <caret line="92" column="27" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
