@@ -52,6 +52,7 @@ class Product(db.Model):
     price_retail = db.Column(db.Integer, default=0)
     qty_stock = db.Column(db.Integer)
     axm_node = db.Column(db.Unicode(300))
+    package_size = db.Column(db.Integer)
 
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
@@ -74,6 +75,7 @@ class Product(db.Model):
             'price_retail': self.price_retail,
             'qty_stock': self.qty_stock,
             'axm_node': self.axm_node,
+            'package_size': self.package_size,
             'active_flg': self.active_flg
         }
 

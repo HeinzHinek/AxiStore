@@ -7,6 +7,7 @@ from models import Product, Maker, Catalog, CatalogedProducts
 from flask_login import login_required
 from flask.ext.babel import gettext
 from imageHelper import getImgUrls
+from config import PACKAGE_SIZES
 
 
 @app.route('/addProduct', methods=['GET', 'POST'])
@@ -27,6 +28,7 @@ def addProduct():
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
         product.axm_node = form.axm_node.data
+        product.package_size = form.package_size.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id
@@ -109,6 +111,7 @@ def editProduct(id=0):
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
         product.axm_node = form.axm_node.data
+        product.package_size = form.package_size.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id

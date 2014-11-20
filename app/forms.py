@@ -2,10 +2,10 @@
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
-    HiddenField, FileField, BooleanField, SubmitField
+    HiddenField, FileField, BooleanField, SubmitField, RadioField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
-from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE
+from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, PACKAGE_SIZES
 from models import Product
 from flask.ext.babel import lazy_gettext
 import wtforms
@@ -60,6 +60,18 @@ class AddProductForm(Form):
     price_retail = FloatField('price_retail', [validators.number_range(min=0)])
     qty_stock = IntegerField('qty_stock', [validators.NumberRange(min=0, max=99999)], default=0)
     axm_node = StringField('axm_node', [validators.length(max=300)])
+
+    sizes = []
+    for k, v in PACKAGE_SIZES.iteritems():
+        if v == 0:
+            sizes.append([str(v), lazy_gettext('Envelope')])
+        elif v == 1:
+            sizes.append([str(v), lazy_gettext('YuPack')])
+        elif v == 2:
+            sizes.append([str(v), lazy_gettext('Box')])
+        else:
+            sizes.append([str(v), k])
+    package_size = RadioField(lazy_gettext('Package size'), choices=sizes)
 
     #for validation
     request = None
