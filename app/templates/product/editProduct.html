@@ -45,7 +45,10 @@
         });
 
         $("#btn_delete").click(function() {
-            return confirm("{{ _('Do you really want to delete this product?') }}");
+            if (confirm("{{ _('Do you really want to delete this product?') }}")) {
+                $(this).closest('td').append("<input type='hidden' name='delete' value='delete' />");
+                $(this).closest('form').submit();
+            }
         });
 
         $("input[type=text]").click(function() {
@@ -133,6 +136,14 @@
     <div>
         <a href="{{ url_for('stock', page=stock_page) }}">{{ _('Back to the list') }}</a>
     </div>
+    {% if product.active_flg == False %}
+    <br/>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            {{ _('This product has been deleted!') }}
+        </div>
+    </div>
+    {% endif %}
 </div>
 <br/>
 
@@ -277,6 +288,7 @@
                     </div>
                 </td>
             </tr>
+            {% if product.active_flg %}
             <br/>
             <tr>
                 <td>
@@ -284,8 +296,10 @@
                     <input type="hidden" name="stock_page" value="{{ stock_page }}"/>
                     <input type="submit" id="btn_submit" value="{{ _('Save product') }}" class="btn btn-default">
                     <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("stock", page=stock_page)}}'" value="{{ _('Cancel') }}"/>
+                    <input type="button" id="btn_delete" class="btn btn-danger btn-sm" value="{{ _('Delete product') }}" style="float: right;"/>
                 </td>
             </tr>
+            {% endif%}
         </table>
     </form>
 </div>
@@ -304,6 +318,7 @@
             </div>
         {% endfor %}
     </div>
+    {% if product.active_flg %}
     <div class="well">
         <form id="upload-image" method="post" enctype="multipart/form-data">
             <fieldset>
@@ -314,6 +329,7 @@
             </fieldset>
         </form>
     </div>
+    {% endif %}
 </div>
 
 </div>

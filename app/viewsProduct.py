@@ -69,6 +69,14 @@ def editProduct(id=0):
     form.request = request
     if form.validate_on_submit():
 
+        #delete product
+        if 'delete' in request.form:
+            product.active_flg = False
+            db.session.add(product)
+            db.session.commit()
+            return redirect(url_for("stock", page=stock_page))
+
+        #update catalog terms
         new_ids_str = request.form.getlist('term')
         new_ids = []
         for id in new_ids_str:
@@ -91,12 +99,6 @@ def editProduct(id=0):
                 t.catalog_id = id
                 db.session.add(t)
         db.session.commit()
-
-        #delete product
-        if 'delete' in request.form:
-            db.session.delete(product)
-            db.session.commit()
-            return redirect(url_for("stock", page=stock_page))
 
         #update product
         product.code = form.code.data
