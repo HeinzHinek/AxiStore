@@ -238,7 +238,7 @@ $(document).ready( function() {
             {% else %}
                 <a class="catalog-a"><span class="glyphicon glyphicon-ok"></span></a>
                 <div class="catalog-terms-hover-div" style="display: none; position: absolute; z-index: 1000;">
-                    {% for term in product.catalog_terms|sort(attribute='product_id') %}
+                    {% for term in product.catalog_terms|sort(attribute='catalog.order') %}
                         {% if term.catalog.super_id == None %}
                             <label class="label label-sm label-success" style="display: block; margin: 0 0 0 10px;">{{ term.catalog.name_CS }}</label>
                         {% else %}

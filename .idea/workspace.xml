@@ -26,7 +26,7 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="5661">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2752" max-vertical-offset="5593">
               <caret line="58" column="17" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="17" />
               <folding />
             </state>
@@ -56,8 +56,8 @@
       <file leaf-file-name="stock.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/stock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33580247" vertical-offset="3961" max-vertical-offset="5440">
-              <caret line="241" column="62" selection-start-line="241" selection-start-column="62" selection-end-line="241" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.29382715" vertical-offset="3961" max-vertical-offset="5440">
+              <caret line="240" column="86" selection-start-line="240" selection-start-column="86" selection-end-line="240" selection-end-column="86" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -1012,14 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="5593">
-          <caret line="58" column="17" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/product/editProduct.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="8.814815" vertical-offset="1275" max-vertical-offset="5610">
@@ -1079,10 +1071,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2752" max-vertical-offset="5593">
+          <caret line="58" column="17" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/stock.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33580247" vertical-offset="3961" max-vertical-offset="5440">
-          <caret line="241" column="62" selection-start-line="241" selection-start-column="62" selection-end-line="241" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.29382715" vertical-offset="3961" max-vertical-offset="5440">
+          <caret line="240" column="86" selection-start-line="240" selection-start-column="86" selection-end-line="240" selection-end-column="86" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
