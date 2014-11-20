@@ -79,7 +79,10 @@ def editProduct(id=0):
 
         for id in old_ids:
             if id not in new_ids:
-                t = CatalogedProducts.query.filter_by(catalog_id=id).first()
+                t = CatalogedProducts.query\
+                    .filter_by(catalog_id=id)\
+                    .filter_by(product_id=product.id)\
+                    .first()
                 db.session.delete(t)
         for id in new_ids:
             if id not in old_ids:
