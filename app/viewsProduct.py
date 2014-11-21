@@ -28,7 +28,10 @@ def addProduct():
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
         product.axm_node = form.axm_node.data
-        product.package_size = form.package_size.data
+        if form.package_size.data == '':
+            product.package_size = None
+        else:
+            product.package_size = form.package_size.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id
@@ -69,6 +72,7 @@ def editProduct(id=0):
         form.maker.choices = [(a.id, a.name) for a in makers]
     #for existing code validation
     form.request = request
+
     if form.validate_on_submit():
 
         #delete product
@@ -111,7 +115,10 @@ def editProduct(id=0):
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
         product.axm_node = form.axm_node.data
-        product.package_size = form.package_size.data
+        if form.package_size.data == '':
+            product.package_size = None
+        else:
+            product.package_size = form.package_size.data
         category_id = Maker.query.filter_by(id=product.maker_id).first().category_id
         if category_id:
             product.category_id = category_id

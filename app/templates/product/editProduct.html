@@ -272,11 +272,7 @@
                 <td>
                     <label>{{ _('Package size') }}:</label>
                     <div class="input-group">
-                        {% for subfield in form.package_size %}
-                            <div style="display: inline-block;" class="radio" style="margin-top: 0 !important;">
-                                <label class="label label-default">&nbsp;&nbsp;{{ subfield }}{{ subfield.label }}</label>&nbsp;
-                            </div>
-                        {% endfor %}
+                        {{form.package_size(class="form-control")}}
                     </div>
                     {% for error in form.errors.package_size %}
                     <div class="alert alert-danger" role="alert" style="max-width: 400px;">

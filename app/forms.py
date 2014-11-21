@@ -62,6 +62,7 @@ class AddProductForm(Form):
     axm_node = StringField('axm_node', [validators.length(max=300)])
 
     sizes = []
+    sizes.append(['', lazy_gettext('(unknown)')])
     for k, v in PACKAGE_SIZES.iteritems():
         if v == 0:
             sizes.append([str(v), lazy_gettext('Envelope')])
@@ -71,7 +72,7 @@ class AddProductForm(Form):
             sizes.append([str(v), lazy_gettext('Box')])
         else:
             sizes.append([str(v), k])
-    package_size = RadioField(lazy_gettext('Package size'), choices=sizes)
+    package_size = SelectField(lazy_gettext('Package size'), choices=sizes, coerce=str)
 
     #for validation
     request = None
