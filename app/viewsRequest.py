@@ -2,11 +2,12 @@
 
 from flask import render_template, redirect, flash, url_for, g
 from app import app, db
-from forms import SelectCustomerForm, OrderNumberForm
+from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm
 from models import Request, Product, RequestedProducts, Customer, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
+from datetime import *
 import flask
 
 
@@ -42,7 +43,7 @@ def createRequest():
     maker_choices = [(a.id, a.name) for a in makers]
     maker_choices = [(0, '')] + maker_choices
     formCustomer.maker.choices = maker_choices
-    if formCustomer.is_submitted():
+    if formCustomer.validate_on_submit():
         ids = {}
         for attr in flask.request.form:
             if attr.startswith("req_qty-"):
@@ -83,6 +84,11 @@ def createRequest():
             new_request = Request()
             new_request.user_id = g.user.id
             new_request.customer_id = req_cust.id
+            if formCustomer.datetime.data:
+                new_request.created_dt = formCustomer.datetime.data
+            else:
+                flash("Date and time date of request was entered incorrectly, request saved with current date and time.")
+
             new_request.active_flg = True
             db.session.add(new_request)
             db.session.commit()
@@ -105,21 +111,33 @@ def createRequest():
             flash(gettext("Order data not sent."))
             return redirect(url_for("requests"))
 
+    formCustomer.datetime.data = datetime.now()
     return render_template('requests/createRequest.html',
                            title=gettext("Accept order from customer"),
                            formCustomer=formCustomer,
                            custType=cust)
 
 
-@app.route('/request/<int:id>')
+@app.route('/request/<int:id>', methods=['GET', 'POST'])
 @login_required
 def request_detail(id):
     req = Request.query.filter_by(id=id).first()
+    form = EditDateTimeForm()
     if req:
         products = req.products
+
+    if form.validate_on_submit():
+        if form.datetime.data:
+            req.created_dt = form.datetime.data
+            db.session.add(req)
+            db.session.commit()
+            flash(gettext("Date and time of request was successfully changed."))
+
+    form.datetime.data = req.created_dt
     return render_template('requests/request.html',
                             title=gettext("Order from customer details"),
                             req=req,
+                            form=form,
                             CUSTOMER_TYPES=CUSTOMER_TYPES,
                             products=products)
 

@@ -169,6 +169,21 @@ $(document).ready(function() {
                     {% endif %}
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <label>{{ _('Date and time of request') }}:</label>
+                    <div class="input-group">
+                        {{ formCustomer.datetime(class="form-control") }}
+                        {% for error in formCustomer.errors.datetime %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div><label style="font-size: 0.82em; color: crimson;">&nbsp;&nbsp;(YYYY-MM-DD HH:MM:SS)</label></div>
+                </td>
+            </tr>
         </table>
 
         <div class="row">

@@ -174,11 +174,15 @@ $(document).ready( function() {
 <thead>
     <tr>
         <th class="no-border row-indicator-left"></th>
-        <th class="td-border-left-1px">{{ _('Product Code') }}&nbsp;
+        <th class="td-border-left-1px" style="text-align: center;"><span class="glyphicon glyphicon-barcode"></span>&nbsp;
             <a href="{{ url_for('stock') + '?ord=code-2' }}">
                 <span class="glyphicon glyphicon-arrow-down sorter" style="color: grey;"></span>
             </a>
         </th>
+        <th><span class="glyphicon glyphicon-book"></span></th>
+        <th><span class="glyphicon glyphicon-camera"></span></th>
+        <th><span class="glyphicon glyphicon-th-large"></span></th>
+        <th><span class="glyphicon glyphicon-shopping-cart"></span></th>
         <th>
             <div class="dropdown" style="display: inline-block;">
                 <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="makerChoice" data-toggle="dropdown" style="font-weight: bold;">
@@ -204,25 +208,23 @@ $(document).ready( function() {
                 <div class="dropdown" style="display: inline-block;">{{ build_sort_str_list('maker') }}</div>
             </div>
         </th>
-        <th><span class="glyphicon glyphicon-book"></span></th>
-        <th><span class="glyphicon glyphicon-camera"></span></th>
-        <th><span class="glyphicon glyphicon-th-large"></span></th>
-        <th><span class="glyphicon glyphicon-shopping-cart"></span></th>
         <th><div class="dropdown">{{ _('Description CS') }}&nbsp;{{ build_sort_str_list('csdesc') }}</div></th>
         <th><div class="dropdown">{{ _('Description JP') }}&nbsp;{{ build_sort_str_list('jpdesc') }}</div></th>
-        <th style="text-align: right;"><div class="dropdown">{{ _('Unit Price') }}&nbsp;{{ build_sort_str_list('unitp') }}</div></th>
-        <th style="text-align: right;"><div class="dropdown">{{ _('Retail Price') }}&nbsp;{{ build_sort_str_list('retap') }}</div></th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
-            <div class="dropdown">{{ _('Stock') }}&nbsp;{{ build_sort_num_list('stock') }}</div>
+        <th style="text-align: right;"><div class="dropdown"><span class="glyphicon glyphicon-usd"></span>
+            <span class="glyphicon glyphicon-log-in"></span>&nbsp;{{ build_sort_str_list('unitp') }}</div></th>
+        <th style="text-align: right;"><div class="dropdown"><span class="glyphicon glyphicon-usd"></span>
+            <span class="glyphicon glyphicon-log-out"></span>&nbsp;{{ build_sort_str_list('retap') }}</div></th>
+        <th style="text-align: right; width: 2%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown"><span class="glyphicon glyphicon-home"></span>{{ build_sort_num_list('stock') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
-            <div class="dropdown">{{ _('Req.') }}&nbsp;{{ build_sort_num_list('req') }}</div>
+        <th style="text-align: right; width: 2%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown"><span class="glyphicon glyphicon-minus-sign"></span>{{ build_sort_num_list('req') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px">
-            <div class="dropdown">{{ _('Ord.') }}&nbsp;{{ build_sort_num_list('ord') }}</div>
+        <th style="text-align: right; width: 2%; white-space: nowrap;" class="td-border-left-1px">
+            <div class="dropdown"><span class="glyphicon glyphicon-plus-sign"></span>{{ build_sort_num_list('ord') }}</div>
         </th>
-        <th style="text-align: right; width: 5%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px">
-            <div class="dropdown">{{ _('Net.') }}&nbsp;{{ build_sort_num_list('net') }}</div>
+        <th style="text-align: right; width: 2%; white-space: nowrap;" class="td-border-left-1px td-border-right-1px">
+            <div class="dropdown"><span class="glyphicon glyphicon-ok-sign"></span>{{ build_sort_num_list('net') }}</div>
         </th>
         <th class="no-border row-indicator-right"></th>
     </tr>
@@ -232,8 +234,7 @@ $(document).ready( function() {
     <tr id="{{ product.id }}" class="product-row">
         <td class="no-border row-indicator-left"></td>
         <td class="clickable-td td-redir-edit td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.code}}</td>
-        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
-        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">
+        <td class="clickable-td td-redir-edit td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}">
             {% if product.catalog_terms|length < 1 %}
                 <span class="glyphicon glyphicon-remove" style="color: crimson;"></span>
             {% else %}
@@ -272,6 +273,7 @@ $(document).ready( function() {
                 </a>
             {% endif %}
         </td>
+        <td class="clickable-td td-redir-edit td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_CS}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_JP}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>

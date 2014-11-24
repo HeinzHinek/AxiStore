@@ -2,7 +2,7 @@
 
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
-from forms import SelectCustomerForm, SelectOrderNumberFormAxm
+from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm
 from models import Supply, Product, Customer, SuppliedProducts, Request
 from flask_login import login_required
 from sqlalchemy import desc
@@ -225,15 +225,26 @@ def supplyProducts():
                            products=products)
 
 
-@app.route('/supply/<int:id>')
+@app.route('/supply/<int:id>', methods=['GET', 'POST'])
 @login_required
 def supply(id):
     supply = Supply.query.filter_by(id=id).first()
+    form = EditDateTimeForm()
     if supply:
         products = supply.products
+
+    if form.validate_on_submit():
+        if form.datetime.data:
+            supply.created_dt = form.datetime.data
+            db.session.add(supply)
+            db.session.commit()
+            flash(gettext("Date and time of supply was successfully changed."))
+
+    form.datetime.data = supply.created_dt
     return render_template('supplies/supply.html',
                             title=gettext("Supply details"),
                             supply=supply,
+                            form=form,
                             CUSTOMER_TYPES=CUSTOMER_TYPES,
                             products=products)
 

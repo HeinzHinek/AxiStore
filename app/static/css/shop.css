@@ -181,6 +181,11 @@
         margin-right: 10px !important;
     }
 
+    .navbar-collapse {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+
     div.container {
         padding: 0px 0px;
     }
@@ -198,8 +203,7 @@
     }
 
     .cart-visible {
-        margin-left: 0px;
-        left: 40px;
+        right: 0px;
     }
 
     .cart-table {

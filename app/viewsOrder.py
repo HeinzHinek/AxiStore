@@ -2,7 +2,7 @@
 
 from flask import render_template, redirect, flash, url_for, request, g
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm
 from models import Order, Product, OrderedProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
@@ -37,7 +37,7 @@ def createOrder():
                 flash(gettext("Maker not found."))
                 return redirect(url_for("orders"))
 
-            products = Product.query.order_by(Product.net_stock, Product.maker_id, Product.code)\
+            products = Product.query.order_by(Product.code)\
                 .filter_by(maker_id=int(maker_id),
                            active_flg=True).all()
             for p in products:
@@ -96,15 +96,26 @@ def placeOrder():
                            products=products)
 
 
-@app.route('/order/<int:id>')
+@app.route('/order/<int:id>', methods=['GET', 'POST'])
 @login_required
 def order(id):
     order = Order.query.filter_by(id=id).first()
+    form = EditDateTimeForm()
     if order:
         products = order.products
+
+    if form.validate_on_submit():
+        if form.datetime.data:
+            order.created_dt = form.datetime.data
+            db.session.add(order)
+            db.session.commit()
+            flash(gettext("Date and time of order was successfully changed."))
+
+    form.datetime.data = order.created_dt
     return render_template('orders/order.html',
                             title=gettext("Order details"),
                             order=order,
+                            form=form,
                             products=products)
 
 

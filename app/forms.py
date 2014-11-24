@@ -2,7 +2,7 @@
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
-    HiddenField, FileField, BooleanField, SubmitField, RadioField
+    HiddenField, FileField, BooleanField, SubmitField, DateTimeField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, PACKAGE_SIZES
@@ -159,16 +159,22 @@ class UploadForm(Form):
 
 class SelectCustomerForm(Form):
     customer = SelectField('customer', coerce=int)
+    datetime = DateTimeField('datetime', [validators.data_required()])
     maker = SelectField('maker', coerce=int)
 
 
 class OrderNumberForm(Form):
     order_no = IntegerField('order_no', [validators.data_required, validators.NumberRange(min=0, max=99999)])
+    datetime = DateTimeField('datetime', [validators.data_required()])
     maker = SelectField('maker', coerce=int)
 
 
 class SelectOrderNumberFormAxm(Form):
     order = SelectField()
+
+
+class EditDateTimeForm(Form):
+    datetime = DateTimeField('datetime', [validators.data_required()])
 
 
 class AddCustomerForm(Form):
