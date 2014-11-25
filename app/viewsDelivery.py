@@ -2,7 +2,7 @@
 
 from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm
 from models import Delivery, Product, DeliveredProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
@@ -168,13 +168,24 @@ def receiveDelivery():
                            products=products)
 
 
-@app.route('/delivery/<int:id>')
+@app.route('/delivery/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delivery(id):
     delivery = Delivery.query.filter_by(id=id).first()
+    form = EditDateTimeForm()
     if delivery:
         products = delivery.products
+
+    if form.validate_on_submit():
+        if form.datetime.data:
+            delivery.created_dt = form.datetime.data
+            db.session.add(delivery)
+            db.session.commit()
+            flash(gettext("Date and time of delivery was successfully changed."))
+
+    form.datetime.data = delivery.created_dt
     return render_template('deliveries/delivery.html',
                             title=gettext("Delivery details"),
                             delivery=delivery,
+                            form=form,
                             products=products)

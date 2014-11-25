@@ -43,7 +43,7 @@ def createRequest():
     maker_choices = [(a.id, a.name) for a in makers]
     maker_choices = [(0, '')] + maker_choices
     formCustomer.maker.choices = maker_choices
-    if formCustomer.validate_on_submit():
+    if formCustomer.is_submitted():
         ids = {}
         for attr in flask.request.form:
             if attr.startswith("req_qty-"):

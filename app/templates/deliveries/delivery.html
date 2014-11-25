@@ -18,7 +18,24 @@
             <th class="info col-md-3">{{ _('Delivery ID') }}</th>
             <td class="col-md-3">{{ delivery.id }}</td>
             <th class="info info col-md-3">{{ _('Received') }}</th>
-            <td class="col-md-3">{{ momentjs(delivery.created_dt).format('LLL') }}</td>
+            <td class="col-md-3">{{ momentjs(delivery.created_dt).format('LLL') }}&nbsp;&nbsp;
+                <input type="button" class="btn btn-xs btn-danger" value="{{ _('Edit') }}" onclick="$('#created-dt-edit-div').show('fast');"/>
+                <div id="created-dt-edit-div" class="shadowed-div" style="display: none; position: fixed; background-color: white; border: 1px solid #dddddd;">
+                    <form action="" method="post" name="selectCustomer">
+                        {{form.hidden_tag()}}
+                        {{ form.datetime }}
+                        <input type="submit" class="btn btn-xs btn-info" value="{{ _('Submit') }}"/>
+                        <input type="button" class="btn btn-xs btn-warning" value="{{ _('close') }}" onclick="$('#created-dt-edit-div').hide('fast');"/><br/>
+                        <label style="font-size: 0.82em; color: crimson;">(YYYY-MM-DD HH:MM:SS)</label>
+                    </form>
+                </div>
+                {% for error in form.errors.datetime %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
         </tr>
         <tr>
             <th class="info info">{{ _('Recipient') }}</th>
