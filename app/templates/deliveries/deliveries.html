@@ -50,20 +50,8 @@
     <br>
 
     <!-- PAGINATION -->
-    <ul class="pager">
-        {% if deliveries.has_prev or deliveries.has_next %}
-        {% if deliveries.has_prev %}
-        <li class="previous"><a href="{{ url_for('deliveries', page = deliveries.prev_num) }}"><< {{ _('Previous') }}</a></li>
-        {% else %}
-        <li class="previous disabled"><a href="#"><< {{ _('Previous') }}</a></li>
-        {% endif %}
-        {% if deliveries.has_next %}
-        <li class="next"><a href="{{ url_for('deliveries', page = deliveries.next_num) }}">{{ _('Next') }} >></a></li>
-        {% else %}
-        <li class="next disabled"><a href="#">{{ _('Next') }} >></a></li>
-        {% endif %}
-        {% endif %}
-    </ul>
+    {% from "_pagination.html" import render_pager %}
+    {{ render_pager(deliveries, 'deliveries') }}
 
 </div>
 {% endif %}

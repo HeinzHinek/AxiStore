@@ -202,12 +202,12 @@ def findProductAjax():
 
     result = db.session.query(Product)
     if code:
-        result = result.filter(Product.code.like('%' + code + '%'))
+        result = result.filter(Product.code.ilike('%' + code + '%'))
     if int_maker_id:
         result = result.filter(Product.maker_id==int_maker_id)
     if desc_CS:
-        result = result.filter(Product.desc_CS.like('%' + desc_CS + '%'))
+        result = result.filter(Product.desc_CS.ilike('%' + desc_CS + '%'))
     if desc_JP:
-        result = result.filter(Product.desc_JP.like('%' + desc_JP + '%'))
+        result = result.filter(Product.desc_JP.ilike('%' + desc_JP + '%'))
     result = result.filter(Product.active_flg==True)
     return jsonify(result=[i.serialize for i in result.all()])

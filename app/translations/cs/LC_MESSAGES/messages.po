@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-24 17:38+0900\n"
-"PO-Revision-Date: 2014-11-24 17:41+0900\n"
+"POT-Creation-Date: 2014-11-27 17:19+0900\n"
+"PO-Revision-Date: 2014-11-27 17:21+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -23,6 +23,30 @@ msgstr ""
 #: app/__init__.py:15
 msgid "Please log in to access this page."
 msgstr "K přístupu na tuto stránku je nutné přihlášení."
+
+#: app/csvHelper.py:23
+msgid "CSV uploaded and processed sucessfully."
+msgstr "CSV soubor nahrán a zpracován úspěšně."
+
+#: app/csvHelper.py:48 app/templates/deliveries/delivery.html:55
+#: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
+#: app/templates/product/editProduct.html:157
+#: app/templates/requests/request.html:60
+#: app/templates/supplies/supply.html:59
+msgid "Product code"
+msgstr "Kód produktu"
+
+#: app/csvHelper.py:48 app/templates/mail/order_confirm.html:22
+#: app/templates/shop/_cart_table.html:6
+#: app/templates/shop/orderconfirm.html:39
+#: app/templates/shop/placeorder.html:35
+msgid "Product Name"
+msgstr "Název produktu"
+
+#: app/csvHelper.py:48 app/templates/product/addProduct.html:166
+#: app/templates/product/editProduct.html:245
+msgid "Quantity on stock"
+msgstr "Množsví na skladě"
 
 #: app/forms.py:22 app/templates/settings/users.html:15
 msgid "Nickname"
@@ -52,7 +76,7 @@ msgstr "Staré heslo"
 msgid "New password"
 msgstr "Nové heslo"
 
-#: app/forms.py:41 app/viewsBase.py:288
+#: app/forms.py:41 app/viewsBase.py:304
 msgid "New password must match confirmation!"
 msgstr "Nové heslo musí odpovídat kontrolnímu heslu!"
 
@@ -117,7 +141,8 @@ msgstr "Pouze dostupné"
 msgid "Search"
 msgstr "Hledat"
 
-#: app/forms.py:216 app/templates/deliveries/newDelivery.html:126
+#: app/forms.py:216 app/templates/deliveries/delivery.html:27
+#: app/templates/deliveries/newDelivery.html:126
 #: app/templates/orders/createOrder.html:171
 #: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
@@ -131,51 +156,51 @@ msgstr "Potvrdit"
 msgid "Thank you for your order!"
 msgstr "Děkujeme za Vaší objednávku!"
 
-#: app/viewsBase.py:94
+#: app/viewsBase.py:110
 msgid "Home"
 msgstr "Domů"
 
-#: app/viewsBase.py:176
+#: app/viewsBase.py:192
 msgid "Stock quantity successfully updated."
 msgstr "Množství na skladě úspěšně aktualizováno."
 
-#: app/viewsBase.py:178 app/viewsBase.py:180
+#: app/viewsBase.py:194 app/viewsBase.py:196
 msgid "Input value error."
 msgstr "Hodnota zadána chybně."
 
-#: app/viewsBase.py:190
+#: app/viewsBase.py:206
 msgid "Stock condition"
 msgstr "Stav skladu"
 
-#: app/viewsBase.py:237
+#: app/viewsBase.py:253
 msgid "Selected nickname is already in use!"
 msgstr "Zadané uživatelské jméno je již registrováno!"
 
-#: app/viewsBase.py:245 app/viewsSettings.py:48 app/viewsSettings.py:94
+#: app/viewsBase.py:261 app/viewsSettings.py:46 app/viewsSettings.py:92
 msgid "Selected email is already in use!"
 msgstr "Zadaný email je již registrován!"
 
-#: app/viewsBase.py:256
+#: app/viewsBase.py:272
 msgid "User settings sucessfully updated."
 msgstr "Data uživatele úspěšně aktualizována."
 
-#: app/viewsBase.py:264 app/templates/user.html:8
+#: app/viewsBase.py:280 app/templates/user.html:8
 msgid "User's Page"
 msgstr "Stránka uživatele"
 
-#: app/viewsBase.py:284
+#: app/viewsBase.py:300
 msgid "User password successfully changed."
 msgstr "Heslo uživatele úspěšně změněno."
 
-#: app/viewsBase.py:290
+#: app/viewsBase.py:306
 msgid "Current password is incorrect!"
 msgstr "Současné heslo nesouhlasí!"
 
-#: app/viewsBase.py:295 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:311 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "Změna hesla"
 
-#: app/viewsBase.py:303 app/templates/navbar_admin.html:55
+#: app/viewsBase.py:319 app/templates/navbar_admin.html:68
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "Nastavení"
@@ -240,7 +265,7 @@ msgstr "Nový zákazník úspěšně přidán."
 msgid "Add New Customer"
 msgstr "Přidat zákazníka"
 
-#: app/viewsCustomer.py:56 app/viewsRequest.py:60
+#: app/viewsCustomer.py:56 app/viewsRequest.py:76
 msgid "Customer not found."
 msgstr "Zákazník nenalezen."
 
@@ -256,7 +281,7 @@ msgstr "Zákazník úspěšně pozměněn."
 msgid "Edit Customer"
 msgstr "Upravit zákazníka"
 
-#: app/viewsDelivery.py:19 app/templates/navbar_admin.html:28
+#: app/viewsDelivery.py:19 app/templates/navbar_admin.html:41
 msgid "Deliveries"
 msgstr "Dodávky"
 
@@ -277,7 +302,11 @@ msgstr "Nová dodávka úspěšně přijata."
 msgid "Delivery Report"
 msgstr "Zpráva o dodávce"
 
-#: app/viewsDelivery.py:178
+#: app/viewsDelivery.py:184
+msgid "Date and time of delivery was successfully changed."
+msgstr "Datum a čas dodávky byl úspěšně změněn."
+
+#: app/viewsDelivery.py:188
 msgid "Delivery details"
 msgstr "Detaily dodávky"
 
@@ -346,7 +375,7 @@ msgstr "Nový produkt úspěšně přidán."
 msgid "Add new product"
 msgstr "Přidat nový produkt"
 
-#: app/viewsProduct.py:67 app/viewsRequest.py:99 app/viewsShop.py:113
+#: app/viewsProduct.py:67 app/viewsRequest.py:115 app/viewsShop.py:114
 msgid "Product not found."
 msgstr "Produkt nenalezen."
 
@@ -358,104 +387,104 @@ msgstr "Produkt úspěšně pozměněn."
 msgid "Edit Product"
 msgstr "Editace produktu"
 
-#: app/viewsRequest.py:23
+#: app/viewsRequest.py:25
 msgid "Orders from Customers"
 msgstr "Objednávky od zákazníka"
 
-#: app/viewsRequest.py:56
+#: app/viewsRequest.py:40
+msgid "Orders from Axis Mart"
+msgstr "Objednávky z Axis Martu"
+
+#: app/viewsRequest.py:72
 msgid "No customer id."
 msgstr "Chybí id zákazníka."
 
-#: app/viewsRequest.py:63
+#: app/viewsRequest.py:79
 msgid "Invalid customer!"
 msgstr "Neplatný zákazník!"
 
-#: app/viewsRequest.py:69
+#: app/viewsRequest.py:85
 msgid "No order number."
 msgstr "Chybí číslo objednávky."
 
-#: app/viewsRequest.py:73
+#: app/viewsRequest.py:89
 msgid "Order number already exists!"
 msgstr "Číslo objednávky již existuje!"
 
-#: app/viewsRequest.py:81
+#: app/viewsRequest.py:97
 msgid "Invalid data received!"
 msgstr "Přijata neplatná data!"
 
-#: app/viewsRequest.py:107 app/viewsShop.py:126
+#: app/viewsRequest.py:123 app/viewsShop.py:127
 msgid "Order created successfully."
 msgstr "Nová objednávka úspěšně vytvořena."
 
-#: app/viewsRequest.py:111
+#: app/viewsRequest.py:127
 msgid "Order data not sent."
 msgstr "Data objednávky neodeslána."
 
-#: app/viewsRequest.py:116
+#: app/viewsRequest.py:132
 msgid "Accept order from customer"
 msgstr "Přijmout objednávku od zákazníka"
 
-#: app/viewsRequest.py:134
+#: app/viewsRequest.py:150
 msgid "Date and time of request was successfully changed."
 msgstr "Datum a čas poptávky byl úspěšně změněn."
 
-#: app/viewsRequest.py:138 app/templates/requests/request.html:5
+#: app/viewsRequest.py:154 app/templates/requests/request.html:5
 msgid "Order from customer details"
 msgstr "Detaily objednávky od zákazníka"
 
-#: app/viewsRequest.py:158
+#: app/viewsRequest.py:174
 msgid "Orders from customers for product"
 msgstr "Objednávky produktu zákazníky"
 
-#: app/viewsSettings.py:26
+#: app/viewsSettings.py:24
 msgid "User List"
 msgstr "Seznam uživatelů"
 
-#: app/viewsSettings.py:40 app/viewsSettings.py:86
+#: app/viewsSettings.py:38 app/viewsSettings.py:84
 msgid "Selected username already exists!"
 msgstr "Zadané uživatelské jméno již existuje!"
 
-#: app/viewsSettings.py:68
+#: app/viewsSettings.py:66
 msgid "New user successfully added."
 msgstr "Nový uživatel úspěšně přidán."
 
-#: app/viewsSettings.py:71 app/templates/settings/addUser.html:24
+#: app/viewsSettings.py:69 app/templates/settings/addUser.html:24
 msgid "Add New User"
 msgstr "Přidat nového uživatele"
 
-#: app/viewsSettings.py:112
+#: app/viewsSettings.py:110
 msgid "User details succesfully changed."
 msgstr "Detaily zákazníka úspěšně pozměněny."
 
-#: app/viewsSettings.py:116 app/templates/settings/editUser.html:26
+#: app/viewsSettings.py:114 app/templates/settings/editUser.html:26
 msgid "Edit User"
 msgstr "Editace uživatele"
 
-#: app/viewsSettings.py:128 app/templates/settings/editCatalog.html:155
+#: app/viewsSettings.py:126 app/templates/settings/editCatalog.html:155
 msgid "Edit Catalog"
 msgstr "Editace Katalogu"
 
-#: app/viewsSettings.py:206
+#: app/viewsSettings.py:204
 msgid "Data Import"
 msgstr "Import dat"
 
-#: app/viewsSettings.py:214
+#: app/viewsSettings.py:212
 msgid "Data Export"
 msgstr "Export dat"
 
-#: app/viewsSettings.py:235
-msgid "CSV uploaded and processed sucessfully."
-msgstr "CSV soubor nahrán a zpracován úspěšně."
-
-#: app/viewsShop.py:57 app/templates/stock.html:161
+#: app/viewsShop.py:58 app/templates/stock.html:161
 #: app/templates/stock.html:199
 msgid "All"
 msgstr "Vše"
 
-#: app/viewsShop.py:60
+#: app/viewsShop.py:61
 msgid "AxiStore shop"
 msgstr "AxiStore obchod"
 
-#: app/viewsShop.py:103
+#: app/viewsShop.py:104
 msgid ""
 "We apologize but your customer data is insufficient. Please, contact our "
 "customer support."
@@ -463,12 +492,12 @@ msgstr ""
 "Omlouváme se, ale Vaše zákaznická data jsou nedostačující. Obraťte se prosím "
 "na naši zákaznickou podporu."
 
-#: app/viewsShop.py:149 app/templates/orders/createOrder.html:173
+#: app/viewsShop.py:150 app/templates/orders/createOrder.html:173
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "Zadat objednávku"
 
-#: app/viewsShop.py:163
+#: app/viewsShop.py:164
 msgid ""
 "Unfortunatelly, your request could not be processed. Please, contact our "
 "customer support."
@@ -476,9 +505,13 @@ msgstr ""
 "Vaše žádost bohužel nemohla být zpracována. Obraťte se prosím na naši "
 "zákaznickou podporu."
 
-#: app/viewsShop.py:182
+#: app/viewsShop.py:183
 msgid "Order Confirmation"
 msgstr "Potvrzení objednávky"
+
+#: app/viewsShop.py:200 app/templates/navbar_customer.html:17
+msgid "Data download"
+msgstr "Stažení dat"
 
 #: app/viewsSupply.py:23
 msgid "Supplies"
@@ -537,36 +570,24 @@ msgid "OK"
 msgstr "OK"
 
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
-#: app/templates/deliveries/deliveries.html:56
-#: app/templates/deliveries/deliveries.html:58
 #: app/templates/orders/orders.html:58 app/templates/orders/orders.html:60
-#: app/templates/requests/requests.html:47
-#: app/templates/requests/requests.html:49
 #: app/templates/settings/contacts.html:38
 #: app/templates/settings/contacts.html:40
 #: app/templates/settings/customers.html:36
 #: app/templates/settings/customers.html:38
 #: app/templates/settings/makers.html:36 app/templates/settings/makers.html:38
 #: app/templates/settings/users.html:37 app/templates/settings/users.html:39
-#: app/templates/supplies/supplies.html:56
-#: app/templates/supplies/supplies.html:58
 msgid "Previous"
 msgstr "Předchozí"
 
 #: app/templates/_pagination.html:28 app/templates/_pagination.html:30
-#: app/templates/deliveries/deliveries.html:61
-#: app/templates/deliveries/deliveries.html:63
 #: app/templates/orders/orders.html:63 app/templates/orders/orders.html:65
-#: app/templates/requests/requests.html:52
-#: app/templates/requests/requests.html:54
 #: app/templates/settings/contacts.html:43
 #: app/templates/settings/contacts.html:45
 #: app/templates/settings/customers.html:41
 #: app/templates/settings/customers.html:43
 #: app/templates/settings/makers.html:41 app/templates/settings/makers.html:43
 #: app/templates/settings/users.html:42 app/templates/settings/users.html:44
-#: app/templates/supplies/supplies.html:61
-#: app/templates/supplies/supplies.html:63
 msgid "Next"
 msgstr "Další"
 
@@ -676,60 +697,64 @@ msgstr "Objednávky"
 msgid "from customers"
 msgstr "od zákazníků"
 
-#: app/templates/navbar_admin.html:23
+#: app/templates/navbar_admin.html:27
+msgid "from Axis Mart"
+msgstr "z Axis Martu"
+
+#: app/templates/navbar_admin.html:32
 msgid "to makers"
 msgstr "výrobcům"
 
-#: app/templates/navbar_admin.html:30
+#: app/templates/navbar_admin.html:43
 msgid "to customers"
 msgstr "zákazníkům"
 
-#: app/templates/navbar_admin.html:31
+#: app/templates/navbar_admin.html:44
 msgid "from makers"
 msgstr "od výrobců"
 
-#: app/templates/navbar_admin.html:36
+#: app/templates/navbar_admin.html:49
 msgid "New"
 msgstr "Nový"
 
-#: app/templates/navbar_admin.html:38
+#: app/templates/navbar_admin.html:51
 msgid "Product"
 msgstr "Produkt"
 
-#: app/templates/navbar_admin.html:40
+#: app/templates/navbar_admin.html:53
 msgid "Order to maker"
 msgstr "Objednávka výrobci"
 
-#: app/templates/navbar_admin.html:41
+#: app/templates/navbar_admin.html:54
 msgid "Delivery from maker"
 msgstr "Dodávka od výrobce"
 
-#: app/templates/navbar_admin.html:43
+#: app/templates/navbar_admin.html:56
 msgid "Order from Customer"
 msgstr "Objednávka od zákazníka"
 
-#: app/templates/navbar_admin.html:44
+#: app/templates/navbar_admin.html:57
 msgid "Order from Axis Mart"
 msgstr "Objednávka z Axis Martu"
 
-#: app/templates/navbar_admin.html:46
+#: app/templates/navbar_admin.html:59
 msgid "Supply to Customer"
 msgstr "Dodávka zákazníkovi"
 
-#: app/templates/navbar_admin.html:47
+#: app/templates/navbar_admin.html:60
 msgid "Supply to Axis Mart order"
 msgstr "Dodávka objednávce z Axis Martu"
 
-#: app/templates/navbar_admin.html:58 app/templates/navbar_customer.html:22
+#: app/templates/navbar_admin.html:71 app/templates/navbar_customer.html:23
 #, python-format
 msgid "%(nickname)s"
 msgstr "%(nickname)s"
 
-#: app/templates/navbar_admin.html:60 app/templates/navbar_customer.html:24
+#: app/templates/navbar_admin.html:73 app/templates/navbar_customer.html:25
 msgid "Logout"
 msgstr "Odhlášení"
 
-#: app/templates/navbar_admin.html:63 app/templates/navbar_customer.html:27
+#: app/templates/navbar_admin.html:76 app/templates/navbar_customer.html:28
 msgid "Login"
 msgstr "Přihlášení"
 
@@ -798,7 +823,7 @@ msgid "Search results:"
 msgstr "Výsledky hledání"
 
 #: app/templates/stock.html:192 app/templates/deliveries/deliveries.html:36
-#: app/templates/deliveries/delivery.html:26
+#: app/templates/deliveries/delivery.html:43
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
@@ -814,7 +839,7 @@ msgstr "Výsledky hledání"
 msgid "Maker"
 msgstr "Výrobce"
 
-#: app/templates/stock.html:211 app/templates/deliveries/delivery.html:39
+#: app/templates/stock.html:211 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
 #: app/templates/requests/createRequest.html:207
@@ -826,7 +851,7 @@ msgstr "Výrobce"
 msgid "Description CS"
 msgstr "Popis ČJ"
 
-#: app/templates/stock.html:212 app/templates/deliveries/delivery.html:40
+#: app/templates/stock.html:212 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
 #: app/templates/requests/createRequest.html:210
@@ -862,14 +887,15 @@ msgstr "ID dodávky"
 
 #: app/templates/deliveries/deliveries.html:34
 #: app/templates/deliveries/delivery.html:20
-#: app/templates/requests/requests.html:19
+#: app/templates/requests/axm_requests.html:15
+#: app/templates/requests/requests.html:15
 #: app/templates/supplies/supplyReport.html:60
 #: app/templates/supplies/supplyReport.html:82
 msgid "Received"
 msgstr "Přijato"
 
 #: app/templates/deliveries/deliveries.html:35
-#: app/templates/deliveries/delivery.html:24
+#: app/templates/deliveries/delivery.html:41
 msgid "Recipient"
 msgstr "Příjemce"
 
@@ -889,15 +915,20 @@ msgstr "Detaily dodávky od výrobce "
 msgid "Back to the list"
 msgstr "Zpět na seznam"
 
-#: app/templates/deliveries/delivery.html:38
-#: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
-#: app/templates/product/editProduct.html:157
-#: app/templates/requests/request.html:60
-#: app/templates/supplies/supply.html:59
-msgid "Product code"
-msgstr "Kód produktu"
+#: app/templates/deliveries/delivery.html:22
+#: app/templates/orders/order.html:22 app/templates/requests/request.html:22
+#: app/templates/supplies/supply.html:22
+msgid "Edit"
+msgstr "Upravit"
 
-#: app/templates/deliveries/delivery.html:41
+#: app/templates/deliveries/delivery.html:28
+#: app/templates/orders/order.html:28 app/templates/requests/request.html:28
+#: app/templates/settings/editCatalog.html:205
+#: app/templates/supplies/supply.html:28
+msgid "close"
+msgstr "zavřít"
+
+#: app/templates/deliveries/delivery.html:58
 #: app/templates/deliveries/deliveryReport.html:20
 #: app/templates/mail/order_confirm.html:24 app/templates/orders/order.html:58
 #: app/templates/orders/productorders.html:46
@@ -953,9 +984,10 @@ msgstr "Zkompletované a uzavřené objednávky výrobci: "
 #: app/templates/deliveries/deliveryReport.html:76
 #: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
 #: app/templates/orders/productorders.html:43
+#: app/templates/requests/axm_requests.html:14
 #: app/templates/requests/productrequests.html:43
 #: app/templates/requests/request.html:18
-#: app/templates/requests/requests.html:18
+#: app/templates/requests/requests.html:14
 #: app/templates/supplies/supplyReport.html:59
 #: app/templates/supplies/supplyReport.html:81
 msgid "Order ID"
@@ -1126,13 +1158,6 @@ msgstr ""
 msgid "Order details:"
 msgstr "Detaily objednávky:"
 
-#: app/templates/mail/order_confirm.html:22
-#: app/templates/shop/_cart_table.html:6
-#: app/templates/shop/orderconfirm.html:39
-#: app/templates/shop/placeorder.html:35
-msgid "Product Name"
-msgstr "Název produktu"
-
 #: app/templates/mail/order_confirm.html:23
 #: app/templates/shop/orderconfirm.html:40
 #: app/templates/shop/placeorder.html:36
@@ -1204,17 +1229,6 @@ msgstr "Čist."
 msgid "Order Quantity"
 msgstr "Objednané množství"
 
-#: app/templates/orders/order.html:22 app/templates/requests/request.html:22
-#: app/templates/supplies/supply.html:22
-msgid "Edit"
-msgstr "Upravit"
-
-#: app/templates/orders/order.html:28 app/templates/requests/request.html:28
-#: app/templates/settings/editCatalog.html:205
-#: app/templates/supplies/supply.html:28
-msgid "close"
-msgstr "zavřít"
-
 #: app/templates/orders/order.html:59
 msgid "Delivered"
 msgstr "Dodáno"
@@ -1270,11 +1284,6 @@ msgstr "Nákupní cena"
 msgid "Retail price"
 msgstr "Maloobch. cena"
 
-#: app/templates/product/addProduct.html:166
-#: app/templates/product/editProduct.html:245
-msgid "Quantity on stock"
-msgstr "Množsví na skladě"
-
 #: app/templates/product/addProduct.html:180
 #: app/templates/product/editProduct.html:259
 msgid "Axis Mart node number"
@@ -1322,6 +1331,22 @@ msgstr "Nový obrázek:"
 #: app/templates/product/editProduct.html:342
 msgid "upload"
 msgstr "nahrát"
+
+#: app/templates/requests/axm_requests.html:5
+msgid "Orders from Axis Mart overview"
+msgstr "Přehled objednávek z Axis Martu"
+
+#: app/templates/requests/axm_requests.html:16
+#: app/templates/requests/request.html:41
+#: app/templates/requests/requests.html:16
+#: app/templates/supplies/supplyReport.html:61
+#: app/templates/supplies/supplyReport.html:83
+msgid "Received by"
+msgstr "Příjemce"
+
+#: app/templates/requests/axm_requests.html:17
+msgid "Order No."
+msgstr "Č. obj."
 
 #: app/templates/requests/createRequest.html:23
 msgid "Select a customer to receive order from!"
@@ -1383,26 +1408,18 @@ msgstr "Objednávky produktu od zákazníků"
 
 #: app/templates/requests/productrequests.html:55
 #: app/templates/requests/request.html:45
-#: app/templates/requests/requests.html:33
 #: app/templates/supplies/supplies.html:42
 #: app/templates/supplies/supply.html:45
 #: app/templates/supplies/supplyReport.html:14
 msgid "order no."
 msgstr "č. obj."
 
-#: app/templates/requests/request.html:41
-#: app/templates/requests/requests.html:20
-#: app/templates/supplies/supplyReport.html:61
-#: app/templates/supplies/supplyReport.html:83
-msgid "Received by"
-msgstr "Příjemce"
-
 #: app/templates/requests/request.html:44
 msgid "Order no."
 msgstr "Č. obj."
 
 #: app/templates/requests/request.html:47
-#: app/templates/requests/requests.html:21
+#: app/templates/requests/requests.html:17
 #: app/templates/supplies/supplies.html:32
 #: app/templates/supplies/supply.html:43
 #: app/templates/supplies/supplyReport.html:62
@@ -1417,10 +1434,6 @@ msgstr "Dodáno"
 #: app/templates/requests/requests.html:5
 msgid "Orders from customers overview"
 msgstr "Přehled objednávek od zákazníků"
-
-#: app/templates/requests/requests.html:9
-msgid "Receive order"
-msgstr "Přijmout objednávku"
 
 #: app/templates/settings/addCategory.html:11
 #: app/templates/settings/categories.html:48
@@ -1592,6 +1605,10 @@ msgstr "Stáhnout data z databáze pro:"
 msgid "Products"
 msgstr "Produkty"
 
+#: app/templates/settings/dataexport.html:15
+msgid "Stock availability"
+msgstr "Dostupnost na skladu"
+
 #: app/templates/settings/dataimport.html:5
 msgid "Import of Data"
 msgstr "Import dat"
@@ -1737,6 +1754,18 @@ msgstr "Obnovit košík"
 #: app/templates/shop/_cart_table.html:31
 msgid "To order"
 msgstr "Objednat"
+
+#: app/templates/shop/csvdownloadcustomer.html:34
+msgid "Download stock data as CSV file"
+msgstr "Stáhnout data jako CSV soubor"
+
+#: app/templates/shop/csvdownloadcustomer.html:35
+msgid "Select product categories to download"
+msgstr "Vyberte kategorie produktů ke stažení"
+
+#: app/templates/shop/csvdownloadcustomer.html:45
+msgid "Download"
+msgstr "Stáhnout"
 
 #: app/templates/shop/orderconfirm.html:27
 msgid ""
@@ -1957,3 +1986,6 @@ msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 
 #~ msgid "This function will be available soon!"
 #~ msgstr "Tato funkce bude v brzké době zprovozněna!"
+
+#~ msgid "Receive order"
+#~ msgstr "Přijmout objednávku"

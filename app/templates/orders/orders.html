@@ -39,7 +39,7 @@
     <tbody>
         {% for order in orders.items %}
         <tr
-                {% if order.active_flg == false %} class="danger" {% endif %}
+                {% if order.active_flg == false %} class="success" {% endif %}
                 onclick="window.location.href = '{{ url_for("order", id=order.id) }}'">
             <td class="clickable-td td-border-left-2px">{{ order.id }}</td>
             <td class="clickable-td">{{ momentjs(order.created_dt).format('LLL') }}</td>

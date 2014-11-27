@@ -275,9 +275,3 @@ def createNohinsho():
 
     flash(gettext('Invalid data received.'))
     return redirect(url_for("supplies"))
-
-
-@app.route('/download/<path:filename>')
-@login_required
-def download_file(filename):
-    return app.send_static_file(filename)

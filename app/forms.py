@@ -212,5 +212,5 @@ class ShopHeaderForm(Form):
     search = StringField(lazy_gettext('Search'), [validators.length(min=2)])
 
 
-class CartOrderForm(Form):
+class SimpleSubmitForm(Form):
     submit = SubmitField(lazy_gettext('Submit'))

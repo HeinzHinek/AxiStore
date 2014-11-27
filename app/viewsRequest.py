@@ -16,12 +16,28 @@ import flask
 @login_required
 def requests(page=1):
     requests = Request.query\
+        .join(Customer)\
+        .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])\
         .order_by(Request.active_flg.desc())\
         .order_by(Request.created_dt)\
         .paginate(page, DEFAULT_PER_PAGE, False)
     return render_template('requests/requests.html',
                            title=gettext("Orders from Customers"),
-                           CUSTOMER_TYPES=CUSTOMER_TYPES,
+                           requests=requests)
+
+
+@app.route('/axm_requests')
+@app.route('/axm_requests/<int:page>')
+@login_required
+def axm_requests(page=1):
+    requests = Request.query\
+        .join(Customer)\
+        .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'])\
+        .order_by(Request.active_flg.desc())\
+        .order_by(Request.created_dt)\
+        .paginate(page, DEFAULT_PER_PAGE, False)
+    return render_template('requests/axm_requests.html',
+                           title=gettext("Orders from Axis Mart"),
                            requests=requests)
 
 

@@ -8,13 +8,11 @@ from flask_login import login_required
 from werkzeug.security import generate_password_hash
 from flask.ext.babel import gettext
 from flask_login import current_user
+from csvHelper import *
 from config import CSV_PATH
 from werkzeug import secure_filename
-from sqlalchemy.engine.reflection import Inspector
-from collections import OrderedDict
 from config import USER_ROLES, LANGUAGES, CUSTOMER_TYPES
 import os
-import csv
 
 
 @app.route('/settings/users')
@@ -222,24 +220,7 @@ def downloadProducts():
     return redirect('/settings/dataexport')
 
 
-def process_csv(path, orm, cols):
-    with open(path, 'rb') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            obj = orm()
-            items = OrderedDict(zip(cols, row))
-            for item in items:
-                setattr(obj, item, items[item].decode('utf-8-sig'))
-                db.session.add(obj)
-    db.session.commit()
-    return gettext('CSV uploaded and processed sucessfully.')
-
-
-def get_colnames(orm):
-    insp = Inspector.from_engine(db.engine)
-    cols = insp.get_columns(orm.__tablename__)
-    colnames = []
-    for c in cols:
-        colnames.append(c['name'])
-    colnames.remove('id')
-    return colnames
+@app.route('/settings/dataexport/downloadAvailableStock')
+@login_required
+def downloadAvailableStock():
+    return redirect(url_for('download_file', filename=generate_available_stock_csv()))

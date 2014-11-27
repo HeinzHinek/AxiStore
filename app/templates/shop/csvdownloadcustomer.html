@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/shop.css" rel="stylesheet">
+
+<script>
+    $(document).ready(function() {
+        $('.cat_chckbx').on('change', function() {
+            if (jQuery('.cat_chckbx:checked').length) {
+                $('#submit-btn').removeAttr('disabled');
+                $('#submit-btn').removeClass('btn-danger');
+                $('#submit-btn').addClass('btn-info');
+            } else {
+                $('#submit-btn').attr('disabled', 'disabled');
+                $('#submit-btn').removeClass('btn-info');
+                $('#submit-btn').addClass('btn-danger');
+            }
+        });
+    });
+</script>
+
+<style>
+    body { background-color: #eeeeee; margin-bottom: 20px !important; }
+</style>
+
+<div class="row" style="text-align: center; margin-top: 10px;">
+
+    <br/>
+    {% include 'flash.html' %}
+
+    <div class="shadowed-div" style="min-width: 400px; width: 50%; margin: 0px auto;">
+        <form action="" method="post" name="csvDownloadCustomer">
+            {{form.hidden_tag()}}
+            <h3>{{ _('Download stock data as CSV file') }}</h3>
+            <label>{{ _('Select product categories to download') }}:</label>
+            <div style="min-width: 350px; width: 60%; text-align: left; margin: 0 auto; border: 1px dotted #dddddd;">
+                {% for c in categories %}
+                <label class="checkbox noselect" style="padding-left: 30px; cursor: pointer;">
+                    <input type="checkbox" class="cat_chckbx" name="csv_cat_id" value="{{ c.id }}" checked="checked"/>{{ c.name_JP }}
+                </label>
+                {% endfor %}
+            </div>
+            <br/>
+            <div>
+                {{ form.submit(id="submit-btn", class="btn btn-info", style="min-width: 150px;", value=gettext('Download')) }}
+            </div>
+            <br/>
+        </form>
+    </div>
+
+
+</div>
+
+{% endblock %}

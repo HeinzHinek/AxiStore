@@ -19,8 +19,21 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ _('Orders') }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{{ url_for('requests') }}">{{ _('from customers') }}</a></li>
-                        <li><a href="{{ url_for('orders') }}">{{ _('to makers') }}</a></li>
+                        <li><a href="{{ url_for('requests') }}">{{ _('from customers') }}
+                            {% if g.cust_request_count > 0 %}
+                            &nbsp;<span class="badge alert-danger">{{ g.cust_request_count }}</span>
+                            {% endif %}
+                        </a></li>
+                        <li><a href="{{ url_for('axm_requests') }}">{{ _('from Axis Mart') }}
+                            {% if g.axm_request_count > 0 %}
+                            &nbsp;<span class="badge alert-danger">{{ g.axm_request_count }}</span>
+                            {% endif %}
+                        </a></li>
+                        <li><a href="{{ url_for('orders') }}">{{ _('to makers') }}
+                            {% if g.maker_order_count > 0 %}
+                            &nbsp;<span class="badge alert-danger">{{ g.maker_order_count }}</span>
+                            {% endif %}
+                        </a></li>
                     </ul>
                 </li>
 

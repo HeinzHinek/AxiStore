@@ -5,7 +5,8 @@ from flask import render_template, g, session, request, json, redirect, url_for,
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
 from models import Product, Category, Cart, Request, RequestedProducts
-from forms import ShopHeaderForm, CartOrderForm
+from forms import ShopHeaderForm, SimpleSubmitForm
+from csvHelper import generate_available_stock_csv
 from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA, MAIL_USERNAME
 from imageHelper import getImgUrls
 from sqlalchemy import or_
@@ -95,7 +96,7 @@ def placeorder():
 
     cart_items = Cart.query.filter_by(user_id=current_user.id).all()
 
-    form = CartOrderForm()
+    form = SimpleSubmitForm()
     if form.validate_on_submit():
         new_request = Request()
         new_request.user_id = current_user.id
@@ -183,6 +184,22 @@ def orderconfirm():
                            requested_products=requested_products,
                            total=total,
                            pieces=pieces)
+
+
+@app.route('/shop/csvDownloadCustomer', methods=['GET', 'POST'])
+@customer_allowed
+@login_required
+def csvDownloadCustomer():
+    categories = Category.query.all()
+    form = SimpleSubmitForm()
+    if form.validate_on_submit():
+        category_ids = request.form.getlist('csv_cat_id')
+        return redirect(url_for('download_file', filename=generate_available_stock_csv(category_ids)))
+
+    return render_template('/shop/csvdownloadcustomer.html',
+                           title=gettext('Data download'),
+                           categories=categories,
+                           form=form)
 
 
 # AJAX methods below

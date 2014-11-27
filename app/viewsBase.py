@@ -3,7 +3,7 @@
 from flask import render_template, request, g, session, flash, redirect, url_for, json
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
-from models import User, Product, Category, Maker, Request, RequestedProducts, Supply
+from models import User, Product, Category, Maker, Request, RequestedProducts, Supply, Customer, Order
 from flask_login import current_user, login_required, customer_allowed
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
@@ -76,6 +76,22 @@ def before_request():
     else:
         if 'available_only' not in session:
             session['available_only'] = None
+
+    # for navbar badges
+    g.cust_request_count = len(Request.query
+                               .filter_by(active_flg=1)
+                               .join(Customer)
+                               .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])
+                               .all())
+    g.axm_request_count = len(Request.query
+                               .filter_by(active_flg=1)
+                               .join(Customer)
+                               .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'])
+                               .all())
+    g.maker_order_count = len(Order.query
+                              .filter_by(active_flg=1)
+                              .all())
+
 
 @app.after_request
 def after_request(response):
@@ -322,6 +338,13 @@ def get_locale():
     if g.user.is_authenticated():
         lang = g.user.language
     return lang
+
+
+@app.route('/download/<path:filename>')
+@customer_allowed
+@login_required
+def download_file(filename):
+    return app.send_static_file(filename)
 
 
 # AJAX functions below

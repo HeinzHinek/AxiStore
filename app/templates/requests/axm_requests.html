@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="row">
-    <h1>{{ _('Orders from customers overview') }}</h1>
+    <h1>{{ _('Orders from Axis Mart overview') }}</h1>
     {% include 'flash.html' %}
 </div>
 
@@ -14,7 +14,7 @@
             <th class="td-border-left-1px">{{ _('Order ID') }}</th>
             <th>{{ _('Received') }}</th>
             <th>{{ _('Received by') }}</th>
-            <th class="td-border-right-1px">{{ _('Customer') }}</th>
+            <th class="td-border-right-1px">{{ _('Order No.') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +25,7 @@
             <td class="clickable-td td-border-left-2px">{{ request.id }}</td>
             <td class="clickable-td">{{ momentjs(request.created_dt).format('LLL') }}</td>
             <td class="clickable-td">{{ request.receiver.nickname }}</td>
-            <td class="clickable-td td-border-right-2px">{{ request.customer.name }}</td>
+            <td class="clickable-td td-border-right-2px">{{ request.customer.order_no }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -34,7 +34,7 @@
 
     <!-- PAGINATION -->
     {% from "_pagination.html" import render_pager %}
-    {{ render_pager(requests, 'requests') }}
+    {{ render_pager(requests, 'axm_requests') }}
 
 </div>
 {% endif %}
