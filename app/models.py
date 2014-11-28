@@ -4,7 +4,6 @@ from app import db
 from config import USER_ROLES, CUSTOMER_TYPES
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import case
 
 
 class User(db.Model):
