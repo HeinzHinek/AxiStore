@@ -121,6 +121,8 @@ def createRequest():
 
             db.session.commit()
             flash(gettext("Order created successfully."))
+            if cust == 'axm':
+                return redirect(url_for("axm_requests"))
             return redirect(url_for("requests"))
 
         else:

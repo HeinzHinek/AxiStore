@@ -4,6 +4,13 @@
 <script>
 $(document).ready(function() {
 
+    $('.input-qty').each( function() {
+        var stock_qty = parseInt($(this).closest('tr').find('.stock_qty_td').text())
+        if (stock_qty < 1) {
+            $(this).addClass('alert-danger');
+        }
+    });
+
     $(".input-qty").focus(function(){
         $(this).on("mouseup.a keyup.a", function(e){
             $(this).off("mouseup.a keyup.a").select();
@@ -43,6 +50,11 @@ $(document).ready(function() {
             } else {
                 $span = $(inputs[i]).parent().find('span');
                 $span.text($(inputs[i]).val());
+                if ($(inputs[i]).parent().find('input').hasClass('alert-danger')){
+                    $span.css('color', 'red');
+                } else {
+                    $span.css('color', 'black');
+                }
                 $(inputs[i]).hide();
                 $span.show();
             }
@@ -75,6 +87,13 @@ $(document).ready(function() {
 
     $('.input-qty').blur( function() {
         $(this).closest('tr').children('td').removeClass('focused-tr');
+        var req_qty = parseInt($(this).closest('tr').find('.req_qty_td').text())
+        var stock_qty = parseInt($(this).closest('tr').find('.stock_qty_td').html())
+        if ( stock_qty < 1 || $(this).val() > stock_qty || $(this).val() > req_qty ) {
+            $(this).addClass('alert-danger');
+        } else {
+            $(this).removeClass('alert-danger');
+        }
     });
 });
 </script>
@@ -113,7 +132,8 @@ $(document).ready(function() {
                 <th>{{ _('Decription CS') }}</th>
                 <th>{{ _('Description JP') }}</th>
                 <th style="text-align: right;">{{ _('Retail Price') }}</th>
-                <th style="text-align: right;">{{ _('Req. quantity') }}</th>
+                <th style="text-align: right; width: 9%;">{{ _('Req. quantity') }}</th>
+                <th style="text-align: right; width: 5%;">{{ _('Stock') }}</th>
                 <th style="text-align: right;">{{ _('Supply quantity') }}</th>
             </tr>
 
@@ -124,7 +144,13 @@ $(document).ready(function() {
                 <td>{{ product.desc_CS }}</td>
                 <td>{{ product.desc_JP }}</td>
                 <td style="text-align: right;">{{ product.price_retail }}</td>
-                <td style="text-align: right;">{{ product.cust_request_qty }}</td>
+
+                {% if product.cust_request_qty > product.qty_stock %}<td class="req_qty_td warning" style="text-align: right; color: red;">
+                {% else %}<td class="req_qty_td" style="text-align: right;">
+                {% endif %}
+                <b>{{ product.cust_request_qty }}</b></td>
+
+                <td class="stock_qty_td" style="text-align: right;">{{ product.qty_stock }}</td>
                 <td>
                     <input type="text" name="supp_qty-{{ product.id }}" size="3"
                            class="input-qty input-sm form-control nums_only" style="text-align: right;" value="0"/>
