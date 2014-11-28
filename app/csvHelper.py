@@ -46,10 +46,10 @@ def generate_available_stock_csv(categories=[]):
         .order_by(Product.code)\
         .all()
     headers = [gettext('Product code'), gettext('Product Name'), gettext('Quantity on stock')]
-    outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
+    outcsv.writerow([unicode(header).encode('utf-8-sig') for header in headers])
     for product in products:
         columns = [product.code, product.desc_JP, product.available_qty]
-        outcsv.writerow([unicode(column).encode('utf-8') for column in columns])
+        outcsv.writerow([unicode(column).encode('utf-8-sig') for column in columns])
 
     outfile.close()
 
