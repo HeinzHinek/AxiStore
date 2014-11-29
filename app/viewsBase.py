@@ -80,6 +80,7 @@ def before_request():
     # for shop - catalog term search
     catalog_ids = request.args.getlist('catalog_ids')
     if catalog_ids:
+        session['category_id'] = None
         g.category_id = None
         session['catalog_ids'] = []
         for id in catalog_ids:
