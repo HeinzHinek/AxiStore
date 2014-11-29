@@ -1,4 +1,4 @@
-{% macro render_catalog(catalog, selected_terms, withparents=True) %}
+{% macro render_catalog(catalog, selected_terms, withparents=True, language='ja') %}
 
 <style>
 #modal-div {
@@ -70,24 +70,42 @@
                 <div style="padding: 10px 5px;;">
                 <label class="checkbox-inline" style="font-size: 1.1em; font-weight: bolder;">
                     <input type="checkbox" class="parent-checkbox category-term-checkbox" termid="{{ term[0].id }}"
-                        termtext="{{ term[0].name_CS }}" termlevel="0"
+                        {% if language == 'cs' %}
+                            termtext="{{ term[0].name_CS }}" termlevel="0"
+                        {% else %}
+                            termtext="{{ term[0].name_JP }}" termlevel="0"
+                        {% endif%}
+
                         {% for cp in term[0].products %}
                             {% if cp in selected_terms %} checked="checked" {% endif %}
                         {% endfor %}
                     />
-                    {{ term[0].name_CS }}
+                    {% if language == 'cs' %}
+                        {{ term[0].name_CS }}
+                    {% else %}
+                        {{ term[0].name_JP }}
+                    {% endif%}
                 </label>
                 {% if term[1] %}
                     {% for chi in term[1] %}
                         <div class="child-term-div">
                             <label class="checkbox-inline">
                                 <input type="checkbox" class="child-checkbox category-term-checkbox" termid="{{ chi.id }}"
-                                    termtext="{{ chi.name_CS }}" termlevel="1"
+                                    {% if language == 'cs' %}
+                                        termtext="{{ chi.name_CS }}" termlevel="1"
+                                    {% else %}
+                                        termtext="{{ chi.name_JP }}" termlevel="1"
+                                    {% endif%}
+
                                     {% for cp in chi.products %}
                                         {% if cp in selected_terms %} checked="checked" {% endif %}
                                     {% endfor %}
                                 />
-                                {{ chi.name_CS }}
+                                {% if language == 'cs' %}
+                                    {{ chi.name_CS }}
+                                {% else %}
+                                    {{ chi.name_JP }}
+                                {% endif%}
                             </label>
                         </div>
                     {% endfor %}

@@ -456,6 +456,6 @@
 
 <!-- Catalog div -->
 {% from "_catalog.html" import render_catalog %}
-{{ render_catalog(catalog, [], withparents=False) }}
+{{ render_catalog(catalog, [], withparents=False, language=g.user.language) }}
 
 {% endblock %}

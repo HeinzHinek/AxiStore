@@ -350,6 +350,6 @@
 
 <!-- Catalog div -->
 {% from "_catalog.html" import render_catalog %}
-{{ render_catalog(catalog, product.catalog_terms) }}
+{{ render_catalog(catalog, product.catalog_terms, language=g.user.language) }}
 
 {% endblock %}

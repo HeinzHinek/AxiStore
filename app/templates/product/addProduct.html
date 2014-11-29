@@ -235,6 +235,6 @@
 
 <!-- Catalog div -->
 {% from "_catalog.html" import render_catalog %}
-{{ render_catalog(catalog, []) }}
+{{ render_catalog(catalog, [], language=g.user.language) }}
 
 {% endblock %}
