@@ -4,10 +4,11 @@ from app import app, db, mailer
 from flask import render_template, g, session, request, json, redirect, url_for, flash
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
-from models import Product, Category, Cart, Request, RequestedProducts
+from models import Product, Category, Cart, Request, RequestedProducts, Catalog, CatalogedProducts
 from forms import ShopHeaderForm, SimpleSubmitForm
+from viewsProduct import prepare_catalog
 from csvHelper import generate_available_stock_csv
-from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA, MAIL_USERNAME
+from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
 from imageHelper import getImgUrls
 from sqlalchemy import or_
 
@@ -26,8 +27,19 @@ def shop(page=1):
                                        (Product.desc_CS.ilike('%' + session['search_string'] + '%')),
                                        (Product.desc_JP.ilike('%' + session['search_string'] + '%'))))
 
+    curr_catalog_terms = None
+    if session['catalog_ids']:
+        cps = CatalogedProducts.query.filter(CatalogedProducts.catalog_id.in_(session['catalog_ids'])).all()
+        cataloged_product_ids = []
+        curr_catalog_terms = []
+        for cp in cps:
+            cataloged_product_ids.append(cp.product_id)
+        for id in session['catalog_ids']:
+            curr_catalog_terms.append(Catalog.query.get(id).name_JP)
+        products = products.filter(Product.id.in_(cataloged_product_ids))
+
     if g.category_id:
-        products = products.filter_by(category_id=int(g.category_id))
+            products = products.filter_by(category_id=int(g.category_id))
 
     if session['available_only'] is True:
         products = products.filter(Product.available_qty > 0)
@@ -57,12 +69,15 @@ def shop(page=1):
     categories = [(a.id, a.name_JP) for a in Category.query.all()]
     categories = [(0, gettext('All'))] + categories
     form.category.choices = categories
+    catalog = prepare_catalog()
     return render_template('/shop/shop.html',
                            title=gettext('AxiStore shop'),
                            products=products,
                            curr_category=g.category_id,
                            axm_product_url=AXM_PRODUCT_URL_JA,
                            curr_search=curr_search,
+                           curr_catalog_terms=curr_catalog_terms,
+                           catalog=catalog,
                            form=form)
 
 
@@ -73,11 +88,22 @@ def restrict():
     form = ShopHeaderForm(request.form)
     if form.is_submitted():
         string = form.search.data
-        if string:
+        if string:      # String search?
+            session['catalog_ids'] = None
             if len(string) > 1:
                 return redirect(url_for('shop', search=string))
+        else:           # Catalog term search?
+            session['search_string'] = None
+            new_ids_str = request.form.getlist('term')
+            new_ids = []
+            for id in new_ids_str:
+                new_ids.append(int(id))
+            if new_ids:
+                return redirect(url_for('shop', catalog_ids=new_ids))
     if session['search_string']:
         return redirect(url_for('shop', search=session['search_string']))
+    elif session['catalog_ids']:
+        return redirect(url_for('shop', catalog_ids=session['catalog_ids']))
     return redirect('shop')
 
 
@@ -86,6 +112,7 @@ def restrict():
 @login_required
 def clearshopsearch():
     session['search_string'] = None
+    session['catalog_ids'] = None
     return redirect(url_for('shop'))
 
 

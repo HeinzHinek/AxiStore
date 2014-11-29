@@ -2,7 +2,6 @@
 
 from app import db
 from models import Product
-from flask import url_for, redirect
 from sqlalchemy.engine.reflection import Inspector
 from collections import OrderedDict
 from config import CSV_PATH

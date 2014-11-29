@@ -77,6 +77,17 @@ def before_request():
         if 'available_only' not in session:
             session['available_only'] = None
 
+    # for shop - catalog term search
+    catalog_ids = request.args.getlist('catalog_ids')
+    if catalog_ids:
+        g.category_id = None
+        session['catalog_ids'] = []
+        for id in catalog_ids:
+            session['catalog_ids'].append(int(id))
+    else:
+        if 'catalog_ids' not in session:
+            session['catalog_ids'] = None
+
     # for navbar badges
     g.cust_request_count = len(Request.query
                                .filter_by(active_flg=1)

@@ -275,6 +275,16 @@
         return false;
     }
 
+    // Catalog search
+    function categoryDataReady() {
+        var checked = returnChecked();
+        for (var i=0; i<checked.length; i++) {
+            var hidden = "<input type='hidden' name='term' value=" + checked[i][0] + " />";
+            $(hidden).appendTo('#search_form');
+        }
+        $('#search_form').submit();
+    }
+
 </script>
 
 <style>
@@ -284,19 +294,25 @@
 <div class="row" style="text-align: center; margin-top: 10px;">
 
     <div class="shop-header shadowed-div" style="padding-top: 30px; margin-top: -30px;">
-        <form action="{{ url_for('restrict') }}" method="post" name="shop" class="form-inline clearfix">
+        <form id="search_form" action="{{ url_for('restrict') }}" method="post" name="shop" class="form-inline clearfix">
             {{form.hidden_tag()}}
-            <div style="float: left; display: inline-block; white-space: nowrap;">
-                <span style="display: inline-block;"><label>{{ _('Category:') }}&nbsp;</label></span>
-                <span style="display: inline-block;">{{ form.category(id="category-select", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}</span>
+            <div style="float: left; display: inline-block; white-space: nowrap; margin-bottom: 5px;">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-addon label-info" style="color: white">{{ _('Category') }}:</span>
+                    {{ form.category(id="category-select", class="form-control", style="min-width: 150px; max-width: 300px;") }}
+                </div>
             </div>
-            <div class="checkbox" style="margin: 5px; 10px; float: left;">
+            <div class="checkbox" style="margin: 0px 10px 5px 10px; padding: 3px 10px; float: left; border: 1px dotted #dddddd;">
                 <label>{{ form.available_only(id="available-only-check") }}&nbsp;{{ _('Available items only') }}&nbsp;</label>
             </div>
-
-            <div style="float: right; display: inline-block; white-space: nowrap; overflow: hidden;">
+            <div style="float: center; display: inline-block; white-space: nowrap; overflow: hidden;">
                 <span style="display: inline-block;">{{ form.search(id="search_bar", class="form-control input-sm", style="min-width: 150px; max-width: 300px;") }}</span>
                 <span style="display: inline-block;"><input type="submit" class="btn btn-info btn-sm" onclick="return checkSearch();" value="{{ _('Search') }}"/></span>
+            </div>
+            <div style="float: right; display: inline-block; white-space: nowrap; overflow: hidden;">
+                <span style="display: inline-block; border-left: 2px dotted #dddddd; margin-left: 10px; padding-left: 15px;">
+                    <input type="button" class="btn btn-info btn-sm" value="{{ _('Search by keyword') }}" onclick="showCategoriesPicker();"/>
+                </span>
             </div>
         </form>
         {% if curr_search %}
@@ -304,6 +320,19 @@
                 background-color: #eeeeee; border-radius: 3px; -webkit-box-shadow: 0 0 3px 3px #78AEFF; box-shadow: 0 0 3px 3px #78AEFF;">
                 <div style="text-align: center; font-size: 1.2em;">
                     {{ _('Search results:') }}:&nbsp;<span style="color: crimson;">{{ curr_search }}</span>&nbsp;&nbsp;&nbsp;
+                    <a href="{{ url_for('clearshopsearch') }}" class="btn btn-warning btn-xs">{{ _('Clear search') }}</a>
+                </div>
+            </div>
+        {% elif curr_catalog_terms %}
+            <div class="clearfix" style="margin-top: 10px; padding: 2px 5px; border: 1px solid #dddddd; position: relative;
+                background-color: #eeeeee; border-radius: 3px; -webkit-box-shadow: 0 0 3px 3px #78AEFF; box-shadow: 0 0 3px 3px #78AEFF;">
+                <div style="text-align: center; font-size: 1.2em;">
+                    {{ _('Results for keywords') }}:&nbsp;<span style="color: crimson;">
+                        {% for t in curr_catalog_terms %}
+                            {{ t }}
+                            {% if not loop.last %}{{ _(', ') }}{% endif %}
+                        {% endfor %}
+                    </span>&nbsp;&nbsp;&nbsp;
                     <a href="{{ url_for('clearshopsearch') }}" class="btn btn-warning btn-xs">{{ _('Clear search') }}</a>
                 </div>
             </div>
@@ -424,5 +453,9 @@
         </div>
     {% endif %}
 </div>
+
+<!-- Catalog div -->
+{% from "_catalog.html" import render_catalog %}
+{{ render_catalog(catalog, [], withparents=False) }}
 
 {% endblock %}

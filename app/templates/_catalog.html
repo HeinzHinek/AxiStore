@@ -1,4 +1,4 @@
-{% macro render_catalog(catalog, selected_terms) %}
+{% macro render_catalog(catalog, selected_terms, withparents=True) %}
 
 <style>
 #modal-div {
@@ -139,17 +139,23 @@
     }
 
     $(document).ready(function() {
-        $('.child-checkbox').change(function() {
-            if ( $(this).is(':checked') ) {
-                $(this).closest('.parent-term-div').find('.parent-checkbox').prop('checked', true);
-            }
-        });
 
-        $('.parent-checkbox').change(function() {
-            if ( !$(this).is(':checked') ) {
-                $(this).closest('.parent-term-div').find('.child-checkbox').prop('checked', false);
-            }
-        });
+        {% if withparents %}
+
+            $('.child-checkbox').change(function() {
+                if ( $(this).is(':checked') ) {
+                    $(this).closest('.parent-term-div').find('.parent-checkbox').prop('checked', true);
+                }
+            });
+
+            $('.parent-checkbox').change(function() {
+                if ( !$(this).is(':checked') ) {
+                    $(this).closest('.parent-term-div').find('.child-checkbox').prop('checked', false);
+                }
+            });
+
+        {% endif %}
+
     });
 </script>
 {% endmacro %}
