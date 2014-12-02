@@ -74,9 +74,13 @@ $(document).ready( function() {
 
     $(".fancybox").fancybox();
 
-    $('.td-redir-edit').click( function() {
+    $('.td-redir-edit').bind('click', function(event) {
         id = $(this).parent().attr('id');
-        window.location.href = '{{ url_for("editProduct") }}' + '/' + id + '?stock_page={{ products.page }}';
+        if (event.ctrlKey) {
+            window.open('{{ url_for("editProduct") }}' + '/' + id + '?stock_page={{ products.page }}');
+        } else {
+            window.location.href = '{{ url_for("editProduct") }}' + '/' + id + '?stock_page={{ products.page }}';
+        }
     });
 
     $('.td-qty-edit').click( function() {
