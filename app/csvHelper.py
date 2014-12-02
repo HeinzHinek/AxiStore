@@ -34,7 +34,7 @@ def get_colnames(orm):
 
 def generate_available_stock_csv(categories=[]):
     path = os.path.join(CSV_PATH, ('axm_stock_' + datetime.utcnow().strftime("%Y%m%d") + '.csv'))
-    outfile = open(path, 'wb')
+    outfile = open(path, 'wb+')
     outcsv = csv.writer(outfile)
     products = Product.query\
         .filter_by(active_flg=True)
@@ -45,10 +45,10 @@ def generate_available_stock_csv(categories=[]):
         .order_by(Product.code)\
         .all()
     headers = [gettext('Product code'), gettext('Product Name'), gettext('Quantity on stock')]
-    outcsv.writerow([unicode(header).encode('utf-8-sig') for header in headers])
+    outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
     for product in products:
         columns = [product.code, product.desc_JP, product.available_qty]
-        outcsv.writerow([unicode(column).encode('utf-8-sig') for column in columns])
+        outcsv.writerow([unicode(column).encode('utf-8') for column in columns])
 
     outfile.close()
 

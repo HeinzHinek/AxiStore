@@ -105,10 +105,10 @@ def before_request():
                               .all())
 
 
-@app.after_request
-def after_request(response):
-    #db.session.expire_all()
-    return response
+#@app.after_request
+#def after_request(response):
+#    #db.session.expire_all()
+#    return response
 
 
 @app.route('/')

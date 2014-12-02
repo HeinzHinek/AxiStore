@@ -129,7 +129,7 @@ def createRequest():
             flash(gettext("Order data not sent."))
             return redirect(url_for("requests"))
 
-    formCustomer.datetime.data = datetime.now()
+    formCustomer.datetime.data = datetime.utcnow()
     return render_template('requests/createRequest.html',
                            title=gettext("Accept order from customer"),
                            formCustomer=formCustomer,
