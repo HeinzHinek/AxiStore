@@ -64,7 +64,7 @@ def shop(page=1):
             for u in urls:
                 u = u.split('app')[1]
                 p.img_urls.append(u)
-                p.img_thumb_urls.append(getThumbUrls(u).split('app')[1])
+                p.img_thumb_urls.append(u) #getThumbUrls(u).split('app')[1])
         else:
             p.img_urls.append(NO_PHOTO_URL.split('app')[1])
             p.img_thumb_urls.append(NO_PHOTO_THUMB_URL.split('app')[1])
