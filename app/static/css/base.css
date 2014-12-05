@@ -200,6 +200,10 @@
     color: #6666ff;
 }
 
+.changed-td {
+    background-color: #ffdddd !important;
+}
+
 .changed-tr td {
     background-color: #ffdddd !important;
 }
@@ -240,4 +244,12 @@
     font-size: 1em !important;
     white-space: normal !important;
     text-align: left !important;
+}
+
+#maker-stock-table th {
+    vertical-align: middle !important;
+}
+
+#maker-stock-table td {
+    vertical-align: middle !important;
 }

@@ -23,7 +23,13 @@
     <td>{{ user.id }}</td>
     <td>{{ user.nickname }}</td>
     <td>{{ roles[user.role] }}
-    <td>{{ user.customer.name }}</td>
+    {% if user.customer %}
+        <td>{{ user.customer.name }}</td>
+    {% elif user.maker %}
+        <td>{{ user.maker.name }}</td>
+    {% else %}
+        <td>-</td>
+    {% endif %}
     <td>{{ languages[user.language] }}</td>
 </tr>
 {% endfor %}

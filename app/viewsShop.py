@@ -8,8 +8,8 @@ from models import Product, Category, Cart, Request, RequestedProducts, Catalog,
 from forms import ShopHeaderForm, SimpleSubmitForm
 from viewsProduct import prepare_catalog
 from csvHelper import generate_available_stock_csv
-from config import NO_PHOTO_URL, USER_ROLES, AXM_PRODUCT_URL_JA
-from imageHelper import getImgUrls
+from config import NO_PHOTO_URL, NO_PHOTO_THUMB_URL, USER_ROLES, AXM_PRODUCT_URL_JA
+from imageHelper import getImgUrls, getThumbUrls
 from sqlalchemy import or_
 
 
@@ -59,12 +59,15 @@ def shop(page=1):
 
         urls = getImgUrls(p.id)
         p.img_urls = []
+        p.img_thumb_urls = []
         if urls:
             for u in urls:
                 u = u.split('app')[1]
                 p.img_urls.append(u)
+                p.img_thumb_urls.append(getThumbUrls(u).split('app')[1])
         else:
             p.img_urls.append(NO_PHOTO_URL.split('app')[1])
+            p.img_thumb_urls.append(NO_PHOTO_THUMB_URL.split('app')[1])
     form = ShopHeaderForm()
     categories = [(a.id, a.name_JP) for a in Category.query.all()]
     categories = [(0, gettext('All'))] + categories

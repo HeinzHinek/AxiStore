@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+
+<script>
+var pics_visible = true;
+
+$(document).ready( function() {
+    $(".fancybox").fancybox();
+    swapImages();
+
+    $.tablesorter.addParser({
+        id: 'input',
+        is: function(s) {
+            return false;
+        },
+        format: function(s, table, cell) {
+            return $('input', cell).val();
+        },
+        type: 'numeric'
+    });
+
+    $('#maker-stock-table').tablesorter( {
+            sortList: [[1,0]],
+            headers: {
+            0: { sorter: false },
+            6: { sorter: 'input' },
+            7: { sorter: false }
+            }
+    });
+
+    $('#image-hide-btn').click(function() {
+        swapImages();
+    });
+
+    $('.result-td').each(function() {
+        var ok = $(this).find('.glyphicon-ok');
+        var ng = $(this).find('.glyphicon-remove');
+        var ordered = parseInt($(this).closest('tr').find('.order-qty-td').text());
+        var on_stock = parseInt($(this).closest('tr').find('.on-stock-input').val());
+        if (ordered > on_stock) {
+            $(ok).hide();
+            $(ng).show();
+        } else {
+           $(ok).show();
+            $(ng).hide();
+        }
+    });
+
+    $(document).on('keyup', '.nums_only', function (e) {
+        if (e.keyCode != '9') {
+            this.value = this.value.replace(/[^0-9\.]/g,'');
+        }
+    });
+
+    $(document).on('focusin', '.nums_only', function (e) {
+        $(this).select();
+    });
+
+    $('.maker-code-edit-a').click(function() {
+        var editor = $(this).closest('td').find('.maker-code-editor-div');
+        var input = $(this).closest('td').find('.maker-code-editor-input');
+        var hidden = $(this).closest('td').find('.maker-code-hidden');
+        var span = $(this).closest('td').find('.maker-code-span');
+        var glyph = $(this).find('.glyphicon');
+        if ($(editor).is(':visible')) {
+            $(input).val($(input).val().replace(',', ''));
+            $(input).val($(input).val().replace(':', ''));
+            if ( $(input).val() != $(hidden).val() ) {
+                $(this).closest('td').addClass('changed-td');
+            } else {
+                $(this).closest('td').removeClass('changed-td');
+            }
+            $(glyph).addClass('glyphicon-pencil');
+            $(glyph).removeClass('glyphicon-ok');
+            $(span).text($(input).val());
+            $(span).show();
+            $(editor).hide();
+        } else {
+            var tmpStr = input.val();
+            input.val('');
+            input.val(tmpStr);
+            $(glyph).removeClass('glyphicon-pencil');
+            $(glyph).addClass('glyphicon-ok');
+            $(span).hide();
+            $(editor).show();
+            $(input).focus();
+        }
+        checkChanged();
+    });
+
+    $('.maker-code-editor-input').blur(function() {
+        var link = $(this).closest('td').find('.glyphicon');
+        if ( !$(clicky).is(link) ) {
+            $(link).trigger('click');
+        }
+    });
+
+    $('.on-stock-input').blur(function() {
+        var ok = $(this).closest('tr').find('.glyphicon-ok');
+        var ng = $(this).closest('tr').find('.glyphicon-remove');
+        var ordered = parseInt($(this).closest('tr').find('.order-qty-td').text());
+        var hidden = $(this).closest('td').find('.maker-stock-qty-hidden');
+        if ( $(this).val().trim() == '') {
+            $(this).val(0);
+        }
+        var on_stock = parseInt($(this).val());
+        if (ordered > on_stock) {
+            $(ok).hide();
+            $(ng).show();
+        } else {
+            $(ok).show();
+            $(ng).hide();
+        }
+        if ( $(this).val() != $(hidden).val() ) {
+            $(this).closest('td').addClass('changed-td');
+        } else {
+            $(this).closest('td').removeClass('changed-td');
+        }
+        checkChanged();
+    });
+
+    $('#form-sumbit-btn').click(function() {
+
+        $('.product-row').each(function() {
+            var data = '';
+            if ( $(this).find('.changed-td').length > 0 ) {
+                var prod_id = $(this).attr('prod_id');
+                var new_code = $(this).find('.maker-code-editor-input').val();
+                var new_qty = $(this).find('.on-stock-input').val();
+                var data = 'product_id:' + prod_id + ',new_code:' + new_code + ',new_qty:' + new_qty;
+                var hidden = $('<input type="hidden">').attr('name', 'product_data').appendTo(this);
+                $(hidden).val(data);
+            }
+        });
+    });
+
+});
+
+var clicky;
+var savebutton = false;
+
+$(document).mousedown(function(e) {
+    // The latest element clicked
+    clicky = $(e.target);
+    savebutton = false;
+    if ( $(clicky).is('#form-sumbit-btn') ) {
+        savebutton = true;
+    }
+});
+$(document).mouseup(function(e) {
+    clicky = null;
+});
+
+function swapImages() {
+    if (pics_visible) {
+        $('#image-hide-btn').text("{{ _('Images') }}");
+        $('.prod-img-glyph').show();
+        $('.prod-thumb-img').hide();
+        pics_visible = false;
+    } else {
+        $('#image-hide-btn').text("{{ _('Icons') }}");
+        $('.prod-thumb-img').show();
+        $('.prod-img-glyph').hide();
+        pics_visible = true;
+    }
+}
+
+function checkChanged() {
+    if ( $('.changed-td').length > 0 ) {
+        $("#change-notifier-div").fadeIn();
+        return true;
+    }
+    $("#change-notifier-div").fadeOut();
+    return false;
+}
+
+$(window).on('beforeunload', function() {
+    if ( checkChanged() == true && savebutton == false ) {
+        return "{{ _('There are unsaved items.') }}";
+    }
+});
+</script>
+
+<div class="row">
+    <h2>{{ _("My Stock Overview") }}</h2>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+    {% if products %}
+    <form action="" method="post" name="placeorder" class="form-inline">
+    {{form.hidden_tag()}}
+        <table id="maker-stock-table" class="table tablesorter table-hover table-condensed table-bordered table-striped">
+            <thead>
+            <tr>
+                <th style="max-width: 84px; width: 84px; text-align: center;">
+                    <input type="button" id="image-hide-btn" class="btn btn-info btn-xs" value="{{ _('Icons') }}"/>
+                </th>
+                <th class="sort-header" style="width: 8%;">{{ _('AM Code') }}</th>
+                <th class="sort-header" style="width: 110px;">{{ _('My Code') }}</th>
+                <th class="sort-header">{{ _('Product Name') }}</th>
+                <th class="sort-header">{{ _('Price') }}</th>
+                <th class="sort-header" style="width: 8%; ">{{ _('Ordered') }}</th>
+                <th class="sort-header" style="width: 100px;">{{ _('On Stock') }}</th>
+                <th style="text-align: center;"><span class="glyphicon glyphicon-question-sign"></span></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for product in products %}
+            <tr class="product-row" prod_id="{{ product.id }}">
+                <td style="text-align: center;">
+                    <a class="fancybox" rel="group{{ product.id }}" href="{{ product.img_urls[0] }}" tabindex="-1">
+                        <img class="prod-thumb-img" src="{{ product.img_thumb_urls[0] }}"
+                             style="display: none; max-height: 80px; max-width: 80px; width; auto;"/>
+                        <span class="glyphicon glyphicon-picture prod-img-glyph" style="display: none;"></span>
+                    </a>
+                </td>
+                <td>{{ product.code }}</td>
+                <td style="text-align: center; padding: 0px;">
+                    <div>
+                        <span class="maker-code-span" style="float: left; padding: 4px 0px 0px 6px; margin: 0px !important;">
+                            {% if product.maker_code %}{{ product.maker_code }}{% endif %}
+                        </span>
+                        <div class="maker-code-editor-div" style="display: none;">
+                            <input class="maker-code-editor-input" type="text" style="float: left; width: 80px; border: 1px dotted #dddddd;
+                                background-color: white; padding: 3px 3px 3px 5px;" maxlength="30" value="{% if product.maker_code %}{{ product.maker_code }}{% endif %}"/>
+                        </div>
+                        <a class="maker-code-edit-a noselect" style="float: right; padding: 3px;">
+                            <span class="glyphicon glyphicon-pencil" style="cursor: pointer;"></span>
+                        </a>
+                    </div>
+                    <input class="maker-code-hidden" type="hidden" value="{% if product.maker_code %}{{ product.maker_code }}{% endif %}"/>
+                </td>
+                <td>{{ product.desc_CS }}</td>
+                <td style="text-align: right;">{{ product.price_unit }}</td>
+                <td style="text-align: right;" class="order-qty-td">{{ product.order_qty }}</td>
+                <td style="text-align: right;">
+                    <input class="on-stock-input nums_only" type="text" style="text-align: right; width: 80px; border: 1px dotted #dddddd;
+                        background-color: white; padding: 3px;" maxlength="30"
+                        value="{% if product.maker_qty_stock %}{{ product.maker_qty_stock }}{% else %}0{% endif %}"/>
+                    <input class="maker-stock-qty-hidden" type="hidden" value="{% if product.maker_qty_stock %}{{ product.maker_qty_stock }}{% else %}0{% endif %}"/>
+                </td>
+                <td class="result-td" style="text-align: center;">
+                    <span class="glyphicon glyphicon-ok" style="display: none; color: green;"></span>
+                    <span class="glyphicon glyphicon-remove" style="display: none; color: crimson;"></span>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br>
+
+        <div id="change-notifier-div" style="position: fixed; z-index: 100; width: 100%; height: 50px; bottom: 0px; left: 0px;
+                background-color: #eeeeee; line-height: 50px; text-align: center; -webkit-box-shadow: 0 -3px 5px 2px #CFCFCF;
+                box-shadow: 0 -3px 5px 2px #CFCFCF; display: none;">
+            <span style="font-size: 1.2em; color: crimson;">{{ _('Data has been changed. Save changes?') }}</span>&nbsp;&nbsp;&nbsp;
+            {{ form.submit(id="form-sumbit-btn", class="btn btn-danger btn-sm", value=gettext('Save')) }}
+        </div>
+
+    </form>
+    {% endif %}
+</div>
+
+{% endblock %}

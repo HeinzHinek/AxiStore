@@ -9,6 +9,7 @@ from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, PACKAGE_SIZES
 from models import Product
 from flask.ext.babel import lazy_gettext
 import wtforms
+import operator
 
 
 class LoginForm(Form):
@@ -98,9 +99,10 @@ class AddUserForm(Form):
     email = EmailField(lazy_gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
 
-    role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
+    role = [(str(v), k) for k, v in iter(sorted(USER_ROLES.iteritems(), key=operator.itemgetter(1)))]
     role = SelectField(lazy_gettext('User role'), choices=role)
     customer = SelectField('Customer', coerce=int)
+    maker = SelectField('Maker', coerce=int)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
@@ -113,9 +115,10 @@ class EditUserForm(Form):
     email = EmailField(lazy_gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
 
-    role = [(str(v), k) for k, v in USER_ROLES.iteritems()]
+    role = [(str(v), k) for k, v in iter(sorted(USER_ROLES.iteritems(), key=operator.itemgetter(1)))]
     role = SelectField(lazy_gettext('User role'), choices=role)
     customer = SelectField('Customer', coerce=int)
+    maker = SelectField('Maker', coerce=int)
 
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]

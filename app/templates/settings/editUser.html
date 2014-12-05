@@ -3,17 +3,25 @@
 
 <script>
     $(document).ready(function() {
-        $("#customer_select").val({{ selected }});
+        $("#customer_select").val({{ selected_customer }});
+        $("#maker_select").val({{ selected_maker }});
 
         if ($(role_select).val() != {{ USER_ROLES['ROLE_CUSTOMER'] }}) {
             $("#customer-select-div").hide();
+        } else if ($(role_select).val() != {{ USER_ROLES['ROLE_MAKER'] }}) {
+            $("#maker-select-div").hide();
         }
 
         $("#role_select").change(function() {
             if ($(this).val() == {{ USER_ROLES['ROLE_CUSTOMER'] }}) {
                 $("#customer-select-div").show('fast');
+                $("#maker-select-div").hide();
+            } else if ($(this).val() == {{ USER_ROLES['ROLE_MAKER'] }}) {
+                $("#maker-select-div").show('fast');
+                $("#customer-select-div").hide();
             } else {
                 $("#customer-select-div").hide('fast');
+                $("#maker-select-div").hide();
             }
         });
     });
@@ -36,6 +44,9 @@ body { background-color: #eeeeee; }
             {{ render_field(form.role, id="role_select", class="form-control", style="width: 50%;") }}<br/>
             <div id="customer-select-div">
                 {{ render_field(form.customer, id="customer_select", class="form-control", style="width: 50%;") }}<br/>
+            </div>
+            <div id="maker-select-div">
+                {{ render_field(form.maker, id="maker_select", class="form-control", style="width: 50%;") }}<br/>
             </div>
             {{ render_field(form.language, class="form-control", style="width: 50%;") }}<br/>
         </dl>

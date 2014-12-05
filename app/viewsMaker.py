@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
-from forms import AddMakerForm
-from models import Maker, Category
-from flask_login import login_required
-from config import DEFAULT_PER_PAGE
+from forms import AddMakerForm, SimpleSubmitForm
+from models import Maker, Category, Product
+from flask_login import login_required, maker_allowed
+from imageHelper import getImgUrls, getThumbUrls
+from config import DEFAULT_PER_PAGE, NO_PHOTO_URL, NO_PHOTO_THUMB_URL
 from flask.ext.babel import gettext
 
 @app.route('/makers')
@@ -66,4 +67,63 @@ def editMaker(id=0):
                            title=gettext("Edit Maker"),
                            maker=maker,
                            selected=selected,
+                           form=form)
+
+
+@app.route('/maker/makerstock', methods=['GET', 'POST'])
+@maker_allowed
+@login_required
+def makerStock():
+    products = None
+    if g.user.maker:
+        products = Product.query.filter_by(active_flg=True)\
+            .filter_by(maker_id=g.user.maker_id)\
+            .all()
+
+    if products:
+        for p in products:
+            if not p.price_unit:
+                p.price_retail = 0
+            urls = getImgUrls(p.id)
+            p.img_urls = []
+            p.img_thumb_urls = []
+            if urls:
+                for u in urls:
+                    u = u.split('app')[1]
+                    p.img_urls.append(u)
+                    p.img_thumb_urls.append(getThumbUrls(u, height=80, width=80).split('app')[1])
+            else:
+                p.img_urls.append(NO_PHOTO_URL.split('app')[1])
+                p.img_thumb_urls.append(NO_PHOTO_THUMB_URL.split('app')[1])
+
+    form = SimpleSubmitForm()
+
+    if form.is_submitted():
+        string = request.form.getlist('product_data')
+        if string:
+            data_to_update = []
+            for s in string:
+                raw = s.split(',')
+                id = int(raw[0].split(':')[1])
+                code = raw[1].split(':')[1]
+                str_qty = raw[2].split(':')[1]
+                qty = 0
+                if str_qty:
+                    try:
+                        qty = int(str_qty)
+                    except ValueError:
+                        qty = 0;
+                data_to_update.append({'id': id, 'code': code, 'qty': qty})
+            if data_to_update:
+                for d in data_to_update:
+                    p = Product.query.get(d['id'])
+                    p.maker_code = d['code']
+                    p.maker_qty_stock = d['qty']
+                    db.session.add(p)
+                db.session.commit()
+
+
+    return render_template('maker/makerStock.html',
+                           title=gettext("My Stock"),
+                           products=products,
                            form=form)

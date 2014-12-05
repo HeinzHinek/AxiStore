@@ -29,10 +29,12 @@
 </head>
 
 <body>
-    {% if g.user and g.user.role != g.USER_ROLES['ROLE_CUSTOMER'] %}
-        {% include 'navbar_admin.html' %}
-    {% else %}
+    {% if g.user and g.user.role == g.USER_ROLES['ROLE_CUSTOMER'] %}
         {% include 'navbar_customer.html' %}
+    {% elif g.user and g.user.role == g.USER_ROLES['ROLE_MAKER'] %}
+        {% include 'navbar_maker.html' %}
+    {% else %}
+        {% include 'navbar_admin.html' %}
     {% endif %}
 
     <div class="container">

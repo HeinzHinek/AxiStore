@@ -362,7 +362,7 @@
                             {% for url in product.img_urls %}
                             <div style="border: 1px solid #dddddd; border-radius: 3px;">
                                 <a u="image" class="fancybox" rel="group{{ product.id }}" href="{{ url }}">
-                                    <img src="{{ url }}"/>
+                                    <img src="{{ product.img_thumb_urls[loop.index-1] }}"/>
                                 </a>
                             </div>
                             {% endfor %}

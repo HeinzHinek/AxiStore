@@ -16,6 +16,7 @@ class User(db.Model):
     products_per_page = db.Column(db.Integer, default = 20)
 
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+    maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
 
     orders = db.relationship('Order', backref='orderer', lazy='dynamic')
     deliveries = db.relationship('Delivery', backref='recipient', lazy='dynamic')
@@ -53,6 +54,9 @@ class Product(db.Model):
     axm_node = db.Column(db.Unicode(300))
     package_size = db.Column(db.Integer)
 
+    maker_code = db.Column(db.String(20))
+    maker_qty_stock = db.Column(db.Integer)
+
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
     ordered_products = db.relationship('OrderedProducts')
@@ -75,6 +79,8 @@ class Product(db.Model):
             'qty_stock': self.qty_stock,
             'axm_node': self.axm_node,
             'package_size': self.package_size,
+            'maker_code': self.maker_code,
+            'maker_qty_stock': self.maker_qty_stock,
             'active_flg': self.active_flg
         }
 
@@ -158,6 +164,7 @@ class Maker(db.Model):
     products = db.relationship('Product', backref='maker', lazy='dynamic')
     orders = db.relationship('Order', backref='maker', lazy='dynamic')
     deliveries = db.relationship('Delivery', backref='maker', lazy='dynamic')
+    user = db.relationship('User', backref='maker', lazy='dynamic')
 
 
 class Category(db.Model):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from flask import render_template, flash, redirect, request, url_for, json
-from app import app, db
-from models import Product, User, Customer, Catalog, CatalogedProducts
+from app import app
+from models import User, Customer, Catalog, CatalogedProducts, Maker
 from forms import UploadForm, AddUserForm, EditUserForm
 from flask_login import login_required
 from werkzeug.security import generate_password_hash
@@ -32,7 +32,11 @@ def addUser():
     form = AddUserForm()
     customer_choices = [(a.id, a.name) for a in Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()]
     customer_choices = [(0, '')] + customer_choices
+    maker_choices = [(a.id, a.name) for a in Maker.query.all()]
+    maker_choices = [(0, '')] + maker_choices
     form.customer.choices = customer_choices
+    form.maker.choices = maker_choices
+
     if form.validate_on_submit():
         if len(User.query.filter_by(nickname=form.nickname.data).all()) > 0:
             flash(gettext("Selected username already exists!"))
@@ -57,8 +61,14 @@ def addUser():
                 user.customer_id = form.customer.data
             else:
                 user.customer_id = None
+        elif int(form.role.data) == USER_ROLES['ROLE_MAKER']:
+            if form.maker.data and form.maker.data != '' and form.maker.data != 0:
+                user.maker_id = form.maker.data
+            else:
+                user.maker_id = None
         else:
             user.customer_id = None
+            user.maker_id = None
 
         user.language = form.language.data
         db.session.add(user)
@@ -78,7 +88,11 @@ def editUser(id=0):
     form = EditUserForm(obj=user)
     customer_choices = [(a.id, a.name) for a in Customer.query.filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER']).all()]
     customer_choices = [(0, '')] + customer_choices
+    maker_choices = [(a.id, a.name) for a in Maker.query.all()]
+    maker_choices = [(0, '')] + maker_choices
     form.customer.choices = customer_choices
+    form.maker.choices = maker_choices
+
     if form.validate_on_submit():
         if len(User.query.filter_by(nickname=form.nickname.data).all()) > 1:
             flash(gettext("Selected username already exists!"))
@@ -101,19 +115,27 @@ def editUser(id=0):
                 user.customer_id = form.customer.data
             else:
                 user.customer_id = None
+        elif int(form.role.data) == USER_ROLES['ROLE_MAKER']:
+            if form.maker.data and form.maker.data != '' and form.maker.data != 0:
+                user.maker_id = form.maker.data
+            else:
+                user.maker_id = None
         else:
             user.customer_id = None
+            user.maker_id = None
 
         user.language = form.language.data
         db.session.add(user)
         db.session.commit()
         flash(gettext("User details succesfully changed."))
         return redirect(url_for("users"))
-    selected = user.customer_id if user.customer_id else 0
+    selected_customer = user.customer_id if user.customer_id else 0
+    selected_maker = user.maker_id if user.maker_id else 0
     return render_template('settings/editUser.html',
                            title=gettext("Edit User"),
                            USER_ROLES=USER_ROLES,
-                           selected=selected,
+                           selected_customer=selected_customer,
+                           selected_maker=selected_maker,
                            form=form)
 
 

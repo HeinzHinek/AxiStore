@@ -3,7 +3,8 @@
 from app import app
 from flask import request, jsonify
 from flask_login import login_required
-from config import PRODUCT_IMG_PATH, IMG_EXTENSIONS
+from config import PRODUCT_IMG_PATH, PRODUCT_THUMB_IMG_PATH, IMG_EXTENSIONS, NO_PHOTO_THUMB_URL
+from PIL import Image
 import os
 import glob
 
@@ -36,7 +37,7 @@ def deleteProductImage():
     if path:
         abspath = os.path.abspath(__file__)
         abspath = abspath.split('app')[0]
-        file = abspath + 'app' + path
+        file = abspath + 'apps/AxiStore/app' + path
         os.remove(file)
         result = 'OK'
     return jsonify({'result': result})
@@ -48,6 +49,25 @@ def getImgUrls(id):
         urls.extend(glob.glob(PRODUCT_IMG_PATH + 'prod_' + str(id) + '_' + '*' + ext))
     urls = sorted(urls)
     return urls
+
+def getThumbUrls(url, height=100, width=100):
+    try:
+        filename = 'prod_' + url.split('prod_')[1]
+    except IndexError:
+        return NO_PHOTO_THUMB_URL
+    path = PRODUCT_IMG_PATH + filename
+    im = Image.open(path)
+    out_path = PRODUCT_THUMB_IMG_PATH + 'thumb_' + filename.split('.')[0] + '.png'
+    try:
+        Image.open(out_path)
+        return out_path
+    except IOError:
+        print "neni"
+
+    im.thumbnail([height, width], Image.ANTIALIAS)
+    im.save(out_path, "PNG")
+    return out_path
+
 
 def allowed_file(filename):
     return '.' in filename and \

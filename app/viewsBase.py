@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, request, g, session, flash, redirect, url_for, json
+from flask import render_template, request, g, session, flash, redirect, url_for, json, abort
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, Supply, Customer, Order
-from flask_login import current_user, login_required, customer_allowed
+from flask_login import current_user, login_required, customer_allowed, maker_allowed
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
 from flask.ext.babel import gettext
@@ -114,13 +114,19 @@ def before_request():
 @app.route('/')
 @app.route('/index')
 @customer_allowed
+@maker_allowed
 @login_required
 def index():
-    if current_user.role > USER_ROLES['ROLE_USER']:
+    if current_user.role <= USER_ROLES['ROLE_USER']:
+        return render_template("index.html",
+                               title=gettext('Home'),
+                               user=g.user)
+    elif current_user.role == USER_ROLES['ROLE_CUSTOMER']:
         return redirect(url_for('shop'))
-    return render_template("index.html",
-                           title=gettext('Home'),
-                           user=g.user)
+    elif current_user.role == USER_ROLES['ROLE_MAKER']:
+        return redirect(url_for('makerStock'))
+    else:
+        abort(403)
 
 
 @app.route('/stock', methods=['GET', 'POST'])
@@ -249,6 +255,7 @@ def clearsearch():
 
 @app.route('/user', methods=['GET', 'POST'])
 @customer_allowed
+@maker_allowed
 @login_required
 def user():
     #if current_user.role > USER_ROLES['ROLE_ADMIN']:
@@ -295,6 +302,7 @@ def user():
 
 @app.route('/user/passwordchange', methods=['GET', 'POST'])
 @customer_allowed
+@maker_allowed
 @login_required
 def passwordChange():
     form = PasswordChangeForm()
