@@ -75,8 +75,49 @@ $(document).ready(function() {
 
     $('.input-qty').blur( function() {
         $(this).closest('tr').children('td').removeClass('focused-tr');
+        checkAndSumPrice();
     });
 });
+
+function checkAndSumPrice() {
+    var sum = 0;
+    var incompletePrices = false;
+    $('.input-qty').each(function() {
+        var qty = $(this).val();
+        if (qty < 1) {
+            return;
+        }
+        var price = $(this).closest('tr').find('.price-td').text();
+        price = price.trim();
+        if (price == '?') {
+            price = 0;
+        } else {
+            price = price.substring(0, price.length - 2);
+        }
+        price = parseFloat(price);
+        if (price > 0) {
+            sum += price * qty;
+        } else {
+            incompletePrices = true;
+        }
+    });
+    if (sum > 0 || incompletePrices) {
+        $('#sum-counter-div').fadeIn();
+        if (sum > 0 ) {
+            $('#price-sum-span').text(sum);
+            $('#price-show-span').show();
+        } else {
+            $('#price-show-span').hide();
+        }
+        if (incompletePrices) {
+            $('#incomplete-prices-span').show();
+        } else {
+            $('#incomplete-prices-span').hide();
+        }
+    } else {
+        $('#sum-counter-div').fadeOut();
+    }
+}
 </script>
 
 <h1>{{ _('Place a new order to maker') }}</h1>
@@ -119,10 +160,11 @@ $(document).ready(function() {
             <th style="width: 5%;">{{ _('Code') }}</th>
             <th>{{ _('Name CS') }}</th>
             <th>{{ _('Name JP') }}</th>
-            <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Stock') }}</th>
+            <th class="td-border-left-2px" style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Stock') }}</th>
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Req.') }}</th>
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Ord.') }}</th>
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Net.') }}</th>
+            <th class="td-border-left-2px td-border-right-1px" style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Price') }}</th>
             <th style="text-align: right; width: 15%;">{{ _('Order Quantity') }}</th>
         </tr>
 
@@ -135,11 +177,11 @@ $(document).ready(function() {
             <td>{{ product.desc_JP }}</td>
 
             {% if product.qty_stock == None %}
-            <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-1px">?
+            <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px">?
             {% elif product.qty_stock <= 0 %}
-            <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-1px">{{product.qty_stock}}
+            <td style="text-align: right;" class="danger clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
             {% else %}
-            <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-1px">{{product.qty_stock}}
+            <td style="text-align: right;" class="clickable-td linked-td td-qty-edit td-border-left-2px">{{product.qty_stock}}
             {% endif %}
 
             <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px"
@@ -155,6 +197,9 @@ $(document).ready(function() {
             {% else %}
             <td style="text-align: right;" class="td-border-left-1px td-border-right-1px">{{product.net_stock}}
             {% endif %}
+            <td style="text-align: right;" class="price-td td-border-left-2px td-border-right-1px">
+                {% if product.price_unit %}{{ product.price_unit }},-{% else %}?{% endif %}
+            </td>
 
             <td style="text-align: right;">{{ field.qty_order(size=10, class="form-control input-sm input-qty nums_only", style="text-align: right;") }}
                 {{ field.product_id(value=product.id) }}
@@ -173,6 +218,13 @@ $(document).ready(function() {
     <input type="submit" id="btn_submit" value="{{ _('Place order') }}" class="btn btn-danger" style="display: none;">
     <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("orders")}}'" value="{{ _('Cancel') }}"/>
 </form>
+
+<div id="sum-counter-div" style="position: fixed; z-index: 100; width: 100%; height: 50px; bottom: 0px; left: 0px;
+                background-color: #eeeeee; line-height: 50px; text-align: center; -webkit-box-shadow: 0 -3px 5px 2px #CFCFCF;
+                box-shadow: 0 -3px 5px 2px #CFCFCF; display: none;">
+    <span id="price-show-span" style="font-size: 1.2em;">{{ _('Total sum:') }}&nbsp;&nbsp;<span id="price-sum-span"></span>,-&nbsp;&nbsp;</span>
+    <span id="incomplete-prices-span" style="font-size: 1.2em; color: crimson;">{{ _('Some prices are not set!') }}</span>
+</div>
 {% endif %}
 
 <br/>
