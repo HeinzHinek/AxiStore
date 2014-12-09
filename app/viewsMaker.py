@@ -143,7 +143,7 @@ def makerOrders(page=1):
     curr_product = None
     if product_id:
         active = True
-        limit = -1
+        limit = 10000
         curr_product = Product.query.get(product_id)
     else:
         active = session['active_orders']
