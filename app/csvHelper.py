@@ -45,7 +45,7 @@ def generate_available_stock_csv(categories=[]):
         .order_by(Product.maker_id)\
         .order_by(Product.code)\
         .all()
-    headers = [gettext('Product code'), gettext('Product Name'), gettext('Quantity on stock'), gettext('Days to deliver')]
+    headers = [gettext('Product code'), gettext('Product Name'), gettext('Quantity on stock'), gettext('Planned time of delivery')]
     outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
     for product in products:
         dtd = product.maker.standard_delivery_days if product.maker.standard_delivery_days else None

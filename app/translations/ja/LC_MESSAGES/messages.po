@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-09 15:11+0900\n"
-"PO-Revision-Date: 2014-12-09 15:14+0900\n"
+"POT-Creation-Date: 2014-12-09 15:19+0900\n"
+"PO-Revision-Date: 2014-12-09 15:19+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -49,8 +49,8 @@ msgid "Quantity on stock"
 msgstr "在庫数"
 
 #: app/csvHelper.py:48
-msgid "Days to deliver"
-msgstr "入荷日数"
+msgid "Planned time of delivery"
+msgstr "入荷日程"
 
 #: app/csvHelper.py:82
 msgid "unknown"
