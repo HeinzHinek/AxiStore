@@ -10,6 +10,23 @@
 var pics_visible = true;
 
 $(document).ready( function() {
+
+    var hash = window.location.hash;
+    if (hash) {
+        var el = $(hash);
+        var elOffset = el.offset().top;
+        var elHeight = el.height();
+        var windowHeight = $(window).height();
+        var offset;
+        if (elHeight < windowHeight) {
+            offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
+        } else {
+            offset = elOffset;
+        }
+        $('html, body').animate({scrollTop:offset}, 500);
+        $(hash).addClass('changed-tr');
+    }
+
     $(".fancybox").fancybox();
     swapImages();
 
@@ -213,7 +230,7 @@ $(window).on('beforeunload', function() {
 
             <tbody>
             {% for product in products %}
-            <tr class="product-row" prod_id="{{ product.id }}">
+            <tr id="prod{{ product.id }}" class="product-row" prod_id="{{ product.id }}">
                 <td style="text-align: center;">
                     <a class="fancybox" rel="group{{ product.id }}" href="{{ product.img_urls[0] }}" tabindex="-1">
                         <img class="prod-thumb-img" src="{{ product.img_thumb_urls[0] }}"
@@ -239,7 +256,13 @@ $(window).on('beforeunload', function() {
                 </td>
                 <td>{{ product.desc_CS }}</td>
                 <td style="text-align: right;">{{ product.price_unit }}</td>
-                <td style="text-align: right;" class="order-qty-td">{{ product.order_qty }}</td>
+                <td style="text-align: right;" class="order-qty-td">
+                    {% if product.order_qty and product.order_qty > 0 %}
+                    <a href="{{ url_for('makerOrders', product_id=product.id) }}"><b>{{ product.order_qty }}</b></a>
+                    {% else %}
+                    0
+                    {% endif %}
+                </td>
                 <td style="text-align: right;">
                     <input class="on-stock-input nums_only" type="text" style="text-align: right; width: 80px; border: 1px dotted #dddddd;
                         background-color: white; padding: 3px;" maxlength="30"

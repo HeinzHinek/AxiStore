@@ -14,6 +14,7 @@
             <ul class="nav navbar-nav">
                 {% if g.user.is_authenticated() %}
                 <li><a href="{{ url_for('makerStock') }}">{{ _('My Stock') }}</a></li>
+                <li><a href="{{ url_for('makerOrders') }}">{{ _('Orders') }}</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">

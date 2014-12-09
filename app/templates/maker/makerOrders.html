@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(document).ready(function() {
+        $('.more-link-tr').click(function() {
+            if ( $(this).hasClass('details-visible') ) {
+                $(this).closest('table').find('.ellipse-tr').show();
+                $(this).closest('table').find('.detail-tr').hide();
+                $(this).find('a').text('{{ _("more") }}');
+                $(this).removeClass('details-visible');
+            } else {
+                $(this).closest('table').find('.ellipse-tr').hide();
+                $(this).closest('table').find('.detail-tr').show('fast');
+                $(this).find('a').text('{{ _("less") }}');
+                $(this).addClass('details-visible');
+            }
+        });
+    });
+</script>
+
+<div class="row">
+    {% if not curr_product %}
+    <h2>{{ _("Orders from Axis Mundi") }}</h2>
+    {% else %}
+    <h2>{{ _("Orders for product:") }}&nbsp;{{ curr_product.desc_CS }}</h2>
+    {% endif %}
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+
+    {% if not curr_product %}
+    <ul id="tabs-active-inactive" class="nav nav-tabs" role="tablist">
+        <li {% if active %} class="active" {% endif %} >
+            <a href="{{ url_for('makerOrders', active_orders=True) }}">{{ _('Active') }}&nbsp;
+                <span class="badge {% if active %}alert-danger{% endif %}">{{ len_active }}</span></a>
+        </li>
+        <li {% if not active %} class="active" {% endif %} >
+            <a href="{{ url_for('makerOrders', active_orders=False) }}">{{ _('Closed') }}&nbsp;
+                <span class="badge {% if not active %}alert-danger{% endif %}">{{ len_closed }}</span></a>
+        </li>
+    </ul>
+    {% else %}
+    <br/>
+    {% endif %}
+
+    {% if orders %}
+    <table class="table table-condensed table-striped">
+        <thead>
+        <tr>
+            <th style="min-width: 200px; width: 20%;">{{ _('Placed') }}</th>
+            <th style="width: 10%;">{{ _('Items count') }}</th>
+            <th style="width: 70%;">{{ _('Details') }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for order in orders.items %}
+        <tr>
+            <td>{{ momentjs(order.created_dt).format('LLL') }}<br/>&nbsp;&nbsp;({{ momentjs(order.created_dt).fromNow() }})</td>
+            <td>{{ order.products|length }}</td>
+            <td>
+                {% if order.products %}
+                <table>
+                    <tr class="ellipse-tr">
+                        <td colspan="2" style="padding-right: 10px;">
+                        {% if curr_product %}
+                            {% for p in order.products %}
+                                {% if p.product_id == curr_product.id %}
+                                    {{ p.quantity }}&nbsp;&times;&nbsp;{{ p.product.desc_CS }}...
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {{ order.products[0].quantity }}&nbsp;&times;&nbsp;{{ order.products[0].product.desc_CS }}...
+                        {% endif %}
+                        </td>
+                    </tr>
+
+                    {% for product in order.products %}
+                    <tr class="detail-tr" style="display: none; border-top: 1px dotted #dddddd;
+                            border-left: 1px dotted #dddddd; border-right: 1px dotted #dddddd;
+                            {% if product.product_id == curr_product.id %}background-color: LemonChiffon ;{% else %}background-color: white;{% endif %}">
+                        <td style="padding: 10px 10px 0px 10px;">
+                            <a href="{{ url_for('makerStock', _anchor='prod' + product.product.id|string) }}">{{ product.product.desc_CS }}</a>
+                        </td>
+                        <td style="padding: 10px 10px 0px 10px;"><b>{{ product.quantity }}&nbsp;{{ _('Pcs.') }}</b></td>
+                    </tr>
+                    <tr class="detail-tr" style="display: none; border-bottom: 1px dotted #dddddd;
+                            border-left: 1px dotted #dddddd; border-right: 1px dotted #dddddd;
+                            {% if product.product_id == curr_product.id %}background-color: LemonChiffon ;{% else %}background-color: white;{% endif %}">
+                        <td style="text-align: right; padding: 0px 10px 10px 10px;">{{ _('Already sent') }}:</td>
+                        <td style="padding: 0px 10px 10px 10px;">{{ product.qty_delivered }}&nbsp;{{ _('Pcs.') }}</td>
+                    </tr>
+                    <tr class="detail-tr" style="display: none; height: 5px;"><td></td><td></td></tr>
+                    {% endfor %}
+
+                    <tr class="more-link-tr">
+                        <td colspan="2" style="cursor: pointer;">
+                            <a class="btn btn-info btn-xs" style="min-width: 100px;">{{ _('more') }}</a>
+                        </td>
+                    </tr>
+                </table>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+</div>
+
+<!-- PAGINATION -->
+{% from "_pagination.html" import render_pager %}
+{{ render_pager(orders, 'makerOrders') }}
+
+{% endblock %}

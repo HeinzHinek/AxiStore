@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, flash, redirect, url_for, request, g
+from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import AddMakerForm, SimpleSubmitForm
-from models import Maker, Category, Product
+from models import Maker, Category, Product, Order, OrderedProducts
 from flask_login import login_required, maker_allowed
 from imageHelper import getImgUrls, getThumbUrls
 from config import DEFAULT_PER_PAGE, NO_PHOTO_URL, NO_PHOTO_THUMB_URL
@@ -128,3 +128,49 @@ def makerStock():
                            title=gettext("My Stock"),
                            products=products,
                            form=form)
+
+
+@app.route('/maker/makerorders')
+@app.route('/maker/makerorders/<int:page>')
+@maker_allowed
+@login_required
+def makerOrders(page=1):
+
+    limit = DEFAULT_PER_PAGE
+
+    # filtering orders for specific product
+    product_id = request.args.get('product_id')
+    curr_product = None
+    if product_id:
+        active = True
+        limit = -1
+        curr_product = Product.query.get(product_id)
+    else:
+        active = session['active_orders']
+        if active is None:
+            active = True
+
+    orders = Order.query\
+        .filter_by(active_flg=active)\
+        .filter_by(maker_id=g.user.maker_id)
+
+    if product_id:
+        orders = orders.join(OrderedProducts).filter_by(product_id=product_id)
+
+    len_active = len(Order.query
+                     .filter_by(active_flg=True)
+                     .filter_by(maker_id=g.user.maker_id)
+                     .all())
+    len_closed = len(Order.query
+                     .filter_by(active_flg=False)
+                     .filter_by(maker_id=g.user.maker_id)
+                     .all())
+
+    orders = orders.paginate(page, limit, False)
+    return render_template('maker/makerOrders.html',
+                           title=gettext("Orders from Axis Mundi"),
+                           orders=orders,
+                           active=active,
+                           len_active=len_active,
+                           len_closed=len_closed,
+                           curr_product=curr_product)

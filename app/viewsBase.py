@@ -89,6 +89,17 @@ def before_request():
         if 'catalog_ids' not in session:
             session['catalog_ids'] = None
 
+    # for maker - active/inactive orders
+    active_orders = request.args.get('active_orders')
+    if active_orders:
+        if active_orders == 'False':
+            session['active_orders'] = False
+        else:
+            session['active_orders'] = True
+    else:
+        if 'active_orders' not in session:
+            session['active_orders'] = None
+
     # for navbar badges
     g.cust_request_count = len(Request.query
                                .filter_by(active_flg=1)
