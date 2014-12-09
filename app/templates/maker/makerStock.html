@@ -9,8 +9,7 @@
 <script>
 var pics_visible = true;
 
-$(document).ready( function() {
-
+jQuery(window).load(function () {
     var hash = window.location.hash;
     if (hash) {
         var el = $(hash);
@@ -26,6 +25,9 @@ $(document).ready( function() {
         $('html, body').animate({scrollTop:offset}, 500);
         $(hash).addClass('changed-tr');
     }
+});
+
+$(document).ready( function() {
 
     $(".fancybox").fancybox();
     swapImages();

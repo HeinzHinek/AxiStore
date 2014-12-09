@@ -67,20 +67,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="makerStock.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="makerStock.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/maker/makerStock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="26.846153" vertical-offset="1123" max-vertical-offset="4998">
-              <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.759434" vertical-offset="137" max-vertical-offset="5032">
+              <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="makerOrders.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="makerOrders.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/maker/makerOrders.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11670481" vertical-offset="765" max-vertical-offset="2091">
+            <state vertical-scroll-proportion="-31.384615" vertical-offset="0" max-vertical-offset="2091">
               <caret line="48" column="53" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
               <folding>
                 <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
@@ -169,9 +169,9 @@
         <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/templates/navbar_maker.html" />
-        <option value="$PROJECT_DIR$/app/templates/maker/makerStock.html" />
         <option value="$PROJECT_DIR$/app/viewsMaker.py" />
         <option value="$PROJECT_DIR$/app/templates/maker/makerOrders.html" />
+        <option value="$PROJECT_DIR$/app/templates/maker/makerStock.html" />
       </list>
     </option>
   </component>
@@ -401,7 +401,7 @@
       <recent name="C:\Users\Hinek\workspace\axistore\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tr_update">
+  <component name="RunManager" selected="Python.tr_compile">
     <configuration default="false" name="run" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -624,9 +624,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.run" />
+        <item index="0" class="java.lang.String" itemvalue="Python.tr_compile" />
         <item index="1" class="java.lang.String" itemvalue="Python.tr_update" />
-        <item index="2" class="java.lang.String" itemvalue="Python.tr_compile" />
+        <item index="2" class="java.lang.String" itemvalue="Python.run" />
         <item index="3" class="java.lang.String" itemvalue="Python.db_migrate" />
         <item index="4" class="java.lang.String" itemvalue="Python.db_upgrade" />
       </list>
@@ -646,7 +646,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23786408" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -657,7 +657,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39719626" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23052959" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="30" y="271" width="1306" height="195" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23052959" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="30" y="271" width="1306" height="195" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1073,17 +1073,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/maker/makerStock.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="26.846153" vertical-offset="1123" max-vertical-offset="4998">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/maker/makerOrders.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11670481" vertical-offset="765" max-vertical-offset="2091">
+        <state vertical-scroll-proportion="-31.384615" vertical-offset="0" max-vertical-offset="2091">
           <caret line="48" column="53" selection-start-line="48" selection-start-column="53" selection-end-line="48" selection-end-column="53" />
           <folding>
             <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#!!top" expanded="true" />
@@ -1100,6 +1092,14 @@
             <element signature="n#style#0;n#td#0;n#tr#4;n#table#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#0;n#td#0;n#tr#4;n#table#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/maker/makerStock.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.759434" vertical-offset="137" max-vertical-offset="5032">
+          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

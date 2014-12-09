@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-09 15:19+0900\n"
-"PO-Revision-Date: 2014-12-09 15:19+0900\n"
+"POT-Creation-Date: 2014-12-09 18:40+0900\n"
+"PO-Revision-Date: 2014-12-09 18:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -36,7 +36,7 @@ msgid "Product code"
 msgstr "品番"
 
 #: app/csvHelper.py:48 app/templates/mail/order_confirm.html:22
-#: app/templates/maker/makerStock.html:206
+#: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/orderconfirm.html:39
 #: app/templates/shop/placeorder.html:35
@@ -144,7 +144,7 @@ msgstr "既存のパスワード"
 msgid "New password"
 msgstr "新しいパスワード"
 
-#: app/forms.py:42 app/viewsBase.py:324
+#: app/forms.py:42 app/viewsBase.py:335
 msgid "New password must match confirmation!"
 msgstr "新しいパスワードが確認用のパスワードと違います！"
 
@@ -232,51 +232,51 @@ msgstr "確認"
 msgid "Thank you for your order!"
 msgstr "ご注文をありがとうございます！"
 
-#: app/viewsBase.py:122
+#: app/viewsBase.py:133
 msgid "Home"
 msgstr "Home"
 
-#: app/viewsBase.py:210
+#: app/viewsBase.py:221
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:212 app/viewsBase.py:214
+#: app/viewsBase.py:223 app/viewsBase.py:225
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
-#: app/viewsBase.py:224
+#: app/viewsBase.py:235
 msgid "Stock condition"
 msgstr "在庫状況"
 
-#: app/viewsBase.py:272
+#: app/viewsBase.py:283
 msgid "Selected nickname is already in use!"
 msgstr "入力されたユーザー名はすでに使用中です！"
 
-#: app/viewsBase.py:280 app/viewsSettings.py:50 app/viewsSettings.py:106
+#: app/viewsBase.py:291 app/viewsSettings.py:50 app/viewsSettings.py:106
 msgid "Selected email is already in use!"
 msgstr "入力されたメールアドレスはすでに使用中です！"
 
-#: app/viewsBase.py:291
+#: app/viewsBase.py:302
 msgid "User settings sucessfully updated."
 msgstr "ユーザーの情報が更新されました。"
 
-#: app/viewsBase.py:299 app/templates/user.html:8
+#: app/viewsBase.py:310 app/templates/user.html:8
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:320
+#: app/viewsBase.py:331
 msgid "User password successfully changed."
 msgstr "パスワードが変更されました。"
 
-#: app/viewsBase.py:326
+#: app/viewsBase.py:337
 msgid "Current password is incorrect!"
 msgstr "既存のパスワードが違います！"
 
-#: app/viewsBase.py:331 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:342 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "パスワードの変更"
 
-#: app/viewsBase.py:339 app/templates/navbar_admin.html:68
+#: app/viewsBase.py:350 app/templates/navbar_admin.html:68
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
@@ -426,6 +426,10 @@ msgstr "メーカーを変更する"
 #: app/viewsMaker.py:128 app/templates/navbar_maker.html:16
 msgid "My Stock"
 msgstr "私の在庫"
+
+#: app/viewsMaker.py:171 app/templates/maker/makerOrders.html:24
+msgid "Orders from Axis Mundi"
+msgstr "アクシス・ムンディからの注文"
 
 #: app/viewsOrder.py:21
 msgid "Orders to maker"
@@ -766,7 +770,7 @@ msgstr "在庫"
 msgid "Shop"
 msgstr "ショップ"
 
-#: app/templates/navbar_admin.html:20
+#: app/templates/navbar_admin.html:20 app/templates/navbar_maker.html:17
 msgid "Orders"
 msgstr "発注"
 
@@ -823,18 +827,18 @@ msgid "Supply to Axis Mart order"
 msgstr "アクシスマート受注への供給"
 
 #: app/templates/navbar_admin.html:71 app/templates/navbar_customer.html:23
-#: app/templates/navbar_maker.html:22
+#: app/templates/navbar_maker.html:23
 #, python-format
 msgid "%(nickname)s"
 msgstr "%(nickname)s"
 
 #: app/templates/navbar_admin.html:73 app/templates/navbar_customer.html:25
-#: app/templates/navbar_maker.html:24
+#: app/templates/navbar_maker.html:25
 msgid "Logout"
 msgstr "ログアウト"
 
 #: app/templates/navbar_admin.html:76 app/templates/navbar_customer.html:28
-#: app/templates/navbar_maker.html:27
+#: app/templates/navbar_maker.html:28
 msgid "Login"
 msgstr "ログイン"
 
@@ -1075,7 +1079,8 @@ msgstr "発注のID"
 
 #: app/templates/deliveries/deliveryReport.html:55
 #: app/templates/deliveries/deliveryReport.html:77
-#: app/templates/orders/order.html:20 app/templates/orders/orders.html:34
+#: app/templates/maker/makerOrders.html:52 app/templates/orders/order.html:20
+#: app/templates/orders/orders.html:34
 #: app/templates/orders/productorders.html:44
 #: app/templates/requests/productrequests.html:44
 #: app/templates/requests/request.html:20
@@ -1288,50 +1293,88 @@ msgstr "藤和新宿コープ810"
 msgid "TEL: 03-6380-6454"
 msgstr "電話番号：03-6380-6454"
 
-#: app/templates/maker/makerStock.html:161
+#: app/templates/maker/makerOrders.html:10
+#: app/templates/maker/makerOrders.html:100
+msgid "more"
+msgstr "もっと見る"
+
+#: app/templates/maker/makerOrders.html:15
+msgid "less"
+msgstr "省略"
+
+#: app/templates/maker/makerOrders.html:26
+msgid "Orders for product:"
+msgstr "製品に対する発注："
+
+#: app/templates/maker/makerOrders.html:36
+msgid "Active"
+msgstr "アクティブ"
+
+#: app/templates/maker/makerOrders.html:40
+msgid "Closed"
+msgstr "完成"
+
+#: app/templates/maker/makerOrders.html:53
+msgid "Items count"
+msgstr "個数"
+
+#: app/templates/maker/makerOrders.html:54
+msgid "Details"
+msgstr "詳細"
+
+#: app/templates/maker/makerOrders.html:87
+#: app/templates/maker/makerOrders.html:93
+msgid "Pcs."
+msgstr "個"
+
+#: app/templates/maker/makerOrders.html:92
+msgid "Already sent"
+msgstr "出荷済み"
+
+#: app/templates/maker/makerStock.html:180
 msgid "Images"
 msgstr "画像"
 
-#: app/templates/maker/makerStock.html:166
-#: app/templates/maker/makerStock.html:202
+#: app/templates/maker/makerStock.html:185
+#: app/templates/maker/makerStock.html:221
 msgid "Icons"
 msgstr "アイコン"
 
-#: app/templates/maker/makerStock.html:184
+#: app/templates/maker/makerStock.html:203
 #: app/templates/settings/editCatalog.html:148
 msgid "There are unsaved items."
 msgstr "保存されていない項目があります。"
 
-#: app/templates/maker/makerStock.html:190
+#: app/templates/maker/makerStock.html:209
 msgid "My Stock Overview"
 msgstr "私の在庫の状況"
 
-#: app/templates/maker/makerStock.html:204
+#: app/templates/maker/makerStock.html:223
 msgid "AM Code"
 msgstr "AMの品番"
 
-#: app/templates/maker/makerStock.html:205
+#: app/templates/maker/makerStock.html:224
 msgid "My Code"
 msgstr "私の品番"
 
-#: app/templates/maker/makerStock.html:207
+#: app/templates/maker/makerStock.html:226
 #: app/templates/orders/createOrder.html:167
 msgid "Price"
 msgstr "価格"
 
-#: app/templates/maker/makerStock.html:208
+#: app/templates/maker/makerStock.html:227
 msgid "Ordered"
 msgstr "受注"
 
-#: app/templates/maker/makerStock.html:209
+#: app/templates/maker/makerStock.html:228
 msgid "On Stock"
 msgstr "在庫"
 
-#: app/templates/maker/makerStock.html:262
+#: app/templates/maker/makerStock.html:287
 msgid "Data has been changed. Save changes?"
 msgstr "データが変更されました。保存しますか？"
 
-#: app/templates/maker/makerStock.html:263
+#: app/templates/maker/makerStock.html:288
 msgid "Save"
 msgstr "保存"
 
