@@ -17,6 +17,7 @@
             <th>{{ _('Maker ID') }}</th>
             <th>{{ _('Maker\'s Name') }}</th>
             <th>{{ _('Product Category') }}</th>
+            <th style="text-align: right;">{{ _('Average days to deliver') }}</th>
         </tr>
 
         {% for maker in makers.items %}
@@ -24,6 +25,15 @@
         <td>{{maker.id}}</td>
         <td>{{maker.name}}</td>
         <td>{{maker.category.name_CS + ' / ' + maker.category.name_JP}}</td>
+        <td style="text-align: right;">
+            {% if maker.standard_delivery_days %}
+                {{maker.standard_delivery_days}}
+            {% elif maker.standard_delivery_days == 0 %}
+                0
+            {% else %}
+                ?
+            {% endif %}
+        </td>
         </tr>
         {% endfor %}
     </table>

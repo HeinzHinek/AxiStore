@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-05 18:26+0900\n"
-"PO-Revision-Date: 2014-12-05 18:35+0900\n"
+"POT-Creation-Date: 2014-12-09 13:55+0900\n"
+"PO-Revision-Date: 2014-12-09 13:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -48,6 +48,10 @@ msgstr "Název produktu"
 #: app/templates/product/editProduct.html:245
 msgid "Quantity on stock"
 msgstr "Množsví na skladě"
+
+#: app/csvHelper.py:47
+msgid "Days to deliver"
+msgstr "Počet dnů dodání"
 
 #: app/forms.py:23 app/templates/settings/users.html:15
 msgid "Nickname"
@@ -130,19 +134,27 @@ msgstr "Uživatelská role"
 msgid "User language"
 msgstr "Jazyk uživatele"
 
-#: app/forms.py:213 app/templates/shop/shop.html:301
+#: app/forms.py:129
+msgid "Name"
+msgstr "Jméno"
+
+#: app/forms.py:131 app/forms.py:216 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "Kategorie"
 
-#: app/forms.py:214
+#: app/forms.py:132 app/templates/settings/makers.html:20
+msgid "Average days to deliver"
+msgstr "Průměrný počet dnů dodávky"
+
+#: app/forms.py:217
 msgid "Available item only"
 msgstr "Pouze dostupné"
 
-#: app/forms.py:215 app/templates/shop/shop.html:310
+#: app/forms.py:218 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "Hledat"
 
-#: app/forms.py:219 app/templates/deliveries/delivery.html:27
+#: app/forms.py:222 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:126
 #: app/templates/orders/createOrder.html:216
 #: app/templates/orders/order.html:27
@@ -340,15 +352,15 @@ msgstr "Nový výrobce úspěšně přidán."
 msgid "Add New Maker"
 msgstr "Přidat výrobce"
 
-#: app/viewsMaker.py:62
+#: app/viewsMaker.py:63
 msgid "Maker successfully changed."
 msgstr "Výrobce úspěšně pozměněn."
 
-#: app/viewsMaker.py:67 app/templates/settings/editMaker.html:15
+#: app/viewsMaker.py:68 app/templates/settings/editMaker.html:15
 msgid "Edit Maker"
 msgstr "Editace výrobce"
 
-#: app/viewsMaker.py:127 app/templates/navbar_maker.html:16
+#: app/viewsMaker.py:128 app/templates/navbar_maker.html:16
 msgid "My Stock"
 msgstr "Můj sklad"
 
@@ -580,7 +592,7 @@ msgstr "OK"
 #: app/templates/settings/contacts.html:40
 #: app/templates/settings/customers.html:36
 #: app/templates/settings/customers.html:38
-#: app/templates/settings/makers.html:36 app/templates/settings/makers.html:38
+#: app/templates/settings/makers.html:46 app/templates/settings/makers.html:48
 #: app/templates/settings/users.html:43 app/templates/settings/users.html:45
 msgid "Previous"
 msgstr "Předchozí"
@@ -591,7 +603,7 @@ msgstr "Předchozí"
 #: app/templates/settings/contacts.html:45
 #: app/templates/settings/customers.html:41
 #: app/templates/settings/customers.html:43
-#: app/templates/settings/makers.html:41 app/templates/settings/makers.html:43
+#: app/templates/settings/makers.html:51 app/templates/settings/makers.html:53
 #: app/templates/settings/users.html:48 app/templates/settings/users.html:50
 msgid "Next"
 msgstr "Další"
@@ -1062,7 +1074,7 @@ msgstr "Pokračovat"
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:168
-#: app/templates/settings/addMaker.html:40
+#: app/templates/settings/addMaker.html:16
 #: app/templates/settings/addUser.html:53
 #: app/templates/settings/editCustomer.html:178
 #: app/templates/settings/editUser.html:54
@@ -1584,18 +1596,8 @@ msgstr "Adresa 2"
 msgid "Address 3"
 msgstr "Adresa 3"
 
-#: app/templates/settings/addMaker.html:11
-#: app/templates/settings/editMaker.html:26
-msgid "Maker name"
-msgstr "Název výrobce"
-
-#: app/templates/settings/addMaker.html:25
-#: app/templates/settings/editMaker.html:40
-msgid "Product category"
-msgstr "Kategorie produktu"
-
-#: app/templates/settings/addMaker.html:39
-#: app/templates/settings/editMaker.html:54
+#: app/templates/settings/addMaker.html:15
+#: app/templates/settings/editMaker.html:31
 msgid "Save maker"
 msgstr "Uložit výrobce"
 
@@ -1755,7 +1757,7 @@ msgstr "Smazat zákazníka"
 msgid "Do you really want to delete this maker?"
 msgstr "Chcete opravdu smazat tohoto výrobce?"
 
-#: app/templates/settings/editMaker.html:55
+#: app/templates/settings/editMaker.html:32
 msgid "Delete maker"
 msgstr "Smazat výrobce"
 
@@ -2060,3 +2062,9 @@ msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 
 #~ msgid "Category:"
 #~ msgstr "Kategorie:"
+
+#~ msgid "Maker name"
+#~ msgstr "Název výrobce"
+
+#~ msgid "Product category"
+#~ msgstr "Kategorie produktu"

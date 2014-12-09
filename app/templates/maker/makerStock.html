@@ -158,12 +158,12 @@ $(document).mouseup(function(e) {
 
 function swapImages() {
     if (pics_visible) {
-        $('#image-hide-btn').text("{{ _('Images') }}");
+        $('#image-hide-btn').val("{{ _('Images') }}");
         $('.prod-img-glyph').show();
         $('.prod-thumb-img').hide();
         pics_visible = false;
     } else {
-        $('#image-hide-btn').text("{{ _('Icons') }}");
+        $('#image-hide-btn').val("{{ _('Icons') }}");
         $('.prod-thumb-img').show();
         $('.prod-img-glyph').hide();
         pics_visible = true;

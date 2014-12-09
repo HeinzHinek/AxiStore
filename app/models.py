@@ -160,6 +160,8 @@ class Maker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    # days to manufacture and deliver products
+    standard_delivery_days = db.Column(db.Integer)
 
     products = db.relationship('Product', backref='maker', lazy='dynamic')
     orders = db.relationship('Order', backref='maker', lazy='dynamic')

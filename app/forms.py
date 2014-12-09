@@ -126,9 +126,12 @@ class EditUserForm(Form):
 
 
 class AddMakerForm(Form):
-    name = StringField('name', [validators.data_required(),
+    name = StringField(lazy_gettext('Name'), [validators.data_required(),
                                 validators.length(max=50)])
-    category = SelectField('category', coerce=int)
+    category = SelectField(lazy_gettext('Category'), coerce=int)
+    standard_delivery_days = IntegerField(lazy_gettext('Average days to deliver'),
+                                          [validators.NumberRange(min=0, max=200)],
+                                          default=14)
 
 
 class AddCategoryForm(Form):

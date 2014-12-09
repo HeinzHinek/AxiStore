@@ -62,7 +62,7 @@ def getThumbUrls(url, height=100, width=100):
         Image.open(out_path)
         return out_path
     except IOError:
-        print "neni"
+        pass
 
     im.thumbnail([height, width], Image.ANTIALIAS)
     im.save(out_path, "PNG")
