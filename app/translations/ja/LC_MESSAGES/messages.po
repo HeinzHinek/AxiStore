@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-09 13:55+0900\n"
-"PO-Revision-Date: 2014-12-09 13:57+0900\n"
+"POT-Creation-Date: 2014-12-09 15:11+0900\n"
+"PO-Revision-Date: 2014-12-09 15:14+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "このページのアクセスにはログインが必要です。"
 
-#: app/csvHelper.py:22
+#: app/csvHelper.py:23
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/csvHelper.py:47 app/templates/deliveries/delivery.html:55
+#: app/csvHelper.py:48 app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
 #: app/templates/requests/request.html:60
@@ -35,7 +35,7 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 msgid "Product code"
 msgstr "品番"
 
-#: app/csvHelper.py:47 app/templates/mail/order_confirm.html:22
+#: app/csvHelper.py:48 app/templates/mail/order_confirm.html:22
 #: app/templates/maker/makerStock.html:206
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/orderconfirm.html:39
@@ -43,14 +43,78 @@ msgstr "品番"
 msgid "Product Name"
 msgstr "商品名"
 
-#: app/csvHelper.py:47 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:48 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 msgid "Quantity on stock"
 msgstr "在庫数"
 
-#: app/csvHelper.py:47
+#: app/csvHelper.py:48
 msgid "Days to deliver"
 msgstr "入荷日数"
+
+#: app/csvHelper.py:82
+msgid "unknown"
+msgstr "不明"
+
+#: app/csvHelper.py:85
+msgid "January"
+msgstr "1月"
+
+#: app/csvHelper.py:85
+msgid "February"
+msgstr "2月"
+
+#: app/csvHelper.py:85
+msgid "March"
+msgstr "3月"
+
+#: app/csvHelper.py:85
+msgid "April"
+msgstr "4月"
+
+#: app/csvHelper.py:85 app/templates/index.html:286
+msgid "May"
+msgstr "5月"
+
+#: app/csvHelper.py:86
+msgid "June"
+msgstr "6月"
+
+#: app/csvHelper.py:86
+msgid "July"
+msgstr "7月"
+
+#: app/csvHelper.py:86
+msgid "August"
+msgstr "8月"
+
+#: app/csvHelper.py:86
+msgid "September"
+msgstr "9月"
+
+#: app/csvHelper.py:86
+msgid "October"
+msgstr "10月"
+
+#: app/csvHelper.py:87
+msgid "November"
+msgstr "11月"
+
+#: app/csvHelper.py:87
+msgid "December"
+msgstr "12月"
+
+#: app/csvHelper.py:88
+msgid ", First third"
+msgstr "上旬"
+
+#: app/csvHelper.py:88
+msgid ", Second third"
+msgstr "中旬"
+
+#: app/csvHelper.py:88
+msgid ", Third third"
+msgstr "下旬"
 
 #: app/forms.py:23 app/templates/settings/users.html:15
 msgid "Nickname"
@@ -471,23 +535,23 @@ msgstr "新しいユーザーが追加されました。"
 msgid "Add New User"
 msgstr "新しいユーザーを追加する"
 
-#: app/viewsSettings.py:130
+#: app/viewsSettings.py:132
 msgid "User details succesfully changed."
 msgstr "ユーザーの情報が変更されました。"
 
-#: app/viewsSettings.py:135 app/templates/settings/editUser.html:34
+#: app/viewsSettings.py:137 app/templates/settings/editUser.html:34
 msgid "Edit User"
 msgstr "ユーザーの情報を編集"
 
-#: app/viewsSettings.py:148 app/templates/settings/editCatalog.html:155
+#: app/viewsSettings.py:150 app/templates/settings/editCatalog.html:155
 msgid "Edit Catalog"
 msgstr "カタログの編集"
 
-#: app/viewsSettings.py:226
+#: app/viewsSettings.py:228
 msgid "Data Import"
 msgstr "データのインポート"
 
-#: app/viewsSettings.py:234
+#: app/viewsSettings.py:236
 msgid "Data Export"
 msgstr "データのエクスポート"
 
@@ -663,10 +727,6 @@ msgstr "3月"
 #: app/templates/index.html:285
 msgid "Apr"
 msgstr "4月"
-
-#: app/templates/index.html:286
-msgid "May"
-msgstr "5月"
 
 #: app/templates/index.html:287
 msgid "Jun"

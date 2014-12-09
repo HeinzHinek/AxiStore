@@ -113,11 +113,13 @@ def editUser(id=0):
         if int(form.role.data) == USER_ROLES['ROLE_CUSTOMER']:
             if form.customer.data and form.customer.data != '' and form.customer.data != 0:
                 user.customer_id = form.customer.data
+                user.maker_id = None
             else:
                 user.customer_id = None
         elif int(form.role.data) == USER_ROLES['ROLE_MAKER']:
             if form.maker.data and form.maker.data != '' and form.maker.data != 0:
                 user.maker_id = form.maker.data
+                user.customer_id = None
             else:
                 user.maker_id = None
         else:

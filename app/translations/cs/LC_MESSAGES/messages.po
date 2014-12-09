@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-09 13:55+0900\n"
-"PO-Revision-Date: 2014-12-09 13:56+0900\n"
+"POT-Creation-Date: 2014-12-09 15:11+0900\n"
+"PO-Revision-Date: 2014-12-09 15:13+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "K přístupu na tuto stránku je nutné přihlášení."
 
-#: app/csvHelper.py:22
+#: app/csvHelper.py:23
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
-#: app/csvHelper.py:47 app/templates/deliveries/delivery.html:55
+#: app/csvHelper.py:48 app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
 #: app/templates/requests/request.html:60
@@ -36,7 +36,7 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 msgid "Product code"
 msgstr "Kód produktu"
 
-#: app/csvHelper.py:47 app/templates/mail/order_confirm.html:22
+#: app/csvHelper.py:48 app/templates/mail/order_confirm.html:22
 #: app/templates/maker/makerStock.html:206
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/orderconfirm.html:39
@@ -44,14 +44,78 @@ msgstr "Kód produktu"
 msgid "Product Name"
 msgstr "Název produktu"
 
-#: app/csvHelper.py:47 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:48 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 msgid "Quantity on stock"
 msgstr "Množsví na skladě"
 
-#: app/csvHelper.py:47
+#: app/csvHelper.py:48
 msgid "Days to deliver"
 msgstr "Počet dnů dodání"
+
+#: app/csvHelper.py:82
+msgid "unknown"
+msgstr "nezadáno"
+
+#: app/csvHelper.py:85
+msgid "January"
+msgstr "Leden"
+
+#: app/csvHelper.py:85
+msgid "February"
+msgstr "Únor"
+
+#: app/csvHelper.py:85
+msgid "March"
+msgstr "Březen"
+
+#: app/csvHelper.py:85
+msgid "April"
+msgstr "Duben"
+
+#: app/csvHelper.py:85 app/templates/index.html:286
+msgid "May"
+msgstr "Květen"
+
+#: app/csvHelper.py:86
+msgid "June"
+msgstr "Červen"
+
+#: app/csvHelper.py:86
+msgid "July"
+msgstr "Červenec"
+
+#: app/csvHelper.py:86
+msgid "August"
+msgstr "Srpen"
+
+#: app/csvHelper.py:86
+msgid "September"
+msgstr "Září"
+
+#: app/csvHelper.py:86
+msgid "October"
+msgstr "Říjen"
+
+#: app/csvHelper.py:87
+msgid "November"
+msgstr "Listopad"
+
+#: app/csvHelper.py:87
+msgid "December"
+msgstr "Prosinec"
+
+#: app/csvHelper.py:88
+msgid ", First third"
+msgstr ", první třetina"
+
+#: app/csvHelper.py:88
+msgid ", Second third"
+msgstr ", druhá třetina"
+
+#: app/csvHelper.py:88
+msgid ", Third third"
+msgstr ", třetí třetina"
 
 #: app/forms.py:23 app/templates/settings/users.html:15
 msgid "Nickname"
@@ -472,23 +536,23 @@ msgstr "Nový uživatel úspěšně přidán."
 msgid "Add New User"
 msgstr "Přidat nového uživatele"
 
-#: app/viewsSettings.py:130
+#: app/viewsSettings.py:132
 msgid "User details succesfully changed."
 msgstr "Detaily zákazníka úspěšně pozměněny."
 
-#: app/viewsSettings.py:135 app/templates/settings/editUser.html:34
+#: app/viewsSettings.py:137 app/templates/settings/editUser.html:34
 msgid "Edit User"
 msgstr "Editace uživatele"
 
-#: app/viewsSettings.py:148 app/templates/settings/editCatalog.html:155
+#: app/viewsSettings.py:150 app/templates/settings/editCatalog.html:155
 msgid "Edit Catalog"
 msgstr "Editace Katalogu"
 
-#: app/viewsSettings.py:226
+#: app/viewsSettings.py:228
 msgid "Data Import"
 msgstr "Import dat"
 
-#: app/viewsSettings.py:234
+#: app/viewsSettings.py:236
 msgid "Data Export"
 msgstr "Export dat"
 
@@ -664,10 +728,6 @@ msgstr "Březen"
 #: app/templates/index.html:285
 msgid "Apr"
 msgstr "Duben"
-
-#: app/templates/index.html:286
-msgid "May"
-msgstr "Květen"
 
 #: app/templates/index.html:287
 msgid "Jun"
