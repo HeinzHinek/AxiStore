@@ -10,3 +10,4 @@ app/static/nohinsho
 app/static/img/product
 db_up.sh
 
+config.py
