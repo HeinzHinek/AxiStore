@@ -9,8 +9,9 @@ from sqlalchemy import desc
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
 from xls import CreateXls
+from imageHelper import getImgUrls
 import datetime, re
-import os, flask
+import flask
 
 @app.route('/supplies')
 @app.route('/supplies/<int:page>')
@@ -219,6 +220,10 @@ def supplyProducts():
                 if rp.product.cust_request_qty > 0:
                     products.append(rp.product)
     products = sorted(products, key=lambda k: (k.maker_id, k.code))
+    for p in products:
+        urls = getImgUrls(p.id)
+        if urls:
+            p.img_url = urls[0]
     return render_template('supplies/supplyProducts.html',
                            custType=custType,
                            customer=cust,

@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
 <script>
 $(document).ready(function() {
+
+    $(".fancybox").fancybox();
 
     $('.input-qty').each( function() {
         var stock_qty = parseInt($(this).closest('tr').find('.stock_qty_td').text())
@@ -129,6 +134,7 @@ $(document).ready(function() {
             <tr>
                 <th class="no-border row-indicator-left"></th>
                 <th>{{ _('Code') }}</th>
+                <th><span class="glyphicon glyphicon-camera"></span></th>
                 <th>{{ _('Decription CS') }}</th>
                 <th>{{ _('Description JP') }}</th>
                 <th style="text-align: right;">{{ _('Retail Price') }}</th>
@@ -141,6 +147,13 @@ $(document).ready(function() {
             <tr class="tr-product">
                 <td class="no-border row-indicator-left"></td>
                 <td>{{ product.code }}</td>
+                <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
+                    {% if product.img_url %}
+                        <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}">
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </a>
+                    {% endif %}
+                </td>
                 <td>{{ product.desc_CS }}</td>
                 <td>{{ product.desc_JP }}</td>
                 <td style="text-align: right;">{{ product.price_retail }}</td>
