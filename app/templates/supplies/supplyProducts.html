@@ -149,7 +149,7 @@ $(document).ready(function() {
                 <td>{{ product.code }}</td>
                 <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
                     {% if product.img_url %}
-                        <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}">
+                        <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}" tabindex="-1">
                             <span class="glyphicon glyphicon-picture"></span>
                         </a>
                     {% endif %}
