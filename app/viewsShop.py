@@ -7,7 +7,7 @@ from flask.ext.babel import gettext
 from models import Product, Category, Cart, Request, RequestedProducts, Catalog, CatalogedProducts
 from forms import ShopHeaderForm, SimpleSubmitForm
 from viewsProduct import prepare_catalog
-from csvHelper import generate_available_stock_csv
+from csvHelper import generate_available_stock_csv, generate_product_details_csv
 from config import NO_PHOTO_URL, NO_PHOTO_THUMB_URL, USER_ROLES, AXM_PRODUCT_URL_JA
 from imageHelper import getImgUrls, getThumbUrls
 from sqlalchemy import or_
@@ -224,7 +224,11 @@ def csvDownloadCustomer():
     form = SimpleSubmitForm()
     if form.validate_on_submit():
         category_ids = request.form.getlist('csv_cat_id')
-        return redirect(url_for('download_file', filename=generate_available_stock_csv(category_ids)))
+        data_type = request.form['data-type']
+        if data_type == 'availability':
+            return redirect(url_for('download_file', filename=generate_available_stock_csv(category_ids)))
+        elif data_type == 'details':
+            return redirect(url_for('download_file', filename=generate_product_details_csv(category_ids)))
 
     return render_template('/shop/csvdownloadcustomer.html',
                            title=gettext('Data download'),

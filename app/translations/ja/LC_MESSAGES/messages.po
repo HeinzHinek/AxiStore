@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-12-09 18:40+0900\n"
-"PO-Revision-Date: 2014-12-09 18:45+0900\n"
+"POT-Creation-Date: 2015-01-07 16:34+0100\n"
+"PO-Revision-Date: 2015-01-07 16:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -23,11 +23,12 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "このページのアクセスにはログインが必要です。"
 
-#: app/csvHelper.py:23
+#: app/csvHelper.py:26
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/csvHelper.py:48 app/templates/deliveries/delivery.html:55
+#: app/csvHelper.py:51 app/csvHelper.py:81
+#: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
 #: app/templates/requests/request.html:60
@@ -35,7 +36,8 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 msgid "Product code"
 msgstr "品番"
 
-#: app/csvHelper.py:48 app/templates/mail/order_confirm.html:22
+#: app/csvHelper.py:51 app/csvHelper.py:81
+#: app/templates/mail/order_confirm.html:22
 #: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/orderconfirm.html:39
@@ -43,76 +45,105 @@ msgstr "品番"
 msgid "Product Name"
 msgstr "商品名"
 
-#: app/csvHelper.py:48 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:51 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 msgid "Quantity on stock"
 msgstr "在庫数"
 
-#: app/csvHelper.py:48
+#: app/csvHelper.py:51
 msgid "Planned time of delivery"
 msgstr "入荷日程"
 
+#: app/csvHelper.py:81 app/templates/product/addProduct.html:152
+#: app/templates/product/editProduct.html:231
+msgid "Retail price"
+msgstr "小売価格"
+
+#: app/csvHelper.py:81
+msgid "Purchase price"
+msgstr "仕入価格"
+
 #: app/csvHelper.py:82
+msgid "Image 1 URL"
+msgstr "画像１URL"
+
+#: app/csvHelper.py:82
+msgid "Image 2 URL"
+msgstr "画像２URL"
+
+#: app/csvHelper.py:82
+msgid "Image 3 URL"
+msgstr "画像３URL"
+
+#: app/csvHelper.py:82
+msgid "Image 4 URL"
+msgstr "画像４URL"
+
+#: app/csvHelper.py:83
+msgid "Image 5 URL"
+msgstr "画像５URL"
+
+#: app/csvHelper.py:140
 msgid "unknown"
 msgstr "不明"
 
-#: app/csvHelper.py:85
+#: app/csvHelper.py:143
 msgid "January"
 msgstr "1月"
 
-#: app/csvHelper.py:85
+#: app/csvHelper.py:143
 msgid "February"
 msgstr "2月"
 
-#: app/csvHelper.py:85
+#: app/csvHelper.py:143
 msgid "March"
 msgstr "3月"
 
-#: app/csvHelper.py:85
+#: app/csvHelper.py:143
 msgid "April"
 msgstr "4月"
 
-#: app/csvHelper.py:85 app/templates/index.html:286
+#: app/csvHelper.py:143 app/templates/index.html:286
 msgid "May"
 msgstr "5月"
 
-#: app/csvHelper.py:86
+#: app/csvHelper.py:144
 msgid "June"
 msgstr "6月"
 
-#: app/csvHelper.py:86
+#: app/csvHelper.py:144
 msgid "July"
 msgstr "7月"
 
-#: app/csvHelper.py:86
+#: app/csvHelper.py:144
 msgid "August"
 msgstr "8月"
 
-#: app/csvHelper.py:86
+#: app/csvHelper.py:144
 msgid "September"
 msgstr "9月"
 
-#: app/csvHelper.py:86
+#: app/csvHelper.py:144
 msgid "October"
 msgstr "10月"
 
-#: app/csvHelper.py:87
+#: app/csvHelper.py:145
 msgid "November"
 msgstr "11月"
 
-#: app/csvHelper.py:87
+#: app/csvHelper.py:145
 msgid "December"
 msgstr "12月"
 
-#: app/csvHelper.py:88
+#: app/csvHelper.py:146
 msgid ", First third"
 msgstr "上旬"
 
-#: app/csvHelper.py:88
+#: app/csvHelper.py:146
 msgid ", Second third"
 msgstr "中旬"
 
-#: app/csvHelper.py:88
+#: app/csvHelper.py:146
 msgid ", Third third"
 msgstr "下旬"
 
@@ -224,7 +255,7 @@ msgstr "検索"
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
 #: app/templates/supplies/supply.html:27
-#: app/templates/supplies/supplyProducts.html:162
+#: app/templates/supplies/supplyProducts.html:175
 msgid "Submit"
 msgstr "確認"
 
@@ -593,55 +624,55 @@ msgstr ""
 msgid "Order Confirmation"
 msgstr "発注の確認"
 
-#: app/viewsShop.py:230 app/templates/navbar_customer.html:17
+#: app/viewsShop.py:234 app/templates/navbar_customer.html:17
 msgid "Data download"
 msgstr "データのダウンロード"
 
-#: app/viewsSupply.py:23
+#: app/viewsSupply.py:24
 msgid "Supplies"
 msgstr "供給"
 
-#: app/viewsSupply.py:62
+#: app/viewsSupply.py:63
 msgid "New Supply"
 msgstr "新規供給"
 
-#: app/viewsSupply.py:70
+#: app/viewsSupply.py:71
 msgid "No customer data!"
 msgstr "お客様のデータがありません！"
 
-#: app/viewsSupply.py:77
+#: app/viewsSupply.py:78
 msgid "Customer not found!"
 msgstr "お客様は不明です！"
 
-#: app/viewsSupply.py:88
+#: app/viewsSupply.py:89
 msgid "No product quantities!"
 msgstr "製品個数がありません！"
 
-#: app/viewsSupply.py:124
+#: app/viewsSupply.py:125
 msgid "No requested products!"
 msgstr "注文された製品がありません！"
 
-#: app/viewsSupply.py:198
+#: app/viewsSupply.py:199
 msgid "New supply sent sucessfully."
 msgstr "新規供給の発送が成功しました。"
 
-#: app/viewsSupply.py:208
+#: app/viewsSupply.py:209
 msgid "Supply Report"
 msgstr "供給の報告"
 
-#: app/viewsSupply.py:241
+#: app/viewsSupply.py:246
 msgid "Date and time of supply was successfully changed."
 msgstr "出荷の日時は変更されました。"
 
-#: app/viewsSupply.py:245 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:250 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "供給の詳細"
 
-#: app/viewsSupply.py:262
+#: app/viewsSupply.py:267
 msgid "No product data!"
 msgstr "製品のデータがありません！"
 
-#: app/viewsSupply.py:276
+#: app/viewsSupply.py:281
 msgid "Invalid data received."
 msgstr "受信されたデータは不正です！"
 
@@ -762,7 +793,7 @@ msgstr "12月"
 
 #: app/templates/navbar_admin.html:16
 #: app/templates/orders/createOrder.html:163
-#: app/templates/supplies/supplyProducts.html:136
+#: app/templates/supplies/supplyProducts.html:142
 msgid "Stock"
 msgstr "在庫"
 
@@ -943,7 +974,7 @@ msgstr "チェコ語の説明"
 #: app/templates/requests/createRequest.html:240
 #: app/templates/requests/request.html:62
 #: app/templates/supplies/supply.html:61
-#: app/templates/supplies/supplyProducts.html:133
+#: app/templates/supplies/supplyProducts.html:139
 #: app/templates/supplies/supplyReport.html:24
 msgid "Description JP"
 msgstr "日本語の説明"
@@ -1142,7 +1173,7 @@ msgstr "次へ"
 #: app/templates/settings/addUser.html:53
 #: app/templates/settings/editCustomer.html:178
 #: app/templates/settings/editUser.html:54
-#: app/templates/supplies/supplyProducts.html:165
+#: app/templates/supplies/supplyProducts.html:178
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1157,7 +1188,7 @@ msgstr "キャンセル"
 #: app/templates/shop/_cart_table.html:5
 #: app/templates/shop/orderconfirm.html:38
 #: app/templates/shop/placeorder.html:34
-#: app/templates/supplies/supplyProducts.html:131
+#: app/templates/supplies/supplyProducts.html:136
 msgid "Code"
 msgstr "品番"
 
@@ -1177,7 +1208,7 @@ msgstr "入庫数量"
 
 #: app/templates/deliveries/newDelivery.html:127
 #: app/templates/orders/createOrder.html:217
-#: app/templates/supplies/supplyProducts.html:163
+#: app/templates/supplies/supplyProducts.html:176
 msgid "Modify"
 msgstr "修正"
 
@@ -1435,7 +1466,7 @@ msgstr "単価"
 
 #: app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
-#: app/templates/supplies/supplyProducts.html:134
+#: app/templates/supplies/supplyProducts.html:140
 msgid "Retail Price"
 msgstr "小売価格"
 
@@ -1455,11 +1486,6 @@ msgstr "日本語の説明"
 #: app/templates/product/editProduct.html:217
 msgid "Unit price"
 msgstr "単価"
-
-#: app/templates/product/addProduct.html:152
-#: app/templates/product/editProduct.html:231
-msgid "Retail price"
-msgstr "小売価格"
 
 #: app/templates/product/addProduct.html:180
 #: app/templates/product/editProduct.html:259
@@ -1918,17 +1944,37 @@ msgstr "カートの更新"
 msgid "To order"
 msgstr "発注へ"
 
-#: app/templates/shop/csvdownloadcustomer.html:34
+#: app/templates/shop/csvdownloadcustomer.html:45
 msgid "Download stock data as CSV file"
 msgstr "CSVファイルとしてデータのダウンロード"
 
-#: app/templates/shop/csvdownloadcustomer.html:35
+#: app/templates/shop/csvdownloadcustomer.html:46
 msgid "Select product categories to download"
 msgstr "ダウンロード対象の商品カテゴリーを選択してください。"
 
-#: app/templates/shop/csvdownloadcustomer.html:45
-msgid "Download"
-msgstr "ダウンロード"
+#: app/templates/shop/csvdownloadcustomer.html:60
+msgid "Download stock availability data"
+msgstr "仕入れに関するデータのダウンロード"
+
+#: app/templates/shop/csvdownloadcustomer.html:61
+msgid "(Stock quantities, Delivery dates)"
+msgstr "（在庫数、納期）"
+
+#: app/templates/shop/csvdownloadcustomer.html:63
+msgid "Download availability"
+msgstr "仕入れデータをダウンロード"
+
+#: app/templates/shop/csvdownloadcustomer.html:68
+msgid "Download product detail data"
+msgstr "商品詳細に関するデータのダウンロード"
+
+#: app/templates/shop/csvdownloadcustomer.html:69
+msgid "(Prices, Images etc.)"
+msgstr "（価格、画像など）"
+
+#: app/templates/shop/csvdownloadcustomer.html:71
+msgid "Download details"
+msgstr "詳細をダウンロード"
 
 #: app/templates/shop/orderconfirm.html:27
 msgid ""
@@ -2049,35 +2095,35 @@ msgstr "発送日時"
 msgid "Sender"
 msgstr "発送者"
 
-#: app/templates/supplies/supplyProducts.html:102
+#: app/templates/supplies/supplyProducts.html:107
 msgid "Select products to supply"
 msgstr "供給する製品の選択"
 
-#: app/templates/supplies/supplyProducts.html:111
+#: app/templates/supplies/supplyProducts.html:116
 msgid "Customer name"
 msgstr "客名"
 
-#: app/templates/supplies/supplyProducts.html:116
+#: app/templates/supplies/supplyProducts.html:121
 msgid "Axis Mart order number"
 msgstr "アクシスマートの注文番号"
 
-#: app/templates/supplies/supplyProducts.html:127
+#: app/templates/supplies/supplyProducts.html:132
 msgid "Requested products:"
 msgstr "注文された製品："
 
-#: app/templates/supplies/supplyProducts.html:132
+#: app/templates/supplies/supplyProducts.html:138
 msgid "Decription CS"
 msgstr "チェコ語の説明"
 
-#: app/templates/supplies/supplyProducts.html:135
+#: app/templates/supplies/supplyProducts.html:141
 msgid "Req. quantity"
 msgstr "受注数量"
 
-#: app/templates/supplies/supplyProducts.html:137
+#: app/templates/supplies/supplyProducts.html:143
 msgid "Supply quantity"
 msgstr "供給数量"
 
-#: app/templates/supplies/supplyProducts.html:164
+#: app/templates/supplies/supplyProducts.html:177
 msgid "Confirm supply"
 msgstr "供給の確認"
 
@@ -2163,3 +2209,6 @@ msgstr "完了ではないが部分的に入庫した受注："
 
 #~ msgid "Product category"
 #~ msgstr "製品カテゴリー"
+
+#~ msgid "Download"
+#~ msgstr "ダウンロード"

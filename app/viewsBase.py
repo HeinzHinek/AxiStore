@@ -23,7 +23,7 @@ def before_request():
     if cat_id:
         session['category_id'] = int(cat_id)
         g.category_id = int(cat_id)
-        session.pop('maker_id')
+        session.pop('maker_id', None)
         g.maker_id = None
     else:
         if 'category_id' not in session:
