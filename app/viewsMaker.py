@@ -84,7 +84,7 @@ def makerStock():
     if products:
         for p in products:
             if not p.price_unit:
-                p.price_retail = 0
+                p.price_unit = 0
             urls = getImgUrls(p.id)
             p.img_urls = []
             p.img_thumb_urls = []
