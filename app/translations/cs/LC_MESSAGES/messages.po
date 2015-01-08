@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-01-07 16:34+0100\n"
-"PO-Revision-Date: 2015-01-07 16:36+0100\n"
+"POT-Creation-Date: 2015-01-08 18:46+0100\n"
+"PO-Revision-Date: 2015-01-08 18:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr "K přístupu na tuto stránku je nutné přihlášení."
 
-#: app/csvHelper.py:26
+#: app/csvHelper.py:36 app/viewsSettings.py:292
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
-#: app/csvHelper.py:51 app/csvHelper.py:81
+#: app/csvHelper.py:61 app/csvHelper.py:91
 #: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
@@ -37,7 +37,7 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 msgid "Product code"
 msgstr "Kód produktu"
 
-#: app/csvHelper.py:51 app/csvHelper.py:81
+#: app/csvHelper.py:61 app/csvHelper.py:91
 #: app/templates/mail/order_confirm.html:22
 #: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
@@ -46,105 +46,105 @@ msgstr "Kód produktu"
 msgid "Product Name"
 msgstr "Název produktu"
 
-#: app/csvHelper.py:51 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:61 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 msgid "Quantity on stock"
 msgstr "Množsví na skladě"
 
-#: app/csvHelper.py:51
+#: app/csvHelper.py:61
 msgid "Planned time of delivery"
 msgstr "Plánovaná doba dodání"
 
-#: app/csvHelper.py:81 app/templates/product/addProduct.html:152
+#: app/csvHelper.py:91 app/templates/product/addProduct.html:152
 #: app/templates/product/editProduct.html:231
 msgid "Retail price"
 msgstr "Maloobch. cena"
 
-#: app/csvHelper.py:81
+#: app/csvHelper.py:91
 msgid "Purchase price"
 msgstr "Prodejní cena"
 
-#: app/csvHelper.py:82
+#: app/csvHelper.py:92
 msgid "Image 1 URL"
 msgstr "URL obrázku 1"
 
-#: app/csvHelper.py:82
+#: app/csvHelper.py:92
 msgid "Image 2 URL"
 msgstr "URL obrázku 2"
 
-#: app/csvHelper.py:82
+#: app/csvHelper.py:92
 msgid "Image 3 URL"
 msgstr "URL obrázku 3"
 
-#: app/csvHelper.py:82
+#: app/csvHelper.py:92
 msgid "Image 4 URL"
 msgstr "URL obrázku 4"
 
-#: app/csvHelper.py:83
+#: app/csvHelper.py:93
 msgid "Image 5 URL"
 msgstr "URL obrázku 5"
 
-#: app/csvHelper.py:140
+#: app/csvHelper.py:150
 msgid "unknown"
 msgstr "nezadáno"
 
-#: app/csvHelper.py:143
+#: app/csvHelper.py:153
 msgid "January"
 msgstr "Leden"
 
-#: app/csvHelper.py:143
+#: app/csvHelper.py:153
 msgid "February"
 msgstr "Únor"
 
-#: app/csvHelper.py:143
+#: app/csvHelper.py:153
 msgid "March"
 msgstr "Březen"
 
-#: app/csvHelper.py:143
+#: app/csvHelper.py:153
 msgid "April"
 msgstr "Duben"
 
-#: app/csvHelper.py:143 app/templates/index.html:286
+#: app/csvHelper.py:153 app/templates/index.html:286
 msgid "May"
 msgstr "Květen"
 
-#: app/csvHelper.py:144
+#: app/csvHelper.py:154
 msgid "June"
 msgstr "Červen"
 
-#: app/csvHelper.py:144
+#: app/csvHelper.py:154
 msgid "July"
 msgstr "Červenec"
 
-#: app/csvHelper.py:144
+#: app/csvHelper.py:154
 msgid "August"
 msgstr "Srpen"
 
-#: app/csvHelper.py:144
+#: app/csvHelper.py:154
 msgid "September"
 msgstr "Září"
 
-#: app/csvHelper.py:144
+#: app/csvHelper.py:154
 msgid "October"
 msgstr "Říjen"
 
-#: app/csvHelper.py:145
+#: app/csvHelper.py:155
 msgid "November"
 msgstr "Listopad"
 
-#: app/csvHelper.py:145
+#: app/csvHelper.py:155
 msgid "December"
 msgstr "Prosinec"
 
-#: app/csvHelper.py:146
+#: app/csvHelper.py:156
 msgid ", First third"
 msgstr ", první třetina"
 
-#: app/csvHelper.py:146
+#: app/csvHelper.py:156
 msgid ", Second third"
 msgstr ", druhá třetina"
 
-#: app/csvHelper.py:146
+#: app/csvHelper.py:156
 msgid ", Third third"
 msgstr ", třetí třetina"
 
@@ -591,6 +591,18 @@ msgstr "Import dat"
 msgid "Data Export"
 msgstr "Export dat"
 
+#: app/viewsSettings.py:276
+msgid "Customer Codes"
+msgstr "Kódy zákazníka"
+
+#: app/viewsSettings.py:295
+msgid "Upload unsuccessful! File could not be parsed!"
+msgstr "Nahrání se nepodařilo! Soubor nemohl být zpracován!"
+
+#: app/viewsSettings.py:309
+msgid "Edit Customer Codes"
+msgstr "Editace kódů zákazníka"
+
 #: app/viewsShop.py:73 app/templates/stock.html:165
 #: app/templates/stock.html:203
 msgid "All"
@@ -905,6 +917,10 @@ msgstr "Importovat data z csv souboru"
 #: app/templates/settings.html:35
 msgid "Export data as csv"
 msgstr "Exportovat data jako csv soubor"
+
+#: app/templates/settings.html:38
+msgid "Customer codes management"
+msgstr "Správa kódů zákazníka"
 
 #: app/templates/stock.html:14 app/templates/stock.html:37
 msgid "descending"
@@ -1767,6 +1783,31 @@ msgstr "Křestní jméno"
 msgid "Surname"
 msgstr "Příjmení"
 
+#: app/templates/settings/customercodes.html:15
+msgid "Customer Codes Management"
+msgstr "Správa kódů zákazníka"
+
+#: app/templates/settings/customercodes.html:22
+msgid "Select customer to manage codes:"
+msgstr "Vyeberte zákazníka, jehož kódy chcete spravovat"
+
+#: app/templates/settings/customercodes.html:25
+#: app/templates/settings/customers.html:18
+msgid "Customer Name"
+msgstr "Jméno zákazníka"
+
+#: app/templates/settings/customercodes.html:26
+msgid "Code definitions uploaded?"
+msgstr "Definice kódů nahrány?"
+
+#: app/templates/settings/customercodes.html:32
+msgid "Yes"
+msgstr "Ano"
+
+#: app/templates/settings/customercodes.html:34
+msgid "No"
+msgstr "Ne"
+
 #: app/templates/settings/customers.html:5
 msgid "List of Customers"
 msgstr "Seznam zákazníků"
@@ -1778,10 +1819,6 @@ msgstr "Přidat zákazníka"
 #: app/templates/settings/customers.html:17
 msgid "Customer ID"
 msgstr "ID zákazníka"
-
-#: app/templates/settings/customers.html:18
-msgid "Customer Name"
-msgstr "Jméno zákazníka"
 
 #: app/templates/settings/customers.html:19
 msgid "Company Name"
@@ -1889,6 +1926,83 @@ msgstr "Chcete opravdu smazat tohoto výrobce?"
 #: app/templates/settings/editMaker.html:32
 msgid "Delete maker"
 msgstr "Smazat výrobce"
+
+#: app/templates/settings/editcustomercodes.html:34
+msgid "Collapse"
+msgstr "Zmenšit"
+
+#: app/templates/settings/editcustomercodes.html:37
+#: app/templates/settings/editcustomercodes.html:107
+msgid "Expand"
+msgstr "Zvětšit"
+
+#: app/templates/settings/editcustomercodes.html:69
+msgid "Edit Codes of Cutomer:"
+msgstr "Editovat kódy zákazníka:"
+
+#: app/templates/settings/editcustomercodes.html:78
+msgid "Upload or Download definitions"
+msgstr "Stáhnout či nahrát definice"
+
+#: app/templates/settings/editcustomercodes.html:82
+msgid "Upload a .csv definition file"
+msgstr "Nahrát .csv soubor definic"
+
+#: app/templates/settings/editcustomercodes.html:83
+msgid "Row example: \"TheirCode, OurCode\""
+msgstr "Příklad řádky: \"JejichKód, NášKód\""
+
+#: app/templates/settings/editcustomercodes.html:84
+msgid "Caution! Current file will be overwritten!"
+msgstr "Pozor! Současný soubor bude přepsán!"
+
+#: app/templates/settings/editcustomercodes.html:91
+msgid "Upload"
+msgstr "Nahrát"
+
+#: app/templates/settings/editcustomercodes.html:98
+msgid "Download current .csv file"
+msgstr "Stáhnout současný .csv soubor"
+
+#: app/templates/settings/editcustomercodes.html:100
+msgid "download"
+msgstr "stáhnout"
+
+#: app/templates/settings/editcustomercodes.html:109
+msgid "Current definitions"
+msgstr "Současné definice"
+
+#: app/templates/settings/editcustomercodes.html:113
+msgid "Customer Code"
+msgstr "Zákazníkův kód"
+
+#: app/templates/settings/editcustomercodes.html:114
+msgid "Our Code"
+msgstr "Náš kód"
+
+#: app/templates/settings/editcustomercodes.html:131
+msgid "Convertor"
+msgstr "Převaděč"
+
+#: app/templates/settings/editcustomercodes.html:132
+msgid "Input"
+msgstr "Vstup"
+
+#: app/templates/settings/editcustomercodes.html:135
+msgid "Output"
+msgstr "Výstup"
+
+#: app/templates/settings/editcustomercodes.html:139
+msgid "Their codes to ours"
+msgstr "Jejich kódy na naše"
+
+#: app/templates/settings/editcustomercodes.html:142
+msgid "Our codes to theirs"
+msgstr "Naše kódy na jejich"
+
+#: app/templates/settings/editcustomercodes.html:145
+msgid "Convert"
+msgstr "Převést"
 
 #: app/templates/settings/makers.html:5
 msgid "List of Makers"
