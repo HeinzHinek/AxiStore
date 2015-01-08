@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(document).ready(function() {
+        $('.cust-row').click(function() {
+            id = $(this).attr('id').substring(5);
+            $('#customer-id-hid').val(id);
+            $('#customer-select-form').submit();
+        });
+    });
+</script>
+
+<div class="row">
+    <h1>{{ _('Customer Codes Management') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<br/>
+<div class="row">
+    <div class="col-md-6">
+        <h4>{{ _('Select customer to manage codes:') }}</h4>
+        <table class="table table-striped table-hover table-bordered table-condensed">
+            <tr>
+                <th>{{ _('Customer Name') }}</th>
+                <th style="text-align: center;">{{ _('Code definitions uploaded?') }}</th>
+            </tr>
+            {% for customer in customers %}
+            <tr id="cust-{{ customer.id }}" class="cust-row" style="cursor: pointer;">
+                <td>{{ customer.name }}</td>
+                <td style="text-align: center;">{% if customer.hasfile %}
+                        <label class="label label-success">{{ _('Yes') }}</label>
+                    {% else %}
+                        <label class="label label-danger">{{ _('No') }}</label>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form id="customer-select-form" method="post">
+            <input type="hidden" id="customer-id-hid" name="customer_id"/>
+        </form>
+    </div>
+    <br/>
+</div>
+
+{% endblock %}

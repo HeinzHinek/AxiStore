@@ -13,6 +13,16 @@ from config import USER_ROLES
 from imageHelper import getImgUrls
 import csv, os, re
 
+
+def parse_csv(path):
+    with open(path, 'rb') as csvfile:
+        reader = csv.reader(csvfile)
+        data = []
+        for row in reader:
+            data.append([item.decode('utf-8') for item in row])
+    return data
+
+
 def process_csv(path, orm, cols):
     with open(path, 'rb') as csvfile:
         reader = csv.reader(csvfile)

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+
+<script>
+
+    var definition_map = [];
+
+    function load_def_data() {
+        var row = [];
+        {% for row in def_file_data %}
+            row = [];
+            row[0] = "{{ row[0]|string }}";
+            row[1] = "{{ row[1] }}";
+            definition_map.push(row);
+        {% endfor %}
+    }
+
+    $(document).ready(function() {
+
+        load_def_data();
+
+        $('#curr-def-table').tablesorter();
+
+        $('#show-file-ops-btn').click(function() {
+            $('#upload-download-div').toggle('fast');
+        });
+
+        $('#definitions-expander-a').click(function() {
+            if ( $('#definitions-div').hasClass('definitions-div-collapsed')) {
+                $('#definitions-div').removeClass('definitions-div-collapsed');
+                $('#definitions-expander-a').text("{{ _('Collapse') }}");
+            } else {
+                $('#definitions-div').addClass('definitions-div-collapsed');
+                $('#definitions-expander-a').text("{{ _('Expand') }}");
+            }
+        });
+
+        $('#convert-btn').click(function() {
+            var direction = $('.convert-radio:checked').val();
+            var text = $('#input-ta').val();
+            var dir_from = 0;
+            var dir_to = 1;
+            if (direction == 1) {
+                dir_from = 1;
+                dir_to = 0;
+            }
+            for (i=0; i<definition_map.length; i++) {
+                var regex = new RegExp(definition_map[i][dir_from], "gi");
+                text = text.replace(regex, definition_map[i][dir_to]);
+            }
+            $('#output-ta').val(text);
+        });
+    });
+</script>
+
+<style>
+    body { background-color: #eeeeee; }
+
+    .definitions-div-collapsed {
+        max-height: 426px;
+        overflow: auto;
+    }
+</style>
+
+<div class="row">
+    <h1>{{ _('Edit Codes of Cutomer:') }}&nbsp;{{ customer.name }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+<br/>
+<div class="row">
+    <div class="col-md-4">
+        <div class="shadowed-div">
+            <div style="text-align: center;">
+                <button id="show-file-ops-btn" class="btn btn-info btn-sm">{{ _('Upload or Download definitions') }}</button>
+            </div>
+            <div id="upload-download-div" style="display: none; background-color: #f1f1f1; border-radius: 5px; margin: 10px 0px; padding: 10px;">
+                <div style="text-align: center; border: 1px solid #dddddd; background-color: white; padding: 10px;">
+                    <p><b>{{ _('Upload a .csv definition file') }}</b><br/>
+                    <span style="font-size: 0.9em; color: grey;">{{ _('Row example: "TheirCode, OurCode"') }}</span><br/>
+                    <span style="color: red;">{{ _('Caution! Current file will be overwritten!') }}</span></p>
+                    <form action="" method="post" name="" enctype="multipart/form-data" >
+                        {{form.hidden_tag()}}
+                        <input type="hidden" name="customer_id" value="{{ customer.id }}"/>
+                        <div class="input-group">
+                            {{ form.filename(class="form-control") }}
+                            <span class="input-group-btn">
+                                <input type="submit" class="btn btn-info form-control" value="{{ _('Upload') }}"/>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <br/>
+                <div style="text-align: center; border: 1px solid #dddddd; background-color: white; padding: 10px;">
+                    <p><b>{{ _('Download current .csv file') }}</b></p>
+                    <a href="{{ url_for('download_file', filename='csv/customercodes/cust_' + customer.id|string + '.csv') }}"
+                       class="btn btn-info btn-sm">{{ _('Download') }}</a>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div id="definitions-div" class="shadowed-div definitions-div-collapsed" style="position: relative;">
+            <div id="definitions-expander-div" style="position: absolute; right: 10px; top: 5px; cursor: pointer;">
+                <a id="definitions-expander-a">{{ _('Expand') }}</a>
+            </div>
+            <h4>{{ _('Current definitions') }}:</h4>
+            <table id="curr-def-table" class="table tablesorter table-bordered table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th class="sort-header">{{ _('Customer Code') }}</th>
+                    <th class="sort-header">{{ _('Our Code') }}</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for row in def_file_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="shadowed-div">
+            <h4>{{ _('Convertor') }}</h4>
+            <label class="label label-default">{{ _('Input') }}</label>
+            <textarea id="input-ta" class="form-control" rows="6" style="margin-top: 2px;"></textarea>
+            <br/>
+            <label class="label label-default">{{ _('Output') }}</label>
+            <textarea id="output-ta" class="form-control" rows="6" style="margin-top: 2px;"></textarea>
+            <div>
+                <div class="checkbox">
+                    <input type="radio" class="convert-radio" name="group1" checked="checked" value="0"/><label>{{ _('Their codes to ours') }}</label><br/>
+                </div>
+                <div class="checkbox">
+                    <input type="radio" class="convert-radio" name="group1" value="1"/><label>{{ _('Our codes to theirs') }}</label>
+                </div>
+            </div>
+            <button id="convert-btn" class="btn btn-info">{{ _('Convert') }}</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
