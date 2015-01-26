@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from flask.ext.babel import Babel
 from momentjs import momentjs
 from flask.ext.babel import gettext
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -22,4 +23,8 @@ from flask.ext.mail import Mail
 mail = Mail(app)
 
 from app import viewsBase, viewsLogin, viewsProduct, viewsMaker, viewsCategory, viewsOrder, viewsDelivery, \
-    viewsSettings, viewsRequest, viewsSupply, viewsCustomer, viewsContact, viewsShop, imageHelper
+    viewsSettings, viewsRequest, viewsSupply, viewsCustomer, viewsContact, viewsShop, imageHelper, scheduled
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(scheduled.sheduleLastura, 'cron', hour=3)
+scheduler.start()

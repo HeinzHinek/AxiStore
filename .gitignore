@@ -9,6 +9,7 @@ app/static/csv
 app/static/nohinsho
 app/static/customercodes
 app/static/img/product
+app/static/temp
 db_up.sh
 
 config.py

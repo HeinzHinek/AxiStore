@@ -291,7 +291,6 @@ def editCustomerCodes(customer_id=None):
             parse_csv(os.path.join(CUSTOMER_CODES_PATH, filename))
             flash(gettext('CSV uploaded and processed sucessfully.'))
         except:
-            print "hovinko"
             flash(gettext('Upload unsuccessful! File could not be parsed!'))
         redirect('/settings/editcustomercodes')
 

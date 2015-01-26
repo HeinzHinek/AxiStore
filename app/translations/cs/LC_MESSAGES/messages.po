@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-01-08 18:46+0100\n"
-"PO-Revision-Date: 2015-01-08 18:46+0100\n"
+"PO-Revision-Date: 2015-01-08 22:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -1950,7 +1950,7 @@ msgstr "Nahrát .csv soubor definic"
 
 #: app/templates/settings/editcustomercodes.html:83
 msgid "Row example: \"TheirCode, OurCode\""
-msgstr "Příklad řádky: \"JejichKód, NášKód\""
+msgstr "Příklad řádky: \"JejichKód,NášKód\""
 
 #: app/templates/settings/editcustomercodes.html:84
 msgid "Caution! Current file will be overwritten!"

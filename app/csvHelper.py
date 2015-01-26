@@ -19,7 +19,7 @@ def parse_csv(path):
         reader = csv.reader(csvfile)
         data = []
         for row in reader:
-            data.append([item.decode('utf-8') for item in row])
+            data.append([item.decode('utf-8', 'ignore') for item in row])
     return data
 
 
