@@ -25,7 +25,6 @@ mail = Mail(app)
 from app import viewsBase, viewsLogin, viewsProduct, viewsMaker, viewsCategory, viewsOrder, viewsDelivery, \
     viewsSettings, viewsRequest, viewsSupply, viewsCustomer, viewsContact, viewsShop, imageHelper, scheduled
 
-import pytz
-scheduler = BackgroundScheduler(timezone=pytz.tz)
+scheduler = BackgroundScheduler(timezone='UTC')
 scheduler.add_job(scheduled.sheduleLastura, 'cron', hour=16)
 scheduler.start()
