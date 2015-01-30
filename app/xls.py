@@ -208,7 +208,8 @@ class CreateXls():
                 item['product'].price_retail = 0
             price_wholesale = item['product'].price_retail
             if customer.base_discount:
-                 price_wholesale *= (1.0 - customer.base_discount)
+                price_wholesale *= (1.0 - customer.base_discount)
+                price_wholesale = round(price_wholesale)
             formula = '=E' + str(idx+16) + '*F' + str(idx+16)
 
             worksheet.write_string(idx+15, 1, item['product'].code, prod_left)

@@ -122,6 +122,11 @@ def before_request():
 #    return response
 
 
+@app.route('/lichtwesen')
+def lichtwesen():
+    return render_template('/lichtwesen/index.html')
+
+
 @app.route('/')
 @app.route('/index')
 @customer_allowed

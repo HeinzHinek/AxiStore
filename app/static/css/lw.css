@@ -1,0 +1,64 @@
+body {
+    height: 100%;
+    background-color: #eeeeee !important;
+    font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+    padding: 0px !important;
+}
+
+.shadowed-div {
+    margin: 0 auto;
+    width: 1000px;
+    background-color: white;
+    -webkit-box-shadow: 4px 4px 5px 5px #949494;
+    box-shadow: 4px 4px 5px 5px #949494;
+}
+
+.gradient-frame {
+    background: rgb(125,185,232); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(125,185,232,1) 0%, rgba(32,124,202,1) 49%, rgba(41,137,216,1) 50%, rgba(25,53,127,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,185,232,1)), color-stop(49%,rgba(32,124,202,1)), color-stop(50%,rgba(41,137,216,1)), color-stop(100%,rgba(25,53,127,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(125,185,232,1) 0%,rgba(32,124,202,1) 49%,rgba(41,137,216,1) 50%,rgba(25,53,127,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(125,185,232,1) 0%,rgba(32,124,202,1) 49%,rgba(41,137,216,1) 50%,rgba(25,53,127,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(125,185,232,1) 0%,rgba(32,124,202,1) 49%,rgba(41,137,216,1) 50%,rgba(25,53,127,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(125,185,232,1) 0%,rgba(32,124,202,1) 49%,rgba(41,137,216,1) 50%,rgba(25,53,127,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#19357f',GradientType=0 ); /* IE6-9 */
+}
+
+.clearfix:after {
+   content: " ";
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+.img-frame {
+border-top: 3px solid #090940;
+outline-offset: 4px;
+-webkit-box-shadow: 0 -5px 5px -2px #090940;
+box-shadow: 0 -5px 5px -2px #090940;
+}
+
+.menu-link {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 0 10px;
+    background-color: #7db9e8;
+    border: 2px solid #090940;
+    border-radius: 8px;
+    color: black;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    background-color: #ACCCE5;
+    color: #EF8B00;
+    -webkit-box-shadow: 0 0 5px 5px #707EFF;
+    box-shadow: 0 0 5px 5px #707EFF;
+}

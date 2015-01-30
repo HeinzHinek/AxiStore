@@ -1,0 +1,26 @@
+{% extends "base_lichtwesen.html" %}
+{% block content %}
+<br/>
+<div class="shadowed-div">
+    <div class="gradient-frame">
+        <div style="padding-top: 30px;">
+            <img src="{{ url_for('static', filename='presentations/lichtwesen/yokoso.png') }}"/>
+        </div>
+    </div>
+    <div class="clearfix" style="height: 120px; background-color: #19357F;">
+        <h3><label class="label label-danger">公式ウェブサイトは準備中です</label></h3>
+        <div style="padding-top: 10px;">
+            <a href="http://www.axis-mart.com/ja/catalog/lichtwesen-%E5%85%89%E3%81%AE%E7%94%9F%E5%91%BD%E4%BD%93%E3%81%8B%E3%82%89%E3%81%AE%E8%B4%88%E3%82%8A%E7%89%A9" target="blank">
+                <div class="menu-link">リヒトヴェーゼンの販売ギャラリー</div></a>
+            <a href="{{ url_for('static', filename='presentations/lichtwesen/master_oils.jpg') }}" target="blank">
+                <div class="menu-link">アセンデットマスターのエッセンスオイル</div></a>
+            <a href="http://s-renaissance.com/ja/node/851" target="blank">
+                <div class="menu-link">お問い合わせ</div></a>
+        </div>
+    </div>
+    <div class="img-frame">
+        <img src="{{ url_for('static', filename='presentations/lichtwesen/LW_flyer.png') }}"/>
+    </div>
+</div>
+<br/>
+{% endblock %}

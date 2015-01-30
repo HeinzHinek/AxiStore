@@ -3,6 +3,7 @@
 app.db
 search.db
 flask
+Flask_FlatPages.egg-info
 *.mo
 app/xls.py
 app/static/csv
