@@ -3,7 +3,7 @@
 from app import db
 from models import Product
 from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL
-from csvHelper import parse_csv
+from csvHelper import parse_csv, generate_axismart_availability_csv
 import os, urllib2
 
 def sheduleLastura():
@@ -36,4 +36,9 @@ def sheduleLastura():
             counter += 1
 
     print "Scheduled job finished sucessfully. Number of updated values for Lastura: " + str(counter)
+    return True
+
+
+def scheduleExportAxismart():
+    generate_axismart_availability_csv()
     return True

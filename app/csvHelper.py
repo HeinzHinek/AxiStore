@@ -11,6 +11,7 @@ from flask_login import current_user
 from datetime import datetime, timedelta
 from config import USER_ROLES
 from imageHelper import getImgUrls
+from sqlalchemy.sql import func
 import csv, os, re
 
 
@@ -128,6 +129,32 @@ def generate_product_details_csv(categories=[]):
     filename = path[pos:]
 
     return filename
+
+
+def generate_axismart_availability_csv():
+    path = os.path.join(CSV_PATH, 'axismart', 'availability.csv')
+    outfile = open(path, 'wb+')
+    outcsv = csv.writer(outfile, delimiter=';')     # Delimiter is set to ';' here!
+
+    headers = ['NID', 'STATUS']
+    outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
+
+    products = Product.query\
+        .filter(func.length(Product.axm_node) > 0)\
+        .all()
+
+    for product in products:
+        if not product.axm_node:
+            continue
+        if product.available_qty > 0:
+            availability = 1
+        else:
+            availability = 0
+        columns = [product.axm_node, availability]
+        outcsv.writerow([unicode(column).encode('utf-8') for column in columns])
+
+    outfile.close()
+
 
 def days_to_month_and_third(days):
     if days is None:
