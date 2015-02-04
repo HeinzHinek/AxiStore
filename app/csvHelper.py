@@ -140,6 +140,7 @@ def generate_axismart_availability_csv():
     outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
 
     products = Product.query\
+        .filter_by(active_flg=1)\
         .filter(func.length(Product.axm_node) > 0)\
         .all()
 
