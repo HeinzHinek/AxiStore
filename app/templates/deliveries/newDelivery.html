@@ -99,8 +99,10 @@ $(document).ready(function() {
         <tr>
             <th class="no-border row-indicator-left"></th>
             <th style="width: 5%;">{{ _('Code') }}</th>
+            <th><span class="glyphicon glyphicon-camera"></span></th>
             <th>{{ _('Name CS') }}</th>
             <th>{{ _('Name JP') }}</th>
+            <th>{{ _('Order Quantity') }}</th>
             <th style="text-align: right; width: 15%;">{{ _('Delivered Quantity') }}</th>
         </tr>
 
@@ -109,8 +111,16 @@ $(document).ready(function() {
         <tr class="tr-product">
             <td class="no-border row-indicator-left"></td>
             <td>{{ product.code }}</td>
+            <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
+                {% if product.img_url %}
+                <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}" tabindex="-1">
+                    <span class="glyphicon glyphicon-picture"></span>
+                </a>
+                {% endif %}
+            </td>
             <td>{{ product.desc_CS }}</td>
             <td>{{ product.desc_JP }}</td>
+            <td>{{ product.order_qty }}</td>
             <td style="text-align: right;">{{ field.qty_order(size=10, class="form-control input-sm input-qty", style="text-align: right;") }}
                 {{ field.product_id(value=product.id) }}
                 <span class="span-qty-order" style="display: none; float: right;">0</span>

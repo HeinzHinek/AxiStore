@@ -6,6 +6,7 @@ from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm
 from models import Delivery, Product, DeliveredProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
+from imageHelper import getImgUrls
 from flask.ext.babel import gettext
 
 @app.route('/deliveries')
@@ -40,6 +41,9 @@ def newDelivery():
                            active_flg=True).all()
             for p in products:
                 formQuantities.fields.append_entry()
+                urls = getImgUrls(p.id)
+                if urls:
+                    p.img_url = urls[0]
 
     return render_template('deliveries/newDelivery.html',
                            title=gettext("New Delivery"),
