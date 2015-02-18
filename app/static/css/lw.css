@@ -43,7 +43,7 @@ outline-offset: 4px;
 box-shadow: 0 -5px 5px -2px #090940;
 }
 
-.menu-link {
+.menu-link-1 {
     display: inline-block;
     padding: 5px 15px;
     margin: 0 10px;
@@ -56,9 +56,34 @@ box-shadow: 0 -5px 5px -2px #090940;
     cursor: pointer;
 }
 
-.menu-link:hover {
+.menu-link-1:hover {
     background-color: #ACCCE5;
     color: #EF8B00;
+    -webkit-box-shadow: 0 0 5px 5px #707EFF;
+    box-shadow: 0 0 5px 5px #707EFF;
+}
+
+.menu-link-2 {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 0 10px;
+    background-color: #090940;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    color: #ACCCE5;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu-link-2:hover {
+    background-color: #ACCCE5;
+    color: #EF8B00;
+    -webkit-box-shadow: 0 0 5px 5px #707EFF;
+    box-shadow: 0 0 5px 5px #707EFF;
+}
+
+.menu-icon:hover {
     -webkit-box-shadow: 0 0 5px 5px #707EFF;
     box-shadow: 0 0 5px 5px #707EFF;
 }
