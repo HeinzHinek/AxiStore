@@ -43,6 +43,10 @@ outline-offset: 4px;
 box-shadow: 0 -5px 5px -2px #090940;
 }
 
+.menu-table tr td {
+    padding-bottom: 4px;
+}
+
 .menu-link-1 {
     display: inline-block;
     padding: 5px 15px;
