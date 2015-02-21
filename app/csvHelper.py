@@ -139,12 +139,10 @@ def generate_axismart_availability_csv():
     headers = ['NID', 'STATUS']
     outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
 
-    products = Product.query\
-        .filter(func.length(Product.axm_node) > 0)\
-        .all()
+    products = db.session.query(Product).all()
 
     for product in products:
-        if not product.axm_node:
+        if not product.axm_node or product.axm_node == "":
             continue
         if product.available_qty > 0 and product.active_flg == 1:
             availability = 1

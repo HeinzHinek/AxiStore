@@ -40,5 +40,7 @@ def sheduleLastura():
 
 
 def scheduleExportAxismart():
+    import logging
+    logging.basicConfig()
     generate_axismart_availability_csv()
     return True
