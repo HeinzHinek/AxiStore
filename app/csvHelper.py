@@ -141,6 +141,11 @@ def generate_axismart_availability_csv():
 
     products = db.session.query(Product).all()
 
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
+
     for product in products:
         if not product.axm_node or product.axm_node == "":
             continue
