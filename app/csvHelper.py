@@ -11,7 +11,8 @@ from flask_login import current_user
 from datetime import datetime, timedelta
 from config import USER_ROLES
 from imageHelper import getImgUrls
-from sqlalchemy.sql import func
+from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import sessionmaker
 import csv, os, re
 
 
@@ -139,12 +140,12 @@ def generate_axismart_availability_csv():
     headers = ['NID', 'STATUS']
     outcsv.writerow([unicode(header).encode('utf-8') for header in headers])
 
-    products = db.session.query(Product).all()
+    # Thread safe sessioning
+    session_factory = sessionmaker(bind=db.engine)
+    Session = scoped_session(session_factory)
+    local_session = Session()
+    products = local_session.query(Product).all()
 
-    try:
-        db.session.commit()
-    except:
-        db.session.rollback()
 
     for product in products:
         if not product.axm_node or product.axm_node == "":
@@ -156,6 +157,8 @@ def generate_axismart_availability_csv():
         columns = [product.axm_node, availability]
         outcsv.writerow([unicode(column).encode('utf-8') for column in columns])
 
+    local_session.close()
+    Session.remove()
     outfile.close()
 
 
