@@ -164,13 +164,12 @@ def request_detail(id):
 @login_required
 def productrequests(id):
     product = Product.query.filter_by(id=id, active_flg=1).first()
-    requests = []
-    if product:
-        all_requests = product.request_assocs
-    for r in all_requests:
-        if r.request.active_flg:
-            if r.quantity - r.qty_supplied > 0:
-                requests.append(r)
+
+    requests = RequestedProducts.query.filter_by(product_id=product.id)\
+        .filter(RequestedProducts.quantity - RequestedProducts.qty_supplied > 0)\
+        .join(Product).filter(Product.active_flg == True)\
+        .join(Request).order_by(Request.created_dt)\
+        .all()
 
     return render_template('requests/productrequests.html',
                            title=gettext("Orders from customers for product"),
