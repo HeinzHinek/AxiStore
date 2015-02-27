@@ -1,0 +1,45 @@
+<head>
+<meta charset="UTF-8">
+</head>
+<h3>AxiStoreに商品が入荷しました！</h3>
+
+<p>メーカーからの商品が到着しましたのでご案内いたします。</p>
+
+<p>メーカー名：　<b>{{ maker }}</b></p>
+
+<h4>以下の商品が入荷いたしました。</h4>
+<style>
+table, th, td {
+    border: 1px solid grey;
+}
+</style>
+<table>
+    <tr>
+        <th style="text-align: center; padding: 5px 10px; background-color: #dddddd;">品番</th>
+        <th style="text-align: center; padding: 5px 10px; background-color: #dddddd;">品名</th>
+    </tr>
+    {% for p in products %}
+        <tr>
+            <td style="text-align: center; padding: 5px 10px;">{{ p['product'].code }}</td>
+            <td style="text-align: center; padding: 5px 10px;">{{ p['product'].desc_JP }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br/>
+<p>※上記の商品のうち、予約品が含まれる可能性があります。その場合、購入不可能となりますのでご了承くださいませ。<br/>
+在庫の状況はAxiStoreにログインしてからご確認いただけます。<br>
+<a href="www.axis-mundi.jp">www.axis-mundi.jp</a></p>
+
+<p>パスワードをお忘れの場合、またはAxiStoreをご利用中に何か問題が発生した場合、ご連絡ください。本メールに直接に回答いただけます。</p>
+
+<p>（本メールはAxiStoreにより自動発信されたものです。入荷のお知らせに関するメールを受け取りたくない場合は、AxiStoreにログインし、マイページにて受信をオフに設定していただけます。）</p>
+<br/>
+<p>いつもAxiStoreをご利用いただきありがとうございます。</p>
+<p>今後ともよろしくお願いいたします。</p>
+
+<p>Axis Mundi株式会社</p>
+<p>〒160-0022<br />
+東京都新宿区<br />
+新宿2-6-3<br />
+藤和新宿コープ810<br />
+電話番号：03-6380-6454</p>
