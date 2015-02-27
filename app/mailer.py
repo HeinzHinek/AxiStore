@@ -1,17 +1,27 @@
+# -*- coding: utf-8 -*-
+
 from flask.ext.mail import Message
 from app import mail
 from flask import render_template
 from flask_login import current_user
 from config import ADMINS, USER_ROLES
-from models import RequestedProducts
+from models import RequestedProducts, User
 from flask.ext.babel import gettext
 
 
-def send_email(subject, sender, recipients, text_body, html_body):
-    msg = Message(subject, sender=sender, recipients=recipients)
-    msg.body = text_body
-    msg.html = html_body
-    mail.send(msg)
+def send_email(subject, sender, recipients, text_body, html_body, bulk=False):
+    if bulk:
+        with mail.connect() as conn:
+            for recipient in recipients:
+                msg = Message(subject, sender=sender, recipients=[recipient])
+                msg.body = text_body
+                msg.html = html_body
+                conn.send(msg)
+    else:
+        msg = Message(subject, sender=sender, recipients=recipients)
+        msg.body = text_body
+        msg.html = html_body
+        mail.send(msg)
 
 
 def order_confirmation(user, req):
@@ -41,3 +51,22 @@ def order_confirmation(user, req):
                                requested_products=requested_products,
                                total=total,
                                pieces=pieces))
+
+
+def send_delivery_notification_to_customers(maker, products):
+    users = User.query.filter_by(role=USER_ROLES['ROLE_CUSTOMER'])\
+        .filter_by(delivery_mail_receive=True).all()
+    user_mails = [u.email for u in users]
+
+    print "Sending delivery notification mail to following addresses: " +  ' '.join(user_mails)
+
+    send_email("【AxiStoreより】入荷のご案内",
+               ADMINS[0],
+               user_mails,
+               render_template("/mail/delivery_notification_to_customers.txt",
+                               maker=maker,
+                               products=products),
+               render_template("/mail/delivery_notification_to_customers.html",
+                               maker=maker,
+                               products=products),
+               bulk=True)

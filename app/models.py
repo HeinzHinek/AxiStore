@@ -15,6 +15,8 @@ class User(db.Model):
     language = db.Column(db.String(3))
     products_per_page = db.Column(db.Integer, default = 20)
 
+    delivery_mail_receive = db.Column(db.Boolean, default=True)
+
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
     maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
 

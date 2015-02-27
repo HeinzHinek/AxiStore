@@ -7,6 +7,7 @@ from models import Delivery, Product, DeliveredProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
 from imageHelper import getImgUrls
+from mailer import send_delivery_notification_to_customers
 from flask.ext.babel import gettext
 
 @app.route('/deliveries')
@@ -151,6 +152,9 @@ def receiveDelivery():
                     report['products'].append(report_details)
 
         db.session.commit()
+
+        # Send e-mail to customers with delivered products notification
+        send_delivery_notification_to_customers(report['maker'], report['products'])
 
         flash( gettext('New delivery received sucessfully.') )
         print(report)

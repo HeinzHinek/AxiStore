@@ -298,6 +298,11 @@ def user():
 
         user.nickname = new_nick
         user.email = new_email
+
+        # if customer, update delivery notification mail receive flag
+        if user.role == USER_ROLES['ROLE_CUSTOMER']:
+            user.delivery_mail_receive = form.delivery_mail_receive.data
+
         user.language = form.language.data
         user.products_per_page = form.products_per_page.data\
                                  if form.products_per_page.data\
@@ -305,6 +310,11 @@ def user():
         db.session.add(user)
         db.session.commit()
         flash(gettext('User settings sucessfully updated.'))
+
+    if current_user.role == USER_ROLES['ROLE_CUSTOMER']:
+        form.delivery_mail_receive.data = (current_user.delivery_mail_receive
+                                           if current_user.delivery_mail_receive != None
+                                           else True)
     form.language.data = (current_user.language
                           if current_user.language
                           else 0)

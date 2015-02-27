@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link href="/static/css/bootstrap-switch.min.css" rel="stylesheet">
+<script src="/static/js/bootstrap-switch.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $("[name='delivery_mail_receive']").bootstrapSwitch();
+});
+</script>
+
 <style>
 body { background-color: #eeeeee; }
 </style>
@@ -15,11 +24,14 @@ body { background-color: #eeeeee; }
         {{form.hidden_tag()}}
         <div class="shadowed-div">
             {{ render_field(form.nickname, class="form-control", style="width: 100%;") }}<br/>
-            <a class="btn btn-sm btn-danger" href="{{ url_for('passwordChange') }}">{{ _('Change password') }}</a>
+            <a class="btn btn-danger" href="{{ url_for('passwordChange') }}">{{ _('Change password') }}</a>
         </div>
         <br/>
         <div class="shadowed-div">
             {{ render_field(form.email, class="form-control", style="width: 50%;") }}<br/>
+            {% if current_user.role == g.USER_ROLES['ROLE_CUSTOMER'] %}
+                {{ render_field(form.delivery_mail_receive, style="width: auto;") }}<br/>
+            {% endif %}
         </div>
         <br/>
         <div class="shadowed-div">

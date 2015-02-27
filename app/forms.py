@@ -24,6 +24,7 @@ class UserForm(Form):
                                                       validators.length(min=5, max=30)])
     email = EmailField(lazy_gettext('Email'), [validators.data_required(),
                                  validators.length(max=120)])
+    delivery_mail_receive = BooleanField(lazy_gettext('Email notification of new goods arrival'), default=True)
     inv_lang = dict((v, k) for k, v in LANGUAGES.items())
     lang = [(v, k) for k, v in inv_lang.iteritems()]
     language = SelectField(lazy_gettext('Preferred language'), choices=lang)
