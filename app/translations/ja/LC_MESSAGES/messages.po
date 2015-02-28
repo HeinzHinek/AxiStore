@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-02-27 11:38+0900\n"
-"PO-Revision-Date: 2015-02-27 11:42+0900\n"
+"PO-Revision-Date: 2015-02-28 12:35+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -161,7 +161,7 @@ msgstr "Eメール"
 
 #: app/forms.py:27
 msgid "Email notification of new goods arrival"
-msgstr "入荷の際に自動発信メール通知"
+msgstr "入荷情報をメールでお知らせ"
 
 #: app/forms.py:30
 msgid "Preferred language"
