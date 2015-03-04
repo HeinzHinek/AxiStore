@@ -53,11 +53,14 @@ class Product(db.Model):
     price_unit = db.Column(db.Integer, default=0)
     price_retail = db.Column(db.Integer, default=0)
     qty_stock = db.Column(db.Integer)
+    min_stock_limit = db.Column(db.Integer, default=1)   # limit for minimal stock
     axm_node = db.Column(db.Unicode(300))
     package_size = db.Column(db.Integer)
 
     maker_code = db.Column(db.String(20))
     maker_qty_stock = db.Column(db.Integer)
+
+    created_dt = db.Column(db.DateTime)
 
     active_flg = db.Column(db.Boolean, default=True)
     requested_products = db.relationship('RequestedProducts')
@@ -65,6 +68,9 @@ class Product(db.Model):
     catalog_terms = db.relationship('CatalogedProducts')
 
     cart = db.relationship('Cart', backref='product')
+
+    def __init__(self):
+        self.created_dt = datetime.utcnow()
 
     @property
     def serialize(self):
