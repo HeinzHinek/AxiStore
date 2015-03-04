@@ -253,3 +253,10 @@
 #maker-stock-table td {
     vertical-align: middle !important;
 }
+
+.table-checkbox-bigger {
+    width: 16px;
+    height: 16px;
+    margin: 0 !important;
+    vertical-align: middle;
+}

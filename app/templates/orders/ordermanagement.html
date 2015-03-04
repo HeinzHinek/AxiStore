@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+
+<script>
+    function update_bulk_hidden() {
+        var checked_items = $('.limit-check:checked');
+        var ids = [];
+        for (var i=0; i<checked_items.length; i++) {
+            $item = $(checked_items[i]);
+            ids.push($item.closest('tr').find('.row-product-id-hidden').val());
+        }
+        $('#bulk-edit-limit-hidden').val(ids);
+    }
+
+    function set_bulk_update_btn_enabled_state() {
+        var checked_items = $('.limit-check:checked');
+        if (checked_items.length > 0) {
+            if ($('#bulk-edit-limit-text').val() > 1) {
+                $('#bulk-edit-limit-submit').removeAttr('disabled');
+            } else {
+                $('#bulk-edit-limit-submit').attr('disabled', 'disabled');
+            }
+        } else {
+            $('#bulk-edit-limit-submit').attr('disabled', 'disabled');
+        }
+    }
+
+    $(document).ready(function() {
+
+        $.tablesorter.addParser({
+            id: 'order_decide',
+            is: function(s) {
+                return false;
+            },
+            format: function(s, table, cell) {
+                return $(cell).attr('rel_value');
+            },
+            type: 'numeric'
+        });
+
+        $('#maker-products-table').tablesorter( {
+            sortList: [[0,0]],
+            headers: {
+            7: { sorter: false },
+            9: { sorter: 'order_decide' },
+            10: { sorter: false }
+            }
+        });
+
+        $('#order-check-all').change(function() {
+            if ($(this).is(':checked')) {
+                $('.order-check').each(function() {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $('.order-check').each(function() {
+                    $(this).prop('checked', false);
+                });
+            }
+        });
+
+        $('.order-check').change(function() {
+            if ($(this).is(':checked') == false) {
+                $('#order-check-all').prop('checked', false);
+            } else {
+                if ($('.order-check:checked').length == $('.order-check').length) {
+                    $('#order-check-all').prop('checked', true);
+                }
+            }
+        });
+
+        $('#limit-check-all').change(function() {
+            if ($(this).is(':checked')) {
+                $('.limit-check').each(function() {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $('.limit-check').each(function() {
+                    $(this).prop('checked', false);
+                });
+            }
+            update_bulk_hidden();
+            set_bulk_update_btn_enabled_state()
+        });
+
+        $('.limit-check').change(function() {
+            if ($(this).is(':checked') == false) {
+                $('#limit-check-all').prop('checked', false);
+            } else {
+                if ($('.limit-check:checked').length == $('.limit-check').length) {
+                    $('#limit-check-all').prop('checked', true);
+                }
+            }
+            update_bulk_hidden();
+            set_bulk_update_btn_enabled_state()
+        });
+
+        $(document).on('keyup', '#bulk-edit-limit-text', function (e) {
+            set_bulk_update_btn_enabled_state();
+        });
+
+
+        $(document).on('keyup', '.nums_only', function (e) {
+            $(this).removeClass('td-border-highlighted');
+            if (e.keyCode != '9') {
+                this.value = this.value.replace(/[^0-9\.]/g,'');
+            }
+        });
+
+        $('.td-qty-edit').click( function() {
+            $(this).addClass('td-border-highlighted');
+            div = $(this).find('div');
+            $(div).show();
+            $(div).find('input[type="text"]').focus();
+            $(div).scrollToFixed();
+        });
+
+        $('.div-qty-stock-edit').focusout( function() {
+            $(this).hide();
+            $('.td-qty-edit').removeClass('td-border-highlighted');
+        });
+
+        $('.submit-qty-stock-edit').blur( function(event) {
+            t = $(this).parent().find('input[type="text"]').val();
+            if (t != '' && t != null) {
+                $(this).trigger('click');
+            }
+        });
+
+    });
+</script>
+
+<div class="row" style="position: relative;">
+    <table style="width: 100%; margin: 10px 0 20px 0;">
+        <tr>
+            <td>
+                <h2>{{ _("Management of orders to makers") }}</h2>
+            </td>
+            <td style="text-align: right; background-color: #f5f5f5;" class="shadowed-div">
+
+                <table style="width: 100%; text-align: center; margin: 0 auto;">
+                    <tr>
+                        <th style="text-align: center;">{{ _('Set min. stock for checked items:') }}</th>
+                        <th style="text-align: center;">{{ _('Order checked items:') }}</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form action="" method="post" name="form_edit_qty" class="form-inline">
+                                {{form_edit_qty.hidden_tag()}}
+                                <div class="input-group">
+                                    {{ form_edit_qty.qty_stock(id="bulk-edit-limit-text", class="input-sm form-control nums_only", size=10, style="text-align: right;") }}
+                                    <span class="input-group-btn">
+                                        <input type="submit" id="bulk-edit-limit-submit" class="btn btn-info form-control input-sm btn-sm" value="OK" disabled/>
+                                        <input type="hidden" id="bulk-edit-limit-hidden" name="product_id">
+                                    </span>
+                                </div>
+                            </form>
+                        </td>
+                        <td><input type="button" class="btn btn-sm btn-info" value="{{ _('Order!') }}"></td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+
+{% if makers %}
+    <ul id="tabs-makers" class="nav nav-tabs" role="tablist" style="margin: 0 6px 0 7px;">
+        {% for maker in makers %}
+            <li id="cat_{{ maker.id }}" {% if curr_maker_id == maker.id %} class="active" {% endif %} >
+                <a href="{{ url_for('ordermanagement') + '?mak=' + (maker.id|string) }}">{{ maker.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</div>
+
+<div class="row">
+
+    <table id="maker-products-table" class="table tablesorter table-responsive table-hover table-condensed table-bordered table-striped"
+           style="font-size: 0.9em;">
+        <thead>
+        <tr>
+            <th style="text-align: center; width: 6%;" class="sort-header"><span class="glyphicon glyphicon-barcode"></span></th>
+            <th class="sort-header">
+                {% if g.user.language == 'ja' %}
+                {{ _('Description JP') }}
+                {% else %}
+                {{ _('Description CS') }}
+                {% endif %}
+            </th>
+            <th style="text-align: right;" class="sort-header"><span class="glyphicon glyphicon-usd"></span>
+                <span class="glyphicon glyphicon-log-in"></span>
+            </th>
+            <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px">
+                <span class="glyphicon glyphicon-home"></span>
+            </th>
+            <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px">
+                <span class="glyphicon glyphicon-minus-sign"></span>
+            </th>
+            <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+            </th>
+            <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px td-border-right-1px">
+                <span class="glyphicon glyphicon-ok-sign"></span>
+            </th>
+            <th style="border-right: none; width: 2%;"><input type="checkbox" class="table-checkbox-bigger" id="limit-check-all"/></th>
+            <th style="text-align: center; width: 5%; border-left: none; white-space: nowrap;" class="sort-header">{{ _('Min. stock') }}</th>
+            <th style="text-align: center;" class="sort-header"><span class="glyphicon glyphicon-question-sign"></span></th>
+            <th style="width: 6%; white-space: nowrap;">
+                <input type="checkbox" class="table-checkbox-bigger" id="order-check-all"/>
+                <label for="order-check-all" style="margin: 0 !important;">{{ _('Order') }}</label>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% if products %}
+        {% for product in products %}
+        <tr style="height: 30px !important;">
+            <input type="hidden" class="row-product-id-hidden" value="{{ product.id }}" />
+            <td class="clickable-td">{{ product.code }}</td>
+            <td class="clickable-td">
+                {% if g.user.language == 'ja' %}
+                {{ product.desc_JP }}
+                {% else %}
+                {{ product.desc_CS }}
+                {% endif %}
+            </td>
+            <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>
+
+            {% if product.qty_stock == None %}
+            <td style="text-align: center; color: red;" class="warning clickable-td td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">?
+                {% elif product.qty_stock <= 0 %}
+            <td style="text-align: right;" class="danger clickable-td td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.qty_stock}}
+            {% else %}
+            <td style="text-align: right;" class="clickable-td td-border-left-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.qty_stock}}
+            {% endif %}
+
+            <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}"
+                onclick="window.location.href = '{{ url_for("productrequests", id=product.id) }}'">{{ product.request_qty }}</td>
+
+            <td style="text-align: right;" class="clickable-td linked-td td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}"
+                onclick="window.location.href = '{{ url_for("productorders", id=product.id) }}'">{{ product.order_qty }}</td>
+
+            {% if product.net_stock == None %}
+            <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">?
+                {% elif product.net_stock < 0 %}
+            <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.net_stock}}
+            {% else %}
+            <td style="text-align: right;" class="td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.net_stock}}
+            {% endif %}
+
+            {% if product.min_stock_limit or product.min_stock_limit == 0 %}
+            <td style="border-right: none;">
+            {% else %}
+            <td style="border-right: none;" class="warning">
+            {% endif %}
+            <input type="checkbox" id="limit-check-{{ product.id }}" class="limit-check table-checkbox-bigger"></td>
+
+            <form action="" method="post" name="form_edit_qty">
+                {{form_edit_qty.hidden_tag()}}
+
+                {% if product.min_stock_limit or product.min_stock_limit == 0 %}
+                <td style="text-align: center; border-left: none;" class="td-border-right-2px clickable-td linked-td td-qty-edit
+                        {% if loop.last %}td-border-bottom-2px{% endif %}">
+                    {{ product.min_stock_limit }}
+                {% else %}
+                <td style="text-align: center; color: red; border-left: none;" class="warning td-border-left-1px td-border-right-2px clickable-td linked-td td-qty-edit
+                        {% if loop.last %}td-border-bottom-2px{% endif %}">
+                    ?
+                {% endif %}
+
+                    <div class="div-qty-stock-edit" style="display: none; position: absolute; z-index: 100;">
+                        <p>{{ form_edit_qty.qty_stock( class="control", size=5, style="color: black; text-align: right;") }}
+                        <input type="submit" class="submit-qty-stock-edit" value="OK">
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        </p>
+                    </div>
+                </td>
+            </form>
+
+            {% if product.net_stock == None or product.min_stock_limit == None %}
+            <td style="text-align: center; color: red;" rel_value="1"
+                    class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">
+                ?
+            </td>
+            {% elif product.net_stock < product.min_stock_limit %}
+            <td style="text-align: center; color: red;" rel_value="0"
+                    class="warning td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">
+                <span class="glyphicon glyphicon-remove" style="color: crimson;"></span>
+            </td>
+            {% else %}
+            <td style="text-align: center;" rel_value="2"
+                    class="td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">
+                <span class="glyphicon glyphicon-ok" style="color: green;"></span>
+            </td>
+            {% endif %}
+
+            <td class="noselect">
+                {% if product.net_stock < product.min_stock_limit %}
+                <input type="checkbox" id="order-check-{{ product.id }}" class="order-check table-checkbox-bigger">
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

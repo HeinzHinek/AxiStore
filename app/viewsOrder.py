@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, flash, url_for, request, g
+from flask import render_template, redirect, flash, url_for, request, g, session
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm
 from models import Order, Product, OrderedProducts, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
@@ -131,3 +131,40 @@ def productorders(id):
                            title=gettext("Orders to maker for product"),
                            product=product,
                            orders=orders)
+
+
+@app.route('/ordermanagement', methods=['GET', 'POST'])
+@login_required
+def ordermanagement():
+
+    makers = Maker.query.all()
+    curr_maker_id = session['maker_id'] if session['maker_id'] else Maker.query.first().id
+    products = Product.query.filter_by(maker_id=curr_maker_id).all()
+    form_edit_qty = EditQtyStockForm()
+
+    if form_edit_qty.is_submitted():
+        if form_edit_qty.validate():
+            qty = form_edit_qty.qty_stock.data
+            id_text = request.form['product_id']
+            ids = id_text.split(',')
+
+            if ((qty and ids) or (qty == 0 and ids)) and ids != ['']:
+                for curr_id in ids:
+                    product = Product.query.filter_by(id=int(curr_id)).first()
+                    if product:
+                        product.min_stock_limit = qty
+                        db.session.add(product)
+                db.session.commit()
+                flash(gettext('Minimum stock limit successfully updated.'))
+            else:
+                flash(gettext('Input value error.'))
+        else:
+            flash(gettext('Input value error.'))
+        return redirect(url_for("ordermanagement"))
+
+    return render_template('orders/ordermanagement.html',
+                           title=gettext("Order management"),
+                           makers=makers,
+                           curr_maker_id=curr_maker_id,
+                           products=products,
+                           form_edit_qty=form_edit_qty)
