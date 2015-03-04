@@ -269,7 +269,7 @@
             <input type="checkbox" id="limit-check-{{ product.id }}" class="limit-check table-checkbox-bigger"></td>
 
             <form action="" method="post" name="form_edit_qty">
-                {{form_edit_qty.hidden_tag()}}
+                {{form_edit_qty.csrf_token }}
 
                 {% if product.min_stock_limit or product.min_stock_limit == 0 %}
                 <td style="text-align: center; border-left: none;" class="td-border-right-2px clickable-td linked-td td-qty-edit
