@@ -11,6 +11,10 @@
 {{ _('If your order contains products currently not on stock, the delivery date may take over two weeks.') }}
 {{ _('In such case an Axis Mundi member will contact you via email or phone.') }}
 
+{{ _('Please, do not delete this e-mail as you may need it for reference in the future.') }}
+
+{{ _('Thank you for being an Axis Mundi customer.') }}
+
 {{ _('Order details:') }}
 --------------------------------------
 {% for rp in requested_products %}
@@ -28,8 +32,7 @@
     {{ total }}{{ _('JPY') }}
 --------------------------------------
 
-{{ _('Thank you for being an Axis Mundi customer.') }}
-{{ _('Yours sincerely') }}
+{{ _('If you have any questions or concerns, please answer directly to this email address or use the contact information below.') }}
 
 {{ _('Axis Mundi Ltd.') }}
 {{ _('160-0022') }}
@@ -37,3 +40,5 @@
 {{ _('Shinjuku 2-6-3') }}
 {{ _('Towa Shinjuku Cope 810') }}
 {{ _('TEL: 03-6380-6454') }}
+
+{{ _('We accept your calls between Monday and Friday (with exception of holidays), 9:00 - 17:00.') }}

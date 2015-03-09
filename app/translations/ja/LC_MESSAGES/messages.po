@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-02-27 11:38+0900\n"
-"PO-Revision-Date: 2015-02-28 12:35+0900\n"
+"POT-Creation-Date: 2015-03-09 09:51+0900\n"
+"PO-Revision-Date: 2015-03-09 09:55+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -37,7 +37,7 @@ msgid "Product code"
 msgstr "品番"
 
 #: app/csvHelper.py:63 app/csvHelper.py:93
-#: app/templates/mail/order_confirm.html:22
+#: app/templates/mail/order_confirm.html:26
 #: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/orderconfirm.html:39
@@ -179,7 +179,7 @@ msgstr "既存のパスワード"
 msgid "New password"
 msgstr "新しいパスワード"
 
-#: app/forms.py:43 app/viewsBase.py:348
+#: app/forms.py:43 app/viewsBase.py:358
 msgid "New password must match confirmation!"
 msgstr "新しいパスワードが確認用のパスワードと違います！"
 
@@ -263,7 +263,7 @@ msgstr "検索"
 msgid "Submit"
 msgstr "確認"
 
-#: app/mailer.py:33 app/templates/shop/orderconfirm.html:26
+#: app/mailer.py:43 app/templates/shop/orderconfirm.html:26
 msgid "Thank you for your order!"
 msgstr "ご注文をありがとうございます！"
 
@@ -275,7 +275,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:236 app/viewsBase.py:238
+#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:160
+#: app/viewsOrder.py:162
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -291,27 +292,27 @@ msgstr "入力されたユーザー名はすでに使用中です！"
 msgid "Selected email is already in use!"
 msgstr "入力されたメールアドレスはすでに使用中です！"
 
-#: app/viewsBase.py:315
+#: app/viewsBase.py:320
 msgid "User settings sucessfully updated."
 msgstr "ユーザーの情報が更新されました。"
 
-#: app/viewsBase.py:323 app/templates/user.html:17
+#: app/viewsBase.py:333 app/templates/user.html:17
 msgid "User's Page"
 msgstr "ユーザーページ"
 
-#: app/viewsBase.py:344
+#: app/viewsBase.py:354
 msgid "User password successfully changed."
 msgstr "パスワードが変更されました。"
 
-#: app/viewsBase.py:350
+#: app/viewsBase.py:360
 msgid "Current password is incorrect!"
 msgstr "既存のパスワードが違います！"
 
-#: app/viewsBase.py:355 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:365 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "パスワードの変更"
 
-#: app/viewsBase.py:363 app/templates/navbar_admin.html:68
+#: app/viewsBase.py:373 app/templates/navbar_admin.html:70
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "設定"
@@ -392,32 +393,32 @@ msgstr "お客様の情報が変更されました。"
 msgid "Edit Customer"
 msgstr "お客様の情報を編集"
 
-#: app/viewsDelivery.py:20 app/templates/navbar_admin.html:41
+#: app/viewsDelivery.py:21 app/templates/navbar_admin.html:43
 msgid "Deliveries"
 msgstr "入庫"
 
-#: app/viewsDelivery.py:36 app/viewsDelivery.py:61 app/viewsMaker.py:45
+#: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:45
 #: app/viewsOrder.py:37 app/viewsOrder.py:59
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
-#: app/viewsDelivery.py:49 app/viewsDelivery.py:169
+#: app/viewsDelivery.py:50 app/viewsDelivery.py:173
 msgid "New Delivery"
 msgstr "新規入庫"
 
-#: app/viewsDelivery.py:155
+#: app/viewsDelivery.py:159
 msgid "New delivery received sucessfully."
 msgstr "入庫に成功しました。"
 
-#: app/viewsDelivery.py:159
+#: app/viewsDelivery.py:163
 msgid "Delivery Report"
 msgstr "入庫レポート"
 
-#: app/viewsDelivery.py:188
+#: app/viewsDelivery.py:192
 msgid "Date and time of delivery was successfully changed."
 msgstr "入荷の日時は変更されました。"
 
-#: app/viewsDelivery.py:192
+#: app/viewsDelivery.py:196
 msgid "Delivery details"
 msgstr "入庫の詳細"
 
@@ -485,6 +486,14 @@ msgstr "発注の詳細"
 #: app/viewsOrder.py:131
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
+
+#: app/viewsOrder.py:158
+msgid "Minimum stock limit successfully updated."
+msgstr "最少在庫数の更新が成功しました。"
+
+#: app/viewsOrder.py:166 app/templates/navbar_admin.html:38
+msgid "Order management"
+msgstr "発注の管理"
 
 #: app/viewsProduct.py:49
 msgid "New product successfully added."
@@ -554,7 +563,7 @@ msgstr "受注の日時は変更されました。"
 msgid "Order from customer details"
 msgstr "受注の詳細"
 
-#: app/viewsRequest.py:176
+#: app/viewsRequest.py:175
 msgid "Orders from customers for product"
 msgstr "製品に対する受注"
 
@@ -730,8 +739,8 @@ msgstr "お客様"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/mail/order_confirm.html:32
-#: app/templates/mail/order_confirm.html:38
+#: app/templates/index.html:102 app/templates/mail/order_confirm.html:36
+#: app/templates/mail/order_confirm.html:42
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
@@ -833,58 +842,58 @@ msgstr "アクシスマートから"
 msgid "to makers"
 msgstr "メーカーへ"
 
-#: app/templates/navbar_admin.html:43
+#: app/templates/navbar_admin.html:45
 msgid "to customers"
 msgstr "お客様へ"
 
-#: app/templates/navbar_admin.html:44
+#: app/templates/navbar_admin.html:46
 msgid "from makers"
 msgstr "メーカーから"
 
-#: app/templates/navbar_admin.html:49
+#: app/templates/navbar_admin.html:51
 msgid "New"
 msgstr "新規"
 
-#: app/templates/navbar_admin.html:51
+#: app/templates/navbar_admin.html:53
 msgid "Product"
 msgstr "製品"
 
-#: app/templates/navbar_admin.html:53
+#: app/templates/navbar_admin.html:55
 msgid "Order to maker"
 msgstr "発注"
 
-#: app/templates/navbar_admin.html:54
+#: app/templates/navbar_admin.html:56
 msgid "Delivery from maker"
 msgstr "メーカーからの入荷"
 
-#: app/templates/navbar_admin.html:56
+#: app/templates/navbar_admin.html:58
 msgid "Order from Customer"
 msgstr "お客様からの注文"
 
-#: app/templates/navbar_admin.html:57
+#: app/templates/navbar_admin.html:59
 msgid "Order from Axis Mart"
 msgstr "アクシスマートからの注文"
 
-#: app/templates/navbar_admin.html:59
+#: app/templates/navbar_admin.html:61
 msgid "Supply to Customer"
 msgstr "お客様への供給"
 
-#: app/templates/navbar_admin.html:60
+#: app/templates/navbar_admin.html:62
 msgid "Supply to Axis Mart order"
 msgstr "アクシスマート受注への供給"
 
-#: app/templates/navbar_admin.html:71 app/templates/navbar_customer.html:23
+#: app/templates/navbar_admin.html:73 app/templates/navbar_customer.html:23
 #: app/templates/navbar_maker.html:23
 #, python-format
 msgid "%(nickname)s"
 msgstr "%(nickname)s"
 
-#: app/templates/navbar_admin.html:73 app/templates/navbar_customer.html:25
+#: app/templates/navbar_admin.html:75 app/templates/navbar_customer.html:25
 #: app/templates/navbar_maker.html:25
 msgid "Logout"
 msgstr "ログアウト"
 
-#: app/templates/navbar_admin.html:76 app/templates/navbar_customer.html:28
+#: app/templates/navbar_admin.html:78 app/templates/navbar_customer.html:28
 #: app/templates/navbar_maker.html:28
 msgid "Login"
 msgstr "ログイン"
@@ -977,6 +986,7 @@ msgstr "メーカー"
 #: app/templates/stock.html:215 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
+#: app/templates/orders/ordermanagement.html:199
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
@@ -989,6 +999,7 @@ msgstr "チェコ語の説明"
 #: app/templates/stock.html:216 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
+#: app/templates/orders/ordermanagement.html:197
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
@@ -1065,7 +1076,7 @@ msgstr "閉じる"
 
 #: app/templates/deliveries/delivery.html:58
 #: app/templates/deliveries/deliveryReport.html:20
-#: app/templates/mail/order_confirm.html:24 app/templates/orders/order.html:58
+#: app/templates/mail/order_confirm.html:28 app/templates/orders/order.html:58
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:241
 #: app/templates/requests/productrequests.html:46
@@ -1198,7 +1209,7 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 #: app/templates/deliveries/newDelivery.html:101
-#: app/templates/mail/order_confirm.html:21
+#: app/templates/mail/order_confirm.html:25
 #: app/templates/orders/createOrder.html:160
 #: app/templates/orders/productorders.html:21
 #: app/templates/requests/createRequest.html:201
@@ -1270,8 +1281,8 @@ msgid ""
 "Thank you for ordering at AxiStore. Your order has been accepted and "
 "processed."
 msgstr ""
-"AxiStoreをご利用いただき、誠にありがとうございます。商品のご注文を承りまし"
-"た。"
+"この度は【AxiStore・アクシストア】をご利用いただき、誠にありがとうございま"
+"す。下記内容でご注文を承りましたので、ご確認ください。"
 
 #: app/templates/mail/order_confirm.html:9
 msgid ""
@@ -1284,8 +1295,8 @@ msgid ""
 "If your order contains products currently not on stock, the delivery date "
 "may take over two weeks."
 msgstr ""
-"なお、在庫切れの商品に関しましては、納品までに2～3週間程かかる場合がございま"
-"すのであしからずご了承ください。"
+"尚、在庫切れの商品に関しましては、納品までに2～3週間程かかる場合がございます"
+"のであらかじめご了承ください。"
 
 #: app/templates/mail/order_confirm.html:11
 msgid "In such case an Axis Mundi member will contact you via email or phone."
@@ -1294,60 +1305,79 @@ msgstr ""
 "だきます。"
 
 #: app/templates/mail/order_confirm.html:13
+msgid ""
+"Please, do not delete this e-mail as you may need it for reference in the "
+"future."
+msgstr ""
+"このメールは今後必要となる場合がございますので大切に保管いただきますようお願"
+"い申し上げます。"
+
+#: app/templates/mail/order_confirm.html:15
+msgid "Thank you for being an Axis Mundi customer."
+msgstr ""
+"今後とも、【AxiStore・アクシストア】をご愛顧のほど宜しくお願い申し上げます。"
+
+#: app/templates/mail/order_confirm.html:17
 #: app/templates/shop/orderconfirm.html:33
 msgid "Order details:"
 msgstr "発注の詳細："
 
-#: app/templates/mail/order_confirm.html:23
+#: app/templates/mail/order_confirm.html:27
 #: app/templates/shop/orderconfirm.html:40
 #: app/templates/shop/placeorder.html:36
 msgid "Your Price"
 msgstr "お客様の価格"
 
-#: app/templates/mail/order_confirm.html:25
+#: app/templates/mail/order_confirm.html:29
 #: app/templates/shop/_cart_table.html:9
 #: app/templates/shop/orderconfirm.html:42
 #: app/templates/shop/placeorder.html:38
 msgid "Subtotal"
 msgstr "小計"
 
-#: app/templates/mail/order_confirm.html:37
+#: app/templates/mail/order_confirm.html:41
 #: app/templates/shop/orderconfirm.html:54
 #: app/templates/shop/placeorder.html:51
 msgid "Total:"
 msgstr "合計："
 
-#: app/templates/mail/order_confirm.html:43
-msgid "Thank you for being an Axis Mundi customer."
-msgstr "アクシス・ムンディをご愛顧いただきありがとうございます。"
+#: app/templates/mail/order_confirm.html:47
+msgid ""
+"If you have any questions or concerns, please answer directly to this email "
+"address or use the contact information below."
+msgstr ""
+"ご不明な点、ご不都合等ございましたら本メール返信宛、もしくは下記までお問い合"
+"わせくださいませ。"
 
-#: app/templates/mail/order_confirm.html:44
-msgid "Yours sincerely"
-msgstr "よろしくお願いいたします。"
-
-#: app/templates/mail/order_confirm.html:46
+#: app/templates/mail/order_confirm.html:49
 msgid "Axis Mundi Ltd."
 msgstr "Axis Mundi株式会社"
 
-#: app/templates/mail/order_confirm.html:47
+#: app/templates/mail/order_confirm.html:50
 msgid "160-0022"
 msgstr "〒160-0022"
 
-#: app/templates/mail/order_confirm.html:48
+#: app/templates/mail/order_confirm.html:51
 msgid "Tokyo-to Shinuku-ku"
 msgstr "東京都新宿区"
 
-#: app/templates/mail/order_confirm.html:49
+#: app/templates/mail/order_confirm.html:52
 msgid "Shinjuku 2-6-3"
 msgstr "新宿2-6-3"
 
-#: app/templates/mail/order_confirm.html:50
+#: app/templates/mail/order_confirm.html:53
 msgid "Towa Shinjuku Cope 810"
 msgstr "藤和新宿コープ810"
 
-#: app/templates/mail/order_confirm.html:51
+#: app/templates/mail/order_confirm.html:54
 msgid "TEL: 03-6380-6454"
 msgstr "電話番号：03-6380-6454"
+
+#: app/templates/mail/order_confirm.html:56
+msgid ""
+"We accept your calls between Monday and Friday (with exception of holidays), "
+"9:00 - 17:00."
+msgstr "お電話受付時間：月曜日〜金曜日(祝祭日を除く)、09:00〜17：00"
 
 #: app/templates/maker/makerOrders.html:10
 #: app/templates/maker/makerOrders.html:100
@@ -1461,6 +1491,30 @@ msgstr "設定していない価格があります！"
 #: app/templates/orders/order.html:59
 msgid "Delivered"
 msgstr "入庫数量"
+
+#: app/templates/orders/ordermanagement.html:142
+msgid "Management of orders to makers"
+msgstr "仕入先への発注の管理"
+
+#: app/templates/orders/ordermanagement.html:148
+msgid "Set min. stock for checked items:"
+msgstr "チェックされた商品の最少在庫数："
+
+#: app/templates/orders/ordermanagement.html:149
+msgid "Order checked items:"
+msgstr "チェックされた商品を注文："
+
+#: app/templates/orders/ordermanagement.html:164
+msgid "Order!"
+msgstr "発注へ！"
+
+#: app/templates/orders/ordermanagement.html:218
+msgid "Min. stock"
+msgstr "最少在庫数"
+
+#: app/templates/orders/ordermanagement.html:222
+msgid "Order"
+msgstr "発注"
 
 #: app/templates/orders/orders.html:5
 msgid "Orders overview"
@@ -2331,3 +2385,6 @@ msgstr "完了ではないが部分的に入庫した受注："
 
 #~ msgid "Download"
 #~ msgstr "ダウンロード"
+
+#~ msgid "Yours sincerely"
+#~ msgstr "よろしくお願いいたします。"
