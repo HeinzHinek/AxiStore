@@ -2,7 +2,7 @@
 
 from app import db
 from config import USER_ROLES, CUSTOMER_TYPES
-from datetime import datetime
+from datetime import datetime, timedelta
 from sqlalchemy.ext.hybrid import hybrid_property
 
 
@@ -162,6 +162,27 @@ class Product(db.Model):
                 req_qties += ra.quantity
                 req_qties -= ra.qty_supplied
         return req_qties
+
+    # quantity of products requested in last 30 days
+    @hybrid_property
+    def requests_last_30_days(self):
+        today = datetime.utcnow() + timedelta(hours=9)
+        begin_date = today - timedelta(days=30)
+        last_month_rp = []
+        for rp in self.requested_products:
+            if begin_date <= rp.request.created_dt <= today:
+                last_month_rp.append(rp)
+        return sum(rp.quantity for rp in last_month_rp)
+
+    # color by amount of products requested in last 30 days
+    @hybrid_property
+    def sales_index_color(self):
+        sale_index = self.requests_last_30_days if self.requests_last_30_days < 20 else 20
+        int_r = 255 - 153/20 * sale_index
+        int_g = 153 + 153/20 * sale_index
+        hex_r = "%0.2X" % int_r
+        hex_g = "%0.2X" % int_g
+        return "#" + hex_r + hex_g + '66'
 
 
 class Maker(db.Model):

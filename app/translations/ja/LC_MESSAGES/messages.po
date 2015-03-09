@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-09 09:51+0900\n"
-"PO-Revision-Date: 2015-03-09 09:55+0900\n"
+"POT-Creation-Date: 2015-03-09 18:39+0900\n"
+"PO-Revision-Date: 2015-03-09 18:41+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -265,7 +265,7 @@ msgstr "確認"
 
 #: app/mailer.py:43 app/templates/shop/orderconfirm.html:26
 msgid "Thank you for your order!"
-msgstr "ご注文をありがとうございます！"
+msgstr "ご注文をありがとうございます。"
 
 #: app/viewsBase.py:146
 msgid "Home"
@@ -744,7 +744,7 @@ msgstr "Axis Mart"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:378 app/templates/shop/shop.html:383
+#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
 msgid "pcs"
 msgstr "個"
 
@@ -1266,7 +1266,7 @@ msgstr "パスワードを記録"
 
 #: app/templates/mail/order_confirm.html:1
 msgid "Thank you for your order at AxiStore!"
-msgstr "AxiStoreにてご注文をいただきありがとうございます！"
+msgstr "AxiStoreにてご注文をいただきありがとうございます。"
 
 #: app/templates/mail/order_confirm.html:3
 msgid "jap:sama"
@@ -1508,11 +1508,11 @@ msgstr "チェックされた商品を注文："
 msgid "Order!"
 msgstr "発注へ！"
 
-#: app/templates/orders/ordermanagement.html:218
+#: app/templates/orders/ordermanagement.html:221
 msgid "Min. stock"
 msgstr "最少在庫数"
 
-#: app/templates/orders/ordermanagement.html:222
+#: app/templates/orders/ordermanagement.html:225
 msgid "Order"
 msgstr "発注"
 
@@ -2182,7 +2182,7 @@ msgstr "いいえ、ショップに戻る"
 
 #: app/templates/shop/placeorder.html:68
 msgid "Yes, order!"
-msgstr "はい、発注します！"
+msgstr "はい、発注します。"
 
 #: app/templates/shop/shop.html:306
 msgid "Available items only"
@@ -2204,31 +2204,43 @@ msgstr "キーワード絞り込み"
 msgid ", "
 msgstr "、"
 
-#: app/templates/shop/shop.html:375
+#: app/templates/shop/shop.html:342
+msgid "low"
+msgstr "少ない"
+
+#: app/templates/shop/shop.html:343
+msgid "Sales last 30 days:"
+msgstr "ここ30日間の発注数"
+
+#: app/templates/shop/shop.html:344
+msgid "high"
+msgstr "多い"
+
+#: app/templates/shop/shop.html:382
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:381
+#: app/templates/shop/shop.html:388
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:386
+#: app/templates/shop/shop.html:393
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:392
+#: app/templates/shop/shop.html:399
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:438
+#: app/templates/shop/shop.html:445
 msgid "Cart Content"
 msgstr "ショッピングカートの内容"
 
-#: app/templates/shop/shop.html:439
+#: app/templates/shop/shop.html:446
 msgid "Shopping cart is empty."
 msgstr "ショッピングカートに商品がありません。"
 
-#: app/templates/shop/shop.html:452
+#: app/templates/shop/shop.html:459
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 

@@ -337,6 +337,13 @@
                 </div>
             </div>
         {% endif %}
+            <div style="text-align: center;" class="clearfix">
+                <div class="sales-indicator-bar" style="float: left; position: relative;">
+                    <div style="position: absolute; left: 10px;">{{ _('low') }}</div>
+                    <div style="width: 0px; min-width: 130px; margin: 0 auto;">{{ _('Sales last 30 days:') }}</div>
+                    <div style="position: absolute; right: 10px; top: 0px;">{{ _('high') }}</div>
+                </div>
+            </div>
     </div>
 
     {% include 'flash.html' %}
@@ -400,7 +407,7 @@
                 </div>
 
                 <div>
-                    <div class="shop-item-code-wrapper label label-warning">
+                    <div class="shop-item-code-wrapper label label-warning" style="background-color: {{ product.sales_index_color }}">
                         {{ product.code }}
                     </div>
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-09 09:51+0900\n"
-"PO-Revision-Date: 2015-03-09 10:00+0900\n"
+"POT-Creation-Date: 2015-03-09 18:39+0900\n"
+"PO-Revision-Date: 2015-03-09 18:42+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -745,7 +745,7 @@ msgstr "Axis Mart"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:378 app/templates/shop/shop.html:383
+#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
 msgid "pcs"
 msgstr "ks"
 
@@ -1499,21 +1499,21 @@ msgstr "Správa stavu a sytému objednávek výrobcům"
 
 #: app/templates/orders/ordermanagement.html:148
 msgid "Set min. stock for checked items:"
-msgstr "Minimální sklad zaškrtnutých výrobků:"
+msgstr "Min. sklad označených výrobků:"
 
 #: app/templates/orders/ordermanagement.html:149
 msgid "Order checked items:"
-msgstr "Objednat zaškrtnuté výrobky:"
+msgstr "Objednat označené výrobky:"
 
 #: app/templates/orders/ordermanagement.html:164
 msgid "Order!"
 msgstr "Objednat!"
 
-#: app/templates/orders/ordermanagement.html:218
+#: app/templates/orders/ordermanagement.html:221
 msgid "Min. stock"
 msgstr "Min. sklad"
 
-#: app/templates/orders/ordermanagement.html:222
+#: app/templates/orders/ordermanagement.html:225
 msgid "Order"
 msgstr "Objednat"
 
@@ -2205,31 +2205,43 @@ msgstr "Výsledky pro klíčové slovo"
 msgid ", "
 msgstr ", "
 
-#: app/templates/shop/shop.html:375
+#: app/templates/shop/shop.html:342
+msgid "low"
+msgstr "nízké"
+
+#: app/templates/shop/shop.html:343
+msgid "Sales last 30 days:"
+msgstr "Prodeje za posl. 30 dní"
+
+#: app/templates/shop/shop.html:344
+msgid "high"
+msgstr "vysoké"
+
+#: app/templates/shop/shop.html:382
 msgid "Available:"
 msgstr "Dostupné:"
 
-#: app/templates/shop/shop.html:381
+#: app/templates/shop/shop.html:388
 msgid "On the way:"
 msgstr "Na cestě:"
 
-#: app/templates/shop/shop.html:386
+#: app/templates/shop/shop.html:393
 msgid "Retail Price:"
 msgstr "Maloobch. cena"
 
-#: app/templates/shop/shop.html:392
+#: app/templates/shop/shop.html:399
 msgid "Your Price:"
 msgstr "Vaše cena:"
 
-#: app/templates/shop/shop.html:438
+#: app/templates/shop/shop.html:445
 msgid "Cart Content"
 msgstr "Obsah nákupního košíku"
 
-#: app/templates/shop/shop.html:439
+#: app/templates/shop/shop.html:446
 msgid "Shopping cart is empty."
 msgstr "Nákupní košík je prázdný."
 
-#: app/templates/shop/shop.html:452
+#: app/templates/shop/shop.html:459
 msgid "No products found."
 msgstr "Žádný produkt nenalezen."
 

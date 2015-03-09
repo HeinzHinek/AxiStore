@@ -46,9 +46,9 @@
         $('#maker-products-table').tablesorter( {
             sortList: [[0,0]],
             headers: {
-            7: { sorter: false },
-            9: { sorter: 'order_decide' },
-            10: { sorter: false }
+            8: { sorter: false },
+            10: { sorter: 'order_decide' },
+            11: { sorter: false }
             }
         });
 
@@ -214,6 +214,9 @@
             <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px td-border-right-1px">
                 <span class="glyphicon glyphicon-ok-sign"></span>
             </th>
+            <th style="text-align: center; width: 4%; white-space: nowrap;" class="sort-header td-border-left-1px td-border-right-1px">
+                <span class="glyphicon glyphicon-heart"></span>
+            </th>
             <th style="border-right: none; width: 2%;"><input type="checkbox" class="table-checkbox-bigger" id="limit-check-all"/></th>
             <th style="text-align: center; width: 5%; border-left: none; white-space: nowrap;" class="sort-header">{{ _('Min. stock') }}</th>
             <th style="text-align: center;" class="sort-header"><span class="glyphicon glyphicon-question-sign"></span></th>
@@ -260,6 +263,10 @@
             {% else %}
             <td style="text-align: right;" class="td-border-left-1px td-border-right-2px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.net_stock}}
             {% endif %}
+
+            <td  style="text-align: right; background-color: {{ product.sales_index_color }}">
+                {{ product.requests_last_30_days }}
+            </td>
 
             {% if product.min_stock_limit or product.min_stock_limit == 0 %}
             <td style="border-right: none;">
