@@ -20,7 +20,7 @@
     function set_bulk_update_btn_enabled_state() {
         var checked_items = $('.limit-check:checked');
         if (checked_items.length > 0) {
-            if ($('#bulk-edit-limit-text').val() > 1) {
+            if ($('#bulk-edit-limit-text').val() > 0 || $('#bulk-edit-limit-text').val() == '0' ) {
                 $('#bulk-edit-limit-submit').removeAttr('disabled');
             } else {
                 $('#bulk-edit-limit-submit').attr('disabled', 'disabled');
