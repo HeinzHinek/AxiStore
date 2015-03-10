@@ -178,8 +178,8 @@ class Product(db.Model):
     @hybrid_property
     def sales_index_color(self):
         sale_index = self.requests_last_30_days if self.requests_last_30_days < 20 else 20
-        int_r = 255 - 153/20 * sale_index
-        int_g = 153 + 153/20 * sale_index
+        int_r = 255 - 102/20 * sale_index
+        int_g = 153 + 102/20 * sale_index
         hex_r = "%0.2X" % int_r
         hex_g = "%0.2X" % int_g
         return "#" + hex_r + hex_g + '66'
