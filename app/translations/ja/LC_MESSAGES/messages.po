@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2015-03-09 18:39+0900\n"
-"PO-Revision-Date: 2015-03-10 09:49+0900\n"
+"PO-Revision-Date: 2015-03-10 16:10+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -265,7 +265,9 @@ msgstr "確認"
 
 #: app/mailer.py:43 app/templates/shop/orderconfirm.html:26
 msgid "Thank you for your order!"
-msgstr "ご注文をありがとうございます。"
+msgstr ""
+"【Axi Store アクシ・ストア】ご注文いただきましてありがとうございます。（自動"
+"配信メール）"
 
 #: app/viewsBase.py:146
 msgid "Home"
@@ -1266,7 +1268,7 @@ msgstr "パスワードを記録"
 
 #: app/templates/mail/order_confirm.html:1
 msgid "Thank you for your order at AxiStore!"
-msgstr "AxiStoreにてご注文をいただきありがとうございます。"
+msgstr "【AxiStore・アクシストア】にてご注文をいただきありがとうございます。"
 
 #: app/templates/mail/order_confirm.html:3
 msgid "jap:sama"
@@ -1351,7 +1353,7 @@ msgstr ""
 
 #: app/templates/mail/order_confirm.html:49
 msgid "Axis Mundi Ltd."
-msgstr "Axis Mundi株式会社"
+msgstr "【Axis Mundi アクシス・ムンディ】株式会社"
 
 #: app/templates/mail/order_confirm.html:50
 msgid "160-0022"
