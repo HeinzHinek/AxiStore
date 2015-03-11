@@ -4,7 +4,9 @@
 <link href="/static/css/tablesorter.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
 
 <script>
     function update_bulk_hidden() {
@@ -46,10 +48,12 @@
         $('#maker-products-table').tablesorter( {
             sortList: [[0,0]],
             headers: {
+            7: { sortInitialOrder: 'desc' },
             8: { sorter: false },
             10: { sorter: 'order_decide' },
             11: { sorter: false }
-            }
+            },
+            widgets: ["saveSort"]
         });
 
         $('#order-check-all').change(function() {
@@ -102,6 +106,11 @@
 
         $(document).on('keyup', '#bulk-edit-limit-text', function (e) {
             set_bulk_update_btn_enabled_state();
+        });
+
+        $('#form-order-checked-but').click(function() {
+            $('#checked-items-ids-hid').val('order');
+            //$('#form_order_checked').submit();
         });
 
 
@@ -161,7 +170,13 @@
                                 </div>
                             </form>
                         </td>
-                        <td><input type="button" class="btn btn-sm btn-info" value="{{ _('Order!') }}"></td>
+                        <td>
+                            <form action="" method="post" id="form_order_checked" name="form_order_checked" class="form-inline">
+                                {{form_edit_qty.hidden_tag()}}
+                                <input type="button" id="form-order-checked-but" class="btn btn-sm btn-info" value="{{ _('Order!') }}">
+                                <input type="hidden" id="checked-items-ids-hid" name="checked-items-ids-hid"/>
+                            </form>
+                        </td>
                     </tr>
                 </table>
 
