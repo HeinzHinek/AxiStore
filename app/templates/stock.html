@@ -83,23 +83,21 @@ $(document).ready( function() {
         }
     });
 
-    $('.td-qty-edit').click( function() {
-        $(this).addClass('td-border-highlighted');
-        div = $(this).find('div');
-        $(div).show();
-        $(div).find('input[type="text"]').focus();
-        $(div).scrollToFixed();
-    });
-
-    $('.div-qty-stock-edit').focusout( function() {
-        $(this).hide();
-        $('.td-qty-edit').removeClass('td-border-highlighted');
-    });
-
-    $('.submit-qty-stock-edit').blur( function(event) {
-        t = $(this).parent().find('input[type="text"]').val();
-        if (t != '' && t != null) {
-            $(this).trigger('click');
+    // Dealing with qty edit elements showing and hiding
+    $('body').click(function(event) {
+        if ( $(event.target).hasClass('td-qty-edit') ) {
+            $('.div-qty-stock-edit').hide();
+            $('.td-qty-edit').removeClass('td-border-highlighted');
+            $(event.target).addClass('td-border-highlighted');
+            div =$(event.target).find('div');
+            $(div).show();
+            $(div).find('input[type="text"]').focus();
+        } else if ( $(event.target).hasClass('submit-qty-stock-edit') ) {
+            $(event.target).closest('.form_edit_qty').submit();
+        } else if ( $(event.target).hasClass('text-qty-stock-edit') ) {
+        } else {
+            $('.div-qty-stock-edit').hide();
+            $('.td-qty-edit').removeClass('td-border-highlighted');
         }
     });
 

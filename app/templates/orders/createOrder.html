@@ -77,6 +77,8 @@ $(document).ready(function() {
         $(this).closest('tr').children('td').removeClass('focused-tr');
         checkAndSumPrice();
     });
+
+    checkAndSumPrice();
 });
 
 function checkAndSumPrice() {
@@ -84,9 +86,20 @@ function checkAndSumPrice() {
     var incompletePrices = false;
     $('.input-qty').each(function() {
         var qty = $(this).val();
+
+        // check whether the quantity is enough to fulfill request and min. stock, if not, set bg-col to pink
+        var net_stock = $(this).closest('tr').find('.net-stock-td').html();
+        var min_stock = $(this).closest('tr').find('.min-stock-td').html();
+        if ( (min_stock - net_stock) - qty > 0 ) {
+            $(this).addClass('alert-danger');
+        } else {
+            $(this).removeClass('alert-danger');
+        }
+
         if (qty < 1) {
             return;
         }
+
         var price = $(this).closest('tr').find('.price-td').text();
         price = price.trim();
         if (price == '?') {
@@ -164,6 +177,7 @@ function checkAndSumPrice() {
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Req.') }}</th>
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Ord.') }}</th>
             <th style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Net.') }}</th>
+            <th class="td-border-left-2px td-border-right-1px" style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Min. stock') }}</th>
             <th class="td-border-left-2px td-border-right-1px" style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Price') }}</th>
             <th style="text-align: right; width: 15%;">{{ _('Order Quantity') }}</th>
         </tr>
@@ -191,12 +205,19 @@ function checkAndSumPrice() {
                 onclick="window.location.href = '{{ url_for("productorders", id=product.id) }}'">{{ product.order_qty }}</td>
 
             {% if product.net_stock == None %}
-            <td style="text-align: center; color: red;" class="warning td-border-left-1px td-border-right-1px">?
+            <td style="text-align: center; color: red;" class="net-stock-td warning td-border-left-1px td-border-right-1px">?
             {% elif product.net_stock < 0 %}
-            <td style="text-align: right; color: red;" class="warning td-border-left-1px td-border-right-1px">{{product.net_stock}}
+            <td style="text-align: right; color: red;" class="net-stock-td warning td-border-left-1px td-border-right-1px">{{product.net_stock}}
             {% else %}
-            <td style="text-align: right;" class="td-border-left-1px td-border-right-1px">{{product.net_stock}}
+            <td style="text-align: right;" class="net-stock-td td-border-left-1px td-border-right-1px">{{product.net_stock}}
             {% endif %}
+
+            {% if product.min_stock_limit %}
+            <td style="text-align: right;" class="min-stock-td td-border-left-2px td-border-right-2px">{{ product.min_stock_limit }}</td>
+            {% else %}
+            <td style="text-align: right; color: crimson;" class="min-stock-td td-border-left-2px td-border-right-2px">?</td>
+            {% endif %}
+
             <td style="text-align: right;" class="price-td td-border-left-2px td-border-right-1px">
                 {% if product.price_unit %}{{ product.price_unit }},-{% else %}?{% endif %}
             </td>

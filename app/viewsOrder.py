@@ -29,7 +29,22 @@ def createOrder():
     formMaker.maker.choices = [(a.id, a.name) for a in Maker.query.all()]
     formQuantities = ProductQuantityForm()
     products = None
-    if formMaker.is_submitted():
+
+    order_items_ids = request.args.get('order_items_ids')
+    maker_to_order = request.args.get('maker_to_order')
+    # redirected from order management screen
+    if order_items_ids and maker_to_order:
+        products = Product.query.order_by(Product.code)\
+            .filter_by(maker_id=int(maker_to_order),
+                       active_flg=True).all()
+        for p in products:
+            qty_to_order = 0
+            ids = order_items_ids.split(',')
+            if str(p.id) in ids:
+                qty_to_order = p.min_stock_limit - p.net_stock
+            entry = formQuantities.fields.append_entry({'qty_order': qty_to_order})
+
+    elif formMaker.is_submitted():
         if formMaker.validate_on_submit():
 
             maker_id = formMaker.maker.data
@@ -143,6 +158,13 @@ def ordermanagement():
     form_edit_qty = EditQtyStockForm()
 
     if form_edit_qty.is_submitted():
+
+        # sumbitting products to order
+        if 'checked-items-ids-hid' in request.form:
+            order_items_ids = request.form['checked-items-ids-hid']
+            return redirect(url_for('createOrder', maker_to_order=curr_maker_id, order_items_ids=order_items_ids))
+
+        #submitting min. stock quantities
         if form_edit_qty.validate():
             qty = form_edit_qty.qty_stock.data
             id_text = request.form['product_id']

@@ -109,8 +109,13 @@
         });
 
         $('#form-order-checked-but').click(function() {
-            $('#checked-items-ids-hid').val('order');
-            //$('#form_order_checked').submit();
+            var checked_items_ids = []
+            $(".order-check:checked").each(function()
+            {
+                checked_items_ids.push( $(this).attr('id').substring(12) )
+            });
+            $('#checked-items-ids-hid').val(checked_items_ids);
+            $('#form_order_checked').submit();
         });
 
 
@@ -121,23 +126,21 @@
             }
         });
 
-        $('.td-qty-edit').click( function() {
-            $(this).addClass('td-border-highlighted');
-            div = $(this).find('div');
-            $(div).show();
-            $(div).find('input[type="text"]').focus();
-            $(div).scrollToFixed();
-        });
-
-        $('.div-qty-stock-edit').focusout( function() {
-            $(this).hide();
-            $('.td-qty-edit').removeClass('td-border-highlighted');
-        });
-
-        $('.submit-qty-stock-edit').blur( function(event) {
-            t = $(this).parent().find('input[type="text"]').val();
-            if (t != '' && t != null) {
-                $(this).trigger('click');
+        // Dealing with qty edit elements showing and hiding
+        $('body').click(function(event) {
+            if ( $(event.target).hasClass('td-qty-edit') ) {
+                $('.div-qty-stock-edit').hide();
+                $('.td-qty-edit').removeClass('td-border-highlighted');
+                $(event.target).addClass('td-border-highlighted');
+                div =$(event.target).find('div');
+                $(div).show();
+                $(div).find('input[type="text"]').focus();
+            } else if ( $(event.target).hasClass('submit-qty-stock-edit') ) {
+                $(event.target).closest('.form_edit_qty').submit();
+            } else if ( $(event.target).hasClass('text-qty-stock-edit') ) {
+            } else {
+                $('.div-qty-stock-edit').hide();
+                $('.td-qty-edit').removeClass('td-border-highlighted');
             }
         });
 
@@ -290,7 +293,7 @@
             {% endif %}
             <input type="checkbox" id="limit-check-{{ product.id }}" class="limit-check table-checkbox-bigger"></td>
 
-            <form action="" method="post" name="form_edit_qty">
+            <form action="" method="post" name="form_edit_qty" class="form_edit_qty">
                 {{form_edit_qty.csrf_token }}
 
                 {% if product.min_stock_limit or product.min_stock_limit == 0 %}
@@ -304,7 +307,7 @@
                 {% endif %}
 
                     <div class="div-qty-stock-edit" style="display: none; position: absolute; z-index: 100;">
-                        <p>{{ form_edit_qty.qty_stock( class="control", size=5, style="color: black; text-align: right;") }}
+                        <p>{{ form_edit_qty.qty_stock( class="text-qty-stock-edit", size=5, style="color: black; text-align: right;") }}
                         <input type="submit" class="submit-qty-stock-edit" value="OK">
                         <input type="hidden" name="product_id" value="{{ product.id }}">
                         </p>
