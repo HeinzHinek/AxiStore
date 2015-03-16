@@ -169,22 +169,25 @@ def days_to_month_and_third(days):
     target = now + timedelta(days=days)
     month = target.month
     day = target.day
+    year = target.year
     if day > 0 and day < 11:
         third = 1
     elif day > 10 and day < 21:
         third = 2
     else:
         third = 3
-    return {'month': month, 'third': third}
+    return {'year': year, 'month': month, 'third': third}
 
 
 def month_and_third_to_text(month_and_third):
     if not month_and_third:
         return gettext('unknown')
+    year = month_and_third['year']
     month = month_and_third['month']
     third = month_and_third['third']
+    years = str(year) + gettext('year, ')
     months = [gettext('January'), gettext('February'), gettext('March'), gettext('April'), gettext('May'),
               gettext('June'), gettext('July'), gettext('August'), gettext('September'), gettext('October'),
               gettext('November'), gettext('December')]
     thirds = [gettext(', First third'), gettext(', Second third'), gettext(', Third third')]
-    return months[month-1] + thirds[third-1]
+    return years + months[month-1] + thirds[third-1]

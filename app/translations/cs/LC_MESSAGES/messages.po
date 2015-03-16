@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-09 18:39+0900\n"
-"PO-Revision-Date: 2015-03-09 18:42+0900\n"
+"POT-Creation-Date: 2015-03-16 09:56+0900\n"
+"PO-Revision-Date: 2015-03-16 09:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -84,67 +84,71 @@ msgstr "URL obrázku 4"
 msgid "Image 5 URL"
 msgstr "URL obrázku 5"
 
-#: app/csvHelper.py:183
+#: app/csvHelper.py:184
 msgid "unknown"
 msgstr "nezadáno"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:188
+msgid "year, "
+msgstr ", "
+
+#: app/csvHelper.py:189
 msgid "January"
 msgstr "Leden"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "February"
 msgstr "Únor"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "March"
 msgstr "Březen"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "April"
 msgstr "Duben"
 
-#: app/csvHelper.py:186 app/templates/index.html:286
+#: app/csvHelper.py:189 app/templates/index.html:286
 msgid "May"
 msgstr "Květen"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "June"
 msgstr "Červen"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "July"
 msgstr "Červenec"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "August"
 msgstr "Srpen"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "September"
 msgstr "Září"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "October"
 msgstr "Říjen"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "November"
 msgstr "Listopad"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "December"
 msgstr "Prosinec"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", First third"
 msgstr ", první třetina"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", Second third"
 msgstr ", druhá třetina"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", Third third"
 msgstr ", třetí třetina"
 
@@ -276,8 +280,8 @@ msgstr "Domů"
 msgid "Stock quantity successfully updated."
 msgstr "Množství na skladě úspěšně aktualizováno."
 
-#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:160
-#: app/viewsOrder.py:162
+#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:166
+#: app/viewsOrder.py:168
 msgid "Input value error."
 msgstr "Hodnota zadána chybně."
 
@@ -488,11 +492,11 @@ msgstr "Detaily objednávky"
 msgid "Orders to maker for product"
 msgstr "Objednávky produktu výrobci"
 
-#: app/viewsOrder.py:158
+#: app/viewsOrder.py:164
 msgid "Minimum stock limit successfully updated."
 msgstr "Mimimální množství na skladě úspěšně aktualizováno."
 
-#: app/viewsOrder.py:166 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:172 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "Správa objednávek výrobcům"
 
@@ -616,8 +620,8 @@ msgstr "Nahrání se nepodařilo! Soubor nemohl být zpracován!"
 msgid "Edit Customer Codes"
 msgstr "Editace kódů zákazníka"
 
-#: app/viewsShop.py:73 app/templates/stock.html:165
-#: app/templates/stock.html:203
+#: app/viewsShop.py:73 app/templates/stock.html:163
+#: app/templates/stock.html:201
 msgid "All"
 msgstr "Vše"
 
@@ -959,15 +963,15 @@ msgstr "sestupně <= 0"
 msgid "ascending <= 0"
 msgstr "vzestupně <= 0"
 
-#: app/templates/stock.html:135
+#: app/templates/stock.html:133
 msgid "Stock overview"
 msgstr "Přehled skladu"
 
-#: app/templates/stock.html:151 app/templates/shop/shop.html:322
+#: app/templates/stock.html:149 app/templates/shop/shop.html:322
 msgid "Search results:"
 msgstr "Výsledky hledání"
 
-#: app/templates/stock.html:196 app/templates/deliveries/deliveries.html:36
+#: app/templates/stock.html:194 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:43
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
@@ -984,10 +988,10 @@ msgstr "Výsledky hledání"
 msgid "Maker"
 msgstr "Výrobce"
 
-#: app/templates/stock.html:215 app/templates/deliveries/delivery.html:56
+#: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
-#: app/templates/orders/ordermanagement.html:199
+#: app/templates/orders/ordermanagement.html:212
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
@@ -997,10 +1001,10 @@ msgstr "Výrobce"
 msgid "Description CS"
 msgstr "Popis ČJ"
 
-#: app/templates/stock.html:216 app/templates/deliveries/delivery.html:57
+#: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
-#: app/templates/orders/ordermanagement.html:197
+#: app/templates/orders/ordermanagement.html:210
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
@@ -1493,27 +1497,27 @@ msgstr "Některé ceny nejsou nastaveny!"
 msgid "Delivered"
 msgstr "Dodáno"
 
-#: app/templates/orders/ordermanagement.html:142
+#: app/templates/orders/ordermanagement.html:149
 msgid "Management of orders to makers"
 msgstr "Správa stavu a sytému objednávek výrobcům"
 
-#: app/templates/orders/ordermanagement.html:148
+#: app/templates/orders/ordermanagement.html:155
 msgid "Set min. stock for checked items:"
 msgstr "Min. sklad označených výrobků:"
 
-#: app/templates/orders/ordermanagement.html:149
+#: app/templates/orders/ordermanagement.html:156
 msgid "Order checked items:"
 msgstr "Objednat označené výrobky:"
 
-#: app/templates/orders/ordermanagement.html:164
+#: app/templates/orders/ordermanagement.html:174
 msgid "Order!"
 msgstr "Objednat!"
 
-#: app/templates/orders/ordermanagement.html:221
+#: app/templates/orders/ordermanagement.html:234
 msgid "Min. stock"
 msgstr "Min. sklad"
 
-#: app/templates/orders/ordermanagement.html:225
+#: app/templates/orders/ordermanagement.html:238
 msgid "Order"
 msgstr "Objednat"
 

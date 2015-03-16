@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-09 18:39+0900\n"
-"PO-Revision-Date: 2015-03-10 16:10+0900\n"
+"POT-Creation-Date: 2015-03-16 09:56+0900\n"
+"PO-Revision-Date: 2015-03-16 09:56+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -83,67 +83,71 @@ msgstr "画像４URL"
 msgid "Image 5 URL"
 msgstr "画像５URL"
 
-#: app/csvHelper.py:183
+#: app/csvHelper.py:184
 msgid "unknown"
 msgstr "不明"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:188
+msgid "year, "
+msgstr "年"
+
+#: app/csvHelper.py:189
 msgid "January"
 msgstr "1月"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "February"
 msgstr "2月"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "March"
 msgstr "3月"
 
-#: app/csvHelper.py:186
+#: app/csvHelper.py:189
 msgid "April"
 msgstr "4月"
 
-#: app/csvHelper.py:186 app/templates/index.html:286
+#: app/csvHelper.py:189 app/templates/index.html:286
 msgid "May"
 msgstr "5月"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "June"
 msgstr "6月"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "July"
 msgstr "7月"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "August"
 msgstr "8月"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "September"
 msgstr "9月"
 
-#: app/csvHelper.py:187
+#: app/csvHelper.py:190
 msgid "October"
 msgstr "10月"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "November"
 msgstr "11月"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "December"
 msgstr "12月"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", First third"
 msgstr "上旬"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", Second third"
 msgstr "中旬"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:192
 msgid ", Third third"
 msgstr "下旬"
 
@@ -277,8 +281,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:160
-#: app/viewsOrder.py:162
+#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:166
+#: app/viewsOrder.py:168
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -489,11 +493,11 @@ msgstr "発注の詳細"
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsOrder.py:158
+#: app/viewsOrder.py:164
 msgid "Minimum stock limit successfully updated."
 msgstr "最少在庫数の更新が成功しました。"
 
-#: app/viewsOrder.py:166 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:172 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "発注の管理"
 
@@ -617,8 +621,8 @@ msgstr "アップロードが失敗しました！ファイルが処理できま
 msgid "Edit Customer Codes"
 msgstr "お客様のコードを編集"
 
-#: app/viewsShop.py:73 app/templates/stock.html:165
-#: app/templates/stock.html:203
+#: app/viewsShop.py:73 app/templates/stock.html:163
+#: app/templates/stock.html:201
 msgid "All"
 msgstr "全て"
 
@@ -960,15 +964,15 @@ msgstr "降順 <= 0"
 msgid "ascending <= 0"
 msgstr "昇順 <= 0"
 
-#: app/templates/stock.html:135
+#: app/templates/stock.html:133
 msgid "Stock overview"
 msgstr "在庫の状況"
 
-#: app/templates/stock.html:151 app/templates/shop/shop.html:322
+#: app/templates/stock.html:149 app/templates/shop/shop.html:322
 msgid "Search results:"
 msgstr "検索結果"
 
-#: app/templates/stock.html:196 app/templates/deliveries/deliveries.html:36
+#: app/templates/stock.html:194 app/templates/deliveries/deliveries.html:36
 #: app/templates/deliveries/delivery.html:43
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
@@ -985,10 +989,10 @@ msgstr "検索結果"
 msgid "Maker"
 msgstr "メーカー"
 
-#: app/templates/stock.html:215 app/templates/deliveries/delivery.html:56
+#: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
-#: app/templates/orders/ordermanagement.html:199
+#: app/templates/orders/ordermanagement.html:212
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
@@ -998,10 +1002,10 @@ msgstr "メーカー"
 msgid "Description CS"
 msgstr "チェコ語の説明"
 
-#: app/templates/stock.html:216 app/templates/deliveries/delivery.html:57
+#: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
-#: app/templates/orders/ordermanagement.html:197
+#: app/templates/orders/ordermanagement.html:210
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
@@ -1494,27 +1498,27 @@ msgstr "設定していない価格があります！"
 msgid "Delivered"
 msgstr "入庫数量"
 
-#: app/templates/orders/ordermanagement.html:142
+#: app/templates/orders/ordermanagement.html:149
 msgid "Management of orders to makers"
 msgstr "仕入先への発注の管理"
 
-#: app/templates/orders/ordermanagement.html:148
+#: app/templates/orders/ordermanagement.html:155
 msgid "Set min. stock for checked items:"
 msgstr "チェックされた商品の最少在庫数："
 
-#: app/templates/orders/ordermanagement.html:149
+#: app/templates/orders/ordermanagement.html:156
 msgid "Order checked items:"
 msgstr "チェックされた商品を注文："
 
-#: app/templates/orders/ordermanagement.html:164
+#: app/templates/orders/ordermanagement.html:174
 msgid "Order!"
 msgstr "発注へ！"
 
-#: app/templates/orders/ordermanagement.html:221
+#: app/templates/orders/ordermanagement.html:234
 msgid "Min. stock"
 msgstr "最少在庫数"
 
-#: app/templates/orders/ordermanagement.html:225
+#: app/templates/orders/ordermanagement.html:238
 msgid "Order"
 msgstr "発注"
 
