@@ -154,7 +154,7 @@ def ordermanagement():
 
     makers = Maker.query.all()
     curr_maker_id = session['maker_id'] if session['maker_id'] else Maker.query.first().id
-    products = Product.query.filter_by(maker_id=curr_maker_id).all()
+    products = Product.query.filter_by(active_flg=True).filter_by(maker_id=curr_maker_id).all()
     form_edit_qty = EditQtyStockForm()
 
     if form_edit_qty.is_submitted():
