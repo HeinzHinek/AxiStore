@@ -15,6 +15,7 @@
                 {% if g.user.is_authenticated() %}
                 <li><a href="{{ url_for('shop') }}">{{ _('Shop') }}</a></li>
                 <li><a href="{{ url_for('csvDownloadCustomer') }}">{{ _('Data download') }}</a></li>
+                <li><a href="{{ url_for('myorderhistory') }}">{{ _('Order history') }}</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">

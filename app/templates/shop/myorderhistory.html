@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/shop.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script type="text/javascript" src="/static/jssor/jssor.slider.mini.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+
+
+<style>
+    body { background-color: #eeeeee; }
+</style>
+
+<div class="row" style="text-align: center; margin-top: 10px;">
+    {% include 'flash.html' %}
+
+    <br/>
+    <div class="shadowed-div" style="padding-left: 20px; padding-right: 20px;">
+        <h3>{{ _('My Order History') }}</h3>
+
+        <table class="table">
+            <tr>
+                <th style="text-align: left;">{{ _('Date and time of order') }}</th>
+                <th style="text-align: center;">{{ _('Number of items ordered') }}</th>
+                <th style="text-align: center;">{{ _('Number of completely delivered items') }}</th>
+                <th style="text-align: center;">{{ _('State of order') }}</th>
+                <th style="width: 10%;"></th>
+                <th></th>
+            </tr>
+            {% if orders %}
+            {% for order in orders %}
+                <tr {% if order.active_flg == False %}class="alert-success"{% endif %}>
+                    <td style="text-align: left;">{{ momentjs(order.created_dt).calendar() }}</td>
+                    <td style="text-align: center;">{{ order.num_items }}</td>
+                    <td style="text-align: center;">{{ order.num_closed }}</td>
+                    <td style="text-align: center;">
+                        {% if order.active_flg %}{{ _('Active') }}
+                        {% else %}{{ _('Closed') }}
+                        {% endif %}
+                    </td>
+                    <td></td>
+                    <td><input type="button" class="btn btn-sm btn-info" value="{{ _('Details') }}"
+                            onclick="$(this).closest('tr').next().toggle('fast')" />
+                    </td>
+                </tr>
+                <tr style="display: none;" {% if order.active_flg == False %}class="alert-success"{% endif %}>
+                    <td colspan="6">
+                        <div style="margin: 0 auto; padding: 10px; width: 80%; background-color: #FFFF99; border: 2px solid #E6E68A;">
+                            <table class="table table-condensed table-striped" style="width: 100%; margin-bottom: 0px;">
+                                <tr>
+                                    <th>{{ _('Code') }}</th>
+                                    <th>{{ _('Product Name') }}</th>
+                                    <th style="width: 10%; text-align: center;">{{ _('Order Quantity') }}</th>
+                                    <th style="width: 10%; text-align: center;">{{ _('Supply quantity') }}</th>
+                                </tr>
+                                {% for product in order.products %}
+                                    <tr>
+                                        <td style="text-align: left;">{{ product.product.code }}</td>
+                                        <td style="text-align: left;">{{ product.product.desc_JP }}</td>
+                                        <td style="text-align: center;">{{ product.quantity }}</td>
+                                        <td {% if product.qty_supplied < product.quantity %}style="color: red;"{% endif %}>
+                                            {{ product.qty_supplied }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

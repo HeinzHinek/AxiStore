@@ -216,6 +216,27 @@ def orderconfirm():
                            pieces=pieces)
 
 
+@app.route('/shop/myorderhistory')
+@customer_allowed
+@login_required
+def myorderhistory():
+    orders = None
+    if g.user.customer_id:
+        orders = Request.query.filter_by(customer_id=g.user.customer_id)\
+            .order_by(Request.created_dt.desc())\
+            .all()
+        for order in orders:
+            items = order.products.all()
+            order.num_items = len(items)
+            order.num_closed = 0
+            for item in items:
+                if item.qty_supplied >= item.quantity:
+                    order.num_closed += 1
+    return render_template('/shop/myorderhistory.html',
+                           title=gettext('My Order History'),
+                           orders=orders)
+
+
 @app.route('/shop/csvDownloadCustomer', methods=['GET', 'POST'])
 @customer_allowed
 @login_required
