@@ -22,6 +22,7 @@ def addProduct():
         product = Product()
         product.code = form.code.data
         product.maker_id = form.maker.data
+        product.maker_code = form.maker_code.data
         product.desc_CS = form.desc_CS.data
         product.desc_JP = form.desc_JP.data
         product.price_unit = form.price_unit.data
@@ -109,6 +110,7 @@ def editProduct(id=0):
         #update product
         product.code = form.code.data
         product.maker_id = form.maker.data
+        product.maker_code = form.maker_code.data
         product.desc_CS = form.desc_CS.data
         product.desc_JP = form.desc_JP.data
         product.price_unit = form.price_unit.data

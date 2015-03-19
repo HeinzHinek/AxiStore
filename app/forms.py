@@ -54,6 +54,7 @@ class AddProductForm(Form):
     code = StringField('code', [validators.data_required(),
                                 validators.length(min=3, max=20)])
     maker = SelectField('maker', coerce=int)
+    maker_code = StringField('maker_code', [validators.length(max=20)])
     desc_CS = StringField('desc_CS', [validators.data_required(),
                                       validators.length(max=300)])
     desc_JP = StringField('desc_CS', [validators.data_required(),
