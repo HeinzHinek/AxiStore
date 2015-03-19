@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-16 09:56+0900\n"
-"PO-Revision-Date: 2015-03-16 09:56+0900\n"
+"POT-Creation-Date: 2015-03-19 14:03+0900\n"
+"PO-Revision-Date: 2015-03-19 14:03+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -259,7 +259,7 @@ msgstr "Hledat"
 
 #: app/forms.py:223 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:136
-#: app/templates/orders/createOrder.html:216
+#: app/templates/orders/createOrder.html:239
 #: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
@@ -280,8 +280,8 @@ msgstr "Domů"
 msgid "Stock quantity successfully updated."
 msgstr "Množství na skladě úspěšně aktualizováno."
 
-#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:166
-#: app/viewsOrder.py:168
+#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:182
+#: app/viewsOrder.py:184
 msgid "Input value error."
 msgstr "Hodnota zadána chybně."
 
@@ -403,7 +403,7 @@ msgid "Deliveries"
 msgstr "Dodávky"
 
 #: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:45
-#: app/viewsOrder.py:37 app/viewsOrder.py:59
+#: app/viewsOrder.py:52 app/viewsOrder.py:74
 msgid "Maker not found."
 msgstr "Výrobce nenalezen."
 
@@ -476,27 +476,27 @@ msgstr "Objednávky od Axis Mundi"
 msgid "Orders to maker"
 msgstr "Objednávky výrobci"
 
-#: app/viewsOrder.py:47 app/viewsOrder.py:93
+#: app/viewsOrder.py:62 app/viewsOrder.py:108
 msgid "Place new order to maker"
 msgstr "Zadat novou objednávku výrobci"
 
-#: app/viewsOrder.py:112
+#: app/viewsOrder.py:127
 msgid "Date and time of order was successfully changed."
 msgstr "Datum a čas objednávky byl úspěšně změněn."
 
-#: app/viewsOrder.py:116 app/templates/orders/order.html:5
+#: app/viewsOrder.py:131 app/templates/orders/order.html:5
 msgid "Order details"
 msgstr "Detaily objednávky"
 
-#: app/viewsOrder.py:131
+#: app/viewsOrder.py:146
 msgid "Orders to maker for product"
 msgstr "Objednávky produktu výrobci"
 
-#: app/viewsOrder.py:164
+#: app/viewsOrder.py:180
 msgid "Minimum stock limit successfully updated."
 msgstr "Mimimální množství na skladě úspěšně aktualizováno."
 
-#: app/viewsOrder.py:172 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:188 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "Správa objednávek výrobcům"
 
@@ -637,7 +637,7 @@ msgstr ""
 "Omlouváme se, ale Vaše zákaznická data jsou nedostačující. Obraťte se prosím "
 "na naši zákaznickou podporu."
 
-#: app/viewsShop.py:180 app/templates/orders/createOrder.html:218
+#: app/viewsShop.py:180 app/templates/orders/createOrder.html:241
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "Zadat objednávku"
@@ -822,7 +822,7 @@ msgid "Dec"
 msgstr "Prosinec"
 
 #: app/templates/navbar_admin.html:16
-#: app/templates/orders/createOrder.html:163
+#: app/templates/orders/createOrder.html:177
 #: app/templates/supplies/supplyProducts.html:142
 msgid "Stock"
 msgstr "Sklad"
@@ -991,7 +991,7 @@ msgstr "Výrobce"
 #: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
-#: app/templates/orders/ordermanagement.html:212
+#: app/templates/orders/ordermanagement.html:217
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
@@ -1004,7 +1004,7 @@ msgstr "Popis ČJ"
 #: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
-#: app/templates/orders/ordermanagement.html:210
+#: app/templates/orders/ordermanagement.html:215
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
@@ -1186,20 +1186,20 @@ msgid "Receive a new delivery"
 msgstr "Přijmout novou dodávku"
 
 #: app/templates/deliveries/newDelivery.html:73
-#: app/templates/orders/createOrder.html:132
+#: app/templates/orders/createOrder.html:145
 msgid "Select maker"
 msgstr "Vybrat výrobce"
 
 #: app/templates/deliveries/newDelivery.html:87
-#: app/templates/orders/createOrder.html:146
+#: app/templates/orders/createOrder.html:159
 #: app/templates/supplies/newSupply.html:60
 msgid "Continue"
 msgstr "Pokračovat"
 
 #: app/templates/deliveries/newDelivery.html:88
 #: app/templates/deliveries/newDelivery.html:139
-#: app/templates/orders/createOrder.html:147
-#: app/templates/orders/createOrder.html:219
+#: app/templates/orders/createOrder.html:160
+#: app/templates/orders/createOrder.html:242
 #: app/templates/product/addProduct.html:230
 #: app/templates/product/editProduct.html:312
 #: app/templates/settings/addCategory.html:40
@@ -1215,7 +1215,7 @@ msgstr "Zrušit"
 
 #: app/templates/deliveries/newDelivery.html:101
 #: app/templates/mail/order_confirm.html:25
-#: app/templates/orders/createOrder.html:160
+#: app/templates/orders/createOrder.html:173
 #: app/templates/orders/productorders.html:21
 #: app/templates/requests/createRequest.html:201
 #: app/templates/requests/createRequest.html:221
@@ -1229,17 +1229,17 @@ msgid "Code"
 msgstr "Kód"
 
 #: app/templates/deliveries/newDelivery.html:103
-#: app/templates/orders/createOrder.html:161
+#: app/templates/orders/createOrder.html:175
 msgid "Name CS"
 msgstr "Název v češtině"
 
 #: app/templates/deliveries/newDelivery.html:104
-#: app/templates/orders/createOrder.html:162
+#: app/templates/orders/createOrder.html:176
 msgid "Name JP"
 msgstr "Název v japonštině"
 
 #: app/templates/deliveries/newDelivery.html:105
-#: app/templates/orders/createOrder.html:168
+#: app/templates/orders/createOrder.html:183
 msgid "Order Quantity"
 msgstr "Objednané množství"
 
@@ -1248,7 +1248,7 @@ msgid "Delivered Quantity"
 msgstr "Doručené množství"
 
 #: app/templates/deliveries/newDelivery.html:137
-#: app/templates/orders/createOrder.html:217
+#: app/templates/orders/createOrder.html:240
 #: app/templates/supplies/supplyProducts.html:176
 msgid "Modify"
 msgstr "Pozměnit"
@@ -1449,7 +1449,7 @@ msgid "My Code"
 msgstr "Můj kód"
 
 #: app/templates/maker/makerStock.html:226
-#: app/templates/orders/createOrder.html:167
+#: app/templates/orders/createOrder.html:182
 msgid "Price"
 msgstr "Cena"
 
@@ -1469,27 +1469,36 @@ msgstr "Hodnoty byly pozměněny. Uložit změny?"
 msgid "Save"
 msgstr "Uložit"
 
-#: app/templates/orders/createOrder.html:123
+#: app/templates/orders/createOrder.html:136
 msgid "Place a new order to maker"
 msgstr "Zadat novou objednávku výrobci"
 
-#: app/templates/orders/createOrder.html:164
+#: app/templates/orders/createOrder.html:174
+msgid "Maker's code"
+msgstr "Kód výrobce"
+
+#: app/templates/orders/createOrder.html:178
 msgid "Req."
 msgstr "Popt."
 
-#: app/templates/orders/createOrder.html:165
+#: app/templates/orders/createOrder.html:179
 msgid "Ord."
 msgstr "Obj."
 
-#: app/templates/orders/createOrder.html:166
+#: app/templates/orders/createOrder.html:180
 msgid "Net."
 msgstr "Čist."
 
-#: app/templates/orders/createOrder.html:225
+#: app/templates/orders/createOrder.html:181
+#: app/templates/orders/ordermanagement.html:239
+msgid "Min. stock"
+msgstr "Min. sklad"
+
+#: app/templates/orders/createOrder.html:248
 msgid "Total sum:"
 msgstr "Celkový součet:"
 
-#: app/templates/orders/createOrder.html:226
+#: app/templates/orders/createOrder.html:249
 msgid "Some prices are not set!"
 msgstr "Některé ceny nejsou nastaveny!"
 
@@ -1497,27 +1506,23 @@ msgstr "Některé ceny nejsou nastaveny!"
 msgid "Delivered"
 msgstr "Dodáno"
 
-#: app/templates/orders/ordermanagement.html:149
+#: app/templates/orders/ordermanagement.html:154
 msgid "Management of orders to makers"
 msgstr "Správa stavu a sytému objednávek výrobcům"
 
-#: app/templates/orders/ordermanagement.html:155
+#: app/templates/orders/ordermanagement.html:160
 msgid "Set min. stock for checked items:"
 msgstr "Min. sklad označených výrobků:"
 
-#: app/templates/orders/ordermanagement.html:156
+#: app/templates/orders/ordermanagement.html:161
 msgid "Order checked items:"
 msgstr "Objednat označené výrobky:"
 
-#: app/templates/orders/ordermanagement.html:174
+#: app/templates/orders/ordermanagement.html:179
 msgid "Order!"
 msgstr "Objednat!"
 
-#: app/templates/orders/ordermanagement.html:234
-msgid "Min. stock"
-msgstr "Min. sklad"
-
-#: app/templates/orders/ordermanagement.html:238
+#: app/templates/orders/ordermanagement.html:243
 msgid "Order"
 msgstr "Objednat"
 

@@ -171,6 +171,7 @@ function checkAndSumPrice() {
         <tr>
             <th class="no-border row-indicator-left"></th>
             <th style="width: 5%;">{{ _('Code') }}</th>
+            <th style="width: 5%;">{{ _("Maker's code") }}</th>
             <th>{{ _('Name CS') }}</th>
             <th>{{ _('Name JP') }}</th>
             <th class="td-border-left-2px" style="text-align: right; width: 5%; white-space: nowrap;">{{ _('Stock') }}</th>
@@ -187,6 +188,7 @@ function checkAndSumPrice() {
         <tr class="tr-product">
             <td class="no-border row-indicator-left"></td>
             <td>{{ product.code }}</td>
+            <td>{{ product.maker_code }}</td>
             <td>{{ product.desc_CS }}</td>
             <td>{{ product.desc_JP }}</td>
 

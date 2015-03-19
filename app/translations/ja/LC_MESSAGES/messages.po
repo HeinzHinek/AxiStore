@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-16 09:56+0900\n"
-"PO-Revision-Date: 2015-03-16 09:56+0900\n"
+"POT-Creation-Date: 2015-03-19 14:03+0900\n"
+"PO-Revision-Date: 2015-03-19 14:03+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -258,7 +258,7 @@ msgstr "検索"
 
 #: app/forms.py:223 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:136
-#: app/templates/orders/createOrder.html:216
+#: app/templates/orders/createOrder.html:239
 #: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
@@ -281,8 +281,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:166
-#: app/viewsOrder.py:168
+#: app/viewsBase.py:236 app/viewsBase.py:238 app/viewsOrder.py:182
+#: app/viewsOrder.py:184
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -404,7 +404,7 @@ msgid "Deliveries"
 msgstr "入庫"
 
 #: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:45
-#: app/viewsOrder.py:37 app/viewsOrder.py:59
+#: app/viewsOrder.py:52 app/viewsOrder.py:74
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
@@ -477,27 +477,27 @@ msgstr "アクシス・ムンディからの注文"
 msgid "Orders to maker"
 msgstr "発注"
 
-#: app/viewsOrder.py:47 app/viewsOrder.py:93
+#: app/viewsOrder.py:62 app/viewsOrder.py:108
 msgid "Place new order to maker"
 msgstr "新規発注を入力する"
 
-#: app/viewsOrder.py:112
+#: app/viewsOrder.py:127
 msgid "Date and time of order was successfully changed."
 msgstr "発注の日時は変更されました。"
 
-#: app/viewsOrder.py:116 app/templates/orders/order.html:5
+#: app/viewsOrder.py:131 app/templates/orders/order.html:5
 msgid "Order details"
 msgstr "発注の詳細"
 
-#: app/viewsOrder.py:131
+#: app/viewsOrder.py:146
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsOrder.py:164
+#: app/viewsOrder.py:180
 msgid "Minimum stock limit successfully updated."
 msgstr "最少在庫数の更新が成功しました。"
 
-#: app/viewsOrder.py:172 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:188 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "発注の管理"
 
@@ -638,7 +638,7 @@ msgstr ""
 "申し訳ありませんが、お客様の顧客データは足りません。お手数ですが、カストマー"
 "サポートにお問い合わせください。"
 
-#: app/viewsShop.py:180 app/templates/orders/createOrder.html:218
+#: app/viewsShop.py:180 app/templates/orders/createOrder.html:241
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "発注を入力"
@@ -823,7 +823,7 @@ msgid "Dec"
 msgstr "12月"
 
 #: app/templates/navbar_admin.html:16
-#: app/templates/orders/createOrder.html:163
+#: app/templates/orders/createOrder.html:177
 #: app/templates/supplies/supplyProducts.html:142
 msgid "Stock"
 msgstr "在庫"
@@ -992,7 +992,7 @@ msgstr "メーカー"
 #: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:56
-#: app/templates/orders/ordermanagement.html:212
+#: app/templates/orders/ordermanagement.html:217
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
@@ -1005,7 +1005,7 @@ msgstr "チェコ語の説明"
 #: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:57
-#: app/templates/orders/ordermanagement.html:210
+#: app/templates/orders/ordermanagement.html:215
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
@@ -1187,20 +1187,20 @@ msgid "Receive a new delivery"
 msgstr "新規入荷を受け取る"
 
 #: app/templates/deliveries/newDelivery.html:73
-#: app/templates/orders/createOrder.html:132
+#: app/templates/orders/createOrder.html:145
 msgid "Select maker"
 msgstr "メーカーの選択"
 
 #: app/templates/deliveries/newDelivery.html:87
-#: app/templates/orders/createOrder.html:146
+#: app/templates/orders/createOrder.html:159
 #: app/templates/supplies/newSupply.html:60
 msgid "Continue"
 msgstr "次へ"
 
 #: app/templates/deliveries/newDelivery.html:88
 #: app/templates/deliveries/newDelivery.html:139
-#: app/templates/orders/createOrder.html:147
-#: app/templates/orders/createOrder.html:219
+#: app/templates/orders/createOrder.html:160
+#: app/templates/orders/createOrder.html:242
 #: app/templates/product/addProduct.html:230
 #: app/templates/product/editProduct.html:312
 #: app/templates/settings/addCategory.html:40
@@ -1216,7 +1216,7 @@ msgstr "キャンセル"
 
 #: app/templates/deliveries/newDelivery.html:101
 #: app/templates/mail/order_confirm.html:25
-#: app/templates/orders/createOrder.html:160
+#: app/templates/orders/createOrder.html:173
 #: app/templates/orders/productorders.html:21
 #: app/templates/requests/createRequest.html:201
 #: app/templates/requests/createRequest.html:221
@@ -1230,17 +1230,17 @@ msgid "Code"
 msgstr "品番"
 
 #: app/templates/deliveries/newDelivery.html:103
-#: app/templates/orders/createOrder.html:161
+#: app/templates/orders/createOrder.html:175
 msgid "Name CS"
 msgstr "チェコ語の品名"
 
 #: app/templates/deliveries/newDelivery.html:104
-#: app/templates/orders/createOrder.html:162
+#: app/templates/orders/createOrder.html:176
 msgid "Name JP"
 msgstr "日本語の品名"
 
 #: app/templates/deliveries/newDelivery.html:105
-#: app/templates/orders/createOrder.html:168
+#: app/templates/orders/createOrder.html:183
 msgid "Order Quantity"
 msgstr "発注数量"
 
@@ -1249,7 +1249,7 @@ msgid "Delivered Quantity"
 msgstr "入庫数量"
 
 #: app/templates/deliveries/newDelivery.html:137
-#: app/templates/orders/createOrder.html:217
+#: app/templates/orders/createOrder.html:240
 #: app/templates/supplies/supplyProducts.html:176
 msgid "Modify"
 msgstr "修正"
@@ -1450,7 +1450,7 @@ msgid "My Code"
 msgstr "私の品番"
 
 #: app/templates/maker/makerStock.html:226
-#: app/templates/orders/createOrder.html:167
+#: app/templates/orders/createOrder.html:182
 msgid "Price"
 msgstr "価格"
 
@@ -1470,27 +1470,36 @@ msgstr "データが変更されました。保存しますか？"
 msgid "Save"
 msgstr "保存"
 
-#: app/templates/orders/createOrder.html:123
+#: app/templates/orders/createOrder.html:136
 msgid "Place a new order to maker"
 msgstr "新規発注を入力する"
 
-#: app/templates/orders/createOrder.html:164
+#: app/templates/orders/createOrder.html:174
+msgid "Maker's code"
+msgstr "マーカーの品番"
+
+#: app/templates/orders/createOrder.html:178
 msgid "Req."
 msgstr "受注"
 
-#: app/templates/orders/createOrder.html:165
+#: app/templates/orders/createOrder.html:179
 msgid "Ord."
 msgstr "発注"
 
-#: app/templates/orders/createOrder.html:166
+#: app/templates/orders/createOrder.html:180
 msgid "Net."
 msgstr "正味"
 
-#: app/templates/orders/createOrder.html:225
+#: app/templates/orders/createOrder.html:181
+#: app/templates/orders/ordermanagement.html:239
+msgid "Min. stock"
+msgstr "最少在庫数"
+
+#: app/templates/orders/createOrder.html:248
 msgid "Total sum:"
 msgstr "総計："
 
-#: app/templates/orders/createOrder.html:226
+#: app/templates/orders/createOrder.html:249
 msgid "Some prices are not set!"
 msgstr "設定していない価格があります！"
 
@@ -1498,27 +1507,23 @@ msgstr "設定していない価格があります！"
 msgid "Delivered"
 msgstr "入庫数量"
 
-#: app/templates/orders/ordermanagement.html:149
+#: app/templates/orders/ordermanagement.html:154
 msgid "Management of orders to makers"
 msgstr "仕入先への発注の管理"
 
-#: app/templates/orders/ordermanagement.html:155
+#: app/templates/orders/ordermanagement.html:160
 msgid "Set min. stock for checked items:"
 msgstr "チェックされた商品の最少在庫数："
 
-#: app/templates/orders/ordermanagement.html:156
+#: app/templates/orders/ordermanagement.html:161
 msgid "Order checked items:"
 msgstr "チェックされた商品を注文："
 
-#: app/templates/orders/ordermanagement.html:174
+#: app/templates/orders/ordermanagement.html:179
 msgid "Order!"
 msgstr "発注へ！"
 
-#: app/templates/orders/ordermanagement.html:234
-msgid "Min. stock"
-msgstr "最少在庫数"
-
-#: app/templates/orders/ordermanagement.html:238
+#: app/templates/orders/ordermanagement.html:243
 msgid "Order"
 msgstr "発注"
 
