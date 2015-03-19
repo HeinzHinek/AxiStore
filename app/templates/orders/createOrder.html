@@ -188,7 +188,7 @@ function checkAndSumPrice() {
         <tr class="tr-product">
             <td class="no-border row-indicator-left"></td>
             <td>{{ product.code }}</td>
-            <td>{{ product.maker_code }}</td>
+            <td>{% if product.maker_code %}{{ product.maker_code }}{% else %}{% endif %}</td>
             <td>{{ product.desc_CS }}</td>
             <td>{{ product.desc_JP }}</td>
 
