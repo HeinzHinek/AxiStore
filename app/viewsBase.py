@@ -3,7 +3,7 @@
 from flask import render_template, request, g, session, flash, redirect, url_for, json, abort
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
-from models import User, Product, Category, Maker, Request, RequestedProducts, Supply, Customer, Order
+from models import User, Product, Category, Maker, Request, RequestedProducts, SuppliedProducts, Supply, Customer, Order
 from flask_login import current_user, login_required, customer_allowed, maker_allowed
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
@@ -493,9 +493,9 @@ def prepareValueProportionGraphData():
     return json.dumps(data)
 
 
-@app.route('/prepareQuantityProportionGraphData', methods=['POST'])
+@app.route('/prepareSuppliedValueProportionGraphData', methods=['POST'])
 @login_required
-def prepareQuantityProportionGraphData():
+def prepareSuppliedValueProportionGraphData():
     data = request.form['data'] if request.form['data'] else None
     date = datetime(int(data[:4]), int(data[4:]), 1)
     begin_date = datetime(date.year, date.month, 1)
@@ -505,16 +505,16 @@ def prepareQuantityProportionGraphData():
     else:
         last_day = calendar.monthrange(date.year, date.month)[1]
     end_date = datetime(date.year, date.month, last_day) + timedelta(days=1)
-    products = RequestedProducts.query\
+    products = SuppliedProducts.query\
         .join(Product)\
         .join(Maker)\
-        .join(Request)\
+        .join(Supply)\
         .with_entities(Maker.name,
-                       func.sum(RequestedProducts.quantity))\
-        .filter(Request.created_dt >= begin_date)\
-        .filter(Request.created_dt <= end_date)\
+                       func.sum(Product.price_retail * SuppliedProducts.quantity))\
+        .filter(Supply.created_dt >= begin_date)\
+        .filter(Supply.created_dt <= end_date)\
         .group_by(Product.maker_id)\
-        .order_by(func.sum(RequestedProducts.quantity).desc())\
+        .order_by(func.sum(Product.price_retail * SuppliedProducts.quantity).desc())\
         .all()
     data = []
     for p in products:

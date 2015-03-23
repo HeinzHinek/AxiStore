@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-19 17:41+0900\n"
-"PO-Revision-Date: 2015-03-19 17:42+0900\n"
+"POT-Creation-Date: 2015-03-23 11:36+0900\n"
+"PO-Revision-Date: 2015-03-23 11:37+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -750,15 +750,6 @@ msgstr "お客様"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/mail/order_confirm.html:36
-#: app/templates/mail/order_confirm.html:42
-#: app/templates/shop/orderconfirm.html:49
-#: app/templates/shop/orderconfirm.html:55
-#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
-msgid "pcs"
-msgstr "個"
-
 #: app/templates/index.html:252
 msgid "AxiStore quick summary"
 msgstr "AxiStore：クイックビュー"
@@ -776,8 +767,8 @@ msgid "Ordered products total value"
 msgstr "受注商品の小売価格総計"
 
 #: app/templates/index.html:273
-msgid "Ordered products total quantity"
-msgstr "受注商品の個数総計"
+msgid "Supplied products total value"
+msgstr "納品した商品の小売価格総計"
 
 #: app/templates/index.html:281
 msgid "Data for:"
@@ -1351,6 +1342,15 @@ msgstr "お客様の価格"
 #: app/templates/shop/placeorder.html:38
 msgid "Subtotal"
 msgstr "小計"
+
+#: app/templates/mail/order_confirm.html:36
+#: app/templates/mail/order_confirm.html:42
+#: app/templates/shop/orderconfirm.html:49
+#: app/templates/shop/orderconfirm.html:55
+#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
+#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
+msgid "pcs"
+msgstr "個"
 
 #: app/templates/mail/order_confirm.html:41
 #: app/templates/shop/orderconfirm.html:54
@@ -2444,3 +2444,6 @@ msgstr "完了ではないが部分的に入庫した受注："
 
 #~ msgid "Yours sincerely"
 #~ msgstr "よろしくお願いいたします。"
+
+#~ msgid "Ordered products total quantity"
+#~ msgstr "受注商品の個数総計"

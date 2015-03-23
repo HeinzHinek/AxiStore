@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-19 17:41+0900\n"
-"PO-Revision-Date: 2015-03-19 17:43+0900\n"
+"POT-Creation-Date: 2015-03-23 11:36+0900\n"
+"PO-Revision-Date: 2015-03-23 11:36+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -749,15 +749,6 @@ msgstr "zákazníci"
 msgid "Axis Mart"
 msgstr "Axis Mart"
 
-#: app/templates/index.html:102 app/templates/mail/order_confirm.html:36
-#: app/templates/mail/order_confirm.html:42
-#: app/templates/shop/orderconfirm.html:49
-#: app/templates/shop/orderconfirm.html:55
-#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
-msgid "pcs"
-msgstr "ks"
-
 #: app/templates/index.html:252
 msgid "AxiStore quick summary"
 msgstr "AxiStore: stručný přehled"
@@ -775,8 +766,8 @@ msgid "Ordered products total value"
 msgstr "Součty maloobch. cen objednaného zboží"
 
 #: app/templates/index.html:273
-msgid "Ordered products total quantity"
-msgstr "Součty počtů kusů objednaného zboží"
+msgid "Supplied products total value"
+msgstr "Součty maloobch. cen dodaného zboží"
 
 #: app/templates/index.html:281
 msgid "Data for:"
@@ -1348,6 +1339,15 @@ msgstr "Vaše cena"
 #: app/templates/shop/placeorder.html:38
 msgid "Subtotal"
 msgstr "Mezisoučet"
+
+#: app/templates/mail/order_confirm.html:36
+#: app/templates/mail/order_confirm.html:42
+#: app/templates/shop/orderconfirm.html:49
+#: app/templates/shop/orderconfirm.html:55
+#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
+#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
+msgid "pcs"
+msgstr "ks"
 
 #: app/templates/mail/order_confirm.html:41
 #: app/templates/shop/orderconfirm.html:54
@@ -2449,3 +2449,6 @@ msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 
 #~ msgid "Yours sincerely"
 #~ msgstr "Se srdečným pozdravem"
+
+#~ msgid "Ordered products total quantity"
+#~ msgstr "Součty počtů kusů objednaného zboží"

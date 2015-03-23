@@ -96,10 +96,10 @@ var chart_value_proportion = AmCharts.makeChart("value_proportion_graph", {
 	"valueField": "total"
 });
 
-var chart_quantity_proportion = AmCharts.makeChart("quantity_proportion_graph", {
+var chart_supplied_value_proportion = AmCharts.makeChart("supplied_value_proportion_graph", {
 	"type": "pie",
 	"angle": 45,
-	"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]&nbsp;{{ _('pcs') }}</b> ([[percents]]%)</span>",
+	"balloonText": "[[title]]<br><span style='font-size:14px'><b>&#165;[[value]]</b> ([[percents]]%)</span>",
 	"legend": {},
 	"labelsEnabled": false,
 	"depth3D": 15,
@@ -229,14 +229,14 @@ function get_new_data_value_value_proportion_graph(year, month) {
 }
 
 function get_new_data_quantity_value_proportion_graph(year, month) {
-    $.post('/prepareQuantityProportionGraphData', {
+    $.post('/prepareSuppliedValueProportionGraphData', {
         data: '' + year.toString() + month.toString()
     }).done(function(result) {
         if (result) {
             chartData = JSON.parse(result);
-            chart_quantity_proportion.dataProvider = chartData;
-            chart_quantity_proportion.validateData();
-            chart_quantity_proportion.animateAgain();
+            chart_supplied_value_proportion.dataProvider = chartData;
+            chart_supplied_value_proportion.validateData();
+            chart_supplied_value_proportion.animateAgain();
         }
     }).fail(function() {
         alert('Data transfer failed!');
@@ -270,8 +270,8 @@ body { background-color: #eeeeee; }
             <div id="value_proportion_graph" style="width: 100%; height: 400px;"></div>
         </div>
         <div class="shadowed-div" style="margin: 10px -10px !important; text-align: center;">
-           <label>{{ _('Ordered products total quantity') }}</label>
-            <div id="quantity_proportion_graph" style="width: 100%; height: 400px;"></div>
+           <label>{{ _('Supplied products total value') }}</label>
+            <div id="supplied_value_proportion_graph" style="width: 100%; height: 400px;"></div>
         </div>
     </div>
 </div>
