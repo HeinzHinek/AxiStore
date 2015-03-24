@@ -27,7 +27,12 @@
     <ul id="tabs-makers" class="nav nav-tabs" role="tablist" style="margin: 0 6px 0 7px;">
         {% for customer in unsupplied_customers %}
             <li id="cat_{{ customer.id }}" {% if curr_id == customer.id %} class="active" {% endif %}>
-                <a href="{{ url_for('unsuppliedProducts', id=customer.id) }}">{{ customer.name }}
+                <a href="{{ url_for('unsuppliedProducts', id=customer.id) }}">
+                    {% if customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                        AxM {{ customer.order_no }}
+                    {% else %}
+                        {{ customer.name }}
+                    {% endif %}
                     {% if customer.unsupplied_products_count > 0 %}
                     &nbsp;<span class="badge alert-danger">{{ customer.unsupplied_products_count }}</span>
                     {% endif %}

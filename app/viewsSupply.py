@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm
-from models import Supply, Product, Customer, SuppliedProducts, Request, RequestedProducts
+from models import Supply, Product, Customer, SuppliedProducts, Request
 from flask_login import login_required
 from sqlalchemy import desc
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
@@ -323,4 +323,5 @@ def unsuppliedProducts(id=None):
                            title=gettext("Unsupplied products"),
                            unsupplied_customers=unsupplied_customers,
                            products=products,
+                           CUSTOMER_TYPES=CUSTOMER_TYPES,
                            curr_id=id)
