@@ -28,4 +28,5 @@ from app import viewsBase, viewsLogin, viewsProduct, viewsMaker, viewsCategory, 
 scheduler = BackgroundScheduler(timezone='UTC')
 scheduler.add_job(scheduled.sheduleLastura, 'cron', hour=16)
 scheduler.add_job(scheduled.scheduleExportAxismart, 'interval', hours=1)
+scheduler.add_job(scheduled.scheduleResetOrderNo, 'cron', day=1, hour=9, minute=0)
 scheduler.start()

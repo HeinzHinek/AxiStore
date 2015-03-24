@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from app import db
-from models import Product
-from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL
+from models import Product, Customer
+from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL, CUSTOMER_TYPES
 from csvHelper import parse_csv, generate_axismart_availability_csv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
@@ -55,4 +55,31 @@ def scheduleExportAxismart():
     import logging
     logging.basicConfig()
     generate_axismart_availability_csv()
+    return True
+
+def scheduleResetOrderNo():
+    """ This function resets order number for non-AxisMart customers.
+        It is supposed to run every 1st day of a month.
+        Order number for non-AxM customers is translated into letters (0 = A) during "nohinsho" generation.
+    """
+
+    # Thread safe sessioning
+    session_factory = sessionmaker(bind=db.engine)
+    Session = scoped_session(session_factory)
+    local_session = Session()
+    local_session._model_changes = {}   # flask-alchemy & pure sqlalchemy subclassing issue fix
+
+    customers = local_session.query(Customer)\
+        .filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER'])\
+        .all()
+
+    for customer in customers:
+        customer.order_no = 0
+        local_session.add(customer)
+
+    local_session.commit()
+    local_session.close()
+    Session.remove()
+
+    print "Scheduled job finished sucessfully. Customer nohinsho numbers reset to 0."
     return True
