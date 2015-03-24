@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
 <script>
 $(document).ready(function() {
+
+    $(".fancybox").fancybox();
+
     $("input[type=text]").click(function(){
         this.select();
     });
