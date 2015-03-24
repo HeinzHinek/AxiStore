@@ -52,7 +52,8 @@
     <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
     <thead>
         <tr>
-            <th>{{ _('Product code') }}</th>
+            <th style="width: 5%;">{{ _('Product code') }}</th>
+            <th style="width: 5%;">{{ _("Maker's code") }}</th>
             <th>{{ _('Description CS') }}</th>
             <th>{{ _('Description JP') }}</th>
             <th>{{ _('Quantity') }}</th>
@@ -63,6 +64,7 @@
         {% for product in products %}
         <tr>
             <td class="clickable-td">{{ product.product.code }}</td>
+            <td class="clickable-td">{% if product.product.maker_code %}{{ product.product.maker_code }}{% else %}{% endif %}</td>
             <td class="clickable-td">{{ product.product.desc_CS }}</td>
             <td class="clickable-td">{{ product.product.desc_JP }}</td>
             <td class="clickable-td">{{ product.quantity }}</td>
