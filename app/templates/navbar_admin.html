@@ -44,6 +44,12 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{{ url_for('supplies') }}">{{ _('to customers') }}</a></li>
                         <li><a href="{{ url_for('deliveries') }}">{{ _('from makers') }}</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ url_for('unsuppliedProducts') }}">{{ _('Unsupplied products') }}
+                            {% if g.unsupplied_customers > 0 %}
+                            &nbsp;<span class="badge alert-danger">{{ g.unsupplied_customers }}</span>
+                            {% endif %}
+                        </a></li>
                     </ul>
                 </li>
 

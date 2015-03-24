@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm
-from models import Supply, Product, Customer, SuppliedProducts, Request
+from models import Supply, Product, Customer, SuppliedProducts, Request, RequestedProducts
 from flask_login import login_required
 from sqlalchemy import desc
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
@@ -280,3 +280,47 @@ def createNohinsho():
 
     flash(gettext('Invalid data received.'))
     return redirect(url_for("supplies"))
+
+
+@app.route('/supplies/unsuppliedproducts')
+@app.route('/supplies/unsuppliedproducts/<int:id>')
+@login_required
+def unsuppliedProducts(id=None):
+    unsupplied_requests = Request.query.filter_by(active_flg=True).all()
+    customer_ids = []
+    for ur in unsupplied_requests:
+        if ur.customer_id not in customer_ids:
+            customer_ids.append(ur.customer_id)
+    unsupplied_customers = db.session.query(Customer)\
+        .filter(Customer.id.in_(customer_ids)).order_by(Customer.id)\
+        .all()
+
+    for uc in unsupplied_customers:
+        uc.unsupplied_products_count = 0
+        for ur in unsupplied_requests:
+            if ur.customer_id == uc.id:
+                for product in ur.products:
+                    if product.quantity > product.qty_supplied:
+                        uc.unsupplied_products_count += (product.quantity - product.qty_supplied)
+
+    if not id:
+        id = unsupplied_customers[0].id
+    cust = Customer.query.filter_by(id=id).first()
+    requests = cust.requests.all()
+    products = []
+    for r in requests:
+        for rp in r.products:
+            if rp.product not in products:
+                rp.product.cust_request_qty = rp.product.customer_request_qty(cust.id)
+                if rp.product.cust_request_qty > 0:
+                    products.append(rp.product)
+    products = sorted(products, key=lambda k: (k.maker_id, k.code))
+    for p in products:
+        urls = getImgUrls(p.id)
+        if urls:
+            p.img_url = urls[0]
+    return render_template('supplies/unsuppliedproducts.html',
+                           title=gettext("Unsupplied products"),
+                           unsupplied_customers=unsupplied_customers,
+                           products=products,
+                           curr_id=id)

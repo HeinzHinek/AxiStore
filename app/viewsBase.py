@@ -107,13 +107,18 @@ def before_request():
                                .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])
                                .all())
     g.axm_request_count = len(Request.query
-                               .filter_by(active_flg=1)
-                               .join(Customer)
-                               .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'])
-                               .all())
+                              .filter_by(active_flg=1)
+                              .join(Customer)
+                              .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'])
+                              .all())
     g.maker_order_count = len(Order.query
                               .filter_by(active_flg=1)
                               .all())
+    g.unsupplied_customers = len(Request.query
+                                 .filter_by(active_flg=1)
+                                 .join(Customer)
+                                 .group_by(Customer.id)
+                                 .all())
 
 
 #@app.after_request

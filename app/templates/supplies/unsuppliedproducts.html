@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $(".fancybox").fancybox();
+
+    });
+</script>
+
+<div class="row">
+    <h2>{{ _("Overview of unsupplied products to customers") }}</h2>
+    {% include 'flash.html' %}
+</div>
+
+<div class="row">
+
+{% if unsupplied_customers %}
+    <ul id="tabs-makers" class="nav nav-tabs" role="tablist" style="margin: 0 6px 0 7px;">
+        {% for customer in unsupplied_customers %}
+            <li id="cat_{{ customer.id }}" {% if curr_id == customer.id %} class="active" {% endif %}>
+                <a href="{{ url_for('unsuppliedProducts', id=customer.id) }}">{{ customer.name }}
+                    {% if customer.unsupplied_products_count > 0 %}
+                    &nbsp;<span class="badge alert-danger">{{ customer.unsupplied_products_count }}</span>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</div>
+
+<div class="row">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tr>
+            <th>{{ _('Code') }}</th>
+            <th style="text-align: center;"><span class="glyphicon glyphicon-camera"></span></th>
+            <th>{{ _('Decription CS') }}</th>
+            <th>{{ _('Description JP') }}</th>
+            <th style="width: 8%; text-align: right;">{{ _('Quantity') }}</th>
+        </tr>
+
+        {% if products %}
+        {% for product in products %}
+        <tr>
+            <td>{{ product.code }}</td>
+            <td style="text-align: center;">
+                    {% if product.img_url %}
+                        <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}" tabindex="-1">
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </a>
+                    {% endif %}
+                </td>
+            <td>{{ product.desc_CS }}</td>
+            <td>{{ product.desc_JP }}</td>
+            <td style="text-align: right;" class="clickable-td linked-td"
+                onclick="window.location.href = '{{ url_for("productrequests", id=product.id) }}'">{{ product.cust_request_qty }}
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+</div>
+
+{% endblock %}
