@@ -28,6 +28,7 @@ def addMaker():
         maker = Maker()
         maker.name = form.name.data
         maker.category_id = form.category.data
+        maker.email = form.email.data
         db.session.add(maker)
         db.session.commit()
         flash(gettext("New maker successfully added."))
@@ -57,6 +58,7 @@ def editMaker(id=0):
         #update maker
         maker.name = form.name.data
         maker.category_id = form.category.data
+        maker.email = form.email.data
         maker.standard_delivery_days = form.standard_delivery_days.data
         db.session.add(maker)
         db.session.commit()

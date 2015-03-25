@@ -193,6 +193,7 @@ class Maker(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    email = db.Column(db.String(120), index = True)
     # days to manufacture and deliver products
     standard_delivery_days = db.Column(db.Integer)
 
