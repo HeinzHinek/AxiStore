@@ -4,9 +4,12 @@ from flask import render_template, redirect, flash, url_for, request, g, session
 from app import app, db
 from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm
 from models import Order, Product, OrderedProducts, Maker
+from mailer import send_order_mail_to_maker
+from xls import CreateXls
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
 from flask.ext.babel import gettext
+import re
 
 
 @app.route('/orders')
@@ -96,7 +99,31 @@ def placeOrder():
                     new_order.products.append(op)
 
         db.session.commit()
-        return redirect(url_for("orders"))
+
+        # Create order sheet xls
+        xls = CreateXls()
+        maker = Maker.query.filter_by(id=maker_id).first()
+        maker_name = maker.name
+        data = []
+        for item in form_data:
+            if item['qty_order'] < 1:
+                continue
+            product = Product.query.filter_by(id=item['product_id']).first()
+            if product:
+                data.append({'product_code': product.code, 'product_maker_code': product.maker_code,\
+                             'product_name': product.desc_CS, 'quantity': item['qty_order']})
+        order_xls = xls.order_sheet(maker_name, data)
+        match = re.search(r"[^a-zA-Z](ordersheet)[^a-zA-Z]", order_xls)
+        pos = match.start(1)
+        filename = order_xls[pos:]
+
+        flash(gettext('New order to maker was successfully created.'))
+
+        return render_template('orders/ordersheet.html',
+                               title=gettext("Order Sheet Management"),
+                               ordersheet_file=filename,
+                               maker=maker,
+                               mail_sent=False)
 
     #if not validated return to maker select
     products = Product.query.order_by(Product.maker_id, Product.code)\
@@ -190,3 +217,19 @@ def ordermanagement():
                            curr_maker_id=curr_maker_id,
                            products=products,
                            form_edit_qty=form_edit_qty)
+
+
+@app.route('/order_mail_to_maker/<path:filename>/maker/<int:maker_id>')
+@login_required
+def order_mail_to_maker(filename, maker_id):
+    maker = Maker.query.filter_by(id=maker_id).first()
+    if maker:
+        send_order_mail_to_maker(filename, maker.email)
+        flash(gettext("Email to maker sent succesfully."))
+    else:
+        flash(gettext("Maker not found."))
+    return render_template('orders/ordersheet.html',
+                           title=gettext("Order Sheet Management"),
+                           ordersheet_file=filename,
+                           maker=maker,
+                           mail_sent=True)

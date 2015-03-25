@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from config import NOHINSHO_PATH
+from config import NOHINSHO_PATH, ORDER_SHEET_PATH
 import xlsxwriter
-import os
+import os, datetime
 
 class CreateXls():
 
@@ -247,6 +247,137 @@ class CreateXls():
         delta = len(products)+24
         range = 'B' + str(delta) + ':G' + str(delta)
         worksheet.merge_range(range, unicode('  口座名義：アクシス　ムンディ（カ　Axis　Mundi株式会社', 'utf-8'), account_bottom)
+
+        workbook.close()
+        return filename
+
+
+    def order_sheet(self, maker_name, products, date=None):
+
+        if not date:
+            date = datetime.datetime.now()
+        elif type(date) is not datetime.datetime:
+            raise TypeError('Date must be a datetime.datetime, not a %s' % type(date))
+
+        filename = os.path.join(ORDER_SHEET_PATH, ('OrderSheet_' + maker_name + '_' + date.strftime("%Y%m%d") + '.xlsx'))
+
+        workbook = xlsxwriter.Workbook(filename)
+        worksheet = workbook.add_worksheet(unicode(date.strftime("%b%d"), 'utf-8'))
+
+        align_right = workbook.add_format({
+            'align': 'right'
+        })
+        title_format = workbook.add_format({
+            'bold': 1,
+            'align': 'center',
+            'valign': 'vcenter',
+            'font_name': unicode('Calibri', 'utf-8')})
+        title_format.set_font_size(16)
+
+        ordering_party_subtitle_format = workbook.add_format({
+            'bold': 1,
+            'align': 'left',
+            'font_name': unicode('Calibri', 'utf-8')})
+        ordering_party_subtitle_format.set_font_size(11)
+        supplier_subtitle_format = workbook.add_format({
+            'bold': 1,
+            'align': 'right',
+            'font_name': unicode('Calibri', 'utf-8')})
+        supplier_subtitle_format.set_font_size(11)
+
+        our_address_format = workbook.add_format({
+            'font_size': 9,
+            'align': 'left'
+        })
+        maker_name_format = workbook.add_format({
+            'font_size': 9,
+            'align': 'right'
+        })
+
+        header_left_top = workbook.add_format({
+            'left': 1,
+            'top': 1,
+            'right': 1,
+            'font_size': 10,
+            'align': 'left',
+            'bg_color': '#CCCCFF'
+        })
+        header_right_top = workbook.add_format({
+            'left': 1,
+            'top': 1,
+            'right': 1,
+            'font_size': 10,
+            'align': 'right',
+            'bg_color': '#CCCCFF'
+        })
+        header_left_bottom = workbook.add_format({
+            'left': 1,
+            'right': 1,
+            'bottom': 1,
+            'font_size': 10,
+            'align': 'left',
+            'bg_color': '#CCCCFF'
+        })
+        header_right_bottom = workbook.add_format({
+            'left': 1,
+            'right': 1,
+            'bottom': 1,
+            'font_size': 10,
+            'align': 'right',
+            'bg_color': '#CCCCFF'
+        })
+        item_left = workbook.add_format({
+            'left': 1,
+            'top': 1,
+            'right': 1,
+            'bottom': 1,
+            'font_size': 10,
+            'align': 'left'
+        })
+        item_right = workbook.add_format({
+            'left': 1,
+            'top': 1,
+            'right': 1,
+            'bottom': 1,
+            'font_size': 10,
+            'align': 'right'
+        })
+
+        worksheet.set_column('A:A', 10)
+        worksheet.set_column('B:B', 10)
+        worksheet.set_column('C:C', 50)
+        worksheet.set_column('D:D', 10)
+
+        worksheet.write('D1', unicode('Date/Datum: ' + date.strftime("%x"), 'utf-8'), align_right)
+
+        worksheet.merge_range('A2:D2', unicode('ORDER SHEET / OBJEDNÁVKOVÝ LIST', 'utf-8'), title_format)
+
+        worksheet.write('A4', unicode('Ordering Party/Objednatel', 'utf-8'), ordering_party_subtitle_format)
+        worksheet.write('D4', unicode('Supplier/Dodavatel', 'utf-8'), supplier_subtitle_format)
+
+        worksheet.write('A5', unicode('Axis Mundi Ltd.', 'utf-8'), our_address_format)
+        worksheet.write('A6', unicode('Robert Janovský', 'utf-8'), our_address_format)
+        worksheet.write('A7', unicode('160-0022', 'utf-8'), our_address_format)
+        worksheet.write('A8', unicode('Tokyo-to Shinjuku-ku Shinjuku 2-6-3', 'utf-8'), our_address_format)
+        worksheet.write('A9', unicode('Towa Shinjuku Cope No. 810', 'utf-8'), our_address_format)
+
+        worksheet.write('D5', maker_name, maker_name_format)
+
+        worksheet.write('A11', unicode('AM Code', 'utf-8'), header_left_top)
+        worksheet.write('A12', unicode('Kód AM', 'utf-8'), header_left_bottom)
+        worksheet.write('B11', unicode('Maker Code', 'utf-8'), header_left_top)
+        worksheet.write('B12', unicode('Kód výrobce', 'utf-8'), header_left_bottom)
+        worksheet.write('C11', unicode('Product Name', 'utf-8'), header_left_top)
+        worksheet.write('C12', unicode('Název výrobku', 'utf-8'), header_left_bottom)
+        worksheet.write('D11', unicode('Quantity', 'utf-8'), header_right_top)
+        worksheet.write('D12', unicode('Počet ks', 'utf-8'), header_right_bottom)
+
+        for idx, item in enumerate(products):
+            worksheet.write_string(idx+12, 0, str(item['product_code']), item_left)
+            maker_code = str(item['product_maker_code']) if item['product_maker_code'] else ""
+            worksheet.write_string(idx+12, 1, maker_code, item_left)
+            worksheet.write_string(idx+12, 2, item['product_name'], item_left)
+            worksheet.write_number(idx+12, 3, item['quantity'], item_right)
 
         workbook.close()
         return filename

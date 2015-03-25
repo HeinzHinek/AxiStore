@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    body { background-color: #eeeeee; }
+</style>
+
+<h1>{{ _("Order Sheet Management") }}</h1>
+{% include 'flash.html' %}
+<br/>
+
+<div class="row col-md-6">
+    <div class="shadowed-div">
+
+        <h3>{{ _('Send order sheet by email to maker?') }}</h3>
+        <h4>{{ _('Maker name') }}: {{ maker.name }}</h4>
+        {% if not mail_sent %}
+        {% if maker.email%}
+            <h4>{{ _('Email') }}: {{ maker.email }}</h4>
+            <div style="text-align: center;">
+                <a href="{{ url_for('order_mail_to_maker', filename=ordersheet_file, maker_id=maker.id) }}">
+                    <input type="button" class="btn btn-success btn-lg" value="{{ _('Send mail!') }}" />
+                </a>
+            </div>
+        {% else %}
+            <h4 style="color: crimson;">{{ _('Email for this maker has not been set!') }}</h4>
+        {% endif %}
+        {% else %}
+            <h4 style="color: #088A08;">{{ _('Email has been sent.') }}</h4>
+        {% endif %}
+        <hr>
+        <div style="text-align: center;">
+            <a href="{{ url_for('download_file', filename=ordersheet_file) }}">
+                <input type="button" class="btn btn-info btn-lg" value="{{ _('Order sheet download') }}" />
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

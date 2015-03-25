@@ -8,6 +8,7 @@ Flask_FlatPages.egg-info
 app/xls.py
 app/static/csv
 app/static/nohinsho
+app/static/ordersheet
 app/static/customercodes
 app/static/img/product
 app/static/temp

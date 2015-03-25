@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.mail import Message
-from app import mail
+from app import app, mail
 from flask import render_template
 from flask_login import current_user
 from config import ADMINS, USER_ROLES
@@ -9,7 +9,7 @@ from models import RequestedProducts, User
 from flask.ext.babel import gettext
 
 
-def send_email(subject, sender, recipients, text_body, html_body, bulk=False):
+def send_email(subject, sender, recipients, text_body, html_body, attachment=False, mimetype=None, bulk=False):
     if bulk:
         with mail.connect() as conn:
             for recipient in recipients:
@@ -21,6 +21,9 @@ def send_email(subject, sender, recipients, text_body, html_body, bulk=False):
         msg = Message(subject, sender=sender, recipients=recipients)
         msg.body = text_body
         msg.html = html_body
+        if attachment:
+            with app.open_resource(attachment) as fp:
+                msg.attach(attachment[(attachment.rindex('/')+1):], mimetype, fp.read())
         mail.send(msg)
 
 
@@ -70,3 +73,12 @@ def send_delivery_notification_to_customers(maker, products):
                                maker=maker,
                                products=products),
                bulk=True)
+
+def send_order_mail_to_maker(filename, email):
+    send_email("【Axis Mundi Ltd】New Order / Nová objednávka",
+               ADMINS[0],
+               [ADMINS[0], email],
+               render_template("/mail/order_mail_to_maker.txt"),
+               render_template("/mail/order_mail_to_maker.html"),
+               attachment='static/' + filename,
+               mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
