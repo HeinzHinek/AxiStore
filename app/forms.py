@@ -131,8 +131,7 @@ class AddMakerForm(Form):
     name = StringField(lazy_gettext('Name'), [validators.data_required(),
                                 validators.length(max=50)])
     category = SelectField(lazy_gettext('Category'), coerce=int)
-    email = EmailField(lazy_gettext('Email'), [validators.data_required(),
-                                 validators.length(max=120)])
+    email = EmailField(lazy_gettext('Email'), [validators.length(max=120)])
     standard_delivery_days = IntegerField(lazy_gettext('Average days to deliver'),
                                           [validators.NumberRange(min=0, max=200)],
                                           default=14)
