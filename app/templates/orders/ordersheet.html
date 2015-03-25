@@ -13,7 +13,7 @@
     <div class="shadowed-div">
 
         <h3>{{ _('Send order sheet by email to maker?') }}</h3>
-        <h4>{{ _('Maker name') }}: {{ maker.name }}</h4>
+        <h4>{{ _('Maker') }}: {{ maker.name }}</h4>
         {% if not mail_sent %}
         {% if maker.email%}
             <h4>{{ _('Email') }}: {{ maker.email }}</h4>

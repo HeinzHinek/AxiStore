@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-24 17:21+0900\n"
-"PO-Revision-Date: 2015-03-24 17:24+0900\n"
+"POT-Creation-Date: 2015-03-25 16:21+0900\n"
+"PO-Revision-Date: 2015-03-25 16:23+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -156,7 +156,8 @@ msgstr "下旬"
 msgid "Nickname"
 msgstr "ユーザー名"
 
-#: app/forms.py:25 app/forms.py:101 app/forms.py:117
+#: app/forms.py:25 app/forms.py:101 app/forms.py:117 app/forms.py:134
+#: app/templates/orders/ordersheet.html:19
 #: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
 #: app/templates/settings/editContact.html:73
@@ -241,23 +242,23 @@ msgstr "ユーザの言語"
 msgid "Name"
 msgstr "名前"
 
-#: app/forms.py:133 app/forms.py:218 app/templates/shop/shop.html:301
+#: app/forms.py:133 app/forms.py:219 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "カテゴリー"
 
-#: app/forms.py:134 app/templates/settings/makers.html:20
+#: app/forms.py:135 app/templates/settings/makers.html:20
 msgid "Average days to deliver"
 msgstr "入荷平均日数"
 
-#: app/forms.py:219
+#: app/forms.py:220
 msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/forms.py:220 app/templates/shop/shop.html:310
+#: app/forms.py:221 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "検索"
 
-#: app/forms.py:224 app/templates/deliveries/delivery.html:27
+#: app/forms.py:225 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
 #: app/templates/orders/createOrder.html:239
 #: app/templates/orders/order.html:27
@@ -268,7 +269,7 @@ msgstr "検索"
 msgid "Submit"
 msgstr "確認"
 
-#: app/mailer.py:43 app/templates/shop/orderconfirm.html:26
+#: app/mailer.py:46 app/templates/shop/orderconfirm.html:26
 msgid "Thank you for your order!"
 msgstr ""
 "【Axi Store アクシ・ストア】ご注文いただきましてありがとうございます。（自動"
@@ -282,8 +283,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:241 app/viewsBase.py:243 app/viewsOrder.py:182
-#: app/viewsOrder.py:184
+#: app/viewsBase.py:241 app/viewsBase.py:243 app/viewsOrder.py:209
+#: app/viewsOrder.py:211
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -404,8 +405,8 @@ msgstr "お客様の情報を編集"
 msgid "Deliveries"
 msgstr "入庫"
 
-#: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:45
-#: app/viewsOrder.py:52 app/viewsOrder.py:74
+#: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:46
+#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:230
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
@@ -450,57 +451,70 @@ msgstr "ログイン"
 msgid "Makers"
 msgstr "メーカー"
 
-#: app/viewsMaker.py:33
+#: app/viewsMaker.py:34
 msgid "New maker successfully added."
 msgstr "新しいメーカーが追加されました。"
 
-#: app/viewsMaker.py:36 app/templates/settings/addMaker.html:3
+#: app/viewsMaker.py:37 app/templates/settings/addMaker.html:3
 msgid "Add New Maker"
 msgstr "新しいメーカーを追加する"
 
-#: app/viewsMaker.py:63
+#: app/viewsMaker.py:65
 msgid "Maker successfully changed."
 msgstr "メーカーが変更されました。"
 
-#: app/viewsMaker.py:68 app/templates/settings/editMaker.html:15
+#: app/viewsMaker.py:70 app/templates/settings/editMaker.html:15
 msgid "Edit Maker"
 msgstr "メーカーを変更する"
 
-#: app/viewsMaker.py:128 app/templates/navbar_maker.html:16
+#: app/viewsMaker.py:130 app/templates/navbar_maker.html:16
 msgid "My Stock"
 msgstr "私の在庫"
 
-#: app/viewsMaker.py:171 app/templates/maker/makerOrders.html:24
+#: app/viewsMaker.py:173 app/templates/maker/makerOrders.html:24
 msgid "Orders from Axis Mundi"
 msgstr "アクシス・ムンディからの注文"
 
-#: app/viewsOrder.py:21
+#: app/viewsOrder.py:24
 msgid "Orders to maker"
 msgstr "発注"
 
-#: app/viewsOrder.py:62 app/viewsOrder.py:108
+#: app/viewsOrder.py:65 app/viewsOrder.py:135
 msgid "Place new order to maker"
 msgstr "新規発注を入力する"
 
-#: app/viewsOrder.py:127
+#: app/viewsOrder.py:120
+msgid "New order to maker was successfully created."
+msgstr "新規発注の登録が成功しました。"
+
+#: app/viewsOrder.py:123 app/viewsOrder.py:232
+#: app/templates/orders/ordersheet.html:8
+msgid "Order Sheet Management"
+msgstr "発注書の管理"
+
+#: app/viewsOrder.py:154
 msgid "Date and time of order was successfully changed."
 msgstr "発注の日時は変更されました。"
 
-#: app/viewsOrder.py:131 app/templates/orders/order.html:5
+#: app/viewsOrder.py:158 app/templates/orders/order.html:5
 msgid "Order details"
 msgstr "発注の詳細"
 
-#: app/viewsOrder.py:146
+#: app/viewsOrder.py:173
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsOrder.py:180
+#: app/viewsOrder.py:207
 msgid "Minimum stock limit successfully updated."
 msgstr "最少在庫数の更新が成功しました。"
 
-#: app/viewsOrder.py:188 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:215 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "発注の管理"
+
+#: app/viewsOrder.py:228
+msgid "Email to maker sent succesfully."
+msgstr "メーカーへのメールの発信が成功しました。"
 
 #: app/viewsProduct.py:50
 msgid "New product successfully added."
@@ -980,6 +994,7 @@ msgstr "検索結果"
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
 #: app/templates/orders/order.html:43 app/templates/orders/orders.html:36
+#: app/templates/orders/ordersheet.html:16
 #: app/templates/orders/productorders.html:23
 #: app/templates/product/addProduct.html:96
 #: app/templates/product/editProduct.html:175
@@ -1015,7 +1030,7 @@ msgstr "チェコ語の説明"
 #: app/templates/supplies/supply.html:61
 #: app/templates/supplies/supplyProducts.html:139
 #: app/templates/supplies/supplyReport.html:24
-#: app/templates/supplies/unsuppliedproducts.html:48
+#: app/templates/supplies/unsuppliedproducts.html:53
 msgid "Description JP"
 msgstr "日本語の説明"
 
@@ -1094,7 +1109,7 @@ msgstr "閉じる"
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
 #: app/templates/supplies/supplyReport.html:25
-#: app/templates/supplies/unsuppliedproducts.html:49
+#: app/templates/supplies/unsuppliedproducts.html:54
 msgid "Quantity"
 msgstr "数量"
 
@@ -1210,7 +1225,7 @@ msgstr "次へ"
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:168
-#: app/templates/settings/addMaker.html:16
+#: app/templates/settings/addMaker.html:17
 #: app/templates/settings/addUser.html:53
 #: app/templates/settings/editCustomer.html:178
 #: app/templates/settings/editUser.html:54
@@ -1231,7 +1246,7 @@ msgstr "キャンセル"
 #: app/templates/shop/orderconfirm.html:38
 #: app/templates/shop/placeorder.html:34
 #: app/templates/supplies/supplyProducts.html:136
-#: app/templates/supplies/unsuppliedproducts.html:45
+#: app/templates/supplies/unsuppliedproducts.html:50
 msgid "Code"
 msgstr "品番"
 
@@ -1553,6 +1568,26 @@ msgstr "発注"
 msgid "Orders overview"
 msgstr "発注一覧"
 
+#: app/templates/orders/ordersheet.html:15
+msgid "Send order sheet by email to maker?"
+msgstr "このメーカーに発注書をメールで送りますか？"
+
+#: app/templates/orders/ordersheet.html:22
+msgid "Send mail!"
+msgstr "メールを発信！"
+
+#: app/templates/orders/ordersheet.html:26
+msgid "Email for this maker has not been set!"
+msgstr "このメーカーのメールアドレスがまだ登録されていません！"
+
+#: app/templates/orders/ordersheet.html:29
+msgid "Email has been sent."
+msgstr "メール発信済み。"
+
+#: app/templates/orders/ordersheet.html:34
+msgid "Order sheet download"
+msgstr "発注書のダウンロード"
+
 #: app/templates/orders/productorders.html:5
 msgid "Orders to maker for Product"
 msgstr "製品に対する発注"
@@ -1831,8 +1866,8 @@ msgstr "所在地その２"
 msgid "Address 3"
 msgstr "所在地その３"
 
-#: app/templates/settings/addMaker.html:15
-#: app/templates/settings/editMaker.html:31
+#: app/templates/settings/addMaker.html:16
+#: app/templates/settings/editMaker.html:32
 msgid "Save maker"
 msgstr "メーカーを保存する"
 
@@ -2013,7 +2048,7 @@ msgstr "お客様の削除"
 msgid "Do you really want to delete this maker?"
 msgstr "本当にこのメーカーを削除しますか？"
 
-#: app/templates/settings/editMaker.html:32
+#: app/templates/settings/editMaker.html:33
 msgid "Delete maker"
 msgstr "メーカーの削除"
 
@@ -2351,7 +2386,7 @@ msgid "Requested products:"
 msgstr "注文された製品："
 
 #: app/templates/supplies/supplyProducts.html:138
-#: app/templates/supplies/unsuppliedproducts.html:47
+#: app/templates/supplies/unsuppliedproducts.html:52
 msgid "Decription CS"
 msgstr "チェコ語の説明"
 
@@ -2445,7 +2480,7 @@ msgstr "お客様に納品していない商品の一覧"
 #~ msgstr "カテゴリー"
 
 #~ msgid "Maker name"
-#~ msgstr "メーカー名"
+#~ msgstr "マーカー名"
 
 #~ msgid "Product category"
 #~ msgstr "製品カテゴリー"
