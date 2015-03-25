@@ -259,7 +259,7 @@ class CreateXls():
         elif type(date) is not datetime.datetime:
             raise TypeError('Date must be a datetime.datetime, not a %s' % type(date))
 
-        filename = os.path.join(ORDER_SHEET_PATH, ('OrderSheet_' + maker_name + '_' + date.strftime("%Y%m%d") + '.xlsx'))
+        filename = os.path.join(ORDER_SHEET_PATH, ('OrderSheet_' + "".join([x if ord(x) < 128 else '?' for x in maker_name]) + '_' + date.strftime("%Y%m%d") + '.xlsx'))
 
         workbook = xlsxwriter.Workbook(filename)
         worksheet = workbook.add_worksheet(unicode(date.strftime("%b%d"), 'utf-8'))
