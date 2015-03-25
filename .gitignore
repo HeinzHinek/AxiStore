@@ -11,6 +11,7 @@ app/static/nohinsho
 app/static/customercodes
 app/static/img/product
 app/static/temp
+app/static/backup
 db_up.sh
 
 config.py

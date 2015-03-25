@@ -2,11 +2,11 @@
 
 from app import db
 from models import Product, Customer
-from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL, CUSTOMER_TYPES
+from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL, CUSTOMER_TYPES, MYSQLPASSWORD
 from csvHelper import parse_csv, generate_axismart_availability_csv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
-import os, urllib2
+import os, urllib2, datetime
 
 def sheduleLastura():
     import logging
@@ -83,3 +83,9 @@ def scheduleResetOrderNo():
 
     print "Scheduled job finished sucessfully. Customer nohinsho numbers reset to 0."
     return True
+
+def scheduleDumpMySQL():
+    target_dir = 'app/static/backup/db'
+    now = datetime.datetime.now()
+    strdate = now.strftime('%Y%m%d')
+    os.system("mysqldump -u apps -p"+MYSQLPASSWORD+" apps > "+target_dir+"/dbbackup_"+strdate+".sql")
