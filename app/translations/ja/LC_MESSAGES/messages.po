@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-25 16:21+0900\n"
-"PO-Revision-Date: 2015-03-25 16:23+0900\n"
+"POT-Creation-Date: 2015-03-26 15:25+0900\n"
+"PO-Revision-Date: 2015-03-26 15:29+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -265,7 +265,7 @@ msgstr "検索"
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
 #: app/templates/supplies/supply.html:27
-#: app/templates/supplies/supplyProducts.html:175
+#: app/templates/supplies/supplyProducts.html:186
 msgid "Submit"
 msgstr "確認"
 
@@ -686,47 +686,47 @@ msgstr "供給"
 msgid "New Supply"
 msgstr "新規供給"
 
-#: app/viewsSupply.py:71
+#: app/viewsSupply.py:82
 msgid "No customer data!"
 msgstr "お客様のデータがありません！"
 
-#: app/viewsSupply.py:78
+#: app/viewsSupply.py:90
 msgid "Customer not found!"
 msgstr "お客様は不明です！"
 
-#: app/viewsSupply.py:89
+#: app/viewsSupply.py:101
 msgid "No product quantities!"
 msgstr "製品個数がありません！"
 
-#: app/viewsSupply.py:125
+#: app/viewsSupply.py:137
 msgid "No requested products!"
 msgstr "注文された製品がありません！"
 
-#: app/viewsSupply.py:199
+#: app/viewsSupply.py:211
 msgid "New supply sent sucessfully."
 msgstr "新規供給の発送が成功しました。"
 
-#: app/viewsSupply.py:209
+#: app/viewsSupply.py:221
 msgid "Supply Report"
 msgstr "供給の報告"
 
-#: app/viewsSupply.py:246
+#: app/viewsSupply.py:259
 msgid "Date and time of supply was successfully changed."
 msgstr "出荷の日時は変更されました。"
 
-#: app/viewsSupply.py:250 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:263 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "供給の詳細"
 
-#: app/viewsSupply.py:267
+#: app/viewsSupply.py:280
 msgid "No product data!"
 msgstr "製品のデータがありません！"
 
-#: app/viewsSupply.py:281
+#: app/viewsSupply.py:294
 msgid "Invalid data received."
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsSupply.py:323 app/templates/navbar_admin.html:48
+#: app/viewsSupply.py:371 app/templates/navbar_admin.html:48
 msgid "Unsupplied products"
 msgstr "納品していない商品"
 
@@ -836,7 +836,8 @@ msgstr "12月"
 
 #: app/templates/navbar_admin.html:16
 #: app/templates/orders/createOrder.html:177
-#: app/templates/supplies/supplyProducts.html:142
+#: app/templates/supplies/supplyProducts.html:153
+#: app/templates/supplies/unsuppliedproducts.html:65
 msgid "Stock"
 msgstr "在庫"
 
@@ -1028,9 +1029,9 @@ msgstr "チェコ語の説明"
 #: app/templates/requests/createRequest.html:240
 #: app/templates/requests/request.html:62
 #: app/templates/supplies/supply.html:61
-#: app/templates/supplies/supplyProducts.html:139
+#: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
-#: app/templates/supplies/unsuppliedproducts.html:53
+#: app/templates/supplies/unsuppliedproducts.html:63
 msgid "Description JP"
 msgstr "日本語の説明"
 
@@ -1109,7 +1110,6 @@ msgstr "閉じる"
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
 #: app/templates/supplies/supplyReport.html:25
-#: app/templates/supplies/unsuppliedproducts.html:54
 msgid "Quantity"
 msgstr "数量"
 
@@ -1229,7 +1229,7 @@ msgstr "次へ"
 #: app/templates/settings/addUser.html:53
 #: app/templates/settings/editCustomer.html:178
 #: app/templates/settings/editUser.html:54
-#: app/templates/supplies/supplyProducts.html:178
+#: app/templates/supplies/supplyProducts.html:189
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1245,8 +1245,8 @@ msgstr "キャンセル"
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
 #: app/templates/shop/placeorder.html:34
-#: app/templates/supplies/supplyProducts.html:136
-#: app/templates/supplies/unsuppliedproducts.html:50
+#: app/templates/supplies/supplyProducts.html:147
+#: app/templates/supplies/unsuppliedproducts.html:60
 msgid "Code"
 msgstr "品番"
 
@@ -1272,7 +1272,7 @@ msgstr "入庫数量"
 
 #: app/templates/deliveries/newDelivery.html:143
 #: app/templates/orders/createOrder.html:240
-#: app/templates/supplies/supplyProducts.html:176
+#: app/templates/supplies/supplyProducts.html:187
 msgid "Modify"
 msgstr "修正"
 
@@ -1609,7 +1609,7 @@ msgstr "単価"
 
 #: app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
-#: app/templates/supplies/supplyProducts.html:140
+#: app/templates/supplies/supplyProducts.html:151
 msgid "Retail Price"
 msgstr "小売価格"
 
@@ -2234,7 +2234,7 @@ msgid "State of order"
 msgstr "注文の状態"
 
 #: app/templates/shop/myorderhistory.html:55
-#: app/templates/supplies/supplyProducts.html:143
+#: app/templates/supplies/supplyProducts.html:154
 msgid "Supply quantity"
 msgstr "納品数量"
 
@@ -2369,32 +2369,32 @@ msgstr "発送日時"
 msgid "Sender"
 msgstr "発送者"
 
-#: app/templates/supplies/supplyProducts.html:107
+#: app/templates/supplies/supplyProducts.html:118
 msgid "Select products to supply"
 msgstr "供給する製品の選択"
 
-#: app/templates/supplies/supplyProducts.html:116
+#: app/templates/supplies/supplyProducts.html:127
 msgid "Customer name"
 msgstr "客名"
 
-#: app/templates/supplies/supplyProducts.html:121
+#: app/templates/supplies/supplyProducts.html:132
 msgid "Axis Mart order number"
 msgstr "アクシスマートの注文番号"
 
-#: app/templates/supplies/supplyProducts.html:132
+#: app/templates/supplies/supplyProducts.html:143
 msgid "Requested products:"
 msgstr "注文された製品："
 
-#: app/templates/supplies/supplyProducts.html:138
-#: app/templates/supplies/unsuppliedproducts.html:52
+#: app/templates/supplies/supplyProducts.html:149
+#: app/templates/supplies/unsuppliedproducts.html:62
 msgid "Decription CS"
 msgstr "チェコ語の説明"
 
-#: app/templates/supplies/supplyProducts.html:141
+#: app/templates/supplies/supplyProducts.html:152
 msgid "Req. quantity"
 msgstr "受注数量"
 
-#: app/templates/supplies/supplyProducts.html:177
+#: app/templates/supplies/supplyProducts.html:188
 msgid "Confirm supply"
 msgstr "供給の確認"
 
@@ -2430,9 +2430,34 @@ msgstr "全量入庫が完了した受注："
 msgid "Not fully completed but partially supplied orders from customer: "
 msgstr "完了ではないが部分的に入庫した受注："
 
-#: app/templates/supplies/unsuppliedproducts.html:20
+#: app/templates/supplies/unsuppliedproducts.html:30
 msgid "Overview of unsupplied products to customers"
 msgstr "お客様に納品していない商品の一覧"
+
+#: app/templates/supplies/unsuppliedproducts.html:64
+msgid "Undelivered"
+msgstr "未納品"
+
+#: app/templates/supplies/unsuppliedproducts.html:72
+msgid "Number of products reserved earlier by other customers."
+msgstr "別のお客様に先に注文した当商品の本数。"
+
+#: app/templates/supplies/unsuppliedproducts.html:75
+msgid "Deliverable"
+msgstr "納品可能"
+
+#: app/templates/supplies/unsuppliedproducts.html:113
+msgid ""
+"Supply deliverable items to selected customer. After pressing the button, "
+"you will be redirected to supply screen with values populated by data in the "
+"table above."
+msgstr ""
+"選択されたお客様に納品可能な商品を納品。ボタンを押すと、以上の表のデータが記"
+"入された納品画面に遷移されます。"
+
+#: app/templates/supplies/unsuppliedproducts.html:119
+msgid "Deliver!"
+msgstr "納品する！"
 
 #~ msgid "Product ID"
 #~ msgstr "製品のＩＤ"

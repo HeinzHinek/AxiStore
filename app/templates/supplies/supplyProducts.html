@@ -9,6 +9,17 @@ $(document).ready(function() {
 
     $(".fancybox").fancybox();
 
+    if ( "{{ data_to_populate }}" != "None" ) {
+        var text_data = "{{ data_to_populate }}";
+        var items = text_data.split(",");
+        for (var i in items) {
+            var id = items[i].split(";")[0].split(":")[1];
+            var qty = items[i].split(";")[1].split(":")[1];
+            var el_id = "#supp_qty-" + id;
+            $(el_id).val(qty);
+        }
+    }
+
     $('.input-qty').each( function() {
         var stock_qty = parseInt($(this).closest('tr').find('.stock_qty_td').text())
         if (stock_qty < 1) {
@@ -165,7 +176,7 @@ $(document).ready(function() {
 
                 <td class="stock_qty_td" style="text-align: right;">{{ product.qty_stock }}</td>
                 <td>
-                    <input type="text" name="supp_qty-{{ product.id }}" size="3"
+                    <input type="text" name="supp_qty-{{ product.id }}" id="supp_qty-{{ product.id }}" size="3"
                            class="input-qty input-sm form-control nums_only" style="text-align: right;" value="0"/>
                     <span class="span-qty-order" style="display: none; float: right;">0</span>
                 </td>

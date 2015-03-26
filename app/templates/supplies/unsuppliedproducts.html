@@ -13,6 +13,16 @@
 
         $(".fancybox").fancybox();
 
+        $("#form-deliver-deliverable-but").click( function() {
+            var data_to_send = [];
+            $(".deliverable-item-qty-hid").each( function () {
+                id = $(this).closest('tr').attr('product_id');
+                data_to_send.push( "id:" + id + ";qty:" + $(this).val() );
+            });
+            $("#checked-items-ids-hid").val(data_to_send);
+            $("#form-deliver-deliverable").submit();
+        });
+
     });
 </script>
 
@@ -51,12 +61,23 @@
             <th style="text-align: center;"><span class="glyphicon glyphicon-camera"></span></th>
             <th>{{ _('Decription CS') }}</th>
             <th>{{ _('Description JP') }}</th>
-            <th style="width: 8%; text-align: right;">{{ _('Quantity') }}</th>
+            <th style="width: 7%; text-align: right;">{{ _('Undelivered') }}</th>
+            <th style="width: 7%; text-align: right;">{{ _('Stock') }}</th>
+            <th style="width: 7%; text-align: center; position: relative; font-weight: normal;">
+                <a style="cursor: pointer;" onmouseover=" $('#earlier-reservations-column-help-div').show('fast') "
+                        onmouseout=" $('#earlier-reservations-column-help-div').hide('fast') ">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </a>
+                <div id="earlier-reservations-column-help-div" style="display: none; position: absolute; top: 20px; left: 0px;" class="shadowed-div">
+                    {{ _('Number of products reserved earlier by other customers.') }}
+                </div>
+            </th>
+            <th style="width: 7%;">{{ _('Deliverable') }}</th>
         </tr>
 
         {% if products %}
         {% for product in products %}
-        <tr>
+        <tr product_id="{{ product.id }}">
             <td>{{ product.code }}</td>
             <td style="text-align: center;">
                     {% if product.img_url %}
@@ -70,10 +91,37 @@
             <td style="text-align: right;" class="clickable-td linked-td"
                 onclick="window.location.href = '{{ url_for("productrequests", id=product.id) }}'">{{ product.cust_request_qty }}
             </td>
+            <td style="text-align: right;">{{ product.qty_stock }}</td>
+            <td style="text-align: right;">{{ product.reserved_earlier_qty }}</td>
+            <td style="text-align: right;{% if product.deliverable_qty > 0 %}background-color: #dff0d8; color: #3c763d;{% endif %}">
+                {{ product.deliverable_qty }}
+                {% if product.deliverable_qty > 0 %}
+                    <input type="hidden" class="deliverable-item-qty-hid" value="{{ product.deliverable_qty }}">
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
         {% endif %}
     </table>
+    <div style="text-align: right;">
+        <div style="display: inline-block; position: relative; vertical-align: middle; margin-right: 10px;">
+            <a style="cursor: pointer;" onmouseover=" $('#deliver-btn-help-div').show('fast') "
+               onmouseout=" $('#deliver-btn-help-div').hide('fast') ">
+                <span class="glyphicon glyphicon-question-sign" style="font-size: 1.4em;"></span>
+            </a>
+            <div id="deliver-btn-help-div" style="display: none; position: absolute; bottom: 20px; right: 20px; width: 200px;" class="shadowed-div">
+                {{ _('Supply deliverable items to selected customer. After pressing the button, you will be redirected to supply screen with values populated by data in the table above.') }}
+            </div>
+        </div>
+        <div style="display: inline-block;">
+            <form action="" method="post" id="form-deliver-deliverable" name="form-deliver-deliverable" class="form-inline">
+                {{form.hidden_tag()}}
+                <input type="button" id="form-deliver-deliverable-but" class="btn btn btn-info" value="{{ _('Deliver!') }}">
+                <input type="hidden" id="checked-items-ids-hid" name="checked-items-ids-hid"/>
+                <input type="hidden" id="curr-customer-id-hid" name="curr-customer-id-hid" value="{{ curr_id }}"/>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

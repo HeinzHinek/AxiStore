@@ -2,8 +2,8 @@
 
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
-from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm
-from models import Supply, Product, Customer, SuppliedProducts, Request
+from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm, SimpleSubmitForm
+from models import Supply, Product, Customer, SuppliedProducts, Request, RequestedProducts
 from flask_login import login_required
 from sqlalchemy import desc
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
@@ -67,11 +67,23 @@ def newSupply():
 @app.route('/supplies/supplyproducts', methods=['GET', 'POST'])
 @login_required
 def supplyProducts():
-    if not session['new_supply']:
-        flash(gettext('No customer data!'))
-        return redirect(url_for("supplies"))
-    custType = session['new_supply'][0][1]
-    cust_id = session['new_supply'][1][1]
+
+    # Redirected from unsuppliedproducts?
+    cust_id = request.args.get('cust_id')
+    data_to_populate = request.args.get('deliver_items_data')
+
+    # Yes, redirected from unsuppliedproducts
+    if cust_id and data_to_populate:
+        custType = 'cust'
+
+    # No, redirected from newsupply
+    else:
+        if not session['new_supply']:
+            flash(gettext('No customer data!'))
+            return redirect(url_for("supplies"))
+        custType = session['new_supply'][0][1]
+        cust_id = session['new_supply'][1][1]
+
     cust = Customer.query.filter_by(id=cust_id).first()
 
     if not cust:
@@ -227,7 +239,8 @@ def supplyProducts():
     return render_template('supplies/supplyProducts.html',
                            custType=custType,
                            customer=cust,
-                           products=products)
+                           products=products,
+                           data_to_populate=data_to_populate)
 
 
 @app.route('/supply/<int:id>', methods=['GET', 'POST'])
@@ -282,10 +295,19 @@ def createNohinsho():
     return redirect(url_for("supplies"))
 
 
-@app.route('/supplies/unsuppliedproducts')
-@app.route('/supplies/unsuppliedproducts/<int:id>')
+@app.route('/supplies/unsuppliedproducts', methods=['GET', 'POST'])
+@app.route('/supplies/unsuppliedproducts/<int:id>', methods=['GET', 'POST'])
 @login_required
 def unsuppliedProducts(id=None):
+
+    form = SimpleSubmitForm()
+
+    if form.is_submitted():
+        if 'checked-items-ids-hid' in request.form:
+            cust_id = request.form['curr-customer-id-hid']
+            data = request.form['checked-items-ids-hid']
+            return redirect(url_for('supplyProducts', cust_id=cust_id, deliver_items_data=data))
+
     unsupplied_requests = Request.query.filter_by(active_flg=True).all()
     customer_ids = []
     for ur in unsupplied_requests:
@@ -314,6 +336,32 @@ def unsuppliedProducts(id=None):
                 rp.product.cust_request_qty = rp.product.customer_request_qty(cust.id)
                 if rp.product.cust_request_qty > 0:
                     products.append(rp.product)
+
+    # Load number of products reserved earlier by other customers
+    for p in products:
+        stock = p.qty_stock
+        cust_earliest_request_dt = RequestedProducts.query.filter_by(product_id=p.id)\
+            .filter(RequestedProducts.quantity - RequestedProducts.qty_supplied > 0)\
+            .join(Request).order_by(Request.created_dt)\
+            .join(Customer).filter(Customer.id == cust.id)\
+            .first().request.created_dt
+        earlier_requests = RequestedProducts.query.filter_by(product_id=p.id)\
+            .filter(RequestedProducts.quantity - RequestedProducts.qty_supplied > 0)\
+            .join(Request).filter(Request.created_dt < cust_earliest_request_dt)\
+            .join(Customer).filter(Customer.id != cust.id)\
+            .all()
+        p.reserved_earlier_qty = 0
+        for er in earlier_requests:
+            p.reserved_earlier_qty += er.quantity - er.qty_supplied
+
+        temp = p.qty_stock - p.reserved_earlier_qty
+        if temp <= 0:
+            p.deliverable_qty = 0
+        elif temp > p.cust_request_qty:
+            p.deliverable_qty = p.cust_request_qty
+        else:
+            p.deliverable_qty = temp
+
     products = sorted(products, key=lambda k: (k.maker_id, k.code))
     for p in products:
         urls = getImgUrls(p.id)
@@ -321,6 +369,7 @@ def unsuppliedProducts(id=None):
             p.img_url = urls[0]
     return render_template('supplies/unsuppliedproducts.html',
                            title=gettext("Unsupplied products"),
+                           form=form,
                            unsupplied_customers=unsupplied_customers,
                            products=products,
                            CUSTOMER_TYPES=CUSTOMER_TYPES,

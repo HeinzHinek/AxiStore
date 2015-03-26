@@ -7,16 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-25 16:21+0900\n"
-"PO-Revision-Date: 2015-03-25 16:20+0900\n"
+"POT-Creation-Date: 2015-03-26 15:25+0900\n"
+"PO-Revision-Date: 2015-03-26 15:32+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 1.3\n"
+"Language: cs\n"
+"X-Generator: Poedit 1.6.8\n"
 
 #: app/__init__.py:16
 msgid "Please log in to access this page."
@@ -27,10 +29,11 @@ msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
 #: app/csvHelper.py:63 app/csvHelper.py:93
-#: app/templates/deliveries/delivery.html:55 app/templates/orders/order.html:55
-#: app/templates/product/addProduct.html:78
+#: app/templates/deliveries/delivery.html:55
+#: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
-#: app/templates/requests/request.html:60 app/templates/supplies/supply.html:59
+#: app/templates/requests/request.html:60
+#: app/templates/supplies/supply.html:59
 msgid "Product code"
 msgstr "Kód produktu"
 
@@ -258,10 +261,12 @@ msgstr "Hledat"
 
 #: app/forms.py:225 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
-#: app/templates/orders/createOrder.html:239 app/templates/orders/order.html:27
+#: app/templates/orders/createOrder.html:239
+#: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
-#: app/templates/requests/request.html:27 app/templates/supplies/supply.html:27
-#: app/templates/supplies/supplyProducts.html:175
+#: app/templates/requests/request.html:27
+#: app/templates/supplies/supply.html:27
+#: app/templates/supplies/supplyProducts.html:186
 msgid "Submit"
 msgstr "Potvrdit"
 
@@ -644,8 +649,8 @@ msgid ""
 "We apologize but your customer data is insufficient. Please, contact our "
 "customer support."
 msgstr ""
-"Omlouváme se, ale Vaše zákaznická data jsou nedostačující. Obraťte se "
-"prosím na naši zákaznickou podporu."
+"Omlouváme se, ale Vaše zákaznická data jsou nedostačující. Obraťte se prosím "
+"na naši zákaznickou podporu."
 
 #: app/viewsShop.py:180 app/templates/orders/createOrder.html:241
 #: app/templates/orders/orders.html:9
@@ -680,47 +685,47 @@ msgstr "Dodávky zákazníkům"
 msgid "New Supply"
 msgstr "Nová dodávka zákazníkovi"
 
-#: app/viewsSupply.py:71
+#: app/viewsSupply.py:82
 msgid "No customer data!"
 msgstr "Chybí data zákazníka!"
 
-#: app/viewsSupply.py:78
+#: app/viewsSupply.py:90
 msgid "Customer not found!"
 msgstr "Zákazník nenalezen!"
 
-#: app/viewsSupply.py:89
+#: app/viewsSupply.py:101
 msgid "No product quantities!"
 msgstr "Chybí počty produktu!"
 
-#: app/viewsSupply.py:125
+#: app/viewsSupply.py:137
 msgid "No requested products!"
 msgstr "Žádné objednané produkty! "
 
-#: app/viewsSupply.py:199
+#: app/viewsSupply.py:211
 msgid "New supply sent sucessfully."
 msgstr "Nová dodávka úspěšně odeslána."
 
-#: app/viewsSupply.py:209
+#: app/viewsSupply.py:221
 msgid "Supply Report"
 msgstr "Zpráva o dodávce zákazníkovi"
 
-#: app/viewsSupply.py:246
+#: app/viewsSupply.py:259
 msgid "Date and time of supply was successfully changed."
 msgstr "Datum a čas dodávky byl úspěšně změněn."
 
-#: app/viewsSupply.py:250 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:263 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "Detaily dodávky zákazníkovi"
 
-#: app/viewsSupply.py:267
+#: app/viewsSupply.py:280
 msgid "No product data!"
 msgstr "Chybí data produktu!"
 
-#: app/viewsSupply.py:281
+#: app/viewsSupply.py:294
 msgid "Invalid data received."
 msgstr "Přijata neplatná data!"
 
-#: app/viewsSupply.py:323 app/templates/navbar_admin.html:48
+#: app/viewsSupply.py:371 app/templates/navbar_admin.html:48
 msgid "Unsupplied products"
 msgstr "Nedodané zboží"
 
@@ -828,8 +833,10 @@ msgstr "Listopad"
 msgid "Dec"
 msgstr "Prosinec"
 
-#: app/templates/navbar_admin.html:16 app/templates/orders/createOrder.html:177
-#: app/templates/supplies/supplyProducts.html:142
+#: app/templates/navbar_admin.html:16
+#: app/templates/orders/createOrder.html:177
+#: app/templates/supplies/supplyProducts.html:153
+#: app/templates/supplies/unsuppliedproducts.html:65
 msgid "Stock"
 msgstr "Sklad"
 
@@ -1006,7 +1013,8 @@ msgstr "Výrobce"
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
-#: app/templates/requests/request.html:61 app/templates/supplies/supply.html:60
+#: app/templates/requests/request.html:61
+#: app/templates/supplies/supply.html:60
 #: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
 msgstr "Popis ČJ"
@@ -1018,10 +1026,11 @@ msgstr "Popis ČJ"
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
-#: app/templates/requests/request.html:62 app/templates/supplies/supply.html:61
-#: app/templates/supplies/supplyProducts.html:139
+#: app/templates/requests/request.html:62
+#: app/templates/supplies/supply.html:61
+#: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
-#: app/templates/supplies/unsuppliedproducts.html:53
+#: app/templates/supplies/unsuppliedproducts.html:63
 msgid "Description JP"
 msgstr "Popis JP"
 
@@ -1076,13 +1085,14 @@ msgstr "Detaily dodávky od výrobce "
 msgid "Back to the list"
 msgstr "Zpět na seznam"
 
-#: app/templates/deliveries/delivery.html:22 app/templates/orders/order.html:22
-#: app/templates/requests/request.html:22 app/templates/supplies/supply.html:22
+#: app/templates/deliveries/delivery.html:22
+#: app/templates/orders/order.html:22 app/templates/requests/request.html:22
+#: app/templates/supplies/supply.html:22
 msgid "Edit"
 msgstr "Upravit"
 
-#: app/templates/deliveries/delivery.html:28 app/templates/orders/order.html:28
-#: app/templates/requests/request.html:28
+#: app/templates/deliveries/delivery.html:28
+#: app/templates/orders/order.html:28 app/templates/requests/request.html:28
 #: app/templates/settings/editCatalog.html:205
 #: app/templates/supplies/supply.html:28
 msgid "close"
@@ -1094,11 +1104,11 @@ msgstr "zavřít"
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/createRequest.html:241
 #: app/templates/requests/productrequests.html:46
-#: app/templates/requests/request.html:63 app/templates/shop/_cart_table.html:8
+#: app/templates/requests/request.html:63
+#: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
 #: app/templates/supplies/supplyReport.html:25
-#: app/templates/supplies/unsuppliedproducts.html:54
 msgid "Quantity"
 msgstr "Množství"
 
@@ -1130,11 +1140,11 @@ msgstr "Kód"
 
 #: app/templates/deliveries/deliveryReport.html:42
 msgid ""
-"* The received quantity is higher than ordered total. Value in () shows "
-"sum of all orders for given product."
+"* The received quantity is higher than ordered total. Value in () shows sum "
+"of all orders for given product."
 msgstr ""
-"* Přijaté množství je větší než úhrn objednávek. Hodnota v () představuje"
-" součet množství všech objednávek daného produktu."
+"* Přijaté množství je větší než úhrn objednávek. Hodnota v () představuje "
+"součet množství všech objednávek daného produktu."
 
 #: app/templates/deliveries/deliveryReport.html:51
 msgid "Completed and closed orders to maker: "
@@ -1218,7 +1228,7 @@ msgstr "Pokračovat"
 #: app/templates/settings/addUser.html:53
 #: app/templates/settings/editCustomer.html:178
 #: app/templates/settings/editUser.html:54
-#: app/templates/supplies/supplyProducts.html:178
+#: app/templates/supplies/supplyProducts.html:189
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -1234,8 +1244,8 @@ msgstr "Zrušit"
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
 #: app/templates/shop/placeorder.html:34
-#: app/templates/supplies/supplyProducts.html:136
-#: app/templates/supplies/unsuppliedproducts.html:50
+#: app/templates/supplies/supplyProducts.html:147
+#: app/templates/supplies/unsuppliedproducts.html:60
 msgid "Code"
 msgstr "Kód"
 
@@ -1261,7 +1271,7 @@ msgstr "Doručené množství"
 
 #: app/templates/deliveries/newDelivery.html:143
 #: app/templates/orders/createOrder.html:240
-#: app/templates/supplies/supplyProducts.html:176
+#: app/templates/supplies/supplyProducts.html:187
 msgid "Modify"
 msgstr "Pozměnit"
 
@@ -1298,21 +1308,20 @@ msgid ""
 "Thank you for ordering at AxiStore. Your order has been accepted and "
 "processed."
 msgstr ""
-"Děkujeme Vám za nákup na AxiStore. Vaše objednávka byla přijata a "
-"zpracována."
+"Děkujeme Vám za nákup na AxiStore. Vaše objednávka byla přijata a zpracována."
 
 #: app/templates/mail/order_confirm.html:9
 msgid ""
 "Ordered products will be sent as soon as possible, usually within three "
 "working days in case the products are on stock."
 msgstr ""
-"Objednané zboží Vám bude dodáno co nejdříve, většinou do tří pracovních "
-"dnů, pokud je zboží na skladě."
+"Objednané zboží Vám bude dodáno co nejdříve, většinou do tří pracovních dnů, "
+"pokud je zboží na skladě."
 
 #: app/templates/mail/order_confirm.html:10
 msgid ""
-"If your order contains products currently not on stock, the delivery date"
-" may take over two weeks."
+"If your order contains products currently not on stock, the delivery date "
+"may take over two weeks."
 msgstr ""
 "Pokud některý z objednaných výrobků není na skladě, jeho dodání může "
 "překročit dva týdny."
@@ -1320,13 +1329,13 @@ msgstr ""
 #: app/templates/mail/order_confirm.html:11
 msgid "In such case an Axis Mundi member will contact you via email or phone."
 msgstr ""
-"V takovém případě Vás po emailu či telefonu kontaktuje zodpovědná osoba z"
-" Axis Mundi."
+"V takovém případě Vás po emailu či telefonu kontaktuje zodpovědná osoba z "
+"Axis Mundi."
 
 #: app/templates/mail/order_confirm.html:13
 msgid ""
-"Please, do not delete this e-mail as you may need it for reference in the"
-" future."
+"Please, do not delete this e-mail as you may need it for reference in the "
+"future."
 msgstr "Nemažte prosím tento e-mail, může být potřeba pro kotrolu objednávky."
 
 #: app/templates/mail/order_confirm.html:15
@@ -1368,11 +1377,11 @@ msgstr "Součet:"
 
 #: app/templates/mail/order_confirm.html:47
 msgid ""
-"If you have any questions or concerns, please answer directly to this "
-"email address or use the contact information below."
+"If you have any questions or concerns, please answer directly to this email "
+"address or use the contact information below."
 msgstr ""
-"Pokud máte jakýkoli dotaz či připomínku, můžete odpovědět přímo na tento "
-"e-mail, popř. využít níže uvedených kontaktních údajů."
+"Pokud máte jakýkoli dotaz či připomínku, můžete odpovědět přímo na tento e-"
+"mail, popř. využít níže uvedených kontaktních údajů."
 
 #: app/templates/mail/order_confirm.html:49
 msgid "Axis Mundi Ltd."
@@ -1400,8 +1409,8 @@ msgstr "TEL: 03-6380-6454"
 
 #: app/templates/mail/order_confirm.html:56
 msgid ""
-"We accept your calls between Monday and Friday (with exception of "
-"holidays), 9:00 - 17:00."
+"We accept your calls between Monday and Friday (with exception of holidays), "
+"9:00 - 17:00."
 msgstr ""
 "Vaše telefonáty zodpovíme od pondělí do pátku (mimo svátků) mezi 9:00 a "
 "17:00."
@@ -1498,7 +1507,8 @@ msgstr "Uložit"
 msgid "Place a new order to maker"
 msgstr "Zadat novou objednávku výrobci"
 
-#: app/templates/orders/createOrder.html:174 app/templates/orders/order.html:56
+#: app/templates/orders/createOrder.html:174
+#: app/templates/orders/order.html:56
 #: app/templates/product/addProduct.html:110
 #: app/templates/product/editProduct.html:189
 msgid "Maker's code"
@@ -1598,7 +1608,7 @@ msgstr "Nák. cena"
 
 #: app/templates/orders/productorders.html:29
 #: app/templates/requests/productrequests.html:29
-#: app/templates/supplies/supplyProducts.html:140
+#: app/templates/supplies/supplyProducts.html:151
 msgid "Retail Price"
 msgstr "Mal. cena"
 
@@ -1971,9 +1981,9 @@ msgstr "Data musí být seřazena podle tohoto pořadí sloupců:"
 msgid "Do NOT use quotation marks around strings!"
 msgstr "Nepoužívejte uvozovky kolem řetězců!"
 
-#: app/templates/settings/editCatalog.html:140 app/templates/shop/shop.html:128
-#: app/templates/shop/shop.html:185 app/templates/shop/shop.html:248
-#: app/templates/shop/shop.html:259
+#: app/templates/settings/editCatalog.html:140
+#: app/templates/shop/shop.html:128 app/templates/shop/shop.html:185
+#: app/templates/shop/shop.html:248 app/templates/shop/shop.html:259
 msgid "Data transfer failed!"
 msgstr "Přenos dat selhal!"
 
@@ -2223,17 +2233,15 @@ msgid "State of order"
 msgstr "Stav objednávky"
 
 #: app/templates/shop/myorderhistory.html:55
-#: app/templates/supplies/supplyProducts.html:143
+#: app/templates/supplies/supplyProducts.html:154
 msgid "Supply quantity"
 msgstr "Kusů k dodání"
 
 #: app/templates/shop/orderconfirm.html:27
 msgid ""
-"Your order has been received and a confirmation sent to your email "
-"address: "
+"Your order has been received and a confirmation sent to your email address: "
 msgstr ""
-"Vaše objednávka byla přijata a potvrzení zasláno na Vaši emailovou "
-"adresu: "
+"Vaše objednávka byla přijata a potvrzení zasláno na Vaši emailovou adresu: "
 
 #: app/templates/shop/orderconfirm.html:61
 #: app/templates/shop/placeorder.html:27
@@ -2360,32 +2368,32 @@ msgstr "Odesláno"
 msgid "Sender"
 msgstr "Odesilatel"
 
-#: app/templates/supplies/supplyProducts.html:107
+#: app/templates/supplies/supplyProducts.html:118
 msgid "Select products to supply"
 msgstr "Vyberte produkty k odeslání"
 
-#: app/templates/supplies/supplyProducts.html:116
+#: app/templates/supplies/supplyProducts.html:127
 msgid "Customer name"
 msgstr "Jméno zákazníka"
 
-#: app/templates/supplies/supplyProducts.html:121
+#: app/templates/supplies/supplyProducts.html:132
 msgid "Axis Mart order number"
 msgstr "Číslo obj. z Axis Martu"
 
-#: app/templates/supplies/supplyProducts.html:132
+#: app/templates/supplies/supplyProducts.html:143
 msgid "Requested products:"
 msgstr "Objednané produkty: "
 
-#: app/templates/supplies/supplyProducts.html:138
-#: app/templates/supplies/unsuppliedproducts.html:52
+#: app/templates/supplies/supplyProducts.html:149
+#: app/templates/supplies/unsuppliedproducts.html:62
 msgid "Decription CS"
 msgstr "Popis CS"
 
-#: app/templates/supplies/supplyProducts.html:141
+#: app/templates/supplies/supplyProducts.html:152
 msgid "Req. quantity"
 msgstr "Obj. množství"
 
-#: app/templates/supplies/supplyProducts.html:177
+#: app/templates/supplies/supplyProducts.html:188
 msgid "Confirm supply"
 msgstr "Potvrdit dodávku"
 
@@ -2407,12 +2415,11 @@ msgstr "Odesláno produktů:"
 
 #: app/templates/supplies/supplyReport.html:47
 msgid ""
-"* The sent quantity is higher than requested total. Value in () shows sum"
-" of all orders of current customer for given product."
+"* The sent quantity is higher than requested total. Value in () shows sum of "
+"all orders of current customer for given product."
 msgstr ""
-"* Odeslané množství je větší než úhrn objednávek. Hodnota v () "
-"představuje součet množství všech objednávek současného zákazníka daného "
-"produktu."
+"* Odeslané množství je větší než úhrn objednávek. Hodnota v () představuje "
+"součet množství všech objednávek současného zákazníka daného produktu."
 
 #: app/templates/supplies/supplyReport.html:56
 msgid "Completed and closed orders from customer: "
@@ -2422,9 +2429,35 @@ msgstr "Zkompletované a uzavřené objednávky od zákazníka: "
 msgid "Not fully completed but partially supplied orders from customer: "
 msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 
-#: app/templates/supplies/unsuppliedproducts.html:20
+#: app/templates/supplies/unsuppliedproducts.html:30
 msgid "Overview of unsupplied products to customers"
 msgstr "Přehled nedodaného zboží zákazníkům"
+
+#: app/templates/supplies/unsuppliedproducts.html:64
+msgid "Undelivered"
+msgstr "Nedodáno"
+
+#: app/templates/supplies/unsuppliedproducts.html:72
+msgid "Number of products reserved earlier by other customers."
+msgstr "Počet kusů produktu, které byly objednány jinými zákazníky dříve."
+
+#: app/templates/supplies/unsuppliedproducts.html:75
+msgid "Deliverable"
+msgstr "Dodatelné"
+
+#: app/templates/supplies/unsuppliedproducts.html:113
+msgid ""
+"Supply deliverable items to selected customer. After pressing the button, "
+"you will be redirected to supply screen with values populated by data in the "
+"table above."
+msgstr ""
+"Dodat odeslatelné položky vybranému zákazníkovi. Po stisknutí tlačítka "
+"budete přesměrováni na obrazovku dodávky zákazníkovi s předvyplněnými "
+"hodnotami z tabulky na této stránce."
+
+#: app/templates/supplies/unsuppliedproducts.html:119
+msgid "Deliver!"
+msgstr "Dodat!"
 
 #~ msgid "Product ID"
 #~ msgstr "ID produktu"
@@ -2491,4 +2524,3 @@ msgstr "Přehled nedodaného zboží zákazníkům"
 
 #~ msgid "Ordered products total quantity"
 #~ msgstr "Součty počtů kusů objednaného zboží"
-
