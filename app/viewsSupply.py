@@ -73,8 +73,13 @@ def supplyProducts():
     data_to_populate = request.args.get('deliver_items_data')
 
     # Yes, redirected from unsuppliedproducts
-    if cust_id and data_to_populate:
-        custType = 'cust'
+    if cust_id:
+        cust_type_num = Customer.query.filter_by(id=cust_id).first().customer_type
+        if cust_type_num == CUSTOMER_TYPES['TYPE_AXM']:
+            custType = 'axm'
+        else:
+            custType = 'cust'
+
 
     # No, redirected from newsupply
     else:
