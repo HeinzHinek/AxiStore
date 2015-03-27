@@ -27,12 +27,12 @@
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="makerChoice">
                         <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                   href="{{ url_for('requests') + '?cust=-1' }}">
+                                                   href="{{ url_for('requests') + '?custid=-1' }}">
                             {{ _('All') }}
                         </a></li>
                         {% for customer in customers %}
                         <li role="presentation"><a role="menuitem" tabindex="-1"
-                                                   href="{{ url_for('requests') + '?cust=' + (customer.id|string) }}">
+                                                   href="{{ url_for('requests') + '?custid=' + (customer.id|string) }}">
                             {{ customer.name }}
                         </a></li>
                         {% endfor %}

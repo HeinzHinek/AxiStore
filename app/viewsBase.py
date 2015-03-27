@@ -47,7 +47,7 @@ def before_request():
         else:
             g.maker_id = session['maker_id']
 
-    cust_id = request.args.get('cust')
+    cust_id = request.args.get('custid')
     if cust_id:
         if int(cust_id) == -1:
             g.customer_id = None
