@@ -57,7 +57,7 @@ class Product(db.Model):
     axm_node = db.Column(db.Unicode(300))
     package_size = db.Column(db.Integer)
 
-    maker_code = db.Column(db.String(20))
+    maker_code = db.Column(db.String(300))
     maker_qty_stock = db.Column(db.Integer)
 
     created_dt = db.Column(db.DateTime)
