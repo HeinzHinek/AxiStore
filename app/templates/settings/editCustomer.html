@@ -15,6 +15,18 @@ $(document).ready(function() {
         }
     });
 
+    $('.capital-letters-only').click( function() {
+        $(this).select();
+    });
+
+    $(document).on('keyup', '.capital-letters-only', function (e) {
+        $(this).removeClass('td-border-highlighted');
+        if (e.keyCode != '9') {
+            this.value = this.value.toUpperCase();
+            this.value = this.value.replace(/[^A-Z]/g,'');
+        }
+    });
+
     $('form').bind("keyup keypress", function(e) {
         var code = e.keyCode || e.which;
         if (code  == 13) {
@@ -78,6 +90,22 @@ $(document).ready(function() {
                             <div style="float: left; font-size: 1.4em;">&nbsp;%</div>
                         </div>
                         {% for error in form.errors.base_discount %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Next nohinsho letter') }}:</label>
+                        <div class="input-group">
+                            <div style="float: left;">
+                                {{form.next_nohinsho_letter(size=5, class="form-control input-sm capital-letters-only", maxlength="1")}}
+                            </div>
+                        </div>
+                        {% for error in form.errors.next_nohinsho_letter %}
                         <div class="alert alert-danger" role="alert" style="max-width: 400px;">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             [{{error}}]

@@ -3,10 +3,11 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddCustomerForm
-from models import Customer, Contact
+from models import Customer
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
+import re
 
 
 @app.route('/customers')
@@ -70,6 +71,10 @@ def editCustomer(id=0):
             customer.name = form.name.data
             customer.email = form.email.data
             customer.base_discount = int(form.base_discount.data)/100.0
+            nohinsho_letter = form.next_nohinsho_letter.data
+
+            if nohinsho_letter and len(nohinsho_letter) == 1 and re.match("^[A-Z]+$", nohinsho_letter):
+                customer.order_no = ord(nohinsho_letter) - 65
 
             customer.company_name = form.company_name.data
             if form.post_code1.data and form.post_code2.data:
@@ -86,6 +91,10 @@ def editCustomer(id=0):
             return redirect(url_for("customers"))
 
     form.base_discount.data = int(customer.base_discount*100) if customer.base_discount else 0
+    if customer.order_no:
+        form.next_nohinsho_letter.data = chr(customer.order_no + 65)
+    else:
+        form.next_nohinsho_letter.data = 'A'
     if customer.post_code:
         post_code = str(customer.post_code)
     else:

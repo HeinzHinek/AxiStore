@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+$(document).ready( function() {
+    $(".nohinsho_num").each( function() {
+        var num = parseInt($(this).val()) + 65;
+        $(this).closest('td').find('span').text(String.fromCharCode(num));
+    });
+});
+</script>
+
 <div class="row">
     <h1>{{ _('List of Customers') }}</h1>
     {% include 'flash.html' %}
@@ -14,16 +23,20 @@
     {% if customers %}
     <table class="table table-hover table-striped">
         <tr>
-            <th>{{ _('Customer ID') }}</th>
-            <th>{{ _('Customer Name') }}</th>
-            <th>{{ _('Company Name') }}</th>
+            <th style="width: 15%;">{{ _('Customer ID') }}</th>
+            <th style="width: 35%;">{{ _('Customer Name') }}</th>
+            <th style="width: 35%;">{{ _('Company Name') }}</th>
+            <th style="width: 15%; text-align: center;">{{ _('Next nohinsho letter') }}</th>
         </tr>
 
         {% for customer in customers.items %}
         <tr onclick="window.location.href = '{{ url_for("editCustomer", id=customer.id) }}'">
-        <td>{{ customer.id }}</td>
-        <td>{{ customer.name }}</td>
-        <td>{{ customer.company_name }}</td>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.company_name }}</td>
+            <td style="text-align: center;"><span></span>
+                <input type="hidden" class="nohinsho_num" value="{% if customer.order_no is none %}0{% else %}{{ customer.order_no }}{% endif %}"/>
+            </td>
         </tr>
         {% endfor %}
     </table>
