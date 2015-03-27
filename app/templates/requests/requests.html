@@ -14,7 +14,31 @@
             <th class="td-border-left-1px">{{ _('Order ID') }}</th>
             <th>{{ _('Received') }}</th>
             <th>{{ _('Received by') }}</th>
-            <th class="td-border-right-1px">{{ _('Customer') }}</th>
+            <!-- <th class="td-border-right-1px">{{ _('Customer') }}</th> -->
+            <th>
+                <div class="dropdown" style="display: inline-block;">
+                    <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="makerChoice" data-toggle="dropdown" style="font-weight: bold;">
+                        {% if curr_customer %}
+                        {{ curr_customer.name }}
+                        {% else %}
+                        {{ _('Customer') }}
+                        {% endif %}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="makerChoice">
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="{{ url_for('requests') + '?cust=-1' }}">
+                            {{ _('All') }}
+                        </a></li>
+                        {% for customer in customers %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1"
+                                                   href="{{ url_for('requests') + '?cust=' + (customer.id|string) }}">
+                            {{ customer.name }}
+                        </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </th>
         </tr>
     </thead>
     <tbody>

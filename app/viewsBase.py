@@ -47,6 +47,21 @@ def before_request():
         else:
             g.maker_id = session['maker_id']
 
+    cust_id = request.args.get('cust')
+    if cust_id:
+        if int(cust_id) == -1:
+            g.customer_id = None
+            session['customer_id'] = g.customer_id
+        else:
+            session['customer_id'] = int(cust_id)
+            g.customer_id = int(cust_id)
+    else:
+        if 'customer_id' not in session:
+            g.customer_id = None
+            session['customer_id'] = g.customer_id
+        else:
+            g.customer_id = session['customer_id']
+
     search_string = request.args.get('search')
     if search_string:
         session['search_string'] = search_string

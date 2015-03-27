@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, flash, url_for, g
+from flask import render_template, redirect, flash, url_for, g, session
 from app import app, db
 from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm
 from models import Request, Product, RequestedProducts, Customer, Maker
@@ -15,15 +15,33 @@ import flask
 @app.route('/requests/<int:page>')
 @login_required
 def requests(page=1):
+    cust_id = session['customer_id']
+    curr_customer = None
+    if cust_id and cust_id > 0:
+        curr_customer = Customer.query.filter_by(id=cust_id).first()
+
     requests = Request.query\
-        .join(Customer)\
-        .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])\
-        .order_by(Request.active_flg.desc())\
+        .join(Customer)
+    if curr_customer:
+        requests = requests\
+            .filter_by(id=curr_customer.id)
+    else:
+        requests = requests\
+            .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])
+    requests = requests.order_by(Request.active_flg.desc())\
         .order_by(Request.created_dt)\
         .paginate(page, DEFAULT_PER_PAGE, False)
+    customers = Customer.query\
+        .filter_by(customer_type=CUSTOMER_TYPES['TYPE_CUSTOMER'])\
+        .join(Request)\
+        .filter(Request.active_flg == True)\
+        .order_by(Customer.name)\
+        .all()
     return render_template('requests/requests.html',
                            title=gettext("Orders from Customers"),
-                           requests=requests)
+                           requests=requests,
+                           customers=customers,
+                           curr_customer=curr_customer)
 
 
 @app.route('/axm_requests')
