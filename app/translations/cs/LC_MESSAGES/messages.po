@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-26 15:25+0900\n"
-"PO-Revision-Date: 2015-03-26 15:32+0900\n"
+"POT-Creation-Date: 2015-03-27 16:56+0900\n"
+"PO-Revision-Date: 2015-03-27 16:57+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -162,7 +162,7 @@ msgstr "Uživatelské jméno"
 #: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
 #: app/templates/settings/editContact.html:73
-#: app/templates/settings/editCustomer.html:59
+#: app/templates/settings/editCustomer.html:71
 msgid "Email"
 msgstr "Email"
 
@@ -186,7 +186,7 @@ msgstr "Staré heslo"
 msgid "New password"
 msgstr "Nové heslo"
 
-#: app/forms.py:43 app/viewsBase.py:363
+#: app/forms.py:43 app/viewsBase.py:378
 msgid "New password must match confirmation!"
 msgstr "Nové heslo musí odpovídat kontrolnímu heslu!"
 
@@ -243,7 +243,7 @@ msgstr "Jazyk uživatele"
 msgid "Name"
 msgstr "Jméno"
 
-#: app/forms.py:133 app/forms.py:219 app/templates/shop/shop.html:301
+#: app/forms.py:133 app/forms.py:220 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "Kategorie"
 
@@ -251,15 +251,15 @@ msgstr "Kategorie"
 msgid "Average days to deliver"
 msgstr "Průměrný počet dnů dodávky"
 
-#: app/forms.py:220
+#: app/forms.py:221
 msgid "Available item only"
 msgstr "Pouze dostupné"
 
-#: app/forms.py:221 app/templates/shop/shop.html:310
+#: app/forms.py:222 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "Hledat"
 
-#: app/forms.py:225 app/templates/deliveries/delivery.html:27
+#: app/forms.py:226 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
 #: app/templates/orders/createOrder.html:239
 #: app/templates/orders/order.html:27
@@ -274,52 +274,52 @@ msgstr "Potvrdit"
 msgid "Thank you for your order!"
 msgstr "Děkujeme za Vaší objednávku!"
 
-#: app/viewsBase.py:151
+#: app/viewsBase.py:166
 msgid "Home"
 msgstr "Domů"
 
-#: app/viewsBase.py:239
+#: app/viewsBase.py:254
 msgid "Stock quantity successfully updated."
 msgstr "Množství na skladě úspěšně aktualizováno."
 
-#: app/viewsBase.py:241 app/viewsBase.py:243 app/viewsOrder.py:209
+#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:209
 #: app/viewsOrder.py:211
 msgid "Input value error."
 msgstr "Hodnota zadána chybně."
 
-#: app/viewsBase.py:253
+#: app/viewsBase.py:268
 msgid "Stock condition"
 msgstr "Stav skladu"
 
-#: app/viewsBase.py:301
+#: app/viewsBase.py:316
 msgid "Selected nickname is already in use!"
 msgstr "Zadané uživatelské jméno je již registrováno!"
 
-#: app/viewsBase.py:309 app/viewsSettings.py:50 app/viewsSettings.py:106
+#: app/viewsBase.py:324 app/viewsSettings.py:50 app/viewsSettings.py:106
 msgid "Selected email is already in use!"
 msgstr "Zadaný email je již registrován!"
 
-#: app/viewsBase.py:325
+#: app/viewsBase.py:340
 msgid "User settings sucessfully updated."
 msgstr "Data uživatele úspěšně aktualizována."
 
-#: app/viewsBase.py:338 app/templates/user.html:17
+#: app/viewsBase.py:353 app/templates/user.html:17
 msgid "User's Page"
 msgstr "Stránka uživatele"
 
-#: app/viewsBase.py:359
+#: app/viewsBase.py:374
 msgid "User password successfully changed."
 msgstr "Heslo uživatele úspěšně změněno."
 
-#: app/viewsBase.py:365
+#: app/viewsBase.py:380
 msgid "Current password is incorrect!"
 msgstr "Současné heslo nesouhlasí!"
 
-#: app/viewsBase.py:370 app/templates/settings/passwordchange.html:8
+#: app/viewsBase.py:385 app/templates/settings/passwordchange.html:8
 msgid "Password Change"
 msgstr "Změna hesla"
 
-#: app/viewsBase.py:378 app/templates/navbar_admin.html:76
+#: app/viewsBase.py:393 app/templates/navbar_admin.html:76
 #: app/templates/settings.html:3
 msgid "Settings"
 msgstr "Nastavení"
@@ -372,31 +372,31 @@ msgstr "Kontakt úspěšně pozměněn."
 msgid "Edit Contact"
 msgstr "Upravit kontakt"
 
-#: app/viewsCustomer.py:18
+#: app/viewsCustomer.py:19
 msgid "Customers"
 msgstr "Zákazníci"
 
-#: app/viewsCustomer.py:44
+#: app/viewsCustomer.py:45
 msgid "New customer successfully added."
 msgstr "Nový zákazník úspěšně přidán."
 
-#: app/viewsCustomer.py:47 app/templates/settings/addCustomer.html:24
+#: app/viewsCustomer.py:48 app/templates/settings/addCustomer.html:24
 msgid "Add New Customer"
 msgstr "Přidat zákazníka"
 
-#: app/viewsCustomer.py:56 app/viewsRequest.py:76
+#: app/viewsCustomer.py:57 app/viewsRequest.py:94
 msgid "Customer not found."
 msgstr "Zákazník nenalezen."
 
-#: app/viewsCustomer.py:65
+#: app/viewsCustomer.py:66
 msgid "This operation is not allowed at the moment."
 msgstr "Tato operace není momentálně podporována."
 
-#: app/viewsCustomer.py:85
+#: app/viewsCustomer.py:90
 msgid "Customer successfully changed."
 msgstr "Zákazník úspěšně pozměněn."
 
-#: app/viewsCustomer.py:97 app/templates/settings/editCustomer.html:29
+#: app/viewsCustomer.py:106 app/templates/settings/editCustomer.html:41
 msgid "Edit Customer"
 msgstr "Upravit zákazníka"
 
@@ -523,7 +523,7 @@ msgstr "Nový produkt úspěšně přidán."
 msgid "Add new product"
 msgstr "Přidat nový produkt"
 
-#: app/viewsProduct.py:68 app/viewsRequest.py:115 app/viewsShop.py:144
+#: app/viewsProduct.py:68 app/viewsRequest.py:133 app/viewsShop.py:144
 msgid "Product not found."
 msgstr "Produkt nenalezen."
 
@@ -535,55 +535,55 @@ msgstr "Produkt úspěšně pozměněn."
 msgid "Edit Product"
 msgstr "Editace produktu"
 
-#: app/viewsRequest.py:25
+#: app/viewsRequest.py:41
 msgid "Orders from Customers"
 msgstr "Objednávky od zákazníka"
 
-#: app/viewsRequest.py:40
+#: app/viewsRequest.py:58
 msgid "Orders from Axis Mart"
 msgstr "Objednávky z Axis Martu"
 
-#: app/viewsRequest.py:72
+#: app/viewsRequest.py:90
 msgid "No customer id."
 msgstr "Chybí id zákazníka."
 
-#: app/viewsRequest.py:79
+#: app/viewsRequest.py:97
 msgid "Invalid customer!"
 msgstr "Neplatný zákazník!"
 
-#: app/viewsRequest.py:85
+#: app/viewsRequest.py:103
 msgid "No order number."
 msgstr "Chybí číslo objednávky."
 
-#: app/viewsRequest.py:89
+#: app/viewsRequest.py:107
 msgid "Order number already exists!"
 msgstr "Číslo objednávky již existuje!"
 
-#: app/viewsRequest.py:97
+#: app/viewsRequest.py:115
 msgid "Invalid data received!"
 msgstr "Přijata neplatná data!"
 
-#: app/viewsRequest.py:123 app/viewsShop.py:157
+#: app/viewsRequest.py:141 app/viewsShop.py:157
 msgid "Order created successfully."
 msgstr "Nová objednávka úspěšně vytvořena."
 
-#: app/viewsRequest.py:129
+#: app/viewsRequest.py:147
 msgid "Order data not sent."
 msgstr "Data objednávky neodeslána."
 
-#: app/viewsRequest.py:134
+#: app/viewsRequest.py:152
 msgid "Accept order from customer"
 msgstr "Přijmout objednávku od zákazníka"
 
-#: app/viewsRequest.py:152
+#: app/viewsRequest.py:170
 msgid "Date and time of request was successfully changed."
 msgstr "Datum a čas poptávky byl úspěšně změněn."
 
-#: app/viewsRequest.py:156 app/templates/requests/request.html:5
+#: app/viewsRequest.py:174 app/templates/requests/request.html:5
 msgid "Order from customer details"
 msgstr "Detaily objednávky od zákazníka"
 
-#: app/viewsRequest.py:175
+#: app/viewsRequest.py:193
 msgid "Orders from customers for product"
 msgstr "Objednávky produktu zákazníky"
 
@@ -636,7 +636,7 @@ msgid "Edit Customer Codes"
 msgstr "Editace kódů zákazníka"
 
 #: app/viewsShop.py:73 app/templates/stock.html:163
-#: app/templates/stock.html:201
+#: app/templates/stock.html:201 app/templates/requests/requests.html:31
 msgid "All"
 msgstr "Vše"
 
@@ -685,47 +685,47 @@ msgstr "Dodávky zákazníkům"
 msgid "New Supply"
 msgstr "Nová dodávka zákazníkovi"
 
-#: app/viewsSupply.py:82
+#: app/viewsSupply.py:87
 msgid "No customer data!"
 msgstr "Chybí data zákazníka!"
 
-#: app/viewsSupply.py:90
+#: app/viewsSupply.py:95
 msgid "Customer not found!"
 msgstr "Zákazník nenalezen!"
 
-#: app/viewsSupply.py:101
+#: app/viewsSupply.py:106
 msgid "No product quantities!"
 msgstr "Chybí počty produktu!"
 
-#: app/viewsSupply.py:137
+#: app/viewsSupply.py:142
 msgid "No requested products!"
 msgstr "Žádné objednané produkty! "
 
-#: app/viewsSupply.py:211
+#: app/viewsSupply.py:216
 msgid "New supply sent sucessfully."
 msgstr "Nová dodávka úspěšně odeslána."
 
-#: app/viewsSupply.py:221
+#: app/viewsSupply.py:226
 msgid "Supply Report"
 msgstr "Zpráva o dodávce zákazníkovi"
 
-#: app/viewsSupply.py:259
+#: app/viewsSupply.py:264
 msgid "Date and time of supply was successfully changed."
 msgstr "Datum a čas dodávky byl úspěšně změněn."
 
-#: app/viewsSupply.py:263 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:268 app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "Detaily dodávky zákazníkovi"
 
-#: app/viewsSupply.py:280
+#: app/viewsSupply.py:285
 msgid "No product data!"
 msgstr "Chybí data produktu!"
 
-#: app/viewsSupply.py:294
+#: app/viewsSupply.py:299
 msgid "Invalid data received."
 msgstr "Přijata neplatná data!"
 
-#: app/viewsSupply.py:371 app/templates/navbar_admin.html:48
+#: app/viewsSupply.py:376 app/templates/navbar_admin.html:48
 msgid "Unsupplied products"
 msgstr "Nedodané zboží"
 
@@ -740,8 +740,8 @@ msgstr "OK"
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
 #: app/templates/settings/contacts.html:38
 #: app/templates/settings/contacts.html:40
-#: app/templates/settings/customers.html:36
-#: app/templates/settings/customers.html:38
+#: app/templates/settings/customers.html:49
+#: app/templates/settings/customers.html:51
 #: app/templates/settings/makers.html:46 app/templates/settings/makers.html:48
 #: app/templates/settings/users.html:43 app/templates/settings/users.html:45
 msgid "Previous"
@@ -750,8 +750,8 @@ msgstr "Předchozí"
 #: app/templates/_pagination.html:28 app/templates/_pagination.html:30
 #: app/templates/settings/contacts.html:43
 #: app/templates/settings/contacts.html:45
-#: app/templates/settings/customers.html:41
-#: app/templates/settings/customers.html:43
+#: app/templates/settings/customers.html:54
+#: app/templates/settings/customers.html:56
 #: app/templates/settings/makers.html:51 app/templates/settings/makers.html:53
 #: app/templates/settings/users.html:48 app/templates/settings/users.html:50
 msgid "Next"
@@ -1079,7 +1079,7 @@ msgstr "Detaily dodávky od výrobce "
 #: app/templates/requests/request.html:9
 #: app/templates/settings/editCategory.html:16
 #: app/templates/settings/editContact.html:21
-#: app/templates/settings/editCustomer.html:35
+#: app/templates/settings/editCustomer.html:47
 #: app/templates/settings/editMaker.html:18
 #: app/templates/supplies/supply.html:9
 msgid "Back to the list"
@@ -1226,7 +1226,7 @@ msgstr "Pokračovat"
 #: app/templates/settings/addCustomer.html:168
 #: app/templates/settings/addMaker.html:17
 #: app/templates/settings/addUser.html:53
-#: app/templates/settings/editCustomer.html:178
+#: app/templates/settings/editCustomer.html:206
 #: app/templates/settings/editUser.html:54
 #: app/templates/supplies/supplyProducts.html:189
 msgid "Cancel"
@@ -1765,6 +1765,7 @@ msgstr "Č. obj."
 
 #: app/templates/requests/request.html:47
 #: app/templates/requests/requests.html:17
+#: app/templates/requests/requests.html:24
 #: app/templates/supplies/supplies.html:32
 #: app/templates/supplies/supply.html:43
 #: app/templates/supplies/supplyReport.html:62
@@ -1821,47 +1822,47 @@ msgstr "Společnost"
 
 #: app/templates/settings/addContact.html:100
 #: app/templates/settings/addCustomer.html:167
-#: app/templates/settings/editCustomer.html:176
+#: app/templates/settings/editCustomer.html:204
 msgid "Save customer"
 msgstr "Uložit zákazníka"
 
 #: app/templates/settings/addCustomer.html:36
-#: app/templates/settings/editCustomer.html:45
+#: app/templates/settings/editCustomer.html:57
 msgid "Customer nickname"
 msgstr "Zkrácené jméno zákazníka"
 
 #: app/templates/settings/addCustomer.html:64
-#: app/templates/settings/editCustomer.html:73
+#: app/templates/settings/editCustomer.html:85
 msgid "Base discount"
 msgstr "Základní sleva"
 
 #: app/templates/settings/addCustomer.html:82
-#: app/templates/settings/editCustomer.html:91
+#: app/templates/settings/editCustomer.html:119
 msgid "Invoice address details"
 msgstr "Detaily adresy na fakturu"
 
 #: app/templates/settings/addCustomer.html:87
-#: app/templates/settings/editCustomer.html:96
+#: app/templates/settings/editCustomer.html:124
 msgid "Company name"
 msgstr "Název společnosti"
 
 #: app/templates/settings/addCustomer.html:101
-#: app/templates/settings/editCustomer.html:110
+#: app/templates/settings/editCustomer.html:138
 msgid "Post code"
 msgstr "Poštovní číslo"
 
 #: app/templates/settings/addCustomer.html:124
-#: app/templates/settings/editCustomer.html:133
+#: app/templates/settings/editCustomer.html:161
 msgid "Address 1"
 msgstr "Adresa 1"
 
 #: app/templates/settings/addCustomer.html:138
-#: app/templates/settings/editCustomer.html:147
+#: app/templates/settings/editCustomer.html:175
 msgid "Address 2"
 msgstr "Adresa 2"
 
 #: app/templates/settings/addCustomer.html:152
-#: app/templates/settings/editCustomer.html:161
+#: app/templates/settings/editCustomer.html:189
 msgid "Address 3"
 msgstr "Adresa 3"
 
@@ -1916,7 +1917,7 @@ msgid "Select customer to manage codes:"
 msgstr "Vyeberte zákazníka, jehož kódy chcete spravovat"
 
 #: app/templates/settings/customercodes.html:25
-#: app/templates/settings/customers.html:18
+#: app/templates/settings/customers.html:27
 msgid "Customer Name"
 msgstr "Jméno zákazníka"
 
@@ -1932,21 +1933,26 @@ msgstr "Ano"
 msgid "No"
 msgstr "Ne"
 
-#: app/templates/settings/customers.html:5
+#: app/templates/settings/customers.html:14
 msgid "List of Customers"
 msgstr "Seznam zákazníků"
 
-#: app/templates/settings/customers.html:11
+#: app/templates/settings/customers.html:20
 msgid "Add customer"
 msgstr "Přidat zákazníka"
 
-#: app/templates/settings/customers.html:17
+#: app/templates/settings/customers.html:26
 msgid "Customer ID"
 msgstr "ID zákazníka"
 
-#: app/templates/settings/customers.html:19
+#: app/templates/settings/customers.html:28
 msgid "Company Name"
 msgstr "Název společnosti"
+
+#: app/templates/settings/customers.html:29
+#: app/templates/settings/editCustomer.html:102
+msgid "Next nohinsho letter"
+msgstr "Řadové písmeno pro další nóhinšo"
 
 #: app/templates/settings/dataexport.html:5
 msgid "Export of Data"
@@ -2039,7 +2045,7 @@ msgstr "Smazat kontakt"
 msgid "Do you really want to delete this customer?"
 msgstr "Chcete opravdu smazat tohoto zákazníka?"
 
-#: app/templates/settings/editCustomer.html:177
+#: app/templates/settings/editCustomer.html:205
 msgid "Delete customer"
 msgstr "Smazat zákazníka"
 
