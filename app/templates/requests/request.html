@@ -70,8 +70,16 @@
             <td class="clickable-td">{{ product.product.code }}</td>
             <td class="clickable-td">{{ product.product.desc_CS }}</td>
             <td class="clickable-td">{{ product.product.desc_JP }}</td>
-            <td class="clickable-td">{{ product.quantity }}</td>
-            <td class="clickable-td">{{ product.qty_supplied }}</td>
+            <td class="clickable-td"
+                {% if product.quantity > product.qty_supplied %}
+                    style="background-color: #ebccd1; color: #a94442;"
+                {% endif %}
+                    >{{ product.quantity }}</td>
+            <td class="clickable-td"
+                {% if product.quantity > product.qty_supplied %}
+                    style="background-color: #ebccd1; color: #a94442;"
+                {% endif %}
+                    >{{ product.qty_supplied }}</td>
         </tr>
         {% endfor %}
     </tbody>
