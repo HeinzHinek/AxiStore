@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-31 15:13+0900\n"
-"PO-Revision-Date: 2015-03-31 15:23+0900\n"
+"POT-Creation-Date: 2015-03-31 17:14+0900\n"
+"PO-Revision-Date: 2015-03-31 17:19+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -57,6 +57,8 @@ msgstr "入荷日程"
 
 #: app/csvHelper.py:93 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
+#: app/templates/settings/recommendedshares.html:121
+#: app/templates/settings/recommendedshares.html:167
 msgid "Retail price"
 msgstr "小売価格"
 
@@ -406,7 +408,7 @@ msgstr "お客様の情報が変更されました。"
 msgid "Edit Customer"
 msgstr "お客様の情報を編集"
 
-#: app/viewsCustomer.py:190 app/templates/settings/recommendedshares.html:33
+#: app/viewsCustomer.py:194 app/templates/settings/recommendedshares.html:33
 msgid "Sales of Recommended Customers"
 msgstr "推薦されたお客様の売り上げ"
 
@@ -1028,6 +1030,8 @@ msgstr "メーカー"
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
 #: app/templates/requests/request.html:61
+#: app/templates/settings/recommendedshares.html:118
+#: app/templates/settings/recommendedshares.html:164
 #: app/templates/supplies/supply.html:60
 #: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
@@ -1041,6 +1045,8 @@ msgstr "チェコ語の説明"
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
 #: app/templates/requests/request.html:62
+#: app/templates/settings/recommendedshares.html:119
+#: app/templates/settings/recommendedshares.html:165
 #: app/templates/supplies/supply.html:61
 #: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
@@ -1119,6 +1125,8 @@ msgstr "閉じる"
 #: app/templates/requests/createRequest.html:241
 #: app/templates/requests/productrequests.html:46
 #: app/templates/requests/request.html:63
+#: app/templates/settings/recommendedshares.html:122
+#: app/templates/settings/recommendedshares.html:168
 #: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
@@ -1172,6 +1180,7 @@ msgstr "全量入庫が完了した発注："
 #: app/templates/requests/productrequests.html:43
 #: app/templates/requests/request.html:18
 #: app/templates/requests/requests.html:14
+#: app/templates/settings/recommendedshares.html:120
 #: app/templates/supplies/supplyReport.html:59
 #: app/templates/supplies/supplyReport.html:81
 msgid "Order ID"
@@ -1254,6 +1263,8 @@ msgstr "キャンセル"
 #: app/templates/requests/createRequest.html:221
 #: app/templates/requests/createRequest.html:237
 #: app/templates/requests/productrequests.html:21
+#: app/templates/settings/recommendedshares.html:117
+#: app/templates/settings/recommendedshares.html:163
 #: app/templates/shop/_cart_table.html:5
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
@@ -1386,7 +1397,7 @@ msgid "pcs"
 msgstr "個"
 
 #: app/templates/mail/order_confirm.html:41
-#: app/templates/settings/recommendedshares.html:106
+#: app/templates/settings/recommendedshares.html:196
 #: app/templates/shop/orderconfirm.html:54
 #: app/templates/shop/placeorder.html:51
 msgid "Total:"
@@ -2196,11 +2207,40 @@ msgstr "注文された商品の総額"
 msgid "Supplied products value"
 msgstr "納品した商品の総額"
 
-#: app/templates/settings/recommendedshares.html:111
+#: app/templates/settings/recommendedshares.html:113
+msgid "Requested products by customer"
+msgstr "注文したお客様の名前"
+
+#: app/templates/settings/recommendedshares.html:114
+#: app/templates/settings/recommendedshares.html:160
+msgid "Year and month"
+msgstr "年月"
+
+#: app/templates/settings/recommendedshares.html:139
+#: app/templates/settings/recommendedshares.html:185
+msgid "All the above prices are retail prices. Discount has to be subtracted."
+msgstr "上記の価格は全て小売価格です。割引は引いていません。"
+
+#: app/templates/settings/recommendedshares.html:140
+#: app/templates/settings/recommendedshares.html:186
+msgid "This customer's base discount"
+msgstr "このお客様の基本割引"
+
+#: app/templates/settings/recommendedshares.html:159
+msgid "Supplied products by customer"
+msgstr "納品したお客様の名前"
+
+#: app/templates/settings/recommendedshares.html:166
+#: app/templates/supplies/supplies.html:29
+#: app/templates/supplies/supply.html:18
+msgid "Supply ID"
+msgstr "供給ID"
+
+#: app/templates/settings/recommendedshares.html:201
 msgid "Share:"
 msgstr "シェア："
 
-#: app/templates/settings/recommendedshares.html:117
+#: app/templates/settings/recommendedshares.html:207
 msgid "No recommended customers found."
 msgstr "推薦されたお客様が一件もありません。"
 
@@ -2408,11 +2448,6 @@ msgstr "注文番号の選択："
 #: app/templates/supplies/supplies.html:5
 msgid "Supplies to customers overview"
 msgstr "お客様への供給の一覧"
-
-#: app/templates/supplies/supplies.html:29
-#: app/templates/supplies/supply.html:18
-msgid "Supply ID"
-msgstr "供給ID"
 
 #: app/templates/supplies/supplies.html:30
 #: app/templates/supplies/supply.html:20

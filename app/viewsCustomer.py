@@ -3,7 +3,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddCustomerForm
-from models import Customer, Request, RequestedProducts, Supply, SuppliedProducts
+from models import Customer, Product, Request, RequestedProducts, Supply, SuppliedProducts
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES, BASE_SHARE_FROM_RECOMMENDED
 from flask.ext.babel import gettext
@@ -173,14 +173,18 @@ def recommendedshares(id=None):
                 .join(Request).filter(Request.customer_id == cust.id)\
                 .filter(Request.created_dt >= start_dt)\
                 .filter(Request.created_dt < end_dt)\
+                .join(Product).order_by(Product.maker_id).order_by(Product.code)\
                 .all()
+            cust.requested_products = rp
             for r in rp:
                 cust.requested_value += r.quantity * r.product.price_retail
             sp = SuppliedProducts.query\
                 .join(Supply).filter(Supply.customer_id == cust.id)\
                 .filter(Supply.created_dt >= start_dt)\
                 .filter(Supply.created_dt < end_dt)\
+                .join(Product).order_by(Product.maker_id).order_by(Product.code)\
                 .all()
+            cust.supplied_products = sp
             for s in sp:
                 cust.supplied_value += s.quantity * s.product.price_retail
             sum_request_values += cust.requested_value

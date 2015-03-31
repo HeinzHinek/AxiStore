@@ -97,12 +97,102 @@
         {% for cust in recommended %}
         <tr>
             <td>{{ cust.name }}</td>
-            <td style="text-align: right;">{{ cust.requested_value }}</td>
-            <td style="text-align: right;">{{ cust.supplied_value }}</td>
+            <td style="text-align: right;">
+                <a style="cursor: pointer;" onclick="$(this).closest('td').find('.req-details-div').toggle('fast');">
+                    {{ cust.requested_value }}
+                </a>
+
+                <div class="req-details-div" style="display: none; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: #444444; padding: 5% 5% 3% 5%; z-index: 999;">
+                    <div style="position: relative; text-align: center; background-color: white; width: 100%; height: 100%; padding: 1% 2%; overflow: auto;">
+                        <div style="position: absolute; top: 10px; right: 10px;">
+                            <label class="label label-danger label-sm" style="font-size: 1.1em; vertical-align: middle; cursor: pointer;"
+                                   onclick="$(this).closest('.req-details-div').toggle('fast');">
+                                ×
+                            </label>
+                        </div>
+                        <h4>{{ _('Requested products by customer') }}: {{ cust.name }}</h4>
+                        <h4>{{ _('Year and month') }}: {{ curr_year }}/{{ curr_month }}</h4>
+                        <table class="table table-bordered table-condensed" style="font-size: 0.9em">
+                            <tr>
+                                <th>{{ _('Code') }}</th>
+                                <th>{{ _('Description CS') }}</th>
+                                <th>{{ _('Description JP') }}</th>
+                                <th style="text-align: right;">{{ _('Order ID') }}</th>
+                                <th style="text-align: right;">{{ _('Retail price') }}</th>
+                                <th style="text-align: right;">{{ _('Quantity') }}</th>
+                            </tr>
+                            {% for rp in cust.requested_products %}
+                            <tr>
+                                <td style="text-align: left;">{{ rp.product.code }}</td>
+                                <td style="text-align: left;">{{ rp.product.desc_CS }}</td>
+                                <td style="text-align: left;">{{ rp.product.desc_JP }}</td>
+                                <td style="text-align: right;">
+                                    <a href="{{ url_for('request_detail', id=rp.request_id) }}">{{ rp.request_id }}</a>
+                                    &nbsp;({{ momentjs(rp.request.created_dt).format('LLL') }})
+                                </td>
+                                <td style="text-align: right;">{{ rp.product.price_retail }}</td>
+                                <td style="text-align: right;">{{ rp.quantity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <div style="text-align: left; color: grey;">
+                            <p>{{ _('All the above prices are retail prices. Discount has to be subtracted.') }}<br/>
+                            {{ _("This customer's base discount") }}: <span style="color: crimson">{{ cust.base_discount * 100 }}%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </td>
+            <td style="text-align: right;">
+                                <a style="cursor: pointer;" onclick="$(this).closest('td').find('.sup-details-div').toggle('fast');">
+                    {{ cust.supplied_value }}
+                </a>
+
+                <div class="sup-details-div" style="display: none; width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: #444444; padding: 5% 5% 3% 5%; z-index: 999;">
+                    <div style="position: relative; text-align: center; background-color: white; width: 100%; height: 100%; padding: 1% 2%; overflow: auto;">
+                        <div style="position: absolute; top: 10px; right: 10px;">
+                            <label class="label label-danger label-sm" style="font-size: 1.1em; vertical-align: middle; cursor: pointer;"
+                                   onclick="$(this).closest('.sup-details-div').toggle('fast');">
+                                ×
+                            </label>
+                        </div>
+                        <h4>{{ _('Supplied products by customer') }}: {{ cust.name }}</h4>
+                        <h4>{{ _('Year and month') }}: {{ curr_year }}/{{ curr_month }}</h4>
+                        <table class="table table-bordered table-condensed" style="font-size: 0.9em">
+                            <tr>
+                                <th>{{ _('Code') }}</th>
+                                <th>{{ _('Description CS') }}</th>
+                                <th>{{ _('Description JP') }}</th>
+                                <th>{{ _('Supply ID') }}</th>
+                                <th style="text-align: right;">{{ _('Retail price') }}</th>
+                                <th style="text-align: right;">{{ _('Quantity') }}</th>
+                            </tr>
+                            {% for sp in cust.supplied_products %}
+                            <tr>
+                                <td style="text-align: left;">{{ sp.product.code }}</td>
+                                <td style="text-align: left;">{{ sp.product.desc_CS }}</td>
+                                <td style="text-align: left;">{{ sp.product.desc_JP }}</td>
+                                <td style="text-align: right;">
+                                    <a href="{{ url_for('supply', id=sp.supply_id) }}">{{ sp.supply_id }}</a>
+                                    &nbsp;({{ momentjs(sp.supply.created_dt).format('LLL') }})
+                                </td>
+                                <td style="text-align: right;">{{ sp.product.price_retail }}</td>
+                                <td style="text-align: right;">{{ sp.quantity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <div style="text-align: left; color: grey;">
+                            <p>{{ _('All the above prices are retail prices. Discount has to be subtracted.') }}<br/>
+                            {{ _("This customer's base discount") }}: <span style="color: crimson">{{ cust.base_discount * 100 }}%</span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </td>
         </tr>
         {% endfor %}
         {% endif %}
-        <tr style="background-color: transparent !important;" class="alert-info">
+        <tr style="background-color: transparent !important;" class="alert-warning">
             <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ _('Total:') }}</th>
             <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ sum_request_values }}</th>
             <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ sum_supply_values }}</th>
