@@ -158,6 +158,11 @@ def recommendedshares(id=None):
         curr_month = now.month
     else:
         curr_month = int(curr_month)
+    curr_year_end = curr_year
+    curr_month_end = curr_month
+    if curr_month == 12:
+        curr_year_end += 1
+        curr_month_end = 1
 
     recommended = []
     sum_request_values = 0
@@ -165,7 +170,7 @@ def recommendedshares(id=None):
     if customers_with_recommended:
         recommended = next((x for x in customers_with_recommended if x.id == curr_id), None).recommended_customers
         start_dt = datetime.datetime(curr_year, curr_month, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
-        end_dt = datetime.datetime(curr_year, curr_month+1, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
+        end_dt = datetime.datetime(curr_year_end, curr_month_end, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
         for cust in recommended:
             cust.requested_value = 0
             cust.supplied_value = 0
