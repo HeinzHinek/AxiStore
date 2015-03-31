@@ -194,6 +194,7 @@ class AddCustomerForm(Form):
     base_discount = IntegerField('base_discount', [validators.input_required(),
                                                    validators.NumberRange(min=0, max=100)])
     next_nohinsho_letter = StringField('next_nohinsho_letter', default='A')
+    recommender = SelectField(lazy_gettext('Recommender'), coerce=int)
     company_name = StringField('company_name', [validators.data_required(),
                                 validators.length(max=100)])
     post_code1 = StringField('post_code1', [validators.length(max=3),

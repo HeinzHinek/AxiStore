@@ -279,12 +279,17 @@ class DeliveredProducts(db.Model):
 
 
 class Customer(db.Model):
+    __tablename__ = 'customer'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     email = db.Column(db.String(120))
     customer_type = db.Column(db.SmallInteger, default=CUSTOMER_TYPES['TYPE_CUSTOMER'])
     order_no = db.Column(db.Integer)
     base_discount = db.Column(db.Float)
+
+    # Reference to customer who recommended this customer
+    recommender_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+    recommended_customers = db.relationship('Customer', backref=db.backref('recommender', remote_side=[id]))
 
     company_name = db.Column(db.String(100))
     post_code = db.Column(db.Integer())

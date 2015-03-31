@@ -76,6 +76,22 @@ $(document).ready(function() {
                         {% endfor %}
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <label>{{ _('Recommended by') }}:</label>
+                        <div class="input-group">
+                            <div style="float: left;">
+                                {{form.recommender(id="recommender_select", class="form-control")}}
+                            </div>
+                        </div>
+                        {% for error in form.errors.recommender %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </td>
+                </tr>
 
                 <tr>
                     <td>

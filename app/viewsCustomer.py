@@ -3,11 +3,11 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddCustomerForm
-from models import Customer
+from models import Customer, Product, Request, RequestedProducts, Supply, SuppliedProducts
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
-import re
+import re, datetime
 
 
 @app.route('/customers')
@@ -24,12 +24,22 @@ def customers(page=1):
 @login_required
 def addCustomer():
     form = AddCustomerForm()
+
+    form.recommender.choices = [(0, '')]
+    poss_customers = Customer.query\
+        .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER']).all()
+    for cust in poss_customers:
+        form.recommender.choices.append((cust.id, cust.name))
+
     if form.validate_on_submit():
         customer = Customer()
 
         customer.name = form.name.data
         customer.email = form.email.data
         customer.base_discount = int(form.base_discount.data)/100.0
+
+        if form.recommender.data and form.recommender.data > 0:
+                customer.recommender_id = form.recommender.data
 
         customer.company_name = form.company_name.data
         if form.post_code1.data and form.post_code2.data:
@@ -58,6 +68,13 @@ def editCustomer(id=0):
         return redirect(url_for('customers'))
     form = AddCustomerForm(obj=customer)
 
+    form.recommender.choices = [(0, '')]
+    poss_customers = Customer.query\
+        .filter(Customer.customer_type == CUSTOMER_TYPES['TYPE_CUSTOMER'])\
+        .filter(Customer.id != customer.id).all()
+    for cust in poss_customers:
+        form.recommender.choices.append((cust.id, cust.name))
+
     if form.is_submitted():
         #delete customer
         if 'delete' in request.form:
@@ -75,6 +92,11 @@ def editCustomer(id=0):
 
             if nohinsho_letter and len(nohinsho_letter) == 1 and re.match("^[A-Z]+$", nohinsho_letter):
                 customer.order_no = ord(nohinsho_letter) - 65
+
+            if form.recommender.data and form.recommender.data > 0:
+                customer.recommender_id = form.recommender.data
+            else:
+                customer.recommender_id = None
 
             customer.company_name = form.company_name.data
             if form.post_code1.data and form.post_code2.data:
@@ -95,6 +117,7 @@ def editCustomer(id=0):
         form.next_nohinsho_letter.data = chr(customer.order_no + 65)
     else:
         form.next_nohinsho_letter.data = 'A'
+    selected = customer.recommender_id if customer.recommender_id else 0
     if customer.post_code:
         post_code = str(customer.post_code)
     else:
@@ -105,4 +128,68 @@ def editCustomer(id=0):
     return render_template('settings/editCustomer.html',
                            title=gettext("Edit Customer"),
                            customer=customer,
+                           selected=selected,
                            form=form)
+
+
+@app.route('/settings/recommendedshares')
+@app.route('/settings/recommendedshares/<int:id>')
+@login_required
+def recommendedshares(id=None):
+
+    customers_with_recommended = Customer.query.filter(Customer.recommended_customers.any()).all()
+    if customers_with_recommended:
+        if not id:
+            curr_id = customers_with_recommended[0].id
+        else:
+            curr_id = id
+
+    curr_year = request.args.get('curr_year')
+    curr_month = request.args.get('curr_month')
+
+    now = datetime.datetime.utcnow() - datetime.timedelta(hours=9)
+    if not curr_year:
+        curr_year = now.year
+    else:
+        curr_year = int(curr_year)
+    if not curr_month:
+        curr_month = now.month
+    else:
+        curr_month = int(curr_month)
+
+    recommended = next((x for x in customers_with_recommended if x.id == curr_id), None).recommended_customers
+    if recommended:
+        start_dt = datetime.datetime(curr_year, curr_month, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
+        end_dt = datetime.datetime(curr_year, curr_month+1, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
+        sum_request_values = 0
+        sum_supply_values = 0
+        for cust in recommended:
+            cust.requested_value = 0
+            cust.supplied_value = 0
+            rp = RequestedProducts.query\
+                .join(Request).filter(Request.customer_id == cust.id)\
+                .filter(Request.created_dt >= start_dt)\
+                .filter(Request.created_dt < end_dt)\
+                .all()
+            for r in rp:
+                cust.requested_value += r.quantity * r.product.price_retail
+            sp = SuppliedProducts.query\
+                .join(Supply).filter(Supply.customer_id == cust.id)\
+                .filter(Supply.created_dt >= start_dt)\
+                .filter(Supply.created_dt < end_dt)\
+                .all()
+            for s in sp:
+                cust.supplied_value += s.quantity * s.product.price_retail
+            sum_request_values += cust.requested_value
+            sum_supply_values += cust.supplied_value
+
+    return render_template('settings/recommendedshares.html',
+                           title=gettext("Sales of Recommended Customers"),
+                           customers_with_recommended=customers_with_recommended,
+                           recommended=recommended,
+                           sum_request_values=sum_request_values,
+                           sum_supply_values=sum_supply_values,
+                           curr_id=curr_id,
+                           curr_year=curr_year,
+                           curr_month=curr_month,
+                           this_year=now.year)
