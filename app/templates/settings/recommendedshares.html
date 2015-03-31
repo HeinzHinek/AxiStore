@@ -47,7 +47,7 @@
             </td>
         </tr>
         <tr>
-            <td style="padding: 5px 10px;">
+            <td style="padding: 5px 10px; vertical-align: top;">
                 <div class="list-group">
                     {% for customer in customers_with_recommended %}
                         <a href="{{ url_for('recommendedshares', id=customer.id, curr_year=curr_year, curr_month=curr_month) }}" style="padding: 5px 10px;"
@@ -85,11 +85,12 @@
 </div>
 
 <div class="row">
-    <table class="table table-striped table-bordered table-hover table-condensed">
+{% if customers_with_recommended %}
+    <table class="table table-striped table-bordered table-hover table-condensed" style="border: 2px solid #bbbbbb;">
         <tr>
-            <th>{{ _('Recommended Customer') }}</th>
-            <th style="text-align: right;">{{ _('Requested products value') }}
-            <th style="text-align: right;">{{ _('Supplied products value') }}</th>
+            <th style="border-bottom: 2px solid #bbbbbb;">{{ _('Recommended Customer') }}</th>
+            <th style="text-align: right; border-bottom: 2px solid #bbbbbb;">{{ _('Requested products value') }}
+            <th style="text-align: right; border-bottom: 2px solid #bbbbbb;">{{ _('Supplied products value') }}</th>
         </tr>
 
         {% if recommended %}
@@ -101,12 +102,20 @@
         </tr>
         {% endfor %}
         {% endif %}
-        <tr>
-            <th style="text-align: right;">{{ _('Total:') }}</th>
-            <th style="text-align: right;">{{ sum_request_values }}</th>
-            <th style="text-align: right;">{{ sum_supply_values }}</th>
+        <tr style="background-color: transparent !important;" class="alert-info">
+            <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ _('Total:') }}</th>
+            <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ sum_request_values }}</th>
+            <th style="text-align: right; border-top: 2px solid #bbbbbb;">{{ sum_supply_values }}</th>
+        </tr>
+        <tr style="background-color: transparent !important;" class="alert-success">
+            <th style="text-align: right;">{{ (base_share * 100) }}% {{ _('Share:') }}</th>
+            <th style="text-align: right;">{{ sum_request_values * base_share }}</th>
+            <th style="text-align: right;">{{ sum_supply_values * base_share }}</th>
         </tr>
     </table>
+{% else %}
+    <h4>{{ _('No recommended customers found.') }}</h4>
+{% endif %}
 </div>
 
 {% endblock %}

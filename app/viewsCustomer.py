@@ -3,9 +3,9 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddCustomerForm
-from models import Customer, Product, Request, RequestedProducts, Supply, SuppliedProducts
+from models import Customer, Request, RequestedProducts, Supply, SuppliedProducts
 from flask_login import login_required
-from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
+from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES, BASE_SHARE_FROM_RECOMMENDED
 from flask.ext.babel import gettext
 import re, datetime
 
@@ -143,6 +143,8 @@ def recommendedshares(id=None):
             curr_id = customers_with_recommended[0].id
         else:
             curr_id = id
+    else:
+        curr_id = None
 
     curr_year = request.args.get('curr_year')
     curr_month = request.args.get('curr_month')
@@ -157,12 +159,13 @@ def recommendedshares(id=None):
     else:
         curr_month = int(curr_month)
 
-    recommended = next((x for x in customers_with_recommended if x.id == curr_id), None).recommended_customers
-    if recommended:
+    recommended = []
+    sum_request_values = 0
+    sum_supply_values = 0
+    if customers_with_recommended:
+        recommended = next((x for x in customers_with_recommended if x.id == curr_id), None).recommended_customers
         start_dt = datetime.datetime(curr_year, curr_month, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
         end_dt = datetime.datetime(curr_year, curr_month+1, 1, 0, 0, 0) - datetime.timedelta(hours=9)  # Japanese timezone
-        sum_request_values = 0
-        sum_supply_values = 0
         for cust in recommended:
             cust.requested_value = 0
             cust.supplied_value = 0
@@ -192,4 +195,5 @@ def recommendedshares(id=None):
                            curr_id=curr_id,
                            curr_year=curr_year,
                            curr_month=curr_month,
-                           this_year=now.year)
+                           this_year=now.year,
+                           base_share=BASE_SHARE_FROM_RECOMMENDED)

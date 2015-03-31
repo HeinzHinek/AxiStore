@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-27 16:56+0900\n"
-"PO-Revision-Date: 2015-03-27 16:58+0900\n"
+"POT-Creation-Date: 2015-03-31 15:13+0900\n"
+"PO-Revision-Date: 2015-03-31 15:23+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -92,51 +92,52 @@ msgstr "不明"
 msgid "year, "
 msgstr "年"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:67
 msgid "January"
 msgstr "1月"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:68
 msgid "February"
 msgstr "2月"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:69
 msgid "March"
 msgstr "3月"
 
-#: app/csvHelper.py:189
+#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:70
 msgid "April"
 msgstr "4月"
 
 #: app/csvHelper.py:189 app/templates/index.html:286
+#: app/templates/settings/recommendedshares.html:71
 msgid "May"
 msgstr "5月"
 
-#: app/csvHelper.py:190
+#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:72
 msgid "June"
 msgstr "6月"
 
-#: app/csvHelper.py:190
+#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:73
 msgid "July"
 msgstr "7月"
 
-#: app/csvHelper.py:190
+#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:74
 msgid "August"
 msgstr "8月"
 
-#: app/csvHelper.py:190
+#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:75
 msgid "September"
 msgstr "9月"
 
-#: app/csvHelper.py:190
+#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:76
 msgid "October"
 msgstr "10月"
 
-#: app/csvHelper.py:191
+#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:77
 msgid "November"
 msgstr "11月"
 
-#: app/csvHelper.py:191
+#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:78
 msgid "December"
 msgstr "12月"
 
@@ -161,7 +162,7 @@ msgstr "ユーザー名"
 #: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
 #: app/templates/settings/editContact.html:73
-#: app/templates/settings/editCustomer.html:71
+#: app/templates/settings/editCustomer.html:73
 msgid "Email"
 msgstr "Eメール"
 
@@ -242,7 +243,7 @@ msgstr "ユーザの言語"
 msgid "Name"
 msgstr "名前"
 
-#: app/forms.py:133 app/forms.py:220 app/templates/shop/shop.html:301
+#: app/forms.py:133 app/forms.py:221 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "カテゴリー"
 
@@ -250,15 +251,19 @@ msgstr "カテゴリー"
 msgid "Average days to deliver"
 msgstr "入荷平均日数"
 
-#: app/forms.py:221
+#: app/forms.py:197
+msgid "Recommender"
+msgstr "推薦者"
+
+#: app/forms.py:222
 msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/forms.py:222 app/templates/shop/shop.html:310
+#: app/forms.py:223 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "検索"
 
-#: app/forms.py:226 app/templates/deliveries/delivery.html:27
+#: app/forms.py:227 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
 #: app/templates/orders/createOrder.html:239
 #: app/templates/orders/order.html:27
@@ -377,29 +382,33 @@ msgstr "連絡先の編集"
 msgid "Customers"
 msgstr "お客様一覧"
 
-#: app/viewsCustomer.py:45
+#: app/viewsCustomer.py:55
 msgid "New customer successfully added."
 msgstr "新しいお客様が追加されました。"
 
-#: app/viewsCustomer.py:48 app/templates/settings/addCustomer.html:24
+#: app/viewsCustomer.py:58 app/templates/settings/addCustomer.html:24
 msgid "Add New Customer"
 msgstr "お客様の登録"
 
-#: app/viewsCustomer.py:57 app/viewsRequest.py:94
+#: app/viewsCustomer.py:67 app/viewsRequest.py:94
 msgid "Customer not found."
 msgstr "お客様は不明です。"
 
-#: app/viewsCustomer.py:66
+#: app/viewsCustomer.py:83
 msgid "This operation is not allowed at the moment."
 msgstr "この操作は現在のところ使えません。"
 
-#: app/viewsCustomer.py:90
+#: app/viewsCustomer.py:112
 msgid "Customer successfully changed."
 msgstr "お客様の情報が変更されました。"
 
-#: app/viewsCustomer.py:106 app/templates/settings/editCustomer.html:41
+#: app/viewsCustomer.py:129 app/templates/settings/editCustomer.html:43
 msgid "Edit Customer"
 msgstr "お客様の情報を編集"
+
+#: app/viewsCustomer.py:190 app/templates/settings/recommendedshares.html:33
+msgid "Sales of Recommended Customers"
+msgstr "推薦されたお客様の売り上げ"
 
 #: app/viewsDelivery.py:21 app/templates/navbar_admin.html:43
 msgid "Deliveries"
@@ -741,8 +750,8 @@ msgstr "OK"
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
 #: app/templates/settings/contacts.html:38
 #: app/templates/settings/contacts.html:40
-#: app/templates/settings/customers.html:49
 #: app/templates/settings/customers.html:51
+#: app/templates/settings/customers.html:53
 #: app/templates/settings/makers.html:46 app/templates/settings/makers.html:48
 #: app/templates/settings/users.html:43 app/templates/settings/users.html:45
 msgid "Previous"
@@ -751,8 +760,8 @@ msgstr "前"
 #: app/templates/_pagination.html:28 app/templates/_pagination.html:30
 #: app/templates/settings/contacts.html:43
 #: app/templates/settings/contacts.html:45
-#: app/templates/settings/customers.html:54
 #: app/templates/settings/customers.html:56
+#: app/templates/settings/customers.html:58
 #: app/templates/settings/makers.html:51 app/templates/settings/makers.html:53
 #: app/templates/settings/users.html:48 app/templates/settings/users.html:50
 msgid "Next"
@@ -942,18 +951,22 @@ msgid "Manage customers"
 msgstr "お客様の管理"
 
 #: app/templates/settings.html:27
+msgid "Overview of recommended customers' sales"
+msgstr "推薦されたお客様の売り上げ一覧"
+
+#: app/templates/settings.html:30
 msgid "Manage contacts"
 msgstr "連絡先の管理"
 
-#: app/templates/settings.html:32
+#: app/templates/settings.html:35
 msgid "Import data from csv"
 msgstr "CSVファイルからデータをインポート"
 
-#: app/templates/settings.html:35
+#: app/templates/settings.html:38
 msgid "Export data as csv"
 msgstr "CSVファイルとしてデータをエキスポート"
 
-#: app/templates/settings.html:38
+#: app/templates/settings.html:41
 msgid "Customer codes management"
 msgstr "お客様のコードの管理"
 
@@ -1080,7 +1093,7 @@ msgstr "メーカーから入荷の詳細"
 #: app/templates/requests/request.html:9
 #: app/templates/settings/editCategory.html:16
 #: app/templates/settings/editContact.html:21
-#: app/templates/settings/editCustomer.html:47
+#: app/templates/settings/editCustomer.html:49
 #: app/templates/settings/editMaker.html:18
 #: app/templates/supplies/supply.html:9
 msgid "Back to the list"
@@ -1224,10 +1237,10 @@ msgstr "次へ"
 #: app/templates/product/editProduct.html:326
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
-#: app/templates/settings/addCustomer.html:168
+#: app/templates/settings/addCustomer.html:184
 #: app/templates/settings/addMaker.html:17
 #: app/templates/settings/addUser.html:53
-#: app/templates/settings/editCustomer.html:206
+#: app/templates/settings/editCustomer.html:224
 #: app/templates/settings/editUser.html:54
 #: app/templates/supplies/supplyProducts.html:189
 msgid "Cancel"
@@ -1373,6 +1386,7 @@ msgid "pcs"
 msgstr "個"
 
 #: app/templates/mail/order_confirm.html:41
+#: app/templates/settings/recommendedshares.html:106
 #: app/templates/shop/orderconfirm.html:54
 #: app/templates/shop/placeorder.html:51
 msgid "Total:"
@@ -1715,6 +1729,7 @@ msgid "Accept a new order from customer"
 msgstr "お客様から注文を受け取る"
 
 #: app/templates/requests/createRequest.html:147
+#: app/templates/settings/recommendedshares.html:43
 #: app/templates/supplies/newSupply.html:34
 msgid "Select customer"
 msgstr "お客様の選択"
@@ -1822,48 +1837,54 @@ msgid "Company"
 msgstr "会社"
 
 #: app/templates/settings/addContact.html:100
-#: app/templates/settings/addCustomer.html:167
-#: app/templates/settings/editCustomer.html:204
+#: app/templates/settings/addCustomer.html:183
+#: app/templates/settings/editCustomer.html:222
 msgid "Save customer"
 msgstr "お客様を保存する"
 
 #: app/templates/settings/addCustomer.html:36
-#: app/templates/settings/editCustomer.html:57
+#: app/templates/settings/editCustomer.html:59
 msgid "Customer nickname"
 msgstr "お客様の略名"
 
 #: app/templates/settings/addCustomer.html:64
-#: app/templates/settings/editCustomer.html:85
+#: app/templates/settings/editCustomer.html:87
 msgid "Base discount"
 msgstr "基本割引"
 
-#: app/templates/settings/addCustomer.html:82
-#: app/templates/settings/editCustomer.html:119
+#: app/templates/settings/addCustomer.html:81
+#: app/templates/settings/customers.html:29
+#: app/templates/settings/editCustomer.html:120
+msgid "Recommended by"
+msgstr "推薦をしたお客様"
+
+#: app/templates/settings/addCustomer.html:98
+#: app/templates/settings/editCustomer.html:137
 msgid "Invoice address details"
 msgstr "所在地の詳細（インボイス用）"
 
-#: app/templates/settings/addCustomer.html:87
-#: app/templates/settings/editCustomer.html:124
+#: app/templates/settings/addCustomer.html:103
+#: app/templates/settings/editCustomer.html:142
 msgid "Company name"
 msgstr "会社名"
 
-#: app/templates/settings/addCustomer.html:101
-#: app/templates/settings/editCustomer.html:138
+#: app/templates/settings/addCustomer.html:117
+#: app/templates/settings/editCustomer.html:156
 msgid "Post code"
 msgstr "郵便番号"
 
-#: app/templates/settings/addCustomer.html:124
-#: app/templates/settings/editCustomer.html:161
+#: app/templates/settings/addCustomer.html:140
+#: app/templates/settings/editCustomer.html:179
 msgid "Address 1"
 msgstr "所在地その１"
 
-#: app/templates/settings/addCustomer.html:138
-#: app/templates/settings/editCustomer.html:175
+#: app/templates/settings/addCustomer.html:154
+#: app/templates/settings/editCustomer.html:193
 msgid "Address 2"
 msgstr "所在地その２"
 
-#: app/templates/settings/addCustomer.html:152
-#: app/templates/settings/editCustomer.html:189
+#: app/templates/settings/addCustomer.html:168
+#: app/templates/settings/editCustomer.html:207
 msgid "Address 3"
 msgstr "所在地その３"
 
@@ -1950,8 +1971,8 @@ msgstr "お客様のID"
 msgid "Company Name"
 msgstr "会社名"
 
-#: app/templates/settings/customers.html:29
-#: app/templates/settings/editCustomer.html:102
+#: app/templates/settings/customers.html:30
+#: app/templates/settings/editCustomer.html:104
 msgid "Next nohinsho letter"
 msgstr "次回の納品書の識別記号"
 
@@ -2042,11 +2063,11 @@ msgstr "連絡先を保存する"
 msgid "Delete contact"
 msgstr "連絡先の削除"
 
-#: app/templates/settings/editCustomer.html:8
+#: app/templates/settings/editCustomer.html:10
 msgid "Do you really want to delete this customer?"
 msgstr "本当にこのお客様を削除しますか？"
 
-#: app/templates/settings/editCustomer.html:205
+#: app/templates/settings/editCustomer.html:223
 msgid "Delete customer"
 msgstr "お客様の削除"
 
@@ -2154,6 +2175,34 @@ msgstr "マーカー名"
 #: app/templates/settings/makers.html:19
 msgid "Product Category"
 msgstr "カテゴリー名"
+
+#: app/templates/settings/recommendedshares.html:46
+msgid "Select year and month"
+msgstr "年月の選択"
+
+#: app/templates/settings/recommendedshares.html:80
+msgid "Set"
+msgstr "設定"
+
+#: app/templates/settings/recommendedshares.html:91
+msgid "Recommended Customer"
+msgstr "推薦されたお客様"
+
+#: app/templates/settings/recommendedshares.html:92
+msgid "Requested products value"
+msgstr "注文された商品の総額"
+
+#: app/templates/settings/recommendedshares.html:93
+msgid "Supplied products value"
+msgstr "納品した商品の総額"
+
+#: app/templates/settings/recommendedshares.html:111
+msgid "Share:"
+msgstr "シェア："
+
+#: app/templates/settings/recommendedshares.html:117
+msgid "No recommended customers found."
+msgstr "推薦されたお客様が一件もありません。"
 
 #: app/templates/settings/users.html:4
 msgid "List of Users"
