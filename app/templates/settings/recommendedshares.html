@@ -97,7 +97,16 @@
         {% for cust in recommended %}
         <tr>
             <td>{{ cust.name }}</td>
-            <td style="text-align: right;">
+            <td style="text-align: right; position: relative;">
+                {% if cust.request_alert %}
+                    <span class="glyphicon glyphicon-exclamation-sign" style="color: crimson; cursor: pointer;"
+                            onmouseover=" $(this).closest('td').find('.unset-prices-alert-div').show('fast') "
+                            onmouseout=" $(this).closest('td').find('.unset-prices-alert-div').hide('fast') "></span>
+                    <div class="unset-prices-alert-div shadowed-div" style="display: none; position: absolute; bottom: 30px; right: 20px;
+                        width: 150px; background-color: white;">
+                        {{ _('Some prices are not set!') }}
+                    </div>
+                {% endif %}
                 <a style="cursor: pointer;" onclick="$(this).closest('td').find('.req-details-div').toggle('fast');">
                     {{ cust.requested_value }}
                 </a>
@@ -130,7 +139,12 @@
                                     <a href="{{ url_for('request_detail', id=rp.request_id) }}">{{ rp.request_id }}</a>
                                     &nbsp;({{ momentjs(rp.request.created_dt).format('LLL') }})
                                 </td>
-                                <td style="text-align: right;">{{ rp.product.price_retail }}</td>
+                                <td style="text-align: right;" {% if not rp.product.price_retail %}class="alert-danger"{% endif %}>
+                                    {% if rp.product.price_retail %}{{ rp.product.price_retail }}
+                                    {% else %}
+                                        <span style="font-weight: bold; color: crimson;">?</span>
+                                    {% endif %}
+                                </td>
                                 <td style="text-align: right;">{{ rp.quantity }}</td>
                             </tr>
                             {% endfor %}
@@ -143,8 +157,17 @@
                 </div>
 
             </td>
-            <td style="text-align: right;">
-                                <a style="cursor: pointer;" onclick="$(this).closest('td').find('.sup-details-div').toggle('fast');">
+            <td style="text-align: right; position: relative;">
+                {% if cust.supply_alert %}
+                    <span class="glyphicon glyphicon-exclamation-sign" style="color: crimson; cursor: pointer;"
+                            onmouseover=" $(this).closest('td').find('.unset-prices-alert-div').show('fast') "
+                            onmouseout=" $(this).closest('td').find('.unset-prices-alert-div').hide('fast') "></span>
+                    <div class="unset-prices-alert-div shadowed-div" style="display: none; position: absolute; bottom: 30px; right: 20px;
+                        width: 150px; background-color: white;">
+                        {{ _('Some prices are not set!') }}
+                    </div>
+                {% endif %}
+                <a style="cursor: pointer;" onclick="$(this).closest('td').find('.sup-details-div').toggle('fast');">
                     {{ cust.supplied_value }}
                 </a>
 
@@ -176,7 +199,12 @@
                                     <a href="{{ url_for('supply', id=sp.supply_id) }}">{{ sp.supply_id }}</a>
                                     &nbsp;({{ momentjs(sp.supply.created_dt).format('LLL') }})
                                 </td>
-                                <td style="text-align: right;">{{ sp.product.price_retail }}</td>
+                                <td style="text-align: right;" {% if not sp.product.price_retail %}class="alert-danger"{% endif %}>
+                                    {% if sp.product.price_retail %}{{ sp.product.price_retail }}
+                                    {% else %}
+                                        <span style="font-weight: bold; color: crimson;">?</span>
+                                    {% endif %}
+                                </td>
                                 <td style="text-align: right;">{{ sp.quantity }}</td>
                             </tr>
                             {% endfor %}

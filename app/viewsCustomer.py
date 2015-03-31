@@ -159,7 +159,7 @@ def recommendedshares(id=None):
     else:
         curr_month = int(curr_month)
     curr_year_end = curr_year
-    curr_month_end = curr_month
+    curr_month_end = curr_month + 1
     if curr_month == 12:
         curr_year_end += 1
         curr_month_end = 1
@@ -182,7 +182,10 @@ def recommendedshares(id=None):
                 .all()
             cust.requested_products = rp
             for r in rp:
-                cust.requested_value += r.quantity * r.product.price_retail
+                if r.product.price_retail:
+                    cust.requested_value += r.quantity * r.product.price_retail
+                else:
+                    cust.request_alert = True
             sp = SuppliedProducts.query\
                 .join(Supply).filter(Supply.customer_id == cust.id)\
                 .filter(Supply.created_dt >= start_dt)\
@@ -191,7 +194,10 @@ def recommendedshares(id=None):
                 .all()
             cust.supplied_products = sp
             for s in sp:
-                cust.supplied_value += s.quantity * s.product.price_retail
+                if s.product.price_retail:
+                    cust.supplied_value += s.quantity * s.product.price_retail
+                else:
+                    cust.supply_alert = True
             sum_request_values += cust.requested_value
             sum_supply_values += cust.supplied_value
 
