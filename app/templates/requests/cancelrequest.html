@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(document).ready( function() {
+        $('#order-cancel-btn').click( function() {
+            if (confirm("{{ _('Do you really want to cancel this order? This action is irreversible!') }}")) {
+                $('#request-form').submit();
+            }
+        });
+    });
+</script>
+
+<style>
+body { background-color: #F2DEDE; }
+</style>
+
+<div class="row">
+    <h1>{{ _('Cancel Order from Customer') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+{% if request %}
+<form id="request-form" action="{{ url_for('cancelrequest', id=request.id) }}" name="cancelrequest" method="post">
+    {{form.hidden_tag()}}
+    <input type="hidden" name="request_id" value="{{ request.id }}">
+</form>
+
+<div class="row shadowed-div">
+    <h3>{{ _('Order details') }}</h3>
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        <tr>
+            <th class="info col-md-3">{{ _('Order ID') }}</th>
+            <td class="col-md-3">{{ request.id }}</td>
+            <th class="info info col-md-3">{{ _('Placed') }}</th>
+            <td class="col-md-3">{{ momentjs(request.created_dt).format('LLL') }}&nbsp;&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <th class="info info">{{ _('Received by') }}</th>
+            <td>{{ request.receiver.nickname }}</td>
+            {% if request.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+                <th class="info info">{{ _('Order no.') }}</th>
+                <td>Axis Mart, {{ _('order no.') }} {{ request.customer.order_no }}</td>
+            {% else %}
+                <th class="info info">{{ _('Customer') }}</th>
+                <td>{{ request.customer.name }}</td>
+            {% endif %}
+        </tr>
+    </table>
+
+    {% if products %}
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
+    <thead>
+        <tr>
+            <th>{{ _('Product code') }}</th>
+            <th>{{ _('Description CS') }}</th>
+            <th>{{ _('Description JP') }}</th>
+            <th>{{ _('Quantity') }}</th>
+            <th>{{ _('Supplied') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td class="clickable-td">{{ product.product.code }}</td>
+            <td class="clickable-td">{{ product.product.desc_CS }}</td>
+            <td class="clickable-td">{{ product.product.desc_JP }}</td>
+            <td class="clickable-td">{{ product.quantity }}</td>
+            <td class="clickable-td">{{ product.qty_supplied }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    <a href="
+        {% if request.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+            {{ url_for('axm_requests') }}
+        {% else %}
+            {{ url_for('requests') }}
+        {% endif %}
+        " class="btn btn-success">{{ _('Return') }}</a>
+    {% if request.check_completely_unsupplied() %}
+    <input type="button" id="order-cancel-btn" value="{{ _('Cancel this order') }}" class="btn btn-danger"/>
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endif %}
+
+{% endblock %}

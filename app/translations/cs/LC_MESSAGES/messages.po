@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-31 17:14+0900\n"
-"PO-Revision-Date: 2015-03-31 17:16+0900\n"
+"POT-Creation-Date: 2015-04-01 18:12+0900\n"
+"PO-Revision-Date: 2015-04-01 18:13+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -32,6 +32,7 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 #: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
+#: app/templates/requests/cancelrequest.html:56
 #: app/templates/requests/request.html:60
 #: app/templates/supplies/supply.html:59
 msgid "Product code"
@@ -58,8 +59,8 @@ msgstr "Plánovaná doba dodání"
 
 #: app/csvHelper.py:93 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
-#: app/templates/settings/recommendedshares.html:121
-#: app/templates/settings/recommendedshares.html:167
+#: app/templates/settings/recommendedshares.html:130
+#: app/templates/settings/recommendedshares.html:190
 msgid "Retail price"
 msgstr "Maloobch. cena"
 
@@ -407,7 +408,7 @@ msgstr "Zákazník úspěšně pozměněn."
 msgid "Edit Customer"
 msgstr "Upravit zákazníka"
 
-#: app/viewsCustomer.py:194 app/templates/settings/recommendedshares.html:33
+#: app/viewsCustomer.py:205 app/templates/settings/recommendedshares.html:33
 msgid "Sales of Recommended Customers"
 msgstr "Prodeje doporučeným zákazníkům"
 
@@ -507,6 +508,7 @@ msgid "Date and time of order was successfully changed."
 msgstr "Datum a čas objednávky byl úspěšně změněn."
 
 #: app/viewsOrder.py:158 app/templates/orders/order.html:5
+#: app/templates/requests/cancelrequest.html:30
 msgid "Order details"
 msgstr "Detaily objednávky"
 
@@ -597,6 +599,14 @@ msgstr "Detaily objednávky od zákazníka"
 #: app/viewsRequest.py:193
 msgid "Orders from customers for product"
 msgstr "Objednávky produktu zákazníky"
+
+#: app/viewsRequest.py:204
+msgid "Order not found!"
+msgstr "Objednávka nenalezena!"
+
+#: app/viewsRequest.py:229
+msgid "Cancel order from customer"
+msgstr "Stornovat objednávku od zákazníka"
 
 #: app/viewsSettings.py:24
 msgid "User List"
@@ -1025,12 +1035,13 @@ msgstr "Výrobce"
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:57
 #: app/templates/orders/ordermanagement.html:217
+#: app/templates/requests/cancelrequest.html:57
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
 #: app/templates/requests/request.html:61
-#: app/templates/settings/recommendedshares.html:118
-#: app/templates/settings/recommendedshares.html:164
+#: app/templates/settings/recommendedshares.html:127
+#: app/templates/settings/recommendedshares.html:187
 #: app/templates/supplies/supply.html:60
 #: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
@@ -1040,12 +1051,13 @@ msgstr "Popis ČJ"
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:58
 #: app/templates/orders/ordermanagement.html:215
+#: app/templates/requests/cancelrequest.html:58
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
 #: app/templates/requests/request.html:62
-#: app/templates/settings/recommendedshares.html:119
-#: app/templates/settings/recommendedshares.html:165
+#: app/templates/settings/recommendedshares.html:128
+#: app/templates/settings/recommendedshares.html:188
 #: app/templates/supplies/supply.html:61
 #: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
@@ -1121,11 +1133,12 @@ msgstr "zavřít"
 #: app/templates/deliveries/deliveryReport.html:20
 #: app/templates/mail/order_confirm.html:28 app/templates/orders/order.html:59
 #: app/templates/orders/productorders.html:46
+#: app/templates/requests/cancelrequest.html:59
 #: app/templates/requests/createRequest.html:241
 #: app/templates/requests/productrequests.html:46
 #: app/templates/requests/request.html:63
-#: app/templates/settings/recommendedshares.html:122
-#: app/templates/settings/recommendedshares.html:168
+#: app/templates/settings/recommendedshares.html:131
+#: app/templates/settings/recommendedshares.html:191
 #: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
@@ -1176,10 +1189,11 @@ msgstr "Zkompletované a uzavřené objednávky výrobci: "
 #: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
 #: app/templates/orders/productorders.html:43
 #: app/templates/requests/axm_requests.html:14
+#: app/templates/requests/cancelrequest.html:33
 #: app/templates/requests/productrequests.html:43
 #: app/templates/requests/request.html:18
 #: app/templates/requests/requests.html:14
-#: app/templates/settings/recommendedshares.html:120
+#: app/templates/settings/recommendedshares.html:129
 #: app/templates/supplies/supplyReport.html:59
 #: app/templates/supplies/supplyReport.html:81
 msgid "Order ID"
@@ -1190,6 +1204,7 @@ msgstr "ID objednávky"
 #: app/templates/maker/makerOrders.html:52 app/templates/orders/order.html:20
 #: app/templates/orders/orders.html:34
 #: app/templates/orders/productorders.html:44
+#: app/templates/requests/cancelrequest.html:35
 #: app/templates/requests/productrequests.html:44
 #: app/templates/requests/request.html:20
 msgid "Placed"
@@ -1262,8 +1277,8 @@ msgstr "Zrušit"
 #: app/templates/requests/createRequest.html:221
 #: app/templates/requests/createRequest.html:237
 #: app/templates/requests/productrequests.html:21
-#: app/templates/settings/recommendedshares.html:117
-#: app/templates/settings/recommendedshares.html:163
+#: app/templates/settings/recommendedshares.html:126
+#: app/templates/settings/recommendedshares.html:186
 #: app/templates/shop/_cart_table.html:5
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
@@ -1394,7 +1409,7 @@ msgid "pcs"
 msgstr "ks"
 
 #: app/templates/mail/order_confirm.html:41
-#: app/templates/settings/recommendedshares.html:196
+#: app/templates/settings/recommendedshares.html:224
 #: app/templates/shop/orderconfirm.html:54
 #: app/templates/shop/placeorder.html:51
 msgid "Total:"
@@ -1561,6 +1576,8 @@ msgid "Total sum:"
 msgstr "Celkový součet:"
 
 #: app/templates/orders/createOrder.html:249
+#: app/templates/settings/recommendedshares.html:107
+#: app/templates/settings/recommendedshares.html:167
 msgid "Some prices are not set!"
 msgstr "Některé ceny nejsou nastaveny!"
 
@@ -1707,6 +1724,7 @@ msgid "Orders from Axis Mart overview"
 msgstr "Přehled objednávek z Axis Martu"
 
 #: app/templates/requests/axm_requests.html:16
+#: app/templates/requests/cancelrequest.html:40
 #: app/templates/requests/request.html:41
 #: app/templates/requests/requests.html:16
 #: app/templates/supplies/supplyReport.html:61
@@ -1717,6 +1735,54 @@ msgstr "Příjemce"
 #: app/templates/requests/axm_requests.html:17
 msgid "Order No."
 msgstr "Č. obj."
+
+#: app/templates/requests/cancelrequest.html:7
+msgid "Do you really want to cancel this order? This action is irreversible!"
+msgstr "Chcete opravdu stornovat tuto objednávku? Tato akce je nevratná!"
+
+#: app/templates/requests/cancelrequest.html:19
+msgid "Cancel Order from Customer"
+msgstr "Stornovat objednávku od zákazníka"
+
+#: app/templates/requests/cancelrequest.html:43
+#: app/templates/requests/request.html:44
+msgid "Order no."
+msgstr "Č. obj."
+
+#: app/templates/requests/cancelrequest.html:44
+#: app/templates/requests/productrequests.html:55
+#: app/templates/requests/request.html:45
+#: app/templates/supplies/supplies.html:42
+#: app/templates/supplies/supply.html:45
+#: app/templates/supplies/supplyReport.html:14
+msgid "order no."
+msgstr "č. obj."
+
+#: app/templates/requests/cancelrequest.html:46
+#: app/templates/requests/request.html:47
+#: app/templates/requests/requests.html:17
+#: app/templates/requests/requests.html:24
+#: app/templates/supplies/supplies.html:32
+#: app/templates/supplies/supply.html:43
+#: app/templates/supplies/supplyReport.html:62
+#: app/templates/supplies/supplyReport.html:84
+msgid "Customer"
+msgstr "Zákazník"
+
+#: app/templates/requests/cancelrequest.html:60
+#: app/templates/requests/request.html:64
+msgid "Supplied"
+msgstr "Dodáno"
+
+#: app/templates/requests/cancelrequest.html:82
+#: app/templates/settings/editCatalog.html:194
+msgid "Back"
+msgstr "Zpět"
+
+#: app/templates/requests/cancelrequest.html:84
+#: app/templates/requests/request.html:89
+msgid "Cancel this order"
+msgstr "Stornovat tuto objednávku"
 
 #: app/templates/requests/createRequest.html:23
 msgid "Select a customer to receive order from!"
@@ -1776,32 +1842,6 @@ msgstr "Objednané produkty"
 #: app/templates/requests/productrequests.html:5
 msgid "Orders from customers for Product"
 msgstr "Objednávky produktu od zákazníků"
-
-#: app/templates/requests/productrequests.html:55
-#: app/templates/requests/request.html:45
-#: app/templates/supplies/supplies.html:42
-#: app/templates/supplies/supply.html:45
-#: app/templates/supplies/supplyReport.html:14
-msgid "order no."
-msgstr "č. obj."
-
-#: app/templates/requests/request.html:44
-msgid "Order no."
-msgstr "Č. obj."
-
-#: app/templates/requests/request.html:47
-#: app/templates/requests/requests.html:17
-#: app/templates/requests/requests.html:24
-#: app/templates/supplies/supplies.html:32
-#: app/templates/supplies/supply.html:43
-#: app/templates/supplies/supplyReport.html:62
-#: app/templates/supplies/supplyReport.html:84
-msgid "Customer"
-msgstr "Zákazník"
-
-#: app/templates/requests/request.html:64
-msgid "Supplied"
-msgstr "Dodáno"
 
 #: app/templates/requests/requests.html:5
 msgid "Orders from customers overview"
@@ -2033,10 +2073,6 @@ msgstr "Popis česky"
 msgid "Japanese Description"
 msgstr "Popis japonsky"
 
-#: app/templates/settings/editCatalog.html:194
-msgid "Back"
-msgstr "Zpět"
-
 #: app/templates/settings/editCatalog.html:195
 msgid "Save changes"
 msgstr "Uložit změny"
@@ -2206,41 +2242,41 @@ msgstr "Hodnota poptaných produktů"
 msgid "Supplied products value"
 msgstr "Hodnota dodaných produktů"
 
-#: app/templates/settings/recommendedshares.html:113
+#: app/templates/settings/recommendedshares.html:122
 msgid "Requested products by customer"
 msgstr "Produkty objednané zákazníkem"
 
-#: app/templates/settings/recommendedshares.html:114
-#: app/templates/settings/recommendedshares.html:160
+#: app/templates/settings/recommendedshares.html:123
+#: app/templates/settings/recommendedshares.html:183
 msgid "Year and month"
 msgstr "Rok a měsíc"
 
-#: app/templates/settings/recommendedshares.html:139
-#: app/templates/settings/recommendedshares.html:185
+#: app/templates/settings/recommendedshares.html:153
+#: app/templates/settings/recommendedshares.html:213
 msgid "All the above prices are retail prices. Discount has to be subtracted."
 msgstr ""
 "Všechny výše uvedené ceny jsou maloobchodní. Sleva musí být teprve odečtena."
 
-#: app/templates/settings/recommendedshares.html:140
-#: app/templates/settings/recommendedshares.html:186
+#: app/templates/settings/recommendedshares.html:154
+#: app/templates/settings/recommendedshares.html:214
 msgid "This customer's base discount"
 msgstr "Základní sleva tohoto zákazníka"
 
-#: app/templates/settings/recommendedshares.html:159
+#: app/templates/settings/recommendedshares.html:182
 msgid "Supplied products by customer"
 msgstr "Produkty dodané zákazníkovi"
 
-#: app/templates/settings/recommendedshares.html:166
+#: app/templates/settings/recommendedshares.html:189
 #: app/templates/supplies/supplies.html:29
 #: app/templates/supplies/supply.html:18
 msgid "Supply ID"
 msgstr "ID dodávky"
 
-#: app/templates/settings/recommendedshares.html:201
+#: app/templates/settings/recommendedshares.html:229
 msgid "Share:"
 msgstr "Podíl:"
 
-#: app/templates/settings/recommendedshares.html:207
+#: app/templates/settings/recommendedshares.html:235
 msgid "No recommended customers found."
 msgstr "Žádný doporučený zákazník nenalezen."
 

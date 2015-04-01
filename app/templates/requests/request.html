@@ -84,6 +84,11 @@
         {% endfor %}
     </tbody>
     </table>
+    {% if req.check_completely_unsupplied() %}
+    <a href="{{ url_for('cancelrequest', id=req.id) }}" class="btn btn-xs btn-danger" style="float: right;">
+        {{ _('Cancel this order') }}
+    </a>
+    {% endif %}
 </div>
 {% endif %}
 

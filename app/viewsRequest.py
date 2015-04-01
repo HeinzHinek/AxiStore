@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, flash, url_for, g, session
+from flask import render_template, redirect, flash, url_for, g, session, request
 from app import app, db
-from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm
+from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm, SimpleSubmitForm
 from models import Request, Product, RequestedProducts, Customer, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
@@ -194,3 +194,40 @@ def productrequests(id):
                            product=product,
                            CUSTOMER_TYPES=CUSTOMER_TYPES,
                            requests=requests)
+
+
+@app.route('/cancelrequest/<int:id>', methods=['GET', 'POST'])
+@login_required
+def cancelrequest(id):
+    req = Request.query.get(id)
+    if not req:
+        flash(gettext('Order not found!'))
+        return redirect('requests')
+    products = req.products
+    form = SimpleSubmitForm()
+
+    if form.validate_on_submit():
+        req = Request.query.get(int(flask.request.form['request_id']))
+        products = req.products
+        for rp in products:
+            db.session.delete(rp)
+            pass
+        db.session.delete(req)
+
+        target = 'requests'
+        # Axis Mart order: delete the customer too
+        if req.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+            cust = Customer.query.get(req.customer.id)
+            db.session.delete(cust)
+            target = 'axm_' + target    # redirect to AxM orders
+
+        db.session.commit()
+        flash('Order was sucessfully cancelled and deleted.')
+        return redirect(target)
+
+    return render_template('requests/cancelrequest.html',
+                           title=gettext("Cancel order from customer"),
+                           request=req,
+                           products=products,
+                           CUSTOMER_TYPES=CUSTOMER_TYPES,
+                           form=form)

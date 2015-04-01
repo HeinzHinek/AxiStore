@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-03-31 17:14+0900\n"
-"PO-Revision-Date: 2015-03-31 17:19+0900\n"
+"POT-Creation-Date: 2015-04-01 18:12+0900\n"
+"PO-Revision-Date: 2015-04-01 18:17+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -31,6 +31,7 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 #: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
+#: app/templates/requests/cancelrequest.html:56
 #: app/templates/requests/request.html:60
 #: app/templates/supplies/supply.html:59
 msgid "Product code"
@@ -57,8 +58,8 @@ msgstr "入荷日程"
 
 #: app/csvHelper.py:93 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
-#: app/templates/settings/recommendedshares.html:121
-#: app/templates/settings/recommendedshares.html:167
+#: app/templates/settings/recommendedshares.html:130
+#: app/templates/settings/recommendedshares.html:190
 msgid "Retail price"
 msgstr "小売価格"
 
@@ -408,7 +409,7 @@ msgstr "お客様の情報が変更されました。"
 msgid "Edit Customer"
 msgstr "お客様の情報を編集"
 
-#: app/viewsCustomer.py:194 app/templates/settings/recommendedshares.html:33
+#: app/viewsCustomer.py:205 app/templates/settings/recommendedshares.html:33
 msgid "Sales of Recommended Customers"
 msgstr "推薦されたお客様の売り上げ"
 
@@ -508,6 +509,7 @@ msgid "Date and time of order was successfully changed."
 msgstr "発注の日時は変更されました。"
 
 #: app/viewsOrder.py:158 app/templates/orders/order.html:5
+#: app/templates/requests/cancelrequest.html:30
 msgid "Order details"
 msgstr "発注の詳細"
 
@@ -598,6 +600,14 @@ msgstr "受注の詳細"
 #: app/viewsRequest.py:193
 msgid "Orders from customers for product"
 msgstr "製品に対する受注"
+
+#: app/viewsRequest.py:204
+msgid "Order not found!"
+msgstr "注文が見つかりません！"
+
+#: app/viewsRequest.py:229
+msgid "Cancel order from customer"
+msgstr "お客様からの注文を取り消す"
 
 #: app/viewsSettings.py:24
 msgid "User List"
@@ -691,11 +701,11 @@ msgstr "データのダウンロード"
 
 #: app/viewsSupply.py:24
 msgid "Supplies"
-msgstr "供給"
+msgstr "納品"
 
 #: app/viewsSupply.py:63
 msgid "New Supply"
-msgstr "新規供給"
+msgstr "新規納品"
 
 #: app/viewsSupply.py:87
 msgid "No customer data!"
@@ -719,7 +729,7 @@ msgstr "新規供給の発送が成功しました。"
 
 #: app/viewsSupply.py:226
 msgid "Supply Report"
-msgstr "供給の報告"
+msgstr "納品の報告"
 
 #: app/viewsSupply.py:264
 msgid "Date and time of supply was successfully changed."
@@ -727,7 +737,7 @@ msgstr "出荷の日時は変更されました。"
 
 #: app/viewsSupply.py:268 app/templates/supplies/supply.html:5
 msgid "Supply details"
-msgstr "供給の詳細"
+msgstr "納品の詳細"
 
 #: app/viewsSupply.py:285
 msgid "No product data!"
@@ -787,7 +797,7 @@ msgstr "お客様からの受注"
 
 #: app/templates/index.html:263
 msgid "Supplies to customers"
-msgstr "お客様への供給"
+msgstr "お客様への納品"
 
 #: app/templates/index.html:269
 msgid "Ordered products total value"
@@ -906,11 +916,11 @@ msgstr "アクシスマートからの注文"
 
 #: app/templates/navbar_admin.html:67
 msgid "Supply to Customer"
-msgstr "お客様への供給"
+msgstr "お客様への納品"
 
 #: app/templates/navbar_admin.html:68
 msgid "Supply to Axis Mart order"
-msgstr "アクシスマート受注への供給"
+msgstr "アクシスマート受注への納品"
 
 #: app/templates/navbar_admin.html:79 app/templates/navbar_customer.html:24
 #: app/templates/navbar_maker.html:23
@@ -1026,12 +1036,13 @@ msgstr "メーカー"
 #: app/templates/deliveries/deliveryReport.html:18
 #: app/templates/orders/order.html:57
 #: app/templates/orders/ordermanagement.html:217
+#: app/templates/requests/cancelrequest.html:57
 #: app/templates/requests/createRequest.html:207
 #: app/templates/requests/createRequest.html:223
 #: app/templates/requests/createRequest.html:239
 #: app/templates/requests/request.html:61
-#: app/templates/settings/recommendedshares.html:118
-#: app/templates/settings/recommendedshares.html:164
+#: app/templates/settings/recommendedshares.html:127
+#: app/templates/settings/recommendedshares.html:187
 #: app/templates/supplies/supply.html:60
 #: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
@@ -1041,12 +1052,13 @@ msgstr "チェコ語の説明"
 #: app/templates/deliveries/deliveryReport.html:19
 #: app/templates/orders/order.html:58
 #: app/templates/orders/ordermanagement.html:215
+#: app/templates/requests/cancelrequest.html:58
 #: app/templates/requests/createRequest.html:210
 #: app/templates/requests/createRequest.html:224
 #: app/templates/requests/createRequest.html:240
 #: app/templates/requests/request.html:62
-#: app/templates/settings/recommendedshares.html:119
-#: app/templates/settings/recommendedshares.html:165
+#: app/templates/settings/recommendedshares.html:128
+#: app/templates/settings/recommendedshares.html:188
 #: app/templates/supplies/supply.html:61
 #: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
@@ -1122,11 +1134,12 @@ msgstr "閉じる"
 #: app/templates/deliveries/deliveryReport.html:20
 #: app/templates/mail/order_confirm.html:28 app/templates/orders/order.html:59
 #: app/templates/orders/productorders.html:46
+#: app/templates/requests/cancelrequest.html:59
 #: app/templates/requests/createRequest.html:241
 #: app/templates/requests/productrequests.html:46
 #: app/templates/requests/request.html:63
-#: app/templates/settings/recommendedshares.html:122
-#: app/templates/settings/recommendedshares.html:168
+#: app/templates/settings/recommendedshares.html:131
+#: app/templates/settings/recommendedshares.html:191
 #: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
 #: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
@@ -1177,10 +1190,11 @@ msgstr "全量入庫が完了した発注："
 #: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
 #: app/templates/orders/productorders.html:43
 #: app/templates/requests/axm_requests.html:14
+#: app/templates/requests/cancelrequest.html:33
 #: app/templates/requests/productrequests.html:43
 #: app/templates/requests/request.html:18
 #: app/templates/requests/requests.html:14
-#: app/templates/settings/recommendedshares.html:120
+#: app/templates/settings/recommendedshares.html:129
 #: app/templates/supplies/supplyReport.html:59
 #: app/templates/supplies/supplyReport.html:81
 msgid "Order ID"
@@ -1191,6 +1205,7 @@ msgstr "発注のID"
 #: app/templates/maker/makerOrders.html:52 app/templates/orders/order.html:20
 #: app/templates/orders/orders.html:34
 #: app/templates/orders/productorders.html:44
+#: app/templates/requests/cancelrequest.html:35
 #: app/templates/requests/productrequests.html:44
 #: app/templates/requests/request.html:20
 msgid "Placed"
@@ -1263,8 +1278,8 @@ msgstr "キャンセル"
 #: app/templates/requests/createRequest.html:221
 #: app/templates/requests/createRequest.html:237
 #: app/templates/requests/productrequests.html:21
-#: app/templates/settings/recommendedshares.html:117
-#: app/templates/settings/recommendedshares.html:163
+#: app/templates/settings/recommendedshares.html:126
+#: app/templates/settings/recommendedshares.html:186
 #: app/templates/shop/_cart_table.html:5
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
@@ -1397,7 +1412,7 @@ msgid "pcs"
 msgstr "個"
 
 #: app/templates/mail/order_confirm.html:41
-#: app/templates/settings/recommendedshares.html:196
+#: app/templates/settings/recommendedshares.html:224
 #: app/templates/shop/orderconfirm.html:54
 #: app/templates/shop/placeorder.html:51
 msgid "Total:"
@@ -1562,6 +1577,8 @@ msgid "Total sum:"
 msgstr "総計："
 
 #: app/templates/orders/createOrder.html:249
+#: app/templates/settings/recommendedshares.html:107
+#: app/templates/settings/recommendedshares.html:167
 msgid "Some prices are not set!"
 msgstr "設定していない価格があります！"
 
@@ -1708,6 +1725,7 @@ msgid "Orders from Axis Mart overview"
 msgstr "アクシスマートからの受注一覧"
 
 #: app/templates/requests/axm_requests.html:16
+#: app/templates/requests/cancelrequest.html:40
 #: app/templates/requests/request.html:41
 #: app/templates/requests/requests.html:16
 #: app/templates/supplies/supplyReport.html:61
@@ -1718,6 +1736,54 @@ msgstr "受取人："
 #: app/templates/requests/axm_requests.html:17
 msgid "Order No."
 msgstr "注文番号"
+
+#: app/templates/requests/cancelrequest.html:7
+msgid "Do you really want to cancel this order? This action is irreversible!"
+msgstr "本当にこの注文を取り消しますか？この動作は非可逆的です！"
+
+#: app/templates/requests/cancelrequest.html:19
+msgid "Cancel Order from Customer"
+msgstr "受注を取り消す"
+
+#: app/templates/requests/cancelrequest.html:43
+#: app/templates/requests/request.html:44
+msgid "Order no."
+msgstr "注文番号"
+
+#: app/templates/requests/cancelrequest.html:44
+#: app/templates/requests/productrequests.html:55
+#: app/templates/requests/request.html:45
+#: app/templates/supplies/supplies.html:42
+#: app/templates/supplies/supply.html:45
+#: app/templates/supplies/supplyReport.html:14
+msgid "order no."
+msgstr "注文番号"
+
+#: app/templates/requests/cancelrequest.html:46
+#: app/templates/requests/request.html:47
+#: app/templates/requests/requests.html:17
+#: app/templates/requests/requests.html:24
+#: app/templates/supplies/supplies.html:32
+#: app/templates/supplies/supply.html:43
+#: app/templates/supplies/supplyReport.html:62
+#: app/templates/supplies/supplyReport.html:84
+msgid "Customer"
+msgstr "お客様"
+
+#: app/templates/requests/cancelrequest.html:60
+#: app/templates/requests/request.html:64
+msgid "Supplied"
+msgstr "納品日時"
+
+#: app/templates/requests/cancelrequest.html:82
+#: app/templates/settings/editCatalog.html:194
+msgid "Back"
+msgstr "戻る"
+
+#: app/templates/requests/cancelrequest.html:84
+#: app/templates/requests/request.html:89
+msgid "Cancel this order"
+msgstr "この受注を取り消す"
 
 #: app/templates/requests/createRequest.html:23
 msgid "Select a customer to receive order from!"
@@ -1777,32 +1843,6 @@ msgstr "注文される製品"
 #: app/templates/requests/productrequests.html:5
 msgid "Orders from customers for Product"
 msgstr "製品に対する受注"
-
-#: app/templates/requests/productrequests.html:55
-#: app/templates/requests/request.html:45
-#: app/templates/supplies/supplies.html:42
-#: app/templates/supplies/supply.html:45
-#: app/templates/supplies/supplyReport.html:14
-msgid "order no."
-msgstr "注文番号"
-
-#: app/templates/requests/request.html:44
-msgid "Order no."
-msgstr "注文番号"
-
-#: app/templates/requests/request.html:47
-#: app/templates/requests/requests.html:17
-#: app/templates/requests/requests.html:24
-#: app/templates/supplies/supplies.html:32
-#: app/templates/supplies/supply.html:43
-#: app/templates/supplies/supplyReport.html:62
-#: app/templates/supplies/supplyReport.html:84
-msgid "Customer"
-msgstr "お客様"
-
-#: app/templates/requests/request.html:64
-msgid "Supplied"
-msgstr "供給日時"
 
 #: app/templates/requests/requests.html:5
 msgid "Orders from customers overview"
@@ -2034,10 +2074,6 @@ msgstr "チェコ語の説明"
 msgid "Japanese Description"
 msgstr "日本語の説明"
 
-#: app/templates/settings/editCatalog.html:194
-msgid "Back"
-msgstr "戻る"
-
 #: app/templates/settings/editCatalog.html:195
 msgid "Save changes"
 msgstr "変更を保存する"
@@ -2207,40 +2243,40 @@ msgstr "注文された商品の総額"
 msgid "Supplied products value"
 msgstr "納品した商品の総額"
 
-#: app/templates/settings/recommendedshares.html:113
+#: app/templates/settings/recommendedshares.html:122
 msgid "Requested products by customer"
 msgstr "注文したお客様の名前"
 
-#: app/templates/settings/recommendedshares.html:114
-#: app/templates/settings/recommendedshares.html:160
+#: app/templates/settings/recommendedshares.html:123
+#: app/templates/settings/recommendedshares.html:183
 msgid "Year and month"
 msgstr "年月"
 
-#: app/templates/settings/recommendedshares.html:139
-#: app/templates/settings/recommendedshares.html:185
+#: app/templates/settings/recommendedshares.html:153
+#: app/templates/settings/recommendedshares.html:213
 msgid "All the above prices are retail prices. Discount has to be subtracted."
 msgstr "上記の価格は全て小売価格です。割引は引いていません。"
 
-#: app/templates/settings/recommendedshares.html:140
-#: app/templates/settings/recommendedshares.html:186
+#: app/templates/settings/recommendedshares.html:154
+#: app/templates/settings/recommendedshares.html:214
 msgid "This customer's base discount"
 msgstr "このお客様の基本割引"
 
-#: app/templates/settings/recommendedshares.html:159
+#: app/templates/settings/recommendedshares.html:182
 msgid "Supplied products by customer"
 msgstr "納品したお客様の名前"
 
-#: app/templates/settings/recommendedshares.html:166
+#: app/templates/settings/recommendedshares.html:189
 #: app/templates/supplies/supplies.html:29
 #: app/templates/supplies/supply.html:18
 msgid "Supply ID"
-msgstr "供給ID"
+msgstr "納品ID"
 
-#: app/templates/settings/recommendedshares.html:201
+#: app/templates/settings/recommendedshares.html:229
 msgid "Share:"
 msgstr "シェア："
 
-#: app/templates/settings/recommendedshares.html:207
+#: app/templates/settings/recommendedshares.html:235
 msgid "No recommended customers found."
 msgstr "推薦されたお客様が一件もありません。"
 
@@ -2435,11 +2471,11 @@ msgstr "納品書のダウンロード"
 
 #: app/templates/supplies/newSupply.html:8
 msgid "Select a customer to supply to!"
-msgstr "供給先を選択してください！"
+msgstr "納品先を選択してください！"
 
 #: app/templates/supplies/newSupply.html:22
 msgid "Select customer to supply to"
-msgstr "供給先の選択"
+msgstr "納品先の選択"
 
 #: app/templates/supplies/newSupply.html:46
 msgid "Select order number:"
@@ -2447,7 +2483,7 @@ msgstr "注文番号の選択："
 
 #: app/templates/supplies/supplies.html:5
 msgid "Supplies to customers overview"
-msgstr "お客様への供給の一覧"
+msgstr "お客様への納品の一覧"
 
 #: app/templates/supplies/supplies.html:30
 #: app/templates/supplies/supply.html:20
@@ -2461,7 +2497,7 @@ msgstr "発送者"
 
 #: app/templates/supplies/supplyProducts.html:118
 msgid "Select products to supply"
-msgstr "供給する製品の選択"
+msgstr "納品する製品の選択"
 
 #: app/templates/supplies/supplyProducts.html:127
 msgid "Customer name"
@@ -2486,15 +2522,15 @@ msgstr "受注数量"
 
 #: app/templates/supplies/supplyProducts.html:188
 msgid "Confirm supply"
-msgstr "供給の確認"
+msgstr "納品の確認"
 
 #: app/templates/supplies/supplyReport.html:4
 msgid "New supply to customer report"
-msgstr "新規供給の報告"
+msgstr "新規納品の報告"
 
 #: app/templates/supplies/supplyReport.html:10
 msgid "Delivery to customer: "
-msgstr "お客様への供給："
+msgstr "お客様への納品："
 
 #: app/templates/supplies/supplyReport.html:16
 msgid "Sent by: "

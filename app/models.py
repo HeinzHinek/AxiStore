@@ -327,12 +327,19 @@ class Request(db.Model):
     def __init__(self):
         self.created_dt = datetime.utcnow()
 
-    #check whether request has unsupplied products, if not, switch active flg to False
+    # check whether request has unsupplied products, if not, switch active flg to False
     def check_completely_supplied(self):
         for rp in self.products:
             if rp.quantity != rp.qty_supplied:
                 return False
         self.active_flg = False
+        return True
+
+    # check whether no supplied products at all
+    def check_completely_unsupplied(self):
+        for rp in self.products:
+            if rp.qty_supplied > 0:
+                return False
         return True
 
 
