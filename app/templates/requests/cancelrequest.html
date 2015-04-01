@@ -79,7 +79,7 @@ body { background-color: #F2DEDE; }
         {% else %}
             {{ url_for('requests') }}
         {% endif %}
-        " class="btn btn-success">{{ _('Return') }}</a>
+        " class="btn btn-success">{{ _('Back') }}</a>
     {% if request.check_completely_unsupplied() %}
     <input type="button" id="order-cancel-btn" value="{{ _('Cancel this order') }}" class="btn btn-danger"/>
     {% endif %}
