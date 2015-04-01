@@ -149,7 +149,7 @@ def recommendedshares(id=None):
     curr_year = request.args.get('curr_year')
     curr_month = request.args.get('curr_month')
 
-    now = datetime.datetime.utcnow() - datetime.timedelta(hours=9)
+    now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
     if not curr_year:
         curr_year = now.year
     else:
