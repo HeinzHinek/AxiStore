@@ -253,9 +253,17 @@
             <td class="clickable-td">{{ product.code }}</td>
             <td class="clickable-td">
                 {% if g.user.language == 'ja' %}
-                {{ product.desc_JP }}
+                    {% if product.limited_flg %}
+                        <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_CS}}</font>
+                    {% else %}
+                        {{product.desc_JP}}
+                    {% endif %}
                 {% else %}
-                {{ product.desc_CS }}
+                    {% if product.limited_flg %}
+                        <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_CS}}</font>
+                    {% else %}
+                        {{product.desc_CS}}
+                    {% endif %}
                 {% endif %}
             </td>
             <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>
@@ -333,8 +341,11 @@
             {% endif %}
 
             <td class="noselect">
-                {% if product.net_stock < product.min_stock_limit %}
-                <input type="checkbox" id="order-check-{{ product.id }}" class="order-check table-checkbox-bigger">
+                {% if product.limited_flg %}
+                {% else %}
+                    {% if product.net_stock < product.min_stock_limit %}
+                    <input type="checkbox" id="order-check-{{ product.id }}" class="order-check table-checkbox-bigger">
+                    {% endif %}
                 {% endif %}
             </td>
 

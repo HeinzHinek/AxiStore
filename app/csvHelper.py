@@ -65,7 +65,10 @@ def generate_available_stock_csv(categories=[]):
     for product in products:
         dtd = product.maker.standard_delivery_days if product.maker.standard_delivery_days else None
         month_and_third = days_to_month_and_third(dtd)
-        text_dtd = month_and_third_to_text(month_and_third)
+        if product.limited_flg:
+            text_dtd = gettext('Product with limited number of items')
+        else:
+            text_dtd = month_and_third_to_text(month_and_third)
         columns = [product.code, product.desc_JP, product.available_qty, text_dtd]
         outcsv.writerow([unicode(column).encode('utf-8') for column in columns])
 

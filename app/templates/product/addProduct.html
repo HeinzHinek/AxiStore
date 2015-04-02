@@ -191,6 +191,20 @@
         </tr>
         <tr>
             <td>
+                <div class="input-group">
+                    <label>{{ _('Product with limited number of items') }}?&nbsp;&nbsp;</label>
+                    {{ form.limited_flg(style="width: 15px; height: 15px;") }}
+                </div>
+                {% for error in form.errors.limited_flg %}
+                <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    [{{error}}]
+                </div>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label>{{ _('Axis Mart node number') }}:</label>
                 <div class="input-group">
                     {{ form.axm_node(size=20, class="form-control", style="text-align: right") }}

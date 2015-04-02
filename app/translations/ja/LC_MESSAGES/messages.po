@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-01 18:12+0900\n"
-"PO-Revision-Date: 2015-04-01 18:17+0900\n"
+"POT-Creation-Date: 2015-04-02 12:16+0900\n"
+"PO-Revision-Date: 2015-04-02 12:18+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -27,7 +27,7 @@ msgstr "このページのアクセスにはログインが必要です。"
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSVファイルのアップロードと処理が成功しました。"
 
-#: app/csvHelper.py:63 app/csvHelper.py:93
+#: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
@@ -37,7 +37,7 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 msgid "Product code"
 msgstr "品番"
 
-#: app/csvHelper.py:63 app/csvHelper.py:93
+#: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/mail/order_confirm.html:26
 #: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
@@ -56,103 +56,108 @@ msgstr "在庫数"
 msgid "Planned time of delivery"
 msgstr "入荷日程"
 
-#: app/csvHelper.py:93 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:69 app/templates/product/addProduct.html:195
+#: app/templates/product/editProduct.html:274 app/templates/shop/shop.html:368
+msgid "Product with limited number of items"
+msgstr "個数限定商品"
+
+#: app/csvHelper.py:96 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 #: app/templates/settings/recommendedshares.html:130
 #: app/templates/settings/recommendedshares.html:190
 msgid "Retail price"
 msgstr "小売価格"
 
-#: app/csvHelper.py:93
+#: app/csvHelper.py:96
 msgid "Purchase price"
 msgstr "仕入価格"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 1 URL"
 msgstr "画像１URL"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 2 URL"
 msgstr "画像２URL"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 3 URL"
 msgstr "画像３URL"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 4 URL"
 msgstr "画像４URL"
 
-#: app/csvHelper.py:95
+#: app/csvHelper.py:98
 msgid "Image 5 URL"
 msgstr "画像５URL"
 
-#: app/csvHelper.py:184
+#: app/csvHelper.py:187
 msgid "unknown"
 msgstr "不明"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "year, "
 msgstr "年"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:67
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:67
 msgid "January"
 msgstr "1月"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:68
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:68
 msgid "February"
 msgstr "2月"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:69
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:69
 msgid "March"
 msgstr "3月"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:70
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:70
 msgid "April"
 msgstr "4月"
 
-#: app/csvHelper.py:189 app/templates/index.html:286
+#: app/csvHelper.py:192 app/templates/index.html:286
 #: app/templates/settings/recommendedshares.html:71
 msgid "May"
 msgstr "5月"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:72
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:72
 msgid "June"
 msgstr "6月"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:73
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:73
 msgid "July"
 msgstr "7月"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:74
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:74
 msgid "August"
 msgstr "8月"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:75
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:75
 msgid "September"
 msgstr "9月"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:76
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:76
 msgid "October"
 msgstr "10月"
 
-#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:77
+#: app/csvHelper.py:194 app/templates/settings/recommendedshares.html:77
 msgid "November"
 msgstr "11月"
 
-#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:78
+#: app/csvHelper.py:194 app/templates/settings/recommendedshares.html:78
 msgid "December"
 msgstr "12月"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", First third"
 msgstr "上旬"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", Second third"
 msgstr "中旬"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", Third third"
 msgstr "下旬"
 
@@ -160,7 +165,7 @@ msgstr "下旬"
 msgid "Nickname"
 msgstr "ユーザー名"
 
-#: app/forms.py:25 app/forms.py:101 app/forms.py:117 app/forms.py:134
+#: app/forms.py:25 app/forms.py:102 app/forms.py:118 app/forms.py:135
 #: app/templates/orders/ordersheet.html:19
 #: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
@@ -197,78 +202,78 @@ msgstr "新しいパスワードが確認用のパスワードと違います！
 msgid "New password confirmation"
 msgstr "パスワードの確認"
 
-#: app/forms.py:68
+#: app/forms.py:69
 msgid "(unknown)"
 msgstr "（不明）"
 
-#: app/forms.py:71
+#: app/forms.py:72
 msgid "Envelope"
 msgstr "封筒"
 
-#: app/forms.py:73
+#: app/forms.py:74
 msgid "YuPack"
 msgstr "ゆうパック"
 
-#: app/forms.py:75
+#: app/forms.py:76
 msgid "Box"
 msgstr "小包"
 
-#: app/forms.py:78 app/templates/product/addProduct.html:208
-#: app/templates/product/editProduct.html:287
+#: app/forms.py:79 app/templates/product/addProduct.html:222
+#: app/templates/product/editProduct.html:301
 msgid "Package size"
 msgstr "梱包のタイプ"
 
-#: app/forms.py:95 app/forms.py:115
+#: app/forms.py:96 app/forms.py:116
 msgid "User nickname"
 msgstr "ユーザー名"
 
-#: app/forms.py:97
+#: app/forms.py:98
 msgid "User password"
 msgstr "ユーザーのパスワード"
 
-#: app/forms.py:99
+#: app/forms.py:100
 msgid "Passwords must match"
 msgstr "確認用のパスワードが異なっています"
 
-#: app/forms.py:100
+#: app/forms.py:101
 msgid "Password confirmation"
 msgstr "パスワードの確認"
 
-#: app/forms.py:105 app/forms.py:121
+#: app/forms.py:106 app/forms.py:122
 msgid "User role"
 msgstr "ユーザーの役割"
 
-#: app/forms.py:111 app/forms.py:127
+#: app/forms.py:112 app/forms.py:128
 msgid "User language"
 msgstr "ユーザの言語"
 
-#: app/forms.py:131
+#: app/forms.py:132
 msgid "Name"
 msgstr "名前"
 
-#: app/forms.py:133 app/forms.py:221 app/templates/shop/shop.html:301
+#: app/forms.py:134 app/forms.py:222 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "カテゴリー"
 
-#: app/forms.py:135 app/templates/settings/makers.html:20
+#: app/forms.py:136 app/templates/settings/makers.html:20
 msgid "Average days to deliver"
 msgstr "入荷平均日数"
 
-#: app/forms.py:197
+#: app/forms.py:198
 msgid "Recommender"
 msgstr "推薦者"
 
-#: app/forms.py:222
+#: app/forms.py:223
 msgid "Available item only"
 msgstr "発注可能な商品のみ"
 
-#: app/forms.py:223 app/templates/shop/shop.html:310
+#: app/forms.py:224 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "検索"
 
-#: app/forms.py:227 app/templates/deliveries/delivery.html:27
+#: app/forms.py:228 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
-#: app/templates/orders/createOrder.html:239
+#: app/templates/orders/createOrder.html:256
 #: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
@@ -291,8 +296,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:209
-#: app/viewsOrder.py:211
+#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:213
+#: app/viewsOrder.py:215
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -418,7 +423,7 @@ msgid "Deliveries"
 msgstr "入庫"
 
 #: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:46
-#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:230
+#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:234
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
@@ -499,7 +504,7 @@ msgstr "新規発注を入力する"
 msgid "New order to maker was successfully created."
 msgstr "新規発注の登録が成功しました。"
 
-#: app/viewsOrder.py:123 app/viewsOrder.py:232
+#: app/viewsOrder.py:123 app/viewsOrder.py:236
 #: app/templates/orders/ordersheet.html:8
 msgid "Order Sheet Management"
 msgstr "発注書の管理"
@@ -513,39 +518,43 @@ msgstr "発注の日時は変更されました。"
 msgid "Order details"
 msgstr "発注の詳細"
 
-#: app/viewsOrder.py:173
+#: app/viewsOrder.py:177
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsOrder.py:207
+#: app/viewsOrder.py:211
 msgid "Minimum stock limit successfully updated."
 msgstr "最少在庫数の更新が成功しました。"
 
-#: app/viewsOrder.py:215 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:219 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "発注の管理"
 
-#: app/viewsOrder.py:228
+#: app/viewsOrder.py:232
 msgid "Email to maker sent succesfully."
 msgstr "メーカーへのメールの発信が成功しました。"
 
-#: app/viewsProduct.py:50
+#: app/viewsProduct.py:51
 msgid "New product successfully added."
 msgstr "新しい製品は追加されました。"
 
-#: app/viewsProduct.py:54 app/templates/product/addProduct.html:66
+#: app/viewsProduct.py:55 app/templates/product/addProduct.html:66
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:68 app/viewsRequest.py:133 app/viewsShop.py:144
+#: app/viewsProduct.py:69 app/viewsRequest.py:133 app/viewsShop.py:144
 msgid "Product not found."
 msgstr "製品は不明です。"
 
-#: app/viewsProduct.py:129
+#: app/viewsProduct.py:85
+msgid "Product has been deleted."
+msgstr "製品が削除されました。"
+
+#: app/viewsProduct.py:132
 msgid "Product successfully changed."
 msgstr "製品が変更されました。"
 
-#: app/viewsProduct.py:147 app/templates/product/editProduct.html:134
+#: app/viewsProduct.py:150 app/templates/product/editProduct.html:134
 msgid "Edit Product"
 msgstr "製品を変更する"
 
@@ -674,7 +683,7 @@ msgstr ""
 "申し訳ありませんが、お客様の顧客データは足りません。お手数ですが、カストマー"
 "サポートにお問い合わせください。"
 
-#: app/viewsShop.py:180 app/templates/orders/createOrder.html:241
+#: app/viewsShop.py:180 app/templates/orders/createOrder.html:258
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "発注を入力"
@@ -1256,9 +1265,9 @@ msgstr "次へ"
 #: app/templates/deliveries/newDelivery.html:94
 #: app/templates/deliveries/newDelivery.html:145
 #: app/templates/orders/createOrder.html:160
-#: app/templates/orders/createOrder.html:242
-#: app/templates/product/addProduct.html:244
-#: app/templates/product/editProduct.html:326
+#: app/templates/orders/createOrder.html:259
+#: app/templates/product/addProduct.html:258
+#: app/templates/product/editProduct.html:340
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:184
@@ -1310,7 +1319,7 @@ msgid "Delivered Quantity"
 msgstr "入庫数量"
 
 #: app/templates/deliveries/newDelivery.html:143
-#: app/templates/orders/createOrder.html:240
+#: app/templates/orders/createOrder.html:257
 #: app/templates/supplies/supplyProducts.html:187
 msgid "Modify"
 msgstr "修正"
@@ -1407,7 +1416,7 @@ msgstr "小計"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
+#: app/templates/shop/shop.html:391 app/templates/shop/shop.html:396
 msgid "pcs"
 msgstr "個"
 
@@ -1572,11 +1581,15 @@ msgstr "正味"
 msgid "Min. stock"
 msgstr "最少在庫数"
 
-#: app/templates/orders/createOrder.html:248
+#: app/templates/orders/createOrder.html:241
+msgid "(Limited product)"
+msgstr "（個数限定商品）"
+
+#: app/templates/orders/createOrder.html:265
 msgid "Total sum:"
 msgstr "総計："
 
-#: app/templates/orders/createOrder.html:249
+#: app/templates/orders/createOrder.html:266
 #: app/templates/settings/recommendedshares.html:107
 #: app/templates/settings/recommendedshares.html:167
 msgid "Some prices are not set!"
@@ -1655,6 +1668,12 @@ msgstr "単価"
 msgid "Retail Price"
 msgstr "小売価格"
 
+#: app/templates/orders/productorders.html:47
+#: app/templates/requests/productrequests.html:47
+#: app/templates/supplies/unsuppliedproducts.html:64
+msgid "Undelivered"
+msgstr "未納品"
+
 #: app/templates/product/addProduct.html:124
 #: app/templates/product/editProduct.html:203
 #: app/templates/settings/editCatalog.html:211
@@ -1672,23 +1691,23 @@ msgstr "日本語の説明"
 msgid "Unit price"
 msgstr "単価"
 
-#: app/templates/product/addProduct.html:194
-#: app/templates/product/editProduct.html:273
+#: app/templates/product/addProduct.html:208
+#: app/templates/product/editProduct.html:287
 msgid "Axis Mart node number"
 msgstr "アクシスマートのURL「ノード」番号"
 
-#: app/templates/product/addProduct.html:223
-#: app/templates/product/editProduct.html:302
+#: app/templates/product/addProduct.html:237
+#: app/templates/product/editProduct.html:316
 msgid "Catalog terms"
 msgstr "カタログキーワード"
 
-#: app/templates/product/addProduct.html:225
-#: app/templates/product/editProduct.html:304
+#: app/templates/product/addProduct.html:239
+#: app/templates/product/editProduct.html:318
 msgid "Edit terms"
 msgstr "キーワードを編集"
 
-#: app/templates/product/addProduct.html:243
-#: app/templates/product/editProduct.html:325
+#: app/templates/product/addProduct.html:257
+#: app/templates/product/editProduct.html:339
 msgid "Save product"
 msgstr "製品を保存"
 
@@ -1704,19 +1723,19 @@ msgstr "本当にこの画像を削除しますか？"
 msgid "This product has been deleted!"
 msgstr "この製品は削除されています！"
 
-#: app/templates/product/editProduct.html:327
+#: app/templates/product/editProduct.html:341
 msgid "Delete product"
 msgstr "製品の削除"
 
-#: app/templates/product/editProduct.html:336
+#: app/templates/product/editProduct.html:350
 msgid "Product images"
 msgstr "製品の画像"
 
-#: app/templates/product/editProduct.html:353
+#: app/templates/product/editProduct.html:367
 msgid "New image:"
 msgstr "新しい画像："
 
-#: app/templates/product/editProduct.html:356
+#: app/templates/product/editProduct.html:370
 msgid "upload"
 msgstr "アップロード"
 
@@ -1751,7 +1770,7 @@ msgid "Order no."
 msgstr "注文番号"
 
 #: app/templates/requests/cancelrequest.html:44
-#: app/templates/requests/productrequests.html:55
+#: app/templates/requests/productrequests.html:56
 #: app/templates/requests/request.html:45
 #: app/templates/supplies/supplies.html:42
 #: app/templates/supplies/supply.html:45
@@ -2436,31 +2455,31 @@ msgstr "ここ30日間の販売本数"
 msgid "high"
 msgstr "多い"
 
-#: app/templates/shop/shop.html:382
+#: app/templates/shop/shop.html:388
 msgid "Available:"
 msgstr "発注可能："
 
-#: app/templates/shop/shop.html:388
+#: app/templates/shop/shop.html:394
 msgid "On the way:"
 msgstr "取寄せ中："
 
-#: app/templates/shop/shop.html:393
+#: app/templates/shop/shop.html:399
 msgid "Retail Price:"
 msgstr "小売価格："
 
-#: app/templates/shop/shop.html:399
+#: app/templates/shop/shop.html:405
 msgid "Your Price:"
 msgstr "お客様の価格："
 
-#: app/templates/shop/shop.html:445
+#: app/templates/shop/shop.html:451
 msgid "Cart Content"
 msgstr "ショッピングカートの内容"
 
-#: app/templates/shop/shop.html:446
+#: app/templates/shop/shop.html:452
 msgid "Shopping cart is empty."
 msgstr "ショッピングカートに商品がありません。"
 
-#: app/templates/shop/shop.html:459
+#: app/templates/shop/shop.html:465
 msgid "No products found."
 msgstr "条件に一致する商品がありません。"
 
@@ -2559,10 +2578,6 @@ msgstr "完了ではないが部分的に入庫した受注："
 #: app/templates/supplies/unsuppliedproducts.html:30
 msgid "Overview of unsupplied products to customers"
 msgstr "お客様に納品していない商品の一覧"
-
-#: app/templates/supplies/unsuppliedproducts.html:64
-msgid "Undelivered"
-msgstr "未納品"
 
 #: app/templates/supplies/unsuppliedproducts.html:72
 msgid "Number of products reserved earlier by other customers."

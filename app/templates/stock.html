@@ -276,8 +276,20 @@ $(document).ready( function() {
             {% endif %}
         </td>
         <td class="clickable-td td-redir-edit td-border-left-1px {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.maker.name}}</td>
-        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_CS}}</td>
-        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">{{product.desc_JP}}</td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">
+            {% if product.limited_flg %}
+                <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_CS}}</font>
+            {% else %}
+                {{product.desc_CS}}
+            {% endif %}
+        </td>
+        <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}">
+            {% if product.limited_flg %}
+                <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_JP}}</font>
+            {% else %}
+                {{product.desc_JP}}
+            {% endif %}
+        </td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_unit}}</td>
         <td class="clickable-td td-redir-edit {% if loop.last %}td-border-bottom-2px{% endif %}" style="text-align: right;">{{product.price_retail}}</td>
 

@@ -62,7 +62,9 @@ class Product(db.Model):
 
     created_dt = db.Column(db.DateTime)
 
+    limited_flg = db.Column(db.Boolean, default=False)  # flag true if product unique or limited number
     active_flg = db.Column(db.Boolean, default=True)
+
     requested_products = db.relationship('RequestedProducts')
     ordered_products = db.relationship('OrderedProducts')
     catalog_terms = db.relationship('CatalogedProducts')

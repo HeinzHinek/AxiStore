@@ -189,8 +189,20 @@ function checkAndSumPrice() {
             <td class="no-border row-indicator-left"></td>
             <td>{{ product.code }}</td>
             <td>{% if product.maker_code %}{{ product.maker_code }}{% else %}{% endif %}</td>
-            <td>{{ product.desc_CS }}</td>
-            <td>{{ product.desc_JP }}</td>
+            <td>
+                {% if product.limited_flg %}
+                    <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_CS}}</font>
+                {% else %}
+                    {{product.desc_CS}}
+                {% endif %}
+            </td>
+            <td>
+                {% if product.limited_flg %}
+                    <font color="crimson"><span class="glyphicon glyphicon-time"></span>&nbsp;{{product.desc_JP}}</font>
+                {% else %}
+                    {{product.desc_JP}}
+                {% endif %}
+            </td>
 
             {% if product.qty_stock == None %}
             <td style="text-align: center; color: red;" class="warning clickable-td linked-td td-qty-edit td-border-left-2px">?
@@ -224,12 +236,17 @@ function checkAndSumPrice() {
                 {% if product.price_unit %}{{ product.price_unit }},-{% else %}?{% endif %}
             </td>
 
-            <td style="text-align: right;">{{ field.qty_order(size=10, class="form-control input-sm input-qty nums_only", style="text-align: right;") }}
-                {{ field.product_id(value=product.id) }}
-                <span class="span-qty-order" style="display: none; float: right;">0</span>
-            {% for error in field.qty_order.errors %}
-            <div class="div-error" style="color: red;">[{{error}}]</div>
-            {% endfor %}
+            <td style="text-align: right;">
+                {% if product.limited_flg %}
+                    {{ _('(Limited product)') }}
+                {% else %}
+                    {{ field.qty_order(size=10, class="form-control input-sm input-qty nums_only", style="text-align: right;") }}
+                    {{ field.product_id(value=product.id) }}
+                    <span class="span-qty-order" style="display: none; float: right;">0</span>
+                    {% for error in field.qty_order.errors %}
+                        <div class="div-error" style="color: red;">[{{error}}]</div>
+                    {% endfor %}
+                {% endif %}
             </td>
         </tr>
         {% endfor %}

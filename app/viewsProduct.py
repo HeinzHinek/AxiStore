@@ -28,6 +28,7 @@ def addProduct():
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
+        product.limited_flg = form.limited_flg.data
         product.axm_node = form.axm_node.data
         if form.package_size.data == '':
             product.package_size = None
@@ -81,6 +82,7 @@ def editProduct(id=0):
             product.active_flg = False
             db.session.add(product)
             db.session.commit()
+            flash(gettext('Product has been deleted.'))
             return redirect(url_for("stock", page=stock_page))
 
         #update catalog terms
@@ -116,6 +118,7 @@ def editProduct(id=0):
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
+        product.limited_flg = form.limited_flg.data
         product.axm_node = form.axm_node.data
         if form.package_size.data == '':
             product.package_size = None

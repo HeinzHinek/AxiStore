@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-01 18:12+0900\n"
-"PO-Revision-Date: 2015-04-01 18:13+0900\n"
+"POT-Creation-Date: 2015-04-02 12:16+0900\n"
+"PO-Revision-Date: 2015-04-02 12:18+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -28,7 +28,7 @@ msgstr "K přístupu na tuto stránku je nutné přihlášení."
 msgid "CSV uploaded and processed sucessfully."
 msgstr "CSV soubor nahrán a zpracován úspěšně."
 
-#: app/csvHelper.py:63 app/csvHelper.py:93
+#: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/deliveries/delivery.html:55
 #: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
@@ -38,7 +38,7 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 msgid "Product code"
 msgstr "Kód produktu"
 
-#: app/csvHelper.py:63 app/csvHelper.py:93
+#: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/mail/order_confirm.html:26
 #: app/templates/maker/makerStock.html:225
 #: app/templates/shop/_cart_table.html:6
@@ -57,103 +57,108 @@ msgstr "Množsví na skladě"
 msgid "Planned time of delivery"
 msgstr "Plánovaná doba dodání"
 
-#: app/csvHelper.py:93 app/templates/product/addProduct.html:166
+#: app/csvHelper.py:69 app/templates/product/addProduct.html:195
+#: app/templates/product/editProduct.html:274 app/templates/shop/shop.html:368
+msgid "Product with limited number of items"
+msgstr "Produkt s limitovaným počtem kusů"
+
+#: app/csvHelper.py:96 app/templates/product/addProduct.html:166
 #: app/templates/product/editProduct.html:245
 #: app/templates/settings/recommendedshares.html:130
 #: app/templates/settings/recommendedshares.html:190
 msgid "Retail price"
 msgstr "Maloobch. cena"
 
-#: app/csvHelper.py:93
+#: app/csvHelper.py:96
 msgid "Purchase price"
 msgstr "Prodejní cena"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 1 URL"
 msgstr "URL obrázku 1"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 2 URL"
 msgstr "URL obrázku 2"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 3 URL"
 msgstr "URL obrázku 3"
 
-#: app/csvHelper.py:94
+#: app/csvHelper.py:97
 msgid "Image 4 URL"
 msgstr "URL obrázku 4"
 
-#: app/csvHelper.py:95
+#: app/csvHelper.py:98
 msgid "Image 5 URL"
 msgstr "URL obrázku 5"
 
-#: app/csvHelper.py:184
+#: app/csvHelper.py:187
 msgid "unknown"
 msgstr "nezadáno"
 
-#: app/csvHelper.py:188
+#: app/csvHelper.py:191
 msgid "year, "
 msgstr ", "
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:67
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:67
 msgid "January"
 msgstr "Leden"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:68
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:68
 msgid "February"
 msgstr "Únor"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:69
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:69
 msgid "March"
 msgstr "Březen"
 
-#: app/csvHelper.py:189 app/templates/settings/recommendedshares.html:70
+#: app/csvHelper.py:192 app/templates/settings/recommendedshares.html:70
 msgid "April"
 msgstr "Duben"
 
-#: app/csvHelper.py:189 app/templates/index.html:286
+#: app/csvHelper.py:192 app/templates/index.html:286
 #: app/templates/settings/recommendedshares.html:71
 msgid "May"
 msgstr "Květen"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:72
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:72
 msgid "June"
 msgstr "Červen"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:73
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:73
 msgid "July"
 msgstr "Červenec"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:74
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:74
 msgid "August"
 msgstr "Srpen"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:75
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:75
 msgid "September"
 msgstr "Září"
 
-#: app/csvHelper.py:190 app/templates/settings/recommendedshares.html:76
+#: app/csvHelper.py:193 app/templates/settings/recommendedshares.html:76
 msgid "October"
 msgstr "Říjen"
 
-#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:77
+#: app/csvHelper.py:194 app/templates/settings/recommendedshares.html:77
 msgid "November"
 msgstr "Listopad"
 
-#: app/csvHelper.py:191 app/templates/settings/recommendedshares.html:78
+#: app/csvHelper.py:194 app/templates/settings/recommendedshares.html:78
 msgid "December"
 msgstr "Prosinec"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", First third"
 msgstr ", první třetina"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", Second third"
 msgstr ", druhá třetina"
 
-#: app/csvHelper.py:192
+#: app/csvHelper.py:195
 msgid ", Third third"
 msgstr ", třetí třetina"
 
@@ -161,7 +166,7 @@ msgstr ", třetí třetina"
 msgid "Nickname"
 msgstr "Uživatelské jméno"
 
-#: app/forms.py:25 app/forms.py:101 app/forms.py:117 app/forms.py:134
+#: app/forms.py:25 app/forms.py:102 app/forms.py:118 app/forms.py:135
 #: app/templates/orders/ordersheet.html:19
 #: app/templates/settings/addContact.html:70
 #: app/templates/settings/addCustomer.html:50
@@ -198,78 +203,78 @@ msgstr "Nové heslo musí odpovídat kontrolnímu heslu!"
 msgid "New password confirmation"
 msgstr "Kontrola nového hesla"
 
-#: app/forms.py:68
+#: app/forms.py:69
 msgid "(unknown)"
 msgstr "(neznámá)"
 
-#: app/forms.py:71
+#: app/forms.py:72
 msgid "Envelope"
 msgstr "Obálka"
 
-#: app/forms.py:73
+#: app/forms.py:74
 msgid "YuPack"
 msgstr "YuPack"
 
-#: app/forms.py:75
+#: app/forms.py:76
 msgid "Box"
 msgstr "Balík"
 
-#: app/forms.py:78 app/templates/product/addProduct.html:208
-#: app/templates/product/editProduct.html:287
+#: app/forms.py:79 app/templates/product/addProduct.html:222
+#: app/templates/product/editProduct.html:301
 msgid "Package size"
 msgstr "Velikost zásilky"
 
-#: app/forms.py:95 app/forms.py:115
+#: app/forms.py:96 app/forms.py:116
 msgid "User nickname"
 msgstr "Uživatelské jméno"
 
-#: app/forms.py:97
+#: app/forms.py:98
 msgid "User password"
 msgstr "Heslo uživatele"
 
-#: app/forms.py:99
+#: app/forms.py:100
 msgid "Passwords must match"
 msgstr "Kontrolní heslo není stejné"
 
-#: app/forms.py:100
+#: app/forms.py:101
 msgid "Password confirmation"
 msgstr "Kontrola hesla"
 
-#: app/forms.py:105 app/forms.py:121
+#: app/forms.py:106 app/forms.py:122
 msgid "User role"
 msgstr "Uživatelská role"
 
-#: app/forms.py:111 app/forms.py:127
+#: app/forms.py:112 app/forms.py:128
 msgid "User language"
 msgstr "Jazyk uživatele"
 
-#: app/forms.py:131
+#: app/forms.py:132
 msgid "Name"
 msgstr "Jméno"
 
-#: app/forms.py:133 app/forms.py:221 app/templates/shop/shop.html:301
+#: app/forms.py:134 app/forms.py:222 app/templates/shop/shop.html:301
 msgid "Category"
 msgstr "Kategorie"
 
-#: app/forms.py:135 app/templates/settings/makers.html:20
+#: app/forms.py:136 app/templates/settings/makers.html:20
 msgid "Average days to deliver"
 msgstr "Průměrný počet dnů dodávky"
 
-#: app/forms.py:197
+#: app/forms.py:198
 msgid "Recommender"
 msgstr "Doporučil"
 
-#: app/forms.py:222
+#: app/forms.py:223
 msgid "Available item only"
 msgstr "Pouze dostupné"
 
-#: app/forms.py:223 app/templates/shop/shop.html:310
+#: app/forms.py:224 app/templates/shop/shop.html:310
 msgid "Search"
 msgstr "Hledat"
 
-#: app/forms.py:227 app/templates/deliveries/delivery.html:27
+#: app/forms.py:228 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
-#: app/templates/orders/createOrder.html:239
+#: app/templates/orders/createOrder.html:256
 #: app/templates/orders/order.html:27
 #: app/templates/requests/createRequest.html:245
 #: app/templates/requests/request.html:27
@@ -290,8 +295,8 @@ msgstr "Domů"
 msgid "Stock quantity successfully updated."
 msgstr "Množství na skladě úspěšně aktualizováno."
 
-#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:209
-#: app/viewsOrder.py:211
+#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:213
+#: app/viewsOrder.py:215
 msgid "Input value error."
 msgstr "Hodnota zadána chybně."
 
@@ -417,7 +422,7 @@ msgid "Deliveries"
 msgstr "Dodávky"
 
 #: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:46
-#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:230
+#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:234
 msgid "Maker not found."
 msgstr "Výrobce nenalezen."
 
@@ -498,7 +503,7 @@ msgstr "Zadat novou objednávku výrobci"
 msgid "New order to maker was successfully created."
 msgstr "Nová objednávka pro výrobce byla úspěšně vytvořena."
 
-#: app/viewsOrder.py:123 app/viewsOrder.py:232
+#: app/viewsOrder.py:123 app/viewsOrder.py:236
 #: app/templates/orders/ordersheet.html:8
 msgid "Order Sheet Management"
 msgstr "Správa objednávkového listu"
@@ -512,39 +517,43 @@ msgstr "Datum a čas objednávky byl úspěšně změněn."
 msgid "Order details"
 msgstr "Detaily objednávky"
 
-#: app/viewsOrder.py:173
+#: app/viewsOrder.py:177
 msgid "Orders to maker for product"
 msgstr "Objednávky produktu výrobci"
 
-#: app/viewsOrder.py:207
+#: app/viewsOrder.py:211
 msgid "Minimum stock limit successfully updated."
 msgstr "Mimimální množství na skladě úspěšně aktualizováno."
 
-#: app/viewsOrder.py:215 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:219 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "Správa objednávek výrobcům"
 
-#: app/viewsOrder.py:228
+#: app/viewsOrder.py:232
 msgid "Email to maker sent succesfully."
 msgstr "Email výrobci úspěšně odeslán."
 
-#: app/viewsProduct.py:50
+#: app/viewsProduct.py:51
 msgid "New product successfully added."
 msgstr "Nový produkt úspěšně přidán."
 
-#: app/viewsProduct.py:54 app/templates/product/addProduct.html:66
+#: app/viewsProduct.py:55 app/templates/product/addProduct.html:66
 msgid "Add new product"
 msgstr "Přidat nový produkt"
 
-#: app/viewsProduct.py:68 app/viewsRequest.py:133 app/viewsShop.py:144
+#: app/viewsProduct.py:69 app/viewsRequest.py:133 app/viewsShop.py:144
 msgid "Product not found."
 msgstr "Produkt nenalezen."
 
-#: app/viewsProduct.py:129
+#: app/viewsProduct.py:85
+msgid "Product has been deleted."
+msgstr "Tento produkt byl smazán."
+
+#: app/viewsProduct.py:132
 msgid "Product successfully changed."
 msgstr "Produkt úspěšně pozměněn."
 
-#: app/viewsProduct.py:147 app/templates/product/editProduct.html:134
+#: app/viewsProduct.py:150 app/templates/product/editProduct.html:134
 msgid "Edit Product"
 msgstr "Editace produktu"
 
@@ -673,7 +682,7 @@ msgstr ""
 "Omlouváme se, ale Vaše zákaznická data jsou nedostačující. Obraťte se prosím "
 "na naši zákaznickou podporu."
 
-#: app/viewsShop.py:180 app/templates/orders/createOrder.html:241
+#: app/viewsShop.py:180 app/templates/orders/createOrder.html:258
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "Zadat objednávku"
@@ -1255,9 +1264,9 @@ msgstr "Pokračovat"
 #: app/templates/deliveries/newDelivery.html:94
 #: app/templates/deliveries/newDelivery.html:145
 #: app/templates/orders/createOrder.html:160
-#: app/templates/orders/createOrder.html:242
-#: app/templates/product/addProduct.html:244
-#: app/templates/product/editProduct.html:326
+#: app/templates/orders/createOrder.html:259
+#: app/templates/product/addProduct.html:258
+#: app/templates/product/editProduct.html:340
 #: app/templates/settings/addCategory.html:40
 #: app/templates/settings/addContact.html:101
 #: app/templates/settings/addCustomer.html:184
@@ -1309,7 +1318,7 @@ msgid "Delivered Quantity"
 msgstr "Doručené množství"
 
 #: app/templates/deliveries/newDelivery.html:143
-#: app/templates/orders/createOrder.html:240
+#: app/templates/orders/createOrder.html:257
 #: app/templates/supplies/supplyProducts.html:187
 msgid "Modify"
 msgstr "Pozměnit"
@@ -1404,7 +1413,7 @@ msgstr "Mezisoučet"
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
 #: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
-#: app/templates/shop/shop.html:385 app/templates/shop/shop.html:390
+#: app/templates/shop/shop.html:391 app/templates/shop/shop.html:396
 msgid "pcs"
 msgstr "ks"
 
@@ -1571,11 +1580,15 @@ msgstr "Čist."
 msgid "Min. stock"
 msgstr "Min. sklad"
 
-#: app/templates/orders/createOrder.html:248
+#: app/templates/orders/createOrder.html:241
+msgid "(Limited product)"
+msgstr "(Limitovaný produkt)"
+
+#: app/templates/orders/createOrder.html:265
 msgid "Total sum:"
 msgstr "Celkový součet:"
 
-#: app/templates/orders/createOrder.html:249
+#: app/templates/orders/createOrder.html:266
 #: app/templates/settings/recommendedshares.html:107
 #: app/templates/settings/recommendedshares.html:167
 msgid "Some prices are not set!"
@@ -1654,6 +1667,12 @@ msgstr "Nák. cena"
 msgid "Retail Price"
 msgstr "Mal. cena"
 
+#: app/templates/orders/productorders.html:47
+#: app/templates/requests/productrequests.html:47
+#: app/templates/supplies/unsuppliedproducts.html:64
+msgid "Undelivered"
+msgstr "Nedodáno"
+
 #: app/templates/product/addProduct.html:124
 #: app/templates/product/editProduct.html:203
 #: app/templates/settings/editCatalog.html:211
@@ -1671,23 +1690,23 @@ msgstr "Popis japonsky"
 msgid "Unit price"
 msgstr "Nákupní cena"
 
-#: app/templates/product/addProduct.html:194
-#: app/templates/product/editProduct.html:273
+#: app/templates/product/addProduct.html:208
+#: app/templates/product/editProduct.html:287
 msgid "Axis Mart node number"
 msgstr "Číslo \"node\" na Axis Martu"
 
-#: app/templates/product/addProduct.html:223
-#: app/templates/product/editProduct.html:302
+#: app/templates/product/addProduct.html:237
+#: app/templates/product/editProduct.html:316
 msgid "Catalog terms"
 msgstr "Výrazy katalogu"
 
-#: app/templates/product/addProduct.html:225
-#: app/templates/product/editProduct.html:304
+#: app/templates/product/addProduct.html:239
+#: app/templates/product/editProduct.html:318
 msgid "Edit terms"
 msgstr "Editace termínů"
 
-#: app/templates/product/addProduct.html:243
-#: app/templates/product/editProduct.html:325
+#: app/templates/product/addProduct.html:257
+#: app/templates/product/editProduct.html:339
 msgid "Save product"
 msgstr "Uložit produkt"
 
@@ -1703,19 +1722,19 @@ msgstr "Chcete opravdu smazat tento obrázek?"
 msgid "This product has been deleted!"
 msgstr "Tento produkt byl smazán!"
 
-#: app/templates/product/editProduct.html:327
+#: app/templates/product/editProduct.html:341
 msgid "Delete product"
 msgstr "Smazat produkt"
 
-#: app/templates/product/editProduct.html:336
+#: app/templates/product/editProduct.html:350
 msgid "Product images"
 msgstr "Obrázky výrobku"
 
-#: app/templates/product/editProduct.html:353
+#: app/templates/product/editProduct.html:367
 msgid "New image:"
 msgstr "Nový obrázek:"
 
-#: app/templates/product/editProduct.html:356
+#: app/templates/product/editProduct.html:370
 msgid "upload"
 msgstr "nahrát"
 
@@ -1750,7 +1769,7 @@ msgid "Order no."
 msgstr "Č. obj."
 
 #: app/templates/requests/cancelrequest.html:44
-#: app/templates/requests/productrequests.html:55
+#: app/templates/requests/productrequests.html:56
 #: app/templates/requests/request.html:45
 #: app/templates/supplies/supplies.html:42
 #: app/templates/supplies/supply.html:45
@@ -2436,31 +2455,31 @@ msgstr "Prodeje za posl. 30 dní"
 msgid "high"
 msgstr "vysoké"
 
-#: app/templates/shop/shop.html:382
+#: app/templates/shop/shop.html:388
 msgid "Available:"
 msgstr "Dostupné:"
 
-#: app/templates/shop/shop.html:388
+#: app/templates/shop/shop.html:394
 msgid "On the way:"
 msgstr "Na cestě:"
 
-#: app/templates/shop/shop.html:393
+#: app/templates/shop/shop.html:399
 msgid "Retail Price:"
 msgstr "Maloobch. cena"
 
-#: app/templates/shop/shop.html:399
+#: app/templates/shop/shop.html:405
 msgid "Your Price:"
 msgstr "Vaše cena:"
 
-#: app/templates/shop/shop.html:445
+#: app/templates/shop/shop.html:451
 msgid "Cart Content"
 msgstr "Obsah nákupního košíku"
 
-#: app/templates/shop/shop.html:446
+#: app/templates/shop/shop.html:452
 msgid "Shopping cart is empty."
 msgstr "Nákupní košík je prázdný."
 
-#: app/templates/shop/shop.html:459
+#: app/templates/shop/shop.html:465
 msgid "No products found."
 msgstr "Žádný produkt nenalezen."
 
@@ -2559,10 +2578,6 @@ msgstr "Neuzavřené, ale částečně dodané objednávky od zákazníka: "
 #: app/templates/supplies/unsuppliedproducts.html:30
 msgid "Overview of unsupplied products to customers"
 msgstr "Přehled nedodaného zboží zákazníkům"
-
-#: app/templates/supplies/unsuppliedproducts.html:64
-msgid "Undelivered"
-msgstr "Nedodáno"
 
 #: app/templates/supplies/unsuppliedproducts.html:72
 msgid "Number of products reserved earlier by other customers."
