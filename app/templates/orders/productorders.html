@@ -43,7 +43,8 @@
             <th class="td-border-left-1px">{{ _('Order ID') }}</th>
             <th>{{ _('Placed') }}</th>
             <th>{{ _('Ordered by') }}</th>
-            <th class="td-border-right-1px">{{ _('Quantity') }}</th>
+            <th>{{ _('Quantity') }}</th>
+            <th class="td-border-right-1px">{{ _('Undelivered') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -52,7 +53,8 @@
             <td class="clickable-td td-border-left-2px">{{ order.order.id }}</td>
             <td class="clickable-td">{{ momentjs(order.order.created_dt).format('LLL') }}</td>
             <td class="clickable-td">{{ order.order.orderer.nickname }}</td>
-            <td class="clickable-td td-border-right-2px">{{ order.quantity }}</td>
+            <td class="clickable-td">{{ order.quantity }}</td>
+            <td class="clickable-td td-border-right-2px">{{ order.quantity - order.qty_delivered }}</td>
         </tr>
         {% endfor %}
     </tbody>

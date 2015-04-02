@@ -166,8 +166,12 @@ def order(id):
 def productorders(id):
     product = Product.query.filter_by(id=id).first()
     if product:
-        #TODO: only active ones!
-        orders = product.order_assocs
+        orders = OrderedProducts.query.filter_by(product_id=product.id)\
+            .filter(OrderedProducts.quantity - OrderedProducts.qty_delivered > 0)\
+            .join(Product).filter(Product.active_flg == True)\
+            .join(Order).order_by(Order.created_dt)\
+            .all()
+        #orders = product.order_assocs
 
     return render_template('orders/productorders.html',
                            title=gettext("Orders to maker for product"),

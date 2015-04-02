@@ -56,8 +56,8 @@
             <th style="width: 5%;">{{ _("Maker's code") }}</th>
             <th>{{ _('Description CS') }}</th>
             <th>{{ _('Description JP') }}</th>
-            <th>{{ _('Quantity') }}</th>
-            <th>{{ _('Delivered') }}</th>
+            <th style="text-align: right;">{{ _('Quantity') }}</th>
+            <th style="text-align: right;">{{ _('Delivered') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -67,16 +67,16 @@
             <td class="clickable-td">{% if product.product.maker_code %}{{ product.product.maker_code }}{% else %}{% endif %}</td>
             <td class="clickable-td">{{ product.product.desc_CS }}</td>
             <td class="clickable-td">{{ product.product.desc_JP }}</td>
-            <td class="clickable-td"
-                {% if product.quantity > product.qty_delivered %}
-                    style="background-color: #ebccd1; color: #a94442;"
+            <td class="clickable-td" style="text-align: right;">{{ product.quantity }}</td>
+            <td class="clickable-td" style="text-align: right;
+                {% if product.qty_delivered == 0 %}
+                    background-color: #ebccd1; color: #a94442;
+                {% elif product.quantity > product.qty_delivered %}
+                    background-color: #FFFFC8;
+                {% else %}
+                    background-color: #C8FFC8; color: #007800;
                 {% endif %}
-                    >{{ product.quantity }}</td>
-            <td class="clickable-td"
-                {% if product.quantity > product.qty_delivered %}
-                    style="background-color: #ebccd1; color: #a94442;"
-                {% endif %}
-                    >{{ product.qty_delivered }}</td>
+                    ">{{ product.qty_delivered }}</td>
         </tr>
         {% endfor %}
     </tbody>
