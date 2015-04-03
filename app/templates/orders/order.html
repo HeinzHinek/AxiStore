@@ -81,6 +81,11 @@
         {% endfor %}
     </tbody>
     </table>
+    {% if order.check_completely_undelivered() %}
+    <a href="{{ url_for('cancelorder', id=order.id) }}" class="btn btn-xs btn-danger" style="float: right;">
+        {{ _('Cancel this order') }}
+    </a>
+    {% endif %}
 </div>
 {% endif %}
 

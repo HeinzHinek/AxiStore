@@ -251,6 +251,13 @@ class Order(db.Model):
         self.active_flg = False
         return True
 
+    # check whether no supplied products at all
+    def check_completely_undelivered(self):
+        for op in self.products:
+            if op.qty_delivered > 0:
+                return False
+        return True
+
 
 class OrderedProducts(db.Model):
     __tablename__ = 'orderedproducts'

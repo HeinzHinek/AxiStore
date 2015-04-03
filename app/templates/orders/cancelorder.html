@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(document).ready( function() {
+        $('#order-cancel-btn').click( function() {
+            if (confirm("{{ _('Do you really want to cancel this order? This action is irreversible!') }}")) {
+                $('#order-form').submit();
+            }
+        });
+    });
+</script>
+
+<style>
+body { background-color: #F2DEDE; }
+</style>
+
+<div class="row">
+    <h1>{{ _('Cancel Order to Maker') }}</h1>
+    {% include 'flash.html' %}
+</div>
+
+{% if order %}
+<form id="order-form" action="{{ url_for('cancelorder', id=order.id) }}" name="cancelorder" method="post">
+    {{form.hidden_tag()}}
+    <input type="hidden" name="order_id" value="{{ order.id }}">
+</form>
+
+<div class="row shadowed-div">
+    <h3>{{ _('Order details') }}</h3>
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        <tr>
+            <th class="info col-md-3">{{ _('Order ID') }}</th>
+            <td class="col-md-3">{{ order.id }}</td>
+            <th class="info info col-md-3">{{ _('Placed') }}</th>
+            <td class="col-md-3">{{ momentjs(order.created_dt).format('LLL') }}&nbsp;&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <th class="info info">{{ _('Ordered by') }}</th>
+            <td>{{ order.orderer.nickname }}</td>
+            <th class="info info">{{ _('Maker') }}</th>
+            <td>{{ order.maker.name }}</td>
+        </tr>
+    </table>
+
+    {% if products %}
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
+    <thead>
+        <tr>
+            <th>{{ _('Product code') }}</th>
+            <th>{{ _('Description CS') }}</th>
+            <th>{{ _('Description JP') }}</th>
+            <th>{{ _('Quantity') }}</th>
+            <th>{{ _('Delivered') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td class="clickable-td">{{ product.product.code }}</td>
+            <td class="clickable-td">{{ product.product.desc_CS }}</td>
+            <td class="clickable-td">{{ product.product.desc_JP }}</td>
+            <td class="clickable-td">{{ product.quantity }}</td>
+            <td class="clickable-td">{{ product.qty_delivered }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    <a href="{{ url_for('orders') }}" class="btn btn-success">{{ _('Back') }}</a>
+    {% if order.check_completely_undelivered() %}
+    <input type="button" id="order-cancel-btn" value="{{ _('Cancel this order') }}" class="btn btn-danger"/>
+    {% endif %}
+
+{% endif %}
+
+</div>
+{% endif %}
+
+{% endblock %}

@@ -2,14 +2,14 @@
 
 from flask import render_template, redirect, flash, url_for, request, g, session
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm, SimpleSubmitForm
 from models import Order, Product, OrderedProducts, Maker
 from mailer import send_order_mail_to_maker
 from xls import CreateXls
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
 from flask.ext.babel import gettext
-import re
+import flask, re
 
 
 @app.route('/orders')
@@ -237,3 +237,31 @@ def order_mail_to_maker(filename, maker_id):
                            ordersheet_file=filename,
                            maker=maker,
                            mail_sent=True)
+
+
+@app.route('/cancelorder/<int:id>', methods=['GET', 'POST'])
+@login_required
+def cancelorder(id):
+    order = Order.query.get(id)
+    if not order:
+        flash(gettext('Order not found!'))
+        return redirect('requests')
+    products = order.products
+    form = SimpleSubmitForm()
+
+    if form.validate_on_submit():
+        order = Order.query.get(int(flask.request.form['order_id']))
+        products = order.products
+        for op in products:
+            db.session.delete(op)
+            pass
+        db.session.delete(order)
+        db.session.commit()
+        flash('Order was sucessfully cancelled and deleted.')
+        return redirect('orders')
+
+    return render_template('orders/cancelorder.html',
+                           title=gettext("Cancel order to maker"),
+                           order=order,
+                           products=products,
+                           form=form)
