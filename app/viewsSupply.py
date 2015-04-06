@@ -2,7 +2,7 @@
 
 from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
-from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm, SimpleSubmitForm
+from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm, SimpleSubmitForm, EditSupplyForm
 from models import Supply, Product, Customer, SuppliedProducts, Request, RequestedProducts
 from flask_login import login_required
 from sqlalchemy import desc
@@ -270,6 +270,146 @@ def supply(id):
                             form=form,
                             CUSTOMER_TYPES=CUSTOMER_TYPES,
                             products=products)
+
+
+@app.route('/editsupply/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editsupply(id):
+    supply = Supply.query.get(id)
+    if not supply:
+        flash(gettext('Supply data not found!'))
+        return redirect(url_for('supplies'))
+    products = supply.products.all()
+
+    form = EditSupplyForm()
+
+    if form.validate_on_submit():
+
+        supply_id = flask.request.form['supply_id']
+
+        # Are we deleting an empty supply?
+        delete_whole_str = None
+        if 'delete_whole_supply' in flask.request.form:
+            delete_whole_str = flask.request.form['delete_whole_supply']
+        if delete_whole_str and delete_whole_str == 'true':
+            supply = Supply.query.get(int(supply_id))
+            if not supply:
+                flash('Supply data not found!')
+                return redirect(url_for('supplies'))
+            sp = supply.products.all()
+            if sp and len(sp) > 0:
+                flash('Supplied products have to be deleted first!')
+                return redirect(url_for('supplies'))
+            db.session.delete(supply)
+            db.session.commit()
+            flash('Supply data sucessfully deleted.')
+            return redirect(url_for('supplies'))
+
+        supplied_product_id = flask.request.form['supplied_product_id']
+
+        # Are we deleting this supplied product completely?
+        delete_str = flask.request.form['delete_supplied_product']
+        if delete_str == 'true':
+            delete_flg = True
+            new_supply_qty = 0
+        else:
+            delete_flg = False
+            new_supply_qty = form.qty_supplied.data
+
+        if supply_id and supplied_product_id and new_supply_qty is not None:
+
+            supplied_product_id = int(supplied_product_id)
+
+            supplied_products = SuppliedProducts.query\
+                .filter_by(product_id=supplied_product_id)\
+                .filter_by(supply_id=supply_id)\
+                .all()
+            if supplied_products and len(supplied_products) == 1:
+                supplied_product = supplied_products[0]
+            else:
+                flash('Supply data are corrupted! Cannot edit supply quantity.')
+                return redirect(url_for('editsupply', id=supply_id))
+
+            if delete_flg:
+                qty_difference = supplied_product.quantity
+            else:
+                qty_difference = supplied_product.quantity - new_supply_qty
+                if qty_difference < 1:
+                    flash('Supply quantity submited incorrectly!')
+                    return redirect(url_for('editsupply', id=supply_id))
+
+            # Add the quantity difference to stock
+            if form.add_qty_to_requests.data:
+                stock_product = Product.query.get(supplied_product.product_id)
+                if not stock_product:
+                    flash('Product id not found!')
+                    return redirect(url_for('editsupply', id=supply_id))
+                stock_product.qty_stock += qty_difference
+                db.session.add(stock_product)
+
+            # Add the quantity difference to requested products
+            if form.add_qty_to_requests.data:
+                cust = Customer.query.get(Supply.query.get(supply_id).customer_id)
+                if not cust:
+                    flash('Customer data are corrupted! Cannot edit supply quantity.')
+                    return redirect(url_for('editsupply', id=supply_id))
+                requests = Request.query\
+                    .filter_by(customer_id=cust.id)\
+                    .join(RequestedProducts).filter(RequestedProducts.product_id == supplied_product_id)\
+                    .order_by(Request.created_dt.desc()).all()
+
+                # Find all requests with this product id from newest, each time subtract supplied quantity till zero,
+                # if it goes over, go to next request. Make inactive request active if needed.
+                qty_to_subtract = qty_difference
+                for r in requests:
+                    rps = r.products.all()
+                    this_rp = None
+                    for rp in rps:
+                        if rp.product_id == supplied_product_id:
+                            this_rp = rp
+                            break
+                    if not this_rp:
+                        continue
+
+                    # Case1: This request has MORE or EQUAL AMOUNT of qty_supplied than remaining qty_to_subtract
+                    # -> subtract qty_to_subtract from qty_supplied and break -> we are done.
+                    if this_rp.qty_supplied >= qty_to_subtract:
+                        this_rp.qty_supplied -= qty_to_subtract
+                        db.session.add(rp)
+                        if not r.active_flg:
+                            r.active_flg = True
+                            db.session.add(r)
+                        break
+                    # Case2: This request has LESS qty_supplied than remaining qty_to_subtract
+                    # -> subtract qty_supplied from qty_to_subtract, set qty_supplied to 0 and go to next request.
+                    else:
+                        qty_to_subtract -= this_rp.qty_supplied
+                        this_rp.qty_supplied = 0
+                        db.session.add(rp)
+                        if not r.active_flg:
+                            r.active_flg = True
+                            db.session.add(r)
+
+            # And finally edit the supplied quantity for this product or delete if delete_flg
+            if delete_flg:
+                db.session.delete(supplied_product)
+            else:
+                if supplied_product.quantity > new_supply_qty:
+                    supplied_product.quantity = new_supply_qty
+                    db.session.add(supplied_product)
+
+            # FINAL COMMIT
+            db.session.commit()
+
+            flash('Supplied quantity succesfully changed.')
+            return redirect(url_for('editsupply', id=supply_id))
+
+    return render_template('supplies/editsupply.html',
+                            title=gettext("Edit supply"),
+                            CUSTOMER_TYPES=CUSTOMER_TYPES,
+                            supply=supply,
+                            products=products,
+                            form=form)
 
 
 @app.route('/supplies/createnohinsho')

@@ -226,3 +226,10 @@ class ShopHeaderForm(Form):
 
 class SimpleSubmitForm(Form):
     submit = SubmitField(lazy_gettext('Submit'))
+
+
+class EditSupplyForm(Form):
+    qty_supplied = IntegerField('qty_supplied')
+    add_qty_to_stock = BooleanField('add_qty_to_stock', default=True)
+    add_qty_to_requests = BooleanField('add_qty_to_requests', default=True)
+    submit = SubmitField(lazy_gettext('Submit'))
