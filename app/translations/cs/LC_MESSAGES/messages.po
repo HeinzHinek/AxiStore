@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-02 12:16+0900\n"
-"PO-Revision-Date: 2015-04-02 12:18+0900\n"
+"POT-Creation-Date: 2015-04-06 17:39+0900\n"
+"PO-Revision-Date: 2015-04-06 17:55+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -30,10 +30,12 @@ msgstr "CSV soubor nahrán a zpracován úspěšně."
 
 #: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/deliveries/delivery.html:55
-#: app/templates/orders/order.html:55 app/templates/product/addProduct.html:78
+#: app/templates/orders/cancelorder.html:51 app/templates/orders/order.html:55
+#: app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
 #: app/templates/requests/cancelrequest.html:56
 #: app/templates/requests/request.html:60
+#: app/templates/supplies/editsupply.html:96
 #: app/templates/supplies/supply.html:59
 msgid "Product code"
 msgstr "Kód produktu"
@@ -272,7 +274,7 @@ msgstr "Pouze dostupné"
 msgid "Search"
 msgstr "Hledat"
 
-#: app/forms.py:228 app/templates/deliveries/delivery.html:27
+#: app/forms.py:228 app/forms.py:235 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
 #: app/templates/orders/createOrder.html:256
 #: app/templates/orders/order.html:27
@@ -512,7 +514,8 @@ msgstr "Správa objednávkového listu"
 msgid "Date and time of order was successfully changed."
 msgstr "Datum a čas objednávky byl úspěšně změněn."
 
-#: app/viewsOrder.py:158 app/templates/orders/order.html:5
+#: app/viewsOrder.py:158 app/templates/orders/cancelorder.html:30
+#: app/templates/orders/order.html:5
 #: app/templates/requests/cancelrequest.html:30
 msgid "Order details"
 msgstr "Detaily objednávky"
@@ -532,6 +535,14 @@ msgstr "Správa objednávek výrobcům"
 #: app/viewsOrder.py:232
 msgid "Email to maker sent succesfully."
 msgstr "Email výrobci úspěšně odeslán."
+
+#: app/viewsOrder.py:247 app/viewsRequest.py:204
+msgid "Order not found!"
+msgstr "Objednávka nenalezena!"
+
+#: app/viewsOrder.py:264
+msgid "Cancel order to maker"
+msgstr "Zrušit objednávku výrobci"
 
 #: app/viewsProduct.py:51
 msgid "New product successfully added."
@@ -608,10 +619,6 @@ msgstr "Detaily objednávky od zákazníka"
 #: app/viewsRequest.py:193
 msgid "Orders from customers for product"
 msgstr "Objednávky produktu zákazníky"
-
-#: app/viewsRequest.py:204
-msgid "Order not found!"
-msgstr "Objednávka nenalezena!"
 
 #: app/viewsRequest.py:229
 msgid "Cancel order from customer"
@@ -707,55 +714,64 @@ msgstr "Historie mých objednávek"
 msgid "Data download"
 msgstr "Stažení dat"
 
-#: app/viewsSupply.py:24
+#: app/viewsSupply.py:25
 msgid "Supplies"
 msgstr "Dodávky zákazníkům"
 
-#: app/viewsSupply.py:63
+#: app/viewsSupply.py:64
 msgid "New Supply"
 msgstr "Nová dodávka zákazníkovi"
 
-#: app/viewsSupply.py:87
+#: app/viewsSupply.py:88
 msgid "No customer data!"
 msgstr "Chybí data zákazníka!"
 
-#: app/viewsSupply.py:95
+#: app/viewsSupply.py:96
 msgid "Customer not found!"
 msgstr "Zákazník nenalezen!"
 
-#: app/viewsSupply.py:106
+#: app/viewsSupply.py:107
 msgid "No product quantities!"
 msgstr "Chybí počty produktu!"
 
-#: app/viewsSupply.py:142
+#: app/viewsSupply.py:148
 msgid "No requested products!"
 msgstr "Žádné objednané produkty! "
 
-#: app/viewsSupply.py:216
+#: app/viewsSupply.py:222
 msgid "New supply sent sucessfully."
 msgstr "Nová dodávka úspěšně odeslána."
 
-#: app/viewsSupply.py:226
+#: app/viewsSupply.py:236
 msgid "Supply Report"
 msgstr "Zpráva o dodávce zákazníkovi"
 
-#: app/viewsSupply.py:264
+#: app/viewsSupply.py:274
 msgid "Date and time of supply was successfully changed."
 msgstr "Datum a čas dodávky byl úspěšně změněn."
 
-#: app/viewsSupply.py:268 app/templates/supplies/supply.html:5
+#: app/viewsSupply.py:278 app/templates/supplies/editsupply.html:71
+#: app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "Detaily dodávky zákazníkovi"
 
-#: app/viewsSupply.py:285
+#: app/viewsSupply.py:290
+msgid "Supply data not found!"
+msgstr "Data dodávky nenalezena!"
+
+#: app/viewsSupply.py:418
+msgid "Edit supply"
+msgstr "Upravit data dodávky"
+
+#: app/viewsSupply.py:435
 msgid "No product data!"
 msgstr "Chybí data produktu!"
 
-#: app/viewsSupply.py:299
+#: app/viewsSupply.py:449
 msgid "Invalid data received."
 msgstr "Přijata neplatná data!"
 
-#: app/viewsSupply.py:376 app/templates/navbar_admin.html:48
+#: app/viewsSupply.py:526 app/templates/navbar_admin.html:48
 msgid "Unsupplied products"
 msgstr "Nedodané zboží"
 
@@ -1027,8 +1043,8 @@ msgstr "Výsledky hledání"
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
-#: app/templates/orders/order.html:43 app/templates/orders/orders.html:36
-#: app/templates/orders/ordersheet.html:16
+#: app/templates/orders/cancelorder.html:42 app/templates/orders/order.html:43
+#: app/templates/orders/orders.html:36 app/templates/orders/ordersheet.html:16
 #: app/templates/orders/productorders.html:23
 #: app/templates/product/addProduct.html:96
 #: app/templates/product/editProduct.html:175
@@ -1042,7 +1058,7 @@ msgstr "Výrobce"
 
 #: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
-#: app/templates/orders/order.html:57
+#: app/templates/orders/cancelorder.html:52 app/templates/orders/order.html:57
 #: app/templates/orders/ordermanagement.html:217
 #: app/templates/requests/cancelrequest.html:57
 #: app/templates/requests/createRequest.html:207
@@ -1051,6 +1067,7 @@ msgstr "Výrobce"
 #: app/templates/requests/request.html:61
 #: app/templates/settings/recommendedshares.html:127
 #: app/templates/settings/recommendedshares.html:187
+#: app/templates/supplies/editsupply.html:97
 #: app/templates/supplies/supply.html:60
 #: app/templates/supplies/supplyReport.html:23
 msgid "Description CS"
@@ -1058,7 +1075,7 @@ msgstr "Popis ČJ"
 
 #: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
-#: app/templates/orders/order.html:58
+#: app/templates/orders/cancelorder.html:53 app/templates/orders/order.html:58
 #: app/templates/orders/ordermanagement.html:215
 #: app/templates/requests/cancelrequest.html:58
 #: app/templates/requests/createRequest.html:210
@@ -1067,6 +1084,7 @@ msgstr "Popis ČJ"
 #: app/templates/requests/request.html:62
 #: app/templates/settings/recommendedshares.html:128
 #: app/templates/settings/recommendedshares.html:188
+#: app/templates/supplies/editsupply.html:98
 #: app/templates/supplies/supply.html:61
 #: app/templates/supplies/supplyProducts.html:150
 #: app/templates/supplies/supplyReport.html:24
@@ -1127,6 +1145,7 @@ msgstr "Zpět na seznam"
 
 #: app/templates/deliveries/delivery.html:22
 #: app/templates/orders/order.html:22 app/templates/requests/request.html:22
+#: app/templates/supplies/editsupply.html:100
 #: app/templates/supplies/supply.html:22
 msgid "Edit"
 msgstr "Upravit"
@@ -1140,7 +1159,8 @@ msgstr "zavřít"
 
 #: app/templates/deliveries/delivery.html:58
 #: app/templates/deliveries/deliveryReport.html:20
-#: app/templates/mail/order_confirm.html:28 app/templates/orders/order.html:59
+#: app/templates/mail/order_confirm.html:28
+#: app/templates/orders/cancelorder.html:54 app/templates/orders/order.html:59
 #: app/templates/orders/productorders.html:46
 #: app/templates/requests/cancelrequest.html:59
 #: app/templates/requests/createRequest.html:241
@@ -1150,7 +1170,9 @@ msgstr "zavřít"
 #: app/templates/settings/recommendedshares.html:191
 #: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
-#: app/templates/shop/placeorder.html:37 app/templates/supplies/supply.html:62
+#: app/templates/shop/placeorder.html:37
+#: app/templates/supplies/editsupply.html:99
+#: app/templates/supplies/supply.html:62
 #: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
 msgstr "Množství"
@@ -1195,7 +1217,8 @@ msgstr "Zkompletované a uzavřené objednávky výrobci: "
 
 #: app/templates/deliveries/deliveryReport.html:54
 #: app/templates/deliveries/deliveryReport.html:76
-#: app/templates/orders/order.html:18 app/templates/orders/orders.html:33
+#: app/templates/orders/cancelorder.html:33 app/templates/orders/order.html:18
+#: app/templates/orders/orders.html:33
 #: app/templates/orders/productorders.html:43
 #: app/templates/requests/axm_requests.html:14
 #: app/templates/requests/cancelrequest.html:33
@@ -1210,7 +1233,8 @@ msgstr "ID objednávky"
 
 #: app/templates/deliveries/deliveryReport.html:55
 #: app/templates/deliveries/deliveryReport.html:77
-#: app/templates/maker/makerOrders.html:52 app/templates/orders/order.html:20
+#: app/templates/maker/makerOrders.html:52
+#: app/templates/orders/cancelorder.html:35 app/templates/orders/order.html:20
 #: app/templates/orders/orders.html:34
 #: app/templates/orders/productorders.html:44
 #: app/templates/requests/cancelrequest.html:35
@@ -1221,7 +1245,8 @@ msgstr "Zadáno"
 
 #: app/templates/deliveries/deliveryReport.html:56
 #: app/templates/deliveries/deliveryReport.html:78
-#: app/templates/orders/order.html:41 app/templates/orders/orders.html:35
+#: app/templates/orders/cancelorder.html:40 app/templates/orders/order.html:41
+#: app/templates/orders/orders.html:35
 #: app/templates/orders/productorders.html:45
 #: app/templates/requests/productrequests.html:45
 msgid "Ordered by"
@@ -1552,6 +1577,31 @@ msgstr "Hodnoty byly pozměněny. Uložit změny?"
 msgid "Save"
 msgstr "Uložit"
 
+#: app/templates/orders/cancelorder.html:7
+#: app/templates/requests/cancelrequest.html:7
+msgid "Do you really want to cancel this order? This action is irreversible!"
+msgstr "Chcete opravdu stornovat tuto objednávku? Tato akce je nevratná!"
+
+#: app/templates/orders/cancelorder.html:19
+msgid "Cancel Order to Maker"
+msgstr "Zrušit objednávku výrobci"
+
+#: app/templates/orders/cancelorder.html:55 app/templates/orders/order.html:60
+msgid "Delivered"
+msgstr "Dodáno"
+
+#: app/templates/orders/cancelorder.html:71
+#: app/templates/requests/cancelrequest.html:82
+#: app/templates/settings/editCatalog.html:194
+msgid "Back"
+msgstr "Zpět"
+
+#: app/templates/orders/cancelorder.html:73 app/templates/orders/order.html:86
+#: app/templates/requests/cancelrequest.html:84
+#: app/templates/requests/request.html:89
+msgid "Cancel this order"
+msgstr "Stornovat tuto objednávku"
+
 #: app/templates/orders/createOrder.html:136
 msgid "Place a new order to maker"
 msgstr "Zadat novou objednávku výrobci"
@@ -1593,10 +1643,6 @@ msgstr "Celkový součet:"
 #: app/templates/settings/recommendedshares.html:167
 msgid "Some prices are not set!"
 msgstr "Některé ceny nejsou nastaveny!"
-
-#: app/templates/orders/order.html:60
-msgid "Delivered"
-msgstr "Dodáno"
 
 #: app/templates/orders/ordermanagement.html:154
 msgid "Management of orders to makers"
@@ -1755,10 +1801,6 @@ msgstr "Příjemce"
 msgid "Order No."
 msgstr "Č. obj."
 
-#: app/templates/requests/cancelrequest.html:7
-msgid "Do you really want to cancel this order? This action is irreversible!"
-msgstr "Chcete opravdu stornovat tuto objednávku? Tato akce je nevratná!"
-
 #: app/templates/requests/cancelrequest.html:19
 msgid "Cancel Order from Customer"
 msgstr "Stornovat objednávku od zákazníka"
@@ -1771,6 +1813,7 @@ msgstr "Č. obj."
 #: app/templates/requests/cancelrequest.html:44
 #: app/templates/requests/productrequests.html:56
 #: app/templates/requests/request.html:45
+#: app/templates/supplies/editsupply.html:85
 #: app/templates/supplies/supplies.html:42
 #: app/templates/supplies/supply.html:45
 #: app/templates/supplies/supplyReport.html:14
@@ -1781,6 +1824,7 @@ msgstr "č. obj."
 #: app/templates/requests/request.html:47
 #: app/templates/requests/requests.html:17
 #: app/templates/requests/requests.html:24
+#: app/templates/supplies/editsupply.html:83
 #: app/templates/supplies/supplies.html:32
 #: app/templates/supplies/supply.html:43
 #: app/templates/supplies/supplyReport.html:62
@@ -1792,16 +1836,6 @@ msgstr "Zákazník"
 #: app/templates/requests/request.html:64
 msgid "Supplied"
 msgstr "Dodáno"
-
-#: app/templates/requests/cancelrequest.html:82
-#: app/templates/settings/editCatalog.html:194
-msgid "Back"
-msgstr "Zpět"
-
-#: app/templates/requests/cancelrequest.html:84
-#: app/templates/requests/request.html:89
-msgid "Cancel this order"
-msgstr "Stornovat tuto objednávku"
 
 #: app/templates/requests/createRequest.html:23
 msgid "Select a customer to receive order from!"
@@ -2286,6 +2320,7 @@ msgid "Supplied products by customer"
 msgstr "Produkty dodané zákazníkovi"
 
 #: app/templates/settings/recommendedshares.html:189
+#: app/templates/supplies/editsupply.html:74
 #: app/templates/supplies/supplies.html:29
 #: app/templates/supplies/supply.html:18
 msgid "Supply ID"
@@ -2488,6 +2523,82 @@ msgstr "Žádný produkt nenalezen."
 msgid "Nohinsho download"
 msgstr "Stáhnout nóhinšo"
 
+#: app/templates/supplies/editsupply.html:65
+msgid "Edit contents of supply to customer"
+msgstr "Upravit data dodávky zákazníkovi"
+
+#: app/templates/supplies/editsupply.html:76
+#: app/templates/supplies/supplies.html:30
+#: app/templates/supplies/supply.html:20
+msgid "Sent"
+msgstr "Odesláno"
+
+#: app/templates/supplies/editsupply.html:81
+#: app/templates/supplies/supplies.html:31
+#: app/templates/supplies/supply.html:41
+msgid "Sender"
+msgstr "Odesilatel"
+
+#: app/templates/supplies/editsupply.html:101
+msgid "Delete"
+msgstr "Smazat"
+
+#: app/templates/supplies/editsupply.html:121
+msgid "Decrease delivered quantity"
+msgstr "Snížit doručené množství"
+
+#: app/templates/supplies/editsupply.html:129
+msgid ""
+"You can only decrease the supplied quantity. If you want to increase the "
+"quantity, create a new supply to customer."
+msgstr ""
+"Dodané množství může být pouze sníženo. Pokud chcete množství navýšit, "
+"vytvořte novou dodávku zákazníkovi."
+
+#: app/templates/supplies/editsupply.html:132
+msgid "Supplied quantity:"
+msgstr "Dodané množství­­:"
+
+#: app/templates/supplies/editsupply.html:139
+msgid "Add quantity difference back to stock"
+msgstr "Přičíst rozdíl v množství zpět na sklad"
+
+#: app/templates/supplies/editsupply.html:144
+msgid ""
+"Add quantity difference back to latest order(s) of this product from this "
+"customer"
+msgstr ""
+"Přičíst rozdíl v množství zpět k nejnovější objednávce (objednávkám) od "
+"tohoto zákazníka"
+
+#: app/templates/supplies/editsupply.html:164
+msgid "Delete this supplied item"
+msgstr "Smazat tuto dodanou položku"
+
+#: app/templates/supplies/editsupply.html:170
+msgid "Add supplied quantity back to stock"
+msgstr "Přičíst dodané množství zpět na sklad"
+
+#: app/templates/supplies/editsupply.html:175
+msgid ""
+"Add supplied quantity back to latest order(s) of this product from this "
+"customer"
+msgstr ""
+"Přičíst dodané množství zpět k nejnovější objednávce (objednávkám) od tohoto "
+"zákazníka"
+
+#: app/templates/supplies/editsupply.html:192
+msgid "This supply is empty. It should be deleted."
+msgstr "Tato dodávka je prázdná a měla by být smazána."
+
+#: app/templates/supplies/editsupply.html:199
+msgid "Delete now"
+msgstr "Smazat nyní"
+
+#: app/templates/supplies/editsupply.html:199
+msgid "Are you sure you want to delete this supply?"
+msgstr "Chcete opravdu smazat tuto dodávku?"
+
 #: app/templates/supplies/newSupply.html:8
 msgid "Select a customer to supply to!"
 msgstr "Vyberte zákazníka pro zaslání dodávky!"
@@ -2504,15 +2615,9 @@ msgstr "Vyberte číslo objednávky:"
 msgid "Supplies to customers overview"
 msgstr "Přehled dodávek zákazníkům"
 
-#: app/templates/supplies/supplies.html:30
-#: app/templates/supplies/supply.html:20
-msgid "Sent"
-msgstr "Odesláno"
-
-#: app/templates/supplies/supplies.html:31
-#: app/templates/supplies/supply.html:41
-msgid "Sender"
-msgstr "Odesilatel"
+#: app/templates/supplies/supply.html:77
+msgid "Edit this order"
+msgstr "Upravit tuto objednávku"
 
 #: app/templates/supplies/supplyProducts.html:118
 msgid "Select products to supply"
