@@ -10,6 +10,7 @@ from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
 from flask.ext.babel import gettext
 from xls import CreateXls
 from imageHelper import getImgUrls
+from mailer import send_notification_mail_to_recommender
 import datetime, re
 import flask
 
@@ -118,11 +119,16 @@ def supplyProducts():
         report = {'sender': g.user.nickname, 'customer': cust, 'date': new_supply.created_dt, 'order_no': cust.order_no, 'products': [],
                   'closed_requests': [], 'changed_requests': [], 'oversent_requests': False}
 
+        # For recommender notification mail
+        overall_product_value = 0
+
         for id in ids:
             new_quantity = int(ids[id])
             if new_quantity > 0:
                 new_product = Product.query.filter_by(id=int(id)).first()
                 if new_product:
+
+                    overall_product_value += new_product.price_retail * new_quantity
 
                     rp = SuppliedProducts(quantity=new_quantity)
                     rp.product = new_product
@@ -205,7 +211,7 @@ def supplyProducts():
                         if date_old.month == date_new.month:
                             cust.order_no += 1
                         else:
-                            cust.order_no += 1
+                            cust.order_no = 1
                 else:
                     cust.order_no = 1
             db.session.add(cust)
@@ -221,6 +227,10 @@ def supplyProducts():
         for p in report['products']:
             product_ids.append([p['product'].id, p['qty']])
         session['new_supply_data'] = {'date': report['date'], 'customer': cust.id, 'products': product_ids}
+
+        # If this customer has a recommender-customer, send notification mail with supply price amount
+        if cust.recommender_id and cust.recommender_id is not '':
+            send_notification_mail_to_recommender(cust, overall_product_value)
 
         return render_template('supplies/supplyReport.html',
                            title=gettext("Supply Report"),

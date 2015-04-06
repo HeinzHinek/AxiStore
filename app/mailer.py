@@ -4,8 +4,8 @@ from flask.ext.mail import Message
 from app import app, mail
 from flask import render_template
 from flask_login import current_user
-from config import ADMINS, USER_ROLES
-from models import RequestedProducts, User
+from config import ADMINS, USER_ROLES, BASE_SHARE_FROM_RECOMMENDED
+from models import RequestedProducts, User, Customer
 from flask.ext.babel import gettext
 
 
@@ -82,3 +82,20 @@ def send_order_mail_to_maker(filename, email):
                render_template("/mail/order_mail_to_maker.html"),
                attachment='static/' + filename,
                mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+
+def send_notification_mail_to_recommender(customer, value):
+    superior = Customer.query.filter_by(id=customer.recommender_id).first()
+    send_email("【Axis Mundi株式会社】納品金額分配のお知らせ",
+               ADMINS[0],
+               [ADMINS[0], superior.email],
+               render_template("/mail/notification_to_recommender.txt",
+                               superior=superior,
+                               recommended_name=customer.name,
+                               share_percent=BASE_SHARE_FROM_RECOMMENDED,
+                               value=value),
+               render_template("/mail/notification_to_recommender.html",
+                               superior=superior,
+                               recommended_name=customer.name,
+                               share_percent=BASE_SHARE_FROM_RECOMMENDED,
+                               value=value))
