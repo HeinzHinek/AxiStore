@@ -238,7 +238,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
     active_flg = db.Column(db.Boolean, default=True)
-    products = db.relationship('OrderedProducts', backref='order')
+    products = db.relationship('OrderedProducts', backref='order', lazy='dynamic')
 
     def __init__(self):
         self.created_dt = datetime.utcnow()

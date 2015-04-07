@@ -69,6 +69,9 @@
         {% endfor %}
     </tbody>
     </table>
+    <a href="{{ url_for('editdelivery', id=delivery.id) }}" class="btn btn-xs btn-warning" style="float: right;">
+        {{ _('Edit this delivery') }}
+    </a>
 </div>
 {% endif %}
 

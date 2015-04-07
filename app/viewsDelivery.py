@@ -2,13 +2,14 @@
 
 from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm
-from models import Delivery, Product, DeliveredProducts, Maker
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditDeliveryForm
+from models import Delivery, Product, DeliveredProducts, Maker, Order, OrderedProducts
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE
 from imageHelper import getImgUrls
 from mailer import send_delivery_notification_to_customers
 from flask.ext.babel import gettext
+import flask
 
 @app.route('/deliveries')
 @app.route('/deliveries/<int:page>')
@@ -180,6 +181,9 @@ def receiveDelivery():
 @login_required
 def delivery(id):
     delivery = Delivery.query.filter_by(id=id).first()
+    if not delivery:
+        flash(gettext('Data not found.'))
+        return redirect(url_for('deliveries'))
     form = EditDateTimeForm()
     if delivery:
         products = delivery.products
@@ -197,3 +201,142 @@ def delivery(id):
                             delivery=delivery,
                             form=form,
                             products=products)
+
+@app.route('/editdelivery/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editdelivery(id):
+
+    delivery = Delivery.query.get(id)
+    if not delivery:
+        flash(gettext('Delivery data not found!'))
+        return redirect(url_for('deliveries'))
+    products = delivery.products.all()
+
+    form = EditDeliveryForm()
+
+    if form.validate_on_submit():
+
+        delivery_id = flask.request.form['delivery_id']
+
+        # Are we deleting an empty delivery?
+        delete_whole_str = None
+        if 'delete_whole_delivery' in flask.request.form:
+            delete_whole_str = flask.request.form['delete_whole_delivery']
+        if delete_whole_str and delete_whole_str == 'true':
+            delivery = Delivery.query.get(int(delivery_id))
+            if not delivery:
+                flash(gettext('Delivery data not found!'))
+                return redirect(url_for('deliveries'))
+            dp = delivery.products.all()
+            if dp and len(dp) > 0:
+                flash(gettext('Delivered products have to be deleted first!'))
+                return redirect(url_for('deliveries'))
+            db.session.delete(delivery)
+            db.session.commit()
+            flash(gettext('Delivery data sucessfully deleted.'))
+            return redirect(url_for('deliveries'))
+
+        delivered_product_id = flask.request.form['delivered_product_id']
+
+        # Are we deleting this delivered product completely?
+        delete_str = flask.request.form['delete_delivered_product']
+        if delete_str == 'true':
+            delete_flg = True
+            new_delivery_qty = 0
+        else:
+            delete_flg = False
+            new_delivery_qty = form.qty_delivered.data
+
+        if delivery_id and delivered_product_id and new_delivery_qty is not None:
+
+            delivered_product_id = int(delivered_product_id)
+
+            delivered_products = DeliveredProducts.query\
+                .filter_by(product_id=delivered_product_id)\
+                .filter_by(delivery_id=delivery_id)\
+                .all()
+            if delivered_products and len(delivered_products) == 1:
+                delivered_product = delivered_products[0]
+            else:
+                flash(gettext('Delivery data are corrupted! Cannot edit delivery quantity.'))
+                return redirect(url_for('editdelivery', id=delivery_id))
+
+            if delete_flg:
+                qty_difference = delivered_product.quantity
+            else:
+                qty_difference = delivered_product.quantity - new_delivery_qty
+                if qty_difference < 1:
+                    flash(gettext('Delivery quantity submited incorrectly!'))
+                    return redirect(url_for('editdelivery', id=delivery_id))
+
+            # Subtract the quantity difference from stock
+            if form.subtract_qty_from_stock.data:
+                stock_product = Product.query.get(delivered_product.product_id)
+                if not stock_product:
+                    flash(gettext('Product id not found!'))
+                    return redirect(url_for('editdelivery', id=delivery_id))
+                stock_product.qty_stock -= qty_difference
+                db.session.add(stock_product)
+
+            # Add the quantity difference to ordered products
+            if form.add_qty_to_orders.data:
+                maker = Maker.query.get(Delivery.query.get(delivery_id).maker_id)
+                if not maker:
+                    flash(gettext('Maker data are corrupted! Cannot edit supply quantity.'))
+                    return redirect(url_for('editdelivery', id=delivery_id))
+                orders = Order.query\
+                    .filter_by(maker_id=maker.id)\
+                    .join(OrderedProducts).filter(OrderedProducts.product_id == delivered_product_id)\
+                    .order_by(Order.created_dt.desc()).all()
+
+                # Find all orders with this product id from newest, each time subtract delivered quantity till zero,
+                # if it goes over, go to next order. Make inactive order active if needed.
+                qty_to_subtract = qty_difference
+                for o in orders:
+                    ops = o.products.all()
+                    this_op = None
+                    for op in ops:
+                        if op.product_id == delivered_product_id:
+                            this_op = op
+                            break
+                    if not this_op:
+                        continue
+
+                    # Case1: This order has MORE or EQUAL AMOUNT of qty_delivered than remaining qty_to_subtract
+                    # -> subtract qty_to_subtract from qty_delivered and break -> we are done.
+                    if this_op.qty_delivered >= qty_to_subtract:
+                        this_op.qty_delivered -= qty_to_subtract
+                        db.session.add(op)
+                        if not o.active_flg:
+                            o.active_flg = True
+                            db.session.add(o)
+                        break
+                    # Case2: This order has LESS qty_delivered than remaining qty_to_subtract
+                    # -> subtract qty_delivered from qty_to_subtract, set qty_delivered to 0 and go to next order.
+                    else:
+                        qty_to_subtract -= this_op.qty_delivered
+                        this_op.qty_delivered = 0
+                        db.session.add(op)
+                        if not o.active_flg:
+                            o.active_flg = True
+                            db.session.add(o)
+
+            # And finally edit the delivered quantity for this product or delete if delete_flg
+            if delete_flg:
+                db.session.delete(delivered_product)
+            else:
+                if delivered_product.quantity > new_delivery_qty:
+                    delivered_product.quantity = new_delivery_qty
+                    db.session.add(delivered_product)
+
+            # FINAL COMMIT
+            db.session.commit()
+
+            flash(gettext('Delivered quantity succesfully changed.'))
+            return redirect(url_for('editdelivery', id=delivery_id))
+
+    return render_template('deliveries/editdelivery.html',
+                            title=gettext("Edit delivery"),
+                            delivery=delivery,
+                            products=products,
+                            form=form)
