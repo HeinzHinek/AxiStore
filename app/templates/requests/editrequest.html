@@ -95,6 +95,20 @@
             {% endif %}
         </tr>
     </table>
+    <table class="table table-bordered col-md-3" style="border: 2px solid #dddddd; margin-left: 20px; width: auto;">
+        <tr>
+            <th>{{ _('This request is') }}:</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                {% if request.active_flg %}
+                <label class="label label-warning">{{ _('Active') }}</label>
+                {% else %}
+                <label class="label label-success">{{ _('Inactive') }}</label>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
 
     {% if products %}
     <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
@@ -182,12 +196,7 @@
         <label class="label label-info" style="font-size: 1.5em;">{{ _('This request is empty. It should be deleted.') }}</label>
         <br/>
         <br/>
-        <form action="" method="post" name="request_whole_delete_form" class="request_whole_delete_form">
-            {{ form.hidden_tag() }}
-            <input type="hidden" name="delete_whole_request" value="true"/>
-            <input type="hidden" name="request_id" value="{{ request.id }}"/>
-            <input type="submit" class="btn btn-lg btn-danger" value="{{ _('Delete now') }}" onclick="return confirm({{ _('Are you sure you want to delete this request?') }});">
-        </form>
+        <a href="{{ url_for('cancelrequest', id=request.id) }}" class="btn btn-lg btn-danger">{{ _('Delete now') }}</a>
     </div>
     {% endif %}
 
