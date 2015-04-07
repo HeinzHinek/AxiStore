@@ -37,6 +37,11 @@ $(document).ready(function() {
         if (empty == true) {
             return;
         }
+        $('.tr-product').each( function() {
+            if ( $(this).find('.input-qty').length === 0 ) {
+                $(this).hide();
+            }
+        });
         for (var i=0; i<inputs.length; i++) {
             if ( $(inputs[i]).val() == 0 ) {
                 $(inputs[i]).parent().parent().hide();
