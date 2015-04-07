@@ -2,7 +2,7 @@
 
 from flask import render_template, redirect, flash, url_for, g, session, request
 from app import app, db
-from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm, SimpleSubmitForm
+from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm, SimpleSubmitForm, EditRequestForm
 from models import Request, Product, RequestedProducts, Customer, Maker
 from flask_login import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
@@ -197,6 +197,85 @@ def productrequests(id):
                            product=product,
                            CUSTOMER_TYPES=CUSTOMER_TYPES,
                            requests=requests)
+
+
+@app.route('/editrequest/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editrequest(id):
+    req = Request.query.get(id)
+    if not req:
+        flash(gettext('Data not found!'))
+        return redirect(url_for('requests'))
+    cust = Customer.query.get(req.customer_id)
+    if not cust:
+        flash(gettext('Customer data not found!'))
+        return redirect(url_for('requests'))
+    products = req.products.all()
+    form = EditRequestForm()
+
+    if form.validate_on_submit():
+
+        requested_product_id = flask.request.form['requested_product_id']
+        if not requested_product_id:
+            flash(gettext('Product data not found!'))
+            return redirect(url_for('editrequest', id=req.id))
+
+        rp = RequestedProducts.query\
+            .filter_by(request_id=req.id)\
+            .filter_by(product_id=int(requested_product_id))\
+            .first()
+        if not rp:
+            flash(gettext('Product data not found!'))
+            return redirect(url_for('editrequest', id=req.id))
+
+        # Are we deleting this requested product completely?
+        delete_str = flask.request.form['delete_requested_product']
+        if delete_str == 'true':
+            if rp.qty_supplied and rp.qty_supplied > 0:
+                flash(gettext('Cannot delete request that has been already supplied! Delete supply item first.'))
+                return redirect(url_for('editrequest', id=req.id))
+
+            db.session.delete(rp)
+            db.session.commit()
+
+            # Check whether this request is still active
+            if req.check_completely_supplied():
+                db.session.add(req)
+                db.session.commit()
+
+            flash(gettext('Requested product sucessfully deleted.'))
+            return redirect(url_for('editrequest', id=req.id))
+
+        # We are not deleting, only changing requested quantity
+        new_request_qty = form.qty_requested.data
+        if not new_request_qty or new_request_qty < 1 or new_request_qty > 1000000:
+            flash(gettext('Requested quantity submited incorrectly!'))
+            return redirect(url_for('editrequest', id=req.id))
+        if new_request_qty == rp.quantity:
+            flash(gettext('Submited quantity is the same as the current value. Nothing to change.'))
+            return redirect(url_for('editrequest', id=req.id))
+
+        # Submited value seems to be ok here
+        rp.quantity = new_request_qty
+        db.session.add(rp)
+
+        # Check whether this request is still active
+        if not req.check_completely_supplied():
+            req.active_flg = True
+        db.session.add(req)
+
+        db.session.commit()
+
+        flash(gettext('Requested quantity succesfully changed.'))
+        return redirect(url_for('editrequest', id=req.id))
+
+    return render_template('requests/editrequest.html',
+                           title=gettext("Edit order from customer"),
+                           request=req,
+                           products=products,
+                           customer=cust,
+                           CUSTOMER_TYPES=CUSTOMER_TYPES,
+                           form=form)
 
 
 @app.route('/cancelrequest/<int:id>', methods=['GET', 'POST'])

@@ -240,3 +240,7 @@ class EditDeliveryForm(Form):
     subtract_qty_from_stock = BooleanField('subtract_qty_to_stock', default=True)
     add_qty_to_orders = BooleanField('add_qty_to_orders', default=True)
     submit = SubmitField(lazy_gettext('Submit'))
+
+class EditRequestForm(Form):
+    qty_requested = IntegerField('qty_requested')
+    submit = SubmitField(lazy_gettext('Submit'))
