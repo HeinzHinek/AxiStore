@@ -158,6 +158,9 @@ def createRequest():
 @login_required
 def request_detail(id):
     req = Request.query.filter_by(id=id).first()
+    if not req:
+        flash(gettext('Data not found.'))
+        return redirect(url_for('requests'))
     form = EditDateTimeForm()
     if req:
         products = req.products

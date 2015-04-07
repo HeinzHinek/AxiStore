@@ -142,6 +142,9 @@ def placeOrder():
 @login_required
 def order(id):
     order = Order.query.filter_by(id=id).first()
+    if not order:
+        flash(gettext('Data not found.'))
+        return redirect(url_for('orders'))
     form = EditDateTimeForm()
     if order:
         products = order.products
