@@ -12,8 +12,8 @@
         });
 
         $(document).on('keyup', '.supply-qty-edit-input', function() {
-            var input_qty = parseInt($(this).val());
-            var orig_qty = parseInt($(this).closest('tr').find('.orig-supplied-qty').text());
+            var input_qty = $(this).val();
+            var orig_qty = $(this).closest('tr').find('.orig-supplied-qty').text();
             var submit_btn = $(this).closest('div').find('.supply-qty-edit-submit-btn');
             if ( input_qty == 0 || $(this).val() == '') {
                 input_qty = orig_qty;
