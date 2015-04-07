@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-06 17:39+0900\n"
-"PO-Revision-Date: 2015-04-06 17:50+0900\n"
+"POT-Creation-Date: 2015-04-07 12:29+0900\n"
+"PO-Revision-Date: 2015-04-07 12:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -29,6 +29,7 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 
 #: app/csvHelper.py:63 app/csvHelper.py:96
 #: app/templates/deliveries/delivery.html:55
+#: app/templates/deliveries/editdelivery.html:92
 #: app/templates/orders/cancelorder.html:51 app/templates/orders/order.html:55
 #: app/templates/product/addProduct.html:78
 #: app/templates/product/editProduct.html:157
@@ -273,7 +274,8 @@ msgstr "発注可能な商品のみ"
 msgid "Search"
 msgstr "検索"
 
-#: app/forms.py:228 app/forms.py:235 app/templates/deliveries/delivery.html:27
+#: app/forms.py:228 app/forms.py:235 app/forms.py:242
+#: app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:142
 #: app/templates/orders/createOrder.html:256
 #: app/templates/orders/order.html:27
@@ -298,8 +300,8 @@ msgstr "Home"
 msgid "Stock quantity successfully updated."
 msgstr "在庫個数の更新が成功しました。"
 
-#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:213
-#: app/viewsOrder.py:215
+#: app/viewsBase.py:256 app/viewsBase.py:258 app/viewsOrder.py:216
+#: app/viewsOrder.py:218
 msgid "Input value error."
 msgstr "入力された値が不正です。"
 
@@ -420,34 +422,75 @@ msgstr "お客様の情報を編集"
 msgid "Sales of Recommended Customers"
 msgstr "推薦されたお客様の売り上げ"
 
-#: app/viewsDelivery.py:21 app/templates/navbar_admin.html:43
+#: app/viewsDelivery.py:22 app/templates/navbar_admin.html:43
 msgid "Deliveries"
 msgstr "入庫"
 
-#: app/viewsDelivery.py:37 app/viewsDelivery.py:62 app/viewsMaker.py:46
-#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:234
+#: app/viewsDelivery.py:38 app/viewsDelivery.py:63 app/viewsMaker.py:46
+#: app/viewsOrder.py:55 app/viewsOrder.py:77 app/viewsOrder.py:237
 msgid "Maker not found."
 msgstr "メーカーは不明です。"
 
-#: app/viewsDelivery.py:50 app/viewsDelivery.py:173
+#: app/viewsDelivery.py:51 app/viewsDelivery.py:174
 msgid "New Delivery"
 msgstr "新規入庫"
 
-#: app/viewsDelivery.py:159
+#: app/viewsDelivery.py:160
 msgid "New delivery received sucessfully."
 msgstr "入庫に成功しました。"
 
-#: app/viewsDelivery.py:163
+#: app/viewsDelivery.py:164
 msgid "Delivery Report"
 msgstr "入庫レポート"
 
-#: app/viewsDelivery.py:192
+#: app/viewsDelivery.py:185 app/viewsOrder.py:146 app/viewsRequest.py:162
+#: app/viewsSupply.py:266
+msgid "Data not found."
+msgstr "データが見つかりません。"
+
+#: app/viewsDelivery.py:196
 msgid "Date and time of delivery was successfully changed."
 msgstr "入荷の日時は変更されました。"
 
-#: app/viewsDelivery.py:196
+#: app/viewsDelivery.py:200 app/templates/deliveries/editdelivery.html:71
 msgid "Delivery details"
 msgstr "入庫の詳細"
+
+#: app/viewsDelivery.py:211 app/viewsDelivery.py:228
+msgid "Delivery data not found!"
+msgstr "入荷のデータがありません！"
+
+#: app/viewsDelivery.py:232
+msgid "Delivered products have to be deleted first!"
+msgstr "入荷商品は先に削除されなければなりません！"
+
+#: app/viewsDelivery.py:236
+msgid "Delivery data sucessfully deleted."
+msgstr "入庫のデータが削除されました。"
+
+#: app/viewsDelivery.py:261
+msgid "Delivery data are corrupted! Cannot edit delivery quantity."
+msgstr "入荷のデータが壊れています！入荷の数量を変更できません。"
+
+#: app/viewsDelivery.py:269
+msgid "Delivery quantity submited incorrectly!"
+msgstr "入荷の数量が不正です！"
+
+#: app/viewsDelivery.py:276 app/viewsSupply.py:358
+msgid "Product id not found!"
+msgstr "製品のIDが見つかりません！"
+
+#: app/viewsDelivery.py:285
+msgid "Maker data are corrupted! Cannot edit supply quantity."
+msgstr "メーカーのデータが壊れています！入荷の数量を変更できません。"
+
+#: app/viewsDelivery.py:335
+msgid "Delivered quantity succesfully changed."
+msgstr "入荷の数量が変更されました。"
+
+#: app/viewsDelivery.py:339
+msgid "Edit delivery"
+msgstr "入荷データの修正"
 
 #: app/viewsLogin.py:23
 msgid "Entered username is unknown."
@@ -506,42 +549,42 @@ msgstr "新規発注を入力する"
 msgid "New order to maker was successfully created."
 msgstr "新規発注の登録が成功しました。"
 
-#: app/viewsOrder.py:123 app/viewsOrder.py:236
+#: app/viewsOrder.py:123 app/viewsOrder.py:239
 #: app/templates/orders/ordersheet.html:8
 msgid "Order Sheet Management"
 msgstr "発注書の管理"
 
-#: app/viewsOrder.py:154
+#: app/viewsOrder.py:157
 msgid "Date and time of order was successfully changed."
 msgstr "発注の日時は変更されました。"
 
-#: app/viewsOrder.py:158 app/templates/orders/cancelorder.html:30
+#: app/viewsOrder.py:161 app/templates/orders/cancelorder.html:30
 #: app/templates/orders/order.html:5
 #: app/templates/requests/cancelrequest.html:30
 msgid "Order details"
 msgstr "発注の詳細"
 
-#: app/viewsOrder.py:177
+#: app/viewsOrder.py:180
 msgid "Orders to maker for product"
 msgstr "製品に対する発注"
 
-#: app/viewsOrder.py:211
+#: app/viewsOrder.py:214
 msgid "Minimum stock limit successfully updated."
 msgstr "最少在庫数の更新が成功しました。"
 
-#: app/viewsOrder.py:219 app/templates/navbar_admin.html:38
+#: app/viewsOrder.py:222 app/templates/navbar_admin.html:38
 msgid "Order management"
 msgstr "発注の管理"
 
-#: app/viewsOrder.py:232
+#: app/viewsOrder.py:235
 msgid "Email to maker sent succesfully."
 msgstr "メーカーへのメールの発信が成功しました。"
 
-#: app/viewsOrder.py:247 app/viewsRequest.py:204
+#: app/viewsOrder.py:250 app/viewsRequest.py:207
 msgid "Order not found!"
 msgstr "注文が見つかりません！"
 
-#: app/viewsOrder.py:264
+#: app/viewsOrder.py:267
 msgid "Cancel order to maker"
 msgstr "メーカーへの発注を取り消す"
 
@@ -609,19 +652,19 @@ msgstr "注文のデータが受信されませんでした。"
 msgid "Accept order from customer"
 msgstr "受注を受け取る"
 
-#: app/viewsRequest.py:170
+#: app/viewsRequest.py:173
 msgid "Date and time of request was successfully changed."
 msgstr "受注の日時は変更されました。"
 
-#: app/viewsRequest.py:174 app/templates/requests/request.html:5
+#: app/viewsRequest.py:177 app/templates/requests/request.html:5
 msgid "Order from customer details"
 msgstr "受注の詳細"
 
-#: app/viewsRequest.py:193
+#: app/viewsRequest.py:196
 msgid "Orders from customers for product"
 msgstr "製品に対する受注"
 
-#: app/viewsRequest.py:229
+#: app/viewsRequest.py:232
 msgid "Cancel order from customer"
 msgstr "お客様からの注文を取り消す"
 
@@ -747,32 +790,56 @@ msgstr "新規供給の発送が成功しました。"
 msgid "Supply Report"
 msgstr "納品の報告"
 
-#: app/viewsSupply.py:274
+#: app/viewsSupply.py:277
 msgid "Date and time of supply was successfully changed."
 msgstr "出荷の日時は変更されました。"
 
-#: app/viewsSupply.py:278 app/templates/supplies/editsupply.html:71
+#: app/viewsSupply.py:281 app/templates/supplies/editsupply.html:71
 #: app/templates/supplies/supply.html:5
 msgid "Supply details"
 msgstr "納品の詳細"
 
-#: app/viewsSupply.py:290
+#: app/viewsSupply.py:293 app/viewsSupply.py:310
 msgid "Supply data not found!"
 msgstr "納品データがありません！"
 
-#: app/viewsSupply.py:418
+#: app/viewsSupply.py:314
+msgid "Supplied products have to be deleted first!"
+msgstr "納品の商品が先に削除されなければなりません！"
+
+#: app/viewsSupply.py:318
+msgid "Supply data sucessfully deleted."
+msgstr "納品のデータが削除されました。"
+
+#: app/viewsSupply.py:343
+msgid "Supply data are corrupted! Cannot edit supply quantity."
+msgstr "納品のデータが壊れています！入荷の数量を変更できません。"
+
+#: app/viewsSupply.py:351
+msgid "Supply quantity submited incorrectly!"
+msgstr "納品の数量が不正です！"
+
+#: app/viewsSupply.py:367
+msgid "Customer data are corrupted! Cannot edit supply quantity."
+msgstr "顧客のデータが壊れています！納品の数量を変更できません。"
+
+#: app/viewsSupply.py:417
+msgid "Supplied quantity succesfully changed."
+msgstr "納品の数量が変更されました。"
+
+#: app/viewsSupply.py:421
 msgid "Edit supply"
 msgstr "納品データの修正"
 
-#: app/viewsSupply.py:435
+#: app/viewsSupply.py:438
 msgid "No product data!"
 msgstr "製品のデータがありません！"
 
-#: app/viewsSupply.py:449
+#: app/viewsSupply.py:452
 msgid "Invalid data received."
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsSupply.py:526 app/templates/navbar_admin.html:48
+#: app/viewsSupply.py:529 app/templates/navbar_admin.html:48
 msgid "Unsupplied products"
 msgstr "納品していない商品"
 
@@ -1044,6 +1111,7 @@ msgstr "検索結果"
 #: app/templates/deliveries/deliveryReport.html:17
 #: app/templates/deliveries/deliveryReport.html:57
 #: app/templates/deliveries/deliveryReport.html:79
+#: app/templates/deliveries/editdelivery.html:83
 #: app/templates/orders/cancelorder.html:42 app/templates/orders/order.html:43
 #: app/templates/orders/orders.html:36 app/templates/orders/ordersheet.html:16
 #: app/templates/orders/productorders.html:23
@@ -1059,6 +1127,7 @@ msgstr "メーカー"
 
 #: app/templates/stock.html:213 app/templates/deliveries/delivery.html:56
 #: app/templates/deliveries/deliveryReport.html:18
+#: app/templates/deliveries/editdelivery.html:93
 #: app/templates/orders/cancelorder.html:52 app/templates/orders/order.html:57
 #: app/templates/orders/ordermanagement.html:217
 #: app/templates/requests/cancelrequest.html:57
@@ -1076,6 +1145,7 @@ msgstr "チェコ語の説明"
 
 #: app/templates/stock.html:214 app/templates/deliveries/delivery.html:57
 #: app/templates/deliveries/deliveryReport.html:19
+#: app/templates/deliveries/editdelivery.html:94
 #: app/templates/orders/cancelorder.html:53 app/templates/orders/order.html:58
 #: app/templates/orders/ordermanagement.html:215
 #: app/templates/requests/cancelrequest.html:58
@@ -1111,11 +1181,13 @@ msgstr "新規入庫"
 
 #: app/templates/deliveries/deliveries.html:33
 #: app/templates/deliveries/delivery.html:18
+#: app/templates/deliveries/editdelivery.html:74
 msgid "Delivery ID"
 msgstr "入庫ID"
 
 #: app/templates/deliveries/deliveries.html:34
 #: app/templates/deliveries/delivery.html:20
+#: app/templates/deliveries/editdelivery.html:76
 #: app/templates/requests/axm_requests.html:15
 #: app/templates/requests/requests.html:15
 #: app/templates/supplies/supplyReport.html:60
@@ -1145,6 +1217,7 @@ msgid "Back to the list"
 msgstr "一覧へ戻る"
 
 #: app/templates/deliveries/delivery.html:22
+#: app/templates/deliveries/editdelivery.html:96
 #: app/templates/orders/order.html:22 app/templates/requests/request.html:22
 #: app/templates/supplies/editsupply.html:100
 #: app/templates/supplies/supply.html:22
@@ -1160,6 +1233,7 @@ msgstr "閉じる"
 
 #: app/templates/deliveries/delivery.html:58
 #: app/templates/deliveries/deliveryReport.html:20
+#: app/templates/deliveries/editdelivery.html:95
 #: app/templates/mail/order_confirm.html:28
 #: app/templates/orders/cancelorder.html:54 app/templates/orders/order.html:59
 #: app/templates/orders/productorders.html:46
@@ -1177,6 +1251,10 @@ msgstr "閉じる"
 #: app/templates/supplies/supplyReport.html:25
 msgid "Quantity"
 msgstr "数量"
+
+#: app/templates/deliveries/delivery.html:73
+msgid "Edit this delivery"
+msgstr "この入荷を修正"
 
 #: app/templates/deliveries/deliveryReport.html:4
 msgid "New delivery from maker report"
@@ -1271,6 +1349,71 @@ msgstr "入庫一覧へ"
 #: app/templates/supplies/supplyReport.html:111
 msgid "To orders"
 msgstr "発注一覧へ"
+
+#: app/templates/deliveries/editdelivery.html:65
+msgid "Edit contents of delivery from maker"
+msgstr "メーカーからの入荷データの修正"
+
+#: app/templates/deliveries/editdelivery.html:81
+msgid "Receiver"
+msgstr "受取人"
+
+#: app/templates/deliveries/editdelivery.html:97
+#: app/templates/supplies/editsupply.html:101
+msgid "Delete"
+msgstr "削除"
+
+#: app/templates/deliveries/editdelivery.html:120
+#: app/templates/supplies/editsupply.html:124
+msgid "Decrease delivered quantity"
+msgstr "納品数量を減らす"
+
+#: app/templates/deliveries/editdelivery.html:128
+msgid ""
+"You can only decrease the delivered quantity. If you want to increase the "
+"quantity, create a new delivery from maker."
+msgstr ""
+"現在は入荷個数を増やすことができません。増やしたい場合は当メーカーからの新規"
+"入荷を行ってください。"
+
+#: app/templates/deliveries/editdelivery.html:131
+msgid "Delivered quantity:"
+msgstr "入荷数量："
+
+#: app/templates/deliveries/editdelivery.html:138
+msgid "Subtract quantity difference from stock"
+msgstr "数量の差を在庫から引く"
+
+#: app/templates/deliveries/editdelivery.html:143
+msgid ""
+"Add quantity difference back to latest order(s) of this product to this maker"
+msgstr "数量の差を本製品を含むこのメーカーへのの最新発注に足す"
+
+#: app/templates/deliveries/editdelivery.html:166
+msgid "Delete this delivered item"
+msgstr "本入荷アイテムを一件削除"
+
+#: app/templates/deliveries/editdelivery.html:172
+msgid "Subtract delivered quantity from stock"
+msgstr "入荷数量を在庫数から引く"
+
+#: app/templates/deliveries/editdelivery.html:177
+msgid ""
+"Add delivered quantity back to latest order(s) of this product to this maker"
+msgstr "納品数量を本製品を含むこのメーカーへの最新発注に足す"
+
+#: app/templates/deliveries/editdelivery.html:194
+msgid "This delivery is empty. It should be deleted."
+msgstr "この入荷はデータがありません。削除されるべきです。"
+
+#: app/templates/deliveries/editdelivery.html:201
+#: app/templates/supplies/editsupply.html:205
+msgid "Delete now"
+msgstr "削除する"
+
+#: app/templates/deliveries/editdelivery.html:201
+msgid "Are you sure you want to delete this delivery?"
+msgstr "本当にこの入荷データを削除しますか？"
 
 #: app/templates/deliveries/newDelivery.html:70
 msgid "Receive a new delivery"
@@ -2539,15 +2682,7 @@ msgstr "発送日時"
 msgid "Sender"
 msgstr "発送者"
 
-#: app/templates/supplies/editsupply.html:101
-msgid "Delete"
-msgstr "削除"
-
-#: app/templates/supplies/editsupply.html:121
-msgid "Decrease delivered quantity"
-msgstr "納品数量を減らす"
-
-#: app/templates/supplies/editsupply.html:129
+#: app/templates/supplies/editsupply.html:132
 msgid ""
 "You can only decrease the supplied quantity. If you want to increase the "
 "quantity, create a new supply to customer."
@@ -2555,43 +2690,39 @@ msgstr ""
 "現在は納品個数を増やすことができません。増やしたい場合は当お客様への新規納品"
 "を行ってください。"
 
-#: app/templates/supplies/editsupply.html:132
+#: app/templates/supplies/editsupply.html:135
 msgid "Supplied quantity:"
 msgstr "納品数量："
 
-#: app/templates/supplies/editsupply.html:139
+#: app/templates/supplies/editsupply.html:142
 msgid "Add quantity difference back to stock"
 msgstr "数量の差を在庫に足す"
 
-#: app/templates/supplies/editsupply.html:144
+#: app/templates/supplies/editsupply.html:147
 msgid ""
 "Add quantity difference back to latest order(s) of this product from this "
 "customer"
 msgstr "数量の差を本製品を含むこのお客様からの最新受注に足す"
 
-#: app/templates/supplies/editsupply.html:164
+#: app/templates/supplies/editsupply.html:170
 msgid "Delete this supplied item"
 msgstr "本納品を一件削除"
 
-#: app/templates/supplies/editsupply.html:170
+#: app/templates/supplies/editsupply.html:176
 msgid "Add supplied quantity back to stock"
 msgstr "納品数量を在庫数に足す"
 
-#: app/templates/supplies/editsupply.html:175
+#: app/templates/supplies/editsupply.html:181
 msgid ""
 "Add supplied quantity back to latest order(s) of this product from this "
 "customer"
 msgstr "納品数量を本製品を含むこのお客様からの最新受注に足す"
 
-#: app/templates/supplies/editsupply.html:192
+#: app/templates/supplies/editsupply.html:198
 msgid "This supply is empty. It should be deleted."
 msgstr "この納品はデータがありません。削除されるべきです。"
 
-#: app/templates/supplies/editsupply.html:199
-msgid "Delete now"
-msgstr "削除する"
-
-#: app/templates/supplies/editsupply.html:199
+#: app/templates/supplies/editsupply.html:205
 msgid "Are you sure you want to delete this supply?"
 msgstr "本当にこの納品データを削除しますか？"
 
@@ -2612,8 +2743,8 @@ msgid "Supplies to customers overview"
 msgstr "お客様への納品の一覧"
 
 #: app/templates/supplies/supply.html:77
-msgid "Edit this order"
-msgstr "この受注を修正"
+msgid "Edit this supply"
+msgstr "納品データの修正"
 
 #: app/templates/supplies/supplyProducts.html:118
 msgid "Select products to supply"
