@@ -2,7 +2,7 @@
 
 from flask import render_template, redirect, flash, url_for, request, g, session
 from app import app, db
-from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm, SimpleSubmitForm
+from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQtyStockForm, SimpleSubmitForm, EditOrderForm
 from models import Order, Product, OrderedProducts, Maker
 from mailer import send_order_mail_to_maker
 from xls import CreateXls
@@ -240,6 +240,84 @@ def order_mail_to_maker(filename, maker_id):
                            ordersheet_file=filename,
                            maker=maker,
                            mail_sent=True)
+
+
+@app.route('/editorder/<int:id>', methods=['GET', 'POST'])
+@login_required
+def editorder(id):
+    order = Order.query.get(id)
+    if not order:
+        flash(gettext('Data not found!'))
+        return redirect(url_for('orders'))
+    maker = Maker.query.get(order.maker_id)
+    if not maker:
+        flash(gettext('Maker data not found!'))
+        return redirect(url_for('orders'))
+    products = order.products.all()
+    form = EditOrderForm()
+
+    if form.validate_on_submit():
+
+        ordered_product_id = flask.request.form['ordered_product_id']
+        if not ordered_product_id:
+            flash(gettext('Product data not found!'))
+            return redirect(url_for('editorder', id=order.id))
+
+        op = OrderedProducts.query\
+            .filter_by(order_id=order.id)\
+            .filter_by(product_id=int(ordered_product_id))\
+            .first()
+        if not op:
+            flash(gettext('Product data not found!'))
+            return redirect(url_for('editorder', id=order.id))
+
+        # Are we deleting this ordered product completely?
+        delete_str = flask.request.form['delete_ordered_product']
+        if delete_str == 'true':
+            if op.qty_delivered and op.qty_delivered > 0:
+                flash(gettext('Cannot delete order that has been already delivered! Delete delivery item first.'))
+                return redirect(url_for('editorder', id=order.id))
+
+            db.session.delete(op)
+            db.session.commit()
+
+            # Check whether this order is still active
+            if order.check_completely_delivered():
+                db.session.add(order)
+                db.session.commit()
+
+            flash(gettext('Ordered product sucessfully deleted.'))
+            return redirect(url_for('editorder', id=order.id))
+
+        # We are not deleting, only changing ordered quantity
+        new_order_qty = form.qty_ordered.data
+        if not new_order_qty or new_order_qty < 1 or new_order_qty > 1000000:
+            flash(gettext('Ordered quantity submited incorrectly!'))
+            return redirect(url_for('editorder', id=order.id))
+        if new_order_qty == op.quantity:
+            flash(gettext('Submited quantity is the same as the current value. Nothing to change.'))
+            return redirect(url_for('editorder', id=order.id))
+
+        # Submited value seems to be ok here
+        op.quantity = new_order_qty
+        db.session.add(op)
+
+        # Check whether this request is still active
+        if not order.check_completely_delivered():
+            order.active_flg = True
+        db.session.add(order)
+
+        db.session.commit()
+
+        flash(gettext('Ordered quantity succesfully changed.'))
+        return redirect(url_for('editorder', id=order.id))
+
+    return render_template('orders/editorder.html',
+                           title=gettext("Edit order to maker"),
+                           order=order,
+                           products=products,
+                           maker=maker,
+                           form=form)
 
 
 @app.route('/cancelorder/<int:id>', methods=['GET', 'POST'])

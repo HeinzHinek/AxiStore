@@ -241,6 +241,12 @@ class EditDeliveryForm(Form):
     add_qty_to_orders = BooleanField('add_qty_to_orders', default=True)
     submit = SubmitField(lazy_gettext('Submit'))
 
+
 class EditRequestForm(Form):
     qty_requested = IntegerField('qty_requested')
+    submit = SubmitField(lazy_gettext('Submit'))
+
+
+class EditOrderForm(Form):
+    qty_ordered = IntegerField('qty_ordered')
     submit = SubmitField(lazy_gettext('Submit'))

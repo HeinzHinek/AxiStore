@@ -51,9 +51,9 @@
         <tr>
             <td style="text-align: center;">
                 {% if order.active_flg %}
-                <label class="label label-success">{{ _('Active') }}</label>
+                <label class="label label-warning">{{ _('Active') }}</label>
                 {% else %}
-                <label class="label label-danger">{{ _('Inactive') }}</label>
+                <label class="label label-success">{{ _('Inactive') }}</label>
                 {% endif %}
             </td>
         </tr>
@@ -95,11 +95,16 @@
         {% endfor %}
     </tbody>
     </table>
-    {% if order.check_completely_undelivered() %}
-    <a href="{{ url_for('cancelorder', id=order.id) }}" class="btn btn-xs btn-danger" style="float: right;">
-        {{ _('Cancel this order') }}
-    </a>
-    {% endif %}
+    <div style="text-align: right;">
+        <a href="{{ url_for('editorder', id=order.id) }}" class="btn btn-xs btn-warning">
+            {{ _('Edit this order') }}
+        </a>
+        {% if order.check_completely_undelivered() %}
+        <a href="{{ url_for('cancelorder', id=order.id) }}" class="btn btn-xs btn-danger">
+            {{ _('Cancel this order') }}
+        </a>
+        {% endif %}
+    </div>
 </div>
 {% endif %}
 

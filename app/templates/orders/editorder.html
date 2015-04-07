@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script>
+    $(document).ready( function() {
+
+        $(document).on('keyup', '.nums_only', function (e) {
+            $(this).removeClass('td-border-highlighted');
+            if (e.keyCode != '9') {
+                this.value = this.value.replace(/[^0-9]/g,'');
+            }
+        });
+
+        $(document).on('keyup', '.order-qty-edit-input', function() {
+            var input_qty = parseInt($(this).val());
+            var orig_qty = parseInt($(this).closest('tr').find('.orig-ordered-qty').text());
+            var supplied_qty = parseInt($(this).closest('tr').find('.orig-supplied-qty').text());
+            var submit_btn = $(this).closest('div').find('.order-qty-edit-submit-btn');
+            if ( input_qty == 0 || $(this).val() == '') {
+                input_qty = orig_qty;
+            }
+            if (input_qty != orig_qty && input_qty >= supplied_qty) {
+                $(submit_btn).removeAttr('disabled');
+            } else {
+                $(submit_btn).attr('disabled','disabled');
+            }
+        });
+
+        $('.order_qty_edit_open_btn').click( function() {
+            var this_div = $(this).closest('td').find('.order_qty_edit_form_div');
+            var this_visible = false;
+            if ( $(this_div).is(":visible") ) {
+                this_visible = true;
+            }
+            $('.order_qty_edit_form_div').hide();
+            $('.order_qty_delete_form_div').hide();
+            if (this_visible) {
+                $(this_div).show();
+            }
+            $(this).closest('td').find('.order_qty_edit_form_div').toggle('fast')
+        });
+
+        $('.order_qty_delete_open_btn').click( function() {
+            var this_div = $(this).closest('td').find('.order_qty_delete_form_div');
+            var this_visible = false;
+            if ( $(this_div).is(":visible") ) {
+                this_visible = true;
+            }
+            $('.order_qty_edit_form_div').hide();
+            $('.order_qty_delete_form_div').hide();
+            if (this_visible) {
+                $(this_div).show();
+            }
+            $(this).closest('td').find('.order_qty_delete_form_div').toggle('fast')
+        });
+
+    });
+</script>
+
+<style>
+    body { background-color: #FFECA2; }
+</style>
+
+<div class="row">
+    <h1>{{ _('Edit contents of order to maker') }}: <font color="navy">{{ order.maker.name }}</font></h1>
+    {% include 'flash.html' %}
+</div>
+
+{% if order %}
+<div class="row shadowed-div">
+    <h3>{{ _('Order details') }}</h3>
+    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+        <tr>
+            <th class="info col-md-3">{{ _('Order ID') }}</th>
+            <td class="col-md-3">{{ order.id }}</td>
+            <th class="info info col-md-3">{{ _('Placed') }}</th>
+            <td class="col-md-3">{{ momentjs(order.created_dt).format('LLL') }}&nbsp;&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <th class="info info">{{ _('Ordered by') }}</th>
+            <td>{{ order.orderer.nickname }}</td>
+            <th class="info info">{{ _('Maker') }}</th>
+            <td>{{ order.maker.name }}</td>
+        </tr>
+    </table>
+    <table class="table table-bordered col-md-3" style="border: 2px solid #dddddd; margin-left: 20px; width: auto;">
+        <tr>
+            <th>{{ _('This order is') }}:</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                {% if order.active_flg %}
+                <label class="label label-warning">{{ _('Active') }}</label>
+                {% else %}
+                <label class="label label-success">{{ _('Inactive') }}</label>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    {% if products %}
+    <table class="table table-hover table-striped table-responsive td-border-bottom-2px">
+    <thead>
+        <tr>
+            <th>{{ _('Product code') }}</th>
+            <th>{{ _('Description CS') }}</th>
+            <th>{{ _('Description JP') }}</th>
+            <th style="text-align: center;">{{ _('Quantity') }}</th>
+            <th style="text-align: center;">{{ _('Delivered') }}</th>
+            <th style="text-align: center;">{{ _('Edit') }}</th>
+            <th style="text-align: center;">{{ _('Delete') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td class="clickable-td">{{ product.product.code }}</td>
+            <td class="clickable-td">{{ product.product.desc_CS }}</td>
+            <td class="clickable-td">{{ product.product.desc_JP }}</td>
+            <td class="clickable-td orig-ordered-qty" style="text-align: center;">{{ product.quantity }}</td>
+            <td class="clickable-td orig-supplied-qty" style="text-align: center;
+                {% if product.qty_delivered == 0 %}
+                    background-color: #ebccd1; color: #a94442;
+                {% elif product.quantity > product.qty_delivered %}
+                    background-color: #FFFFC8;
+                {% else %}
+                    background-color: #C8FFC8; color: #007800;
+                {% endif %}
+                ">{{ product.qty_delivered }}</td>
+            <td class="td-border-left-1px"  style="text-align: center; position: relative;">
+                <a class="btn btn-info btn-xs order_qty_edit_open_btn">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <div class="order_qty_edit_form_div shadowed-div form-inline"
+                        style="display:none; position: absolute; right: 0px; top: 35px; width: 400px;
+                        text-align: left; padding: 20px; background-color: #DEDEFF; z-index: 999;">
+                    <div style="position: absolute; right: 10px; top: 10px;">
+                        <button type="button" class="close" onclick="$(this).closest('.order_qty_edit_form_div').hide('fast');">&times;</button>
+                    </div>
+                    <form action="" method="post" name="order_qty_edit_form" class="order_qty_edit_form">
+                        {{ form.hidden_tag() }}
+                        <h4>{{ _('Change ordered quantity') }}</h4>
+
+                        {{ _('Ordered quantity:') }}&nbsp;
+                        {{ form.qty_ordered(class="form-control input-sm nums_only order-qty-edit-input",
+                                    style="width: 100px; text-align: right;", onclick="$(this).select()") }}
+                        <input type="hidden" name="order_id" value="{{ order.id }}"/>
+                        <input type="hidden" name="ordered_product_id" value="{{ product.product_id }}"/>
+                        <input type="hidden" name="delete_ordered_product" value="false"/>
+                        <div style="text-align: right">{{ form.submit(class="btn btn-sm btn-danger order-qty-edit-submit-btn", disabled='disabled') }}</div>
+                    </form>
+                </div>
+            </td>
+            <td class="td-border-left-1px td-border-right-1px"  style="text-align: center; position: relative;">
+                {% if product.qty_delivered == 0 %}
+                <a class="btn btn-danger btn-xs order_qty_delete_open_btn">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <div class="order_qty_delete_form_div shadowed-div form-inline"
+                        style="display:none; position: absolute; right: 0px; top: 35px; width: 400px;
+                        text-align: left; padding: 20px; background-color: #FFDEDE; z-index: 999;">
+                    <div style="position: absolute; right: 10px; top: 10px;">
+                        <button type="button" class="close" onclick="$(this).closest('.order_qty_delete_form_div').hide('fast');">&times;</button>
+                    </div>
+                    <form action="" method="post" name="order_qty_delete_form" class="order_qty_delete_form">
+                        {{ form.hidden_tag() }}
+                        <h4>{{ _('Delete this ordered item') }}</h4>
+
+                        <input type="hidden" name="order_id" value="{{ order.id }}"/>
+                        <input type="hidden" name="ordered_product_id" value="{{ product.product_id }}"/>
+                        <input type="hidden" name="delete_ordered_product" value="true"/>
+                        <div style="text-align: right">{{ form.submit(class="btn btn-sm btn-danger order-qty-edit-submit-btn") }}</div>
+                    </form>
+                </div>
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <div class="col-md-12" style="text-align: center; margin: 20px;">
+        <label class="label label-info" style="font-size: 1.5em;">{{ _('This order is empty. It should be deleted.') }}</label>
+        <br/>
+        <br/>
+        <a href="{{ url_for('cancelorder', id=order.id) }}" class="btn btn-lg btn-danger">{{ _('Delete now') }}</a>
+    </div>
+    {% endif %}
+
+</div>
+{% endif %}
+
+{% endblock %}
