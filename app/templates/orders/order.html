@@ -44,6 +44,20 @@
             <td>{{ order.maker.name }}</td>
         </tr>
     </table>
+    <table class="table table-bordered col-md-3" style="border: 2px solid #dddddd; margin-left: 20px; width: auto;">
+        <tr>
+            <th>{{ _('This order is') }}:</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                {% if order.active_flg %}
+                <label class="label label-success">{{ _('Active') }}</label>
+                {% else %}
+                <label class="label label-danger">{{ _('Inactive') }}</label>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
 </div>
 {% endif %}
 
