@@ -116,6 +116,9 @@
                 <div class="supply_qty_edit_form_div shadowed-div form-inline"
                         style="display:none; position: absolute; right: 0px; top: 35px; width: 400px;
                         text-align: left; padding: 20px; background-color: #DEDEFF; z-index: 999;">
+                    <div style="position: absolute; right: 10px; top: 10px;">
+                        <button type="button" class="close" onclick="$(this).closest('.supply_qty_edit_form_div').hide('fast');">&times;</button>
+                    </div>
                     <form action="" method="post" name="supply_qty_edit_form" class="supply_qty_edit_form">
                         {{ form.hidden_tag() }}
                         <h4>{{ _('Decrease delivered quantity') }}&nbsp;
@@ -159,6 +162,9 @@
                 <div class="supply_qty_delete_form_div shadowed-div form-inline"
                         style="display:none; position: absolute; right: 0px; top: 35px; width: 400px;
                         text-align: left; padding: 20px; background-color: #FFDEDE; z-index: 999;">
+                    <div style="position: absolute; right: 10px; top: 10px;">
+                        <button type="button" class="close" onclick="$(this).closest('.supply_qty_delete_form_div').hide('fast');">&times;</button>
+                    </div>
                     <form action="" method="post" name="supply_qty_delete_form" class="supply_qty_delete_form">
                         {{ form.hidden_tag() }}
                         <h4>{{ _('Delete this supplied item') }}</h4>

@@ -262,6 +262,9 @@ def supplyProducts():
 @login_required
 def supply(id):
     supply = Supply.query.filter_by(id=id).first()
+    if not supply:
+        flash(gettext('Data not found.'))
+        return redirect(url_for('supplies'))
     form = EditDateTimeForm()
     if supply:
         products = supply.products
@@ -304,15 +307,15 @@ def editsupply(id):
         if delete_whole_str and delete_whole_str == 'true':
             supply = Supply.query.get(int(supply_id))
             if not supply:
-                flash('Supply data not found!')
+                flash(gettext('Supply data not found!'))
                 return redirect(url_for('supplies'))
             sp = supply.products.all()
             if sp and len(sp) > 0:
-                flash('Supplied products have to be deleted first!')
+                flash(gettext('Supplied products have to be deleted first!'))
                 return redirect(url_for('supplies'))
             db.session.delete(supply)
             db.session.commit()
-            flash('Supply data sucessfully deleted.')
+            flash(gettext('Supply data sucessfully deleted.'))
             return redirect(url_for('supplies'))
 
         supplied_product_id = flask.request.form['supplied_product_id']
@@ -337,7 +340,7 @@ def editsupply(id):
             if supplied_products and len(supplied_products) == 1:
                 supplied_product = supplied_products[0]
             else:
-                flash('Supply data are corrupted! Cannot edit supply quantity.')
+                flash(gettext('Supply data are corrupted! Cannot edit supply quantity.'))
                 return redirect(url_for('editsupply', id=supply_id))
 
             if delete_flg:
@@ -345,14 +348,14 @@ def editsupply(id):
             else:
                 qty_difference = supplied_product.quantity - new_supply_qty
                 if qty_difference < 1:
-                    flash('Supply quantity submited incorrectly!')
+                    flash(gettext('Supply quantity submited incorrectly!'))
                     return redirect(url_for('editsupply', id=supply_id))
 
             # Add the quantity difference to stock
             if form.add_qty_to_requests.data:
                 stock_product = Product.query.get(supplied_product.product_id)
                 if not stock_product:
-                    flash('Product id not found!')
+                    flash(gettext('Product id not found!'))
                     return redirect(url_for('editsupply', id=supply_id))
                 stock_product.qty_stock += qty_difference
                 db.session.add(stock_product)
@@ -361,7 +364,7 @@ def editsupply(id):
             if form.add_qty_to_requests.data:
                 cust = Customer.query.get(Supply.query.get(supply_id).customer_id)
                 if not cust:
-                    flash('Customer data are corrupted! Cannot edit supply quantity.')
+                    flash(gettext('Customer data are corrupted! Cannot edit supply quantity.'))
                     return redirect(url_for('editsupply', id=supply_id))
                 requests = Request.query\
                     .filter_by(customer_id=cust.id)\
@@ -411,7 +414,7 @@ def editsupply(id):
             # FINAL COMMIT
             db.session.commit()
 
-            flash('Supplied quantity succesfully changed.')
+            flash(gettext('Supplied quantity succesfully changed.'))
             return redirect(url_for('editsupply', id=supply_id))
 
     return render_template('supplies/editsupply.html',
