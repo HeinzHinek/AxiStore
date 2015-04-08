@@ -48,9 +48,10 @@
     <thead>
         <tr>
             <th class="td-border-left-1px">{{ _('Order ID') }}</th>
+            <th>{{ _('Order No.') }}</th>
+            <th><span class="glyphicon glyphicon-list"></span></th>
             <th>{{ _('Received') }}</th>
             <th>{{ _('Received by') }}</th>
-            <th>{{ _('Order No.') }}</th>
             <th>{{ _('Payment Method') }}</th>
             <th colspan="2" class="td-border-right-1px">{{ _('Paid for?') }}</th>
         </tr>
@@ -60,9 +61,14 @@
         <tr req_id="{{ request.id }}"
                 {% if request.active_flg == false %} class="success" {% endif %}>
             <td class="clickable-td td-border-left-2px">{{ request.id }}</td>
+            <td class="clickable-td">{{ request.customer.order_no }}</td>
+            <td><a href="http://www.axis-mart.com/{% if g.user.language == 'ja'%}ja{% else %}cs{% endif %}/admin/store/orders/{{ request.customer.order_no }}"
+                    target="_blank">
+                <span class="glyphicon glyphicon-share" style="cursor: pointer;"></span>
+                </a>
+            </td>
             <td class="clickable-td">{{ momentjs(request.created_dt).format('LLL') }}</td>
             <td class="clickable-td">{{ request.receiver.nickname }}
-            <td class="clickable-td">{{ request.customer.order_no }}</td>
             <td class="clickable-td">
                 {% if request.payment_method %}
                     {% if request.payment_method == 1 %}
