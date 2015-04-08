@@ -28,7 +28,7 @@
 
             var selected_val = $('#payment-method-select').val();
             selected_text = $("#payment-method-select option:selected").text();
-            if (selected_val != selected_orig) {
+            if (selected_val != selected_orig || orig_method == "None") {
                 $.post('/switchRequestPaymentMethod', {
                 data: '' + {{ req.id }} + '_' + selected_val
                 }).done(function(result) {
