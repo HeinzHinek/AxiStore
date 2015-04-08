@@ -330,6 +330,8 @@ class Request(db.Model):
     created_dt = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))
+    payment_method = db.Column(db.Integer)
+    paid_for_flg = db.Column(db.Boolean, default=False)
     active_flg = db.Column(db.Boolean, default=True)
     products = db.relationship('RequestedProducts', backref='request', lazy='dynamic')
 

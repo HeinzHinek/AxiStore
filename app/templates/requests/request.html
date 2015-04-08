@@ -1,24 +1,113 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+    $(document).ready( function() {
+
+        var orig_method = "{{ req.payment_method }}";
+        if (orig_method == "None") {
+            var selected_orig = 1;
+            var selected_text = '{{ _('unknown') }}';
+        } else {
+            $('#payment-method-select').val(orig_method);
+            var selected_orig = $('#payment-method-select').val();
+            var selected_text = $("#payment-method-select option:selected").text();
+        }
+        $('#payment-method-span').text(selected_text);
+
+        $('#payment-method-a-pencil').click( function() {
+            $(this).hide();
+            $('#payment-method-span').hide();
+            $('#payment-method-select').show();
+            $('#payment-method-a-ok').show();
+            selected_orig = $('#payment-method-select').val();
+        });
+
+        $('#payment-method-a-ok').click( function() {
+            $(this).hide();
+
+            var selected_val = $('#payment-method-select').val();
+            selected_text = $("#payment-method-select option:selected").text();
+            if (selected_val != selected_orig) {
+                $.post('/switchRequestPaymentMethod', {
+                data: '' + {{ req.id }} + '_' + selected_val
+                }).done(function(result) {
+                    if (result && result != 'error') {
+                        $('#payment-method-span').text(selected_text);
+                        $('#payment-method-span').show();
+                        if (selected_val == 3) {
+                            $('.paid-for-switch').hide();
+                            var label = $('.paid-for-switch').closest('td').find('.label');
+                            $(label).removeClass('label-danger');
+                            $(label).addClass('label-success');
+                            $(label).html("{{ _('Yes') }}");
+                        } else {
+                            $('.paid-for-switch').show();
+                        }
+                    } else {
+                        alert("{{ _('Data transfer failed!') }}");
+                    }
+                }).fail(function() {
+                    alert("{{ _('Data transfer failed!') }}");
+                });
+            } else {
+                $('#payment-method-span').show();
+            }
+            $('#payment-method-select').hide();
+            $('#payment-method-a-pencil').show();
+        });
+
+        $('.paid-for-switch').click( function() {
+            $(this).hide();
+            var this_switch = $(this);
+            var req_id = $(this).attr('id').split('_')[1];
+            $.post('/switchRequestPaidForFlg', {
+                data: '' + req_id
+            }).done(function(result) {
+                if (result && result != 'error') {
+                    var label = $(this_switch).closest('td').find('.label');
+                    if (result == 'true') {
+                        $(label).removeClass('label-danger');
+                        $(label).addClass('label-success');
+                        $(label).html("{{ _('Yes') }}");
+                    } else {
+                        $(label).removeClass('label-success');
+                        $(label).addClass('label-danger');
+                        $(label).html("{{ _('No') }}");
+                    }
+                } else {
+                    alert("{{ _('Data transfer failed!') }}");
+                }
+            }).fail(function() {
+                alert("{{ _('Data transfer failed!') }}");
+            });
+            $(this).show();
+        });
+    });
+</script>
+
 <div class="row">
     <h1>{{ _('Order from customer details') }}</h1>
     {% include 'flash.html' %}
 
     <div>
+        {% if req.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+        <a href="{{ url_for('axm_requests') }}">{{ _('Back to the list') }}</a>
+        {% else %}
         <a href="{{ url_for('requests') }}">{{ _('Back to the list') }}</a>
+        {% endif %}
     </div>
     <br/>
 </div>
 
 {% if req %}
 <div class="row">
-    <table class="table table-bordered col-md-8" style="border: 2px solid #dddddd; width: auto;">
+    <table class="table table-bordered  col-md-8" style="border: 2px solid #dddddd; width: 70%;">
         <tr>
-            <th class="info col-md-3">{{ _('Order ID') }}</th>
-            <td class="col-md-3">{{ req.id }}</td>
-            <th class="info info col-md-3">{{ _('Placed') }}</th>
-            <td class="col-md-3">{{ momentjs(req.created_dt).format('LLL') }}&nbsp;&nbsp;
+            <th class="info">{{ _('Order ID') }}</th>
+            <td style="width: 10%;">{{ req.id }}</td>
+            <th class="info">{{ _('Placed') }}</th>
+            <td>{{ momentjs(req.created_dt).format('LLL') }}&nbsp;&nbsp;
                 <input type="button" class="btn btn-xs btn-danger" value="{{ _('Edit') }}" onclick="$('#created-dt-edit-div').show('fast');"/>
                 <div id="created-dt-edit-div" class="shadowed-div" style="display: none; position: fixed; background-color: white; border: 1px solid #dddddd;">
                     <form action="" method="post" name="selectCustomer">
@@ -36,6 +125,20 @@
                 </div>
                 {% endfor %}
             </td>
+
+            {% if req.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+            <th class="info">{{ _('Payment Method') }}</th>
+            <td>
+                <span id="payment-method-span"></span>
+                <select id="payment-method-select" style="display: none;">
+                    <option value="1">{{ _('Bank transfer') }}</option>
+                    <option value="2">{{ _('PayPal') }}</option>
+                    <option value="3">{{ _('On delivery') }}</option>
+                </select>
+                <a id="payment-method-a-pencil" style="cursor: pointer;"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a id="payment-method-a-ok" style="cursor: pointer; display: none;"><span class="glyphicon glyphicon-ok"></span></a>
+            </td>
+            {% endif %}
         </tr>
         <tr>
             <th class="info info">{{ _('Received by') }}</th>
@@ -46,6 +149,27 @@
             {% else %}
                 <th class="info info">{{ _('Customer') }}</th>
                 <td>{{ req.customer.name }}</td>
+            {% endif %}
+
+            {% if req.customer.customer_type == CUSTOMER_TYPES['TYPE_AXM'] %}
+            <th class="info">{{ _('Paid for?') }}</th>
+            <td>
+                {% if req.paid_for_flg != None %}
+                    {% if req.paid_for_flg == 1 %}
+                        <label class="label label-sm label-success">{{ _('Yes') }}</label>
+                    {% else %}
+                        <label class="label label-sm label-danger">{{ _('No') }}</label>
+                    {% endif %}
+                {% else %}
+                   <label class="label label-sm label-warning">?</label>
+                {% endif %}
+                <a class="paid-for-switch" id="paidforswitch_{{ req.id }}"
+                        {% if req.payment_method == 3 %} style="display: none;" {% endif %}
+                        >
+                    <span class="glyphicon glyphicon-refresh"
+                          style="font-size: 1.2em; vertical-align: middle; margin-left: 10px; cursor: pointer;"></span>
+                </a>
+            </td>
             {% endif %}
         </tr>
     </table>

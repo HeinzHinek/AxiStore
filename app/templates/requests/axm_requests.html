@@ -1,6 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 
+<script>
+    $(document).ready( function() {
+        $('.clickable-td').click( function() {
+            var req_id = $(this).closest('tr').attr('req_id');
+            window.location.href = '{{ url_for("request_detail") }}' + '/' + req_id;
+        });
+
+        $('.paid-for-switch').click( function() {
+            $(this).hide();
+            var this_switch = $(this);
+            var req_id = $(this).attr('id').split('_')[1];
+            $.post('/switchRequestPaidForFlg', {
+                data: '' + req_id
+            }).done(function(result) {
+                if (result && result != 'error') {
+                    var label = $(this_switch).closest('tr').find('.switch-label');
+                    if (result == 'true') {
+                        $(label).removeClass('label-danger');
+                        $(label).addClass('label-success');
+                        $(label).html("{{ _('Yes') }}");
+                    } else {
+                        $(label).removeClass('label-success');
+                        $(label).addClass('label-danger');
+                        $(label).html("{{ _('No') }}");
+                    }
+                } else {
+                    alert("{{ _('Data transfer failed!') }}");
+                }
+            }).fail(function() {
+                alert("{{ _('Data transfer failed!') }}");
+            });
+            $(this).show();
+        });
+    });
+</script>
+
 <div class="row">
     <h1>{{ _('Orders from Axis Mart overview') }}</h1>
     {% include 'flash.html' %}
@@ -14,18 +50,51 @@
             <th class="td-border-left-1px">{{ _('Order ID') }}</th>
             <th>{{ _('Received') }}</th>
             <th>{{ _('Received by') }}</th>
-            <th class="td-border-right-1px">{{ _('Order No.') }}</th>
+            <th>{{ _('Order No.') }}</th>
+            <th>{{ _('Payment Method') }}</th>
+            <th colspan="2" class="td-border-right-1px">{{ _('Paid for?') }}</th>
         </tr>
     </thead>
     <tbody>
         {% for request in requests.items %}
-        <tr
-                {% if request.active_flg == false %} class="success" {% endif %}
-                onclick="window.location.href = '{{ url_for("request_detail", id=request.id) }}'">
+        <tr req_id="{{ request.id }}"
+                {% if request.active_flg == false %} class="success" {% endif %}>
             <td class="clickable-td td-border-left-2px">{{ request.id }}</td>
             <td class="clickable-td">{{ momentjs(request.created_dt).format('LLL') }}</td>
-            <td class="clickable-td">{{ request.receiver.nickname }}</td>
-            <td class="clickable-td td-border-right-2px">{{ request.customer.order_no }}</td>
+            <td class="clickable-td">{{ request.receiver.nickname }}
+            <td class="clickable-td">{{ request.customer.order_no }}</td>
+            <td class="clickable-td">
+                {% if request.payment_method %}
+                    {% if request.payment_method == 1 %}
+                        {{ _('Bank transfer') }}
+                    {% elif request.payment_method == 2 %}
+                        {{ _('PayPal') }}
+                    {% else %}
+                        <span style="font-weight: bold; color: crimson;">{{ _('On delivery') }}</span>
+                    {% endif %}
+                {% else %}
+                   ?
+                {% endif %}
+            </td>
+            <td class="clickable-td" style="width: 1%;">
+                {% if request.paid_for_flg != None %}
+                    {% if request.paid_for_flg == 1 %}
+                        <label class="label switch-label label-sm label-success">{{ _('Yes') }}</label>
+                    {% else %}
+                        <label class="label switch-label label-sm label-danger">{{ _('No') }}</label>
+                    {% endif %}
+                {% else %}
+                   <label class="label switch-label label-sm label-warning">?</label>
+                {% endif %}
+            </td>
+            <td class="td-border-right-2px">
+                {% if request.payment_method != 3 %}
+                <a class="paid-for-switch" id="paidforswitch_{{ request.id }}">
+                    <span class="glyphicon glyphicon-refresh"
+                          style="font-size: 1.2em; vertical-align: middle; margin-left: 10px; cursor: pointer;"></span>
+                </a>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

@@ -104,6 +104,7 @@
         {% endif %}
     </table>
     <div style="text-align: right;">
+        {% if curr_paid %}
         <div style="display: inline-block; position: relative; vertical-align: middle; margin-right: 10px;">
             <a style="cursor: pointer;" onmouseover=" $('#deliver-btn-help-div').show('fast') "
                onmouseout=" $('#deliver-btn-help-div').hide('fast') ">
@@ -121,6 +122,9 @@
                 <input type="hidden" id="curr-customer-id-hid" name="curr-customer-id-hid" value="{{ curr_id }}"/>
             </form>
         </div>
+        {% else %}
+                <label class="label label-danger" style="font-size: 1.1em;">{{ _('This order has not been paid for yet!') }}</label>
+        {% endif %}
     </div>
 </div>
 

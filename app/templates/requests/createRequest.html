@@ -127,6 +127,25 @@ $(document).ready(function() {
     $('#select_cust').change( function() {
         $(this).removeClass('td-border-highlighted');
     });
+
+    $('#payment-method-select').change( function() {
+        var val = $(this).val();
+        if (val == 3) {
+            $('#payment-received-select').val('1');
+            $('#payment-received-select').attr('disabled', 'disabled');
+        } else {
+            $('#payment-received-select').removeAttr('disabled');
+            if (val ==2 ) {
+                $('#payment-received-select').val('1');
+            } else {
+                $('#payment-received-select').val('0');
+            }
+        }
+    });
+
+    $('#new-request-form').submit(function() {
+        $('#payment-received-select').removeAttr('disabled');
+    });
 });
 
 </script>
@@ -137,11 +156,11 @@ $(document).ready(function() {
 </div>
 
 <div class="row">
-    <form action="" method="post" name="selectCustomer">
+    <form id="new-request-form" action="" method="post" name="selectCustomer">
         {{formCustomer.hidden_tag()}}
         <table class="table no-border">
             <tr>
-                <td>
+                <td style="width: 100px; min-width: 400px;">
                     <input type="hidden" name="custType" value="{{ custType }}">
                     {% if custType == 'cust' %}
                         <label>{{ _('Select customer') }}</label>
@@ -168,6 +187,21 @@ $(document).ready(function() {
                         {% endfor %}
                     {% endif %}
                 </td>
+                {% if custType == 'axm' %}
+                <td>
+                    <h3>{{ _('Payment') }}</h3>
+                    <label>{{ _('Select payment method:') }}</label>
+                    <div class="input-group">
+                        {{ formCustomer.payment_method(id="payment-method-select", class="form-control", style="text-align: right;", tabindex="2") }}
+                    </div>
+                    {% for error in formCustomer.errors.payment_method %}
+                    <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        [{{error}}]
+                    </div>
+                    {% endfor %}
+                </td>
+                {% endif %}
             </tr>
             <tr>
                 <td>
@@ -183,6 +217,22 @@ $(document).ready(function() {
                     </div>
                     <div><label style="font-size: 0.82em; color: crimson;">&nbsp;&nbsp;(YYYY-MM-DD HH:MM:SS)</label></div>
                 </td>
+                {% if custType == 'axm' %}
+                <td>
+                    <div id="payment-received-div">
+                        <label>{{ _('Payment received?') }}</label>
+                        <div class="input-group">
+                            {{ formCustomer.paid_for_flg(id="payment-received-select", class="form-control", style="text-align: right;", tabindex="3") }}
+                        </div>
+                        {% for error in formCustomer.errors.paid_for_flg %}
+                        <div class="alert alert-danger" role="alert" style="max-width: 400px;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            [{{error}}]
+                        </div>
+                        {% endfor %}
+                    </div>
+                </td>
+                {% endif %}
             </tr>
         </table>
 
@@ -195,20 +245,20 @@ $(document).ready(function() {
 
                     <tr>
                         <th>{{ _('Maker') }}</th>
-                        <td colspan="2">{{ formCustomer.maker(id="sel-maker", class="form-control search-input", tabindex="2") }}</td>
+                        <td colspan="2">{{ formCustomer.maker(id="sel-maker", class="form-control search-input", tabindex="4") }}</td>
                     </tr>
                     <tr>
                         <th>{{ _('Code') }}</th>
-                        <td><input type="text" id="inp-code" size="40" class="form-control search-input" tabindex="3"/></td>
+                        <td><input type="text" id="inp-code" size="40" class="form-control search-input" tabindex="5"/></td>
                         <td rowspan="3" style="text-align: center; vertical-align: middle;">
-                            <input id="btn-search" type="button" value="{{ _('Search!') }}" class="btn btn-info" tabindex="6" style="padding: 20px 5px;">
+                            <input id="btn-search" type="button" value="{{ _('Search!') }}" class="btn btn-info" tabindex="8" style="padding: 20px 5px;">
                         </td>
                     </tr><tr>
                         <th>{{ _('Description CS') }}</th>
-                        <td><input type="text" id="inp-desc_cs" size="40" class="form-control search-input" tabindex="4"/></td>
+                        <td><input type="text" id="inp-desc_cs" size="40" class="form-control search-input" tabindex="6"/></td>
                     </tr><tr>
                         <th>{{ _('Description JP') }}</th>
-                        <td><input type="text" id="inp-desc_jp" size="40" class="form-control search-input" tabindex="5"/></td>
+                        <td><input type="text" id="inp-desc_jp" size="40" class="form-control search-input" tabindex="7"/></td>
                     </tr>
                 </table>
 

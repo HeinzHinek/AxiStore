@@ -176,6 +176,10 @@ class SelectCustomerForm(Form):
 class OrderNumberForm(Form):
     order_no = IntegerField('order_no', [validators.data_required, validators.NumberRange(min=0, max=99999)])
     datetime = DateTimeField('datetime', [validators.data_required()])
+    payments = [(1, lazy_gettext('Bank transfer')), (2, lazy_gettext('PayPal')), (3, lazy_gettext('On delivery'))]
+    payment_method = SelectField('payment_method', choices=payments, coerce=int)
+    flg_options = [(0, lazy_gettext('No')), (1, lazy_gettext('Yes'))]
+    paid_for_flg = SelectField('paid_for', choices=flg_options, coerce=int)
     maker = SelectField('maker', coerce=int)
 
 

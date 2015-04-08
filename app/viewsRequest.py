@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, flash, url_for, g, session, request
+from flask import render_template, redirect, flash, url_for, g, session, json
 from app import app, db
 from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm, SimpleSubmitForm, EditRequestForm
 from models import Request, Product, RequestedProducts, Customer, Maker
@@ -101,11 +101,11 @@ def createRequest():
                 order_no = formCustomer.order_no.data
                 if not order_no:
                     flash(gettext("No order number."))
-                    return redirect(url_for("requests"))
+                    return redirect(url_for("axm_requests"))
                 req_cust = db.session.query(Customer).filter_by(order_no=order_no).first()
                 if req_cust:
                     flash(gettext("Order number already exists!"))
-                    return redirect(url_for("requests"))
+                    return redirect(url_for("axm_requests"))
                 req_cust = Customer()
                 req_cust.customer_type = CUSTOMER_TYPES['TYPE_AXM']
                 req_cust.order_no = order_no
@@ -122,6 +122,16 @@ def createRequest():
                 new_request.created_dt = formCustomer.datetime.data
             else:
                 flash("Date and time date of request was entered incorrectly, request saved with current date and time.")
+
+            if cust == 'axm':
+                if formCustomer.payment_method.data is not None:
+                    new_request.payment_method = formCustomer.payment_method.data
+                else:
+                    new_request.payment_method = 1
+                if formCustomer.paid_for_flg is not None:
+                    new_request.paid_for_flg = formCustomer.paid_for_flg.data
+                else:
+                    new_request.paid_for_flg = 0
 
             new_request.active_flg = True
             db.session.add(new_request)
@@ -154,9 +164,10 @@ def createRequest():
                            custType=cust)
 
 
+@app.route('/request', methods=['GET', 'POST'])
 @app.route('/request/<int:id>', methods=['GET', 'POST'])
 @login_required
-def request_detail(id):
+def request_detail(id=0):
     req = Request.query.filter_by(id=id).first()
     if not req:
         flash(gettext('Data not found.'))
@@ -313,3 +324,35 @@ def cancelrequest(id):
                            products=products,
                            CUSTOMER_TYPES=CUSTOMER_TYPES,
                            form=form)
+
+@app.route('/switchRequestPaidForFlg', methods=['POST'])
+@login_required
+def switchRequestPaidForFlg():
+    req_id = flask.request.form['data'] if flask.request.form['data'] else None
+    req = Request.query.get(req_id)
+    if not req:
+        return json.dumps("error")
+    if req.paid_for_flg is not None:
+        req.paid_for_flg = not req.paid_for_flg
+    else:
+        req.paid_for_flg = False
+    db.session.add(req)
+    db.session.commit()
+    return json.dumps(req.paid_for_flg)
+
+
+@app.route('/switchRequestPaymentMethod', methods=['POST'])
+@login_required
+def switchRequestPaymentMethod():
+    data = flask.request.form['data'] if flask.request.form['data'] else None
+    req_id = int(data.split('_')[0])
+    method = int(data.split('_')[1])
+    req = Request.query.get(req_id)
+    if req and method:
+        req.payment_method = method
+        if method == 3:
+            req.paid_for_flg = True
+        db.session.add(req)
+        db.session.commit()
+        return "ok"
+    return "error"

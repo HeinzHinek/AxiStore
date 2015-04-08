@@ -251,10 +251,18 @@ def supplyProducts():
         urls = getImgUrls(p.id)
         if urls:
             p.img_url = urls[0]
+
+    # If AxM customer, check if the order is paid for
+    paid_for = True
+    if cust.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+        req = cust.requests.all()[0]
+        paid_for = req.paid_for_flg
+
     return render_template('supplies/supplyProducts.html',
                            custType=custType,
                            customer=cust,
                            products=products,
+                           paid_for=paid_for,
                            data_to_populate=data_to_populate)
 
 
@@ -525,10 +533,19 @@ def unsuppliedProducts(id=None):
         urls = getImgUrls(p.id)
         if urls:
             p.img_url = urls[0]
+
+    # If AxM customer, is the order paid for_
+    curr_paid = True
+    if cust.customer_type == CUSTOMER_TYPES['TYPE_AXM']:
+        curr_req = cust.requests.all()[0]
+        if curr_req:
+            curr_paid = curr_req.paid_for_flg
+
     return render_template('supplies/unsuppliedproducts.html',
                            title=gettext("Unsupplied products"),
                            form=form,
                            unsupplied_customers=unsupplied_customers,
                            products=products,
                            CUSTOMER_TYPES=CUSTOMER_TYPES,
-                           curr_id=id)
+                           curr_id=id,
+                           curr_paid=curr_paid)

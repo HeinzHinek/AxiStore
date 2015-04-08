@@ -183,10 +183,14 @@ $(document).ready(function() {
             </tr>
             {% endfor %}
         </table>
-        <input type="button" id="btn_check" class="btn btn-default" value="{{ _('Submit') }}"/>
-        <input type="button" id="btn_correct" class="btn btn-warning" value="{{ _('Modify') }}" style="display: none;"/>
-        <input type="submit" id="btn_submit" value="{{ _('Confirm supply') }}" class="btn btn-danger" style="display: none;">
-        <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("supplies")}}'" value="{{ _('Cancel') }}"/>
+        {% if paid_for %}
+            <input type="button" id="btn_check" class="btn btn-default" value="{{ _('Submit') }}"/>
+            <input type="button" id="btn_correct" class="btn btn-warning" value="{{ _('Modify') }}" style="display: none;"/>
+            <input type="submit" id="btn_submit" value="{{ _('Confirm supply') }}" class="btn btn-danger" style="display: none;">
+            <input type="button" class="btn btn-info" onclick="window.location.href = '{{ url_for("supplies")}}'" value="{{ _('Cancel') }}"/>
+        {% else %}
+            <label class="label label-danger" style="font-size: 1.1em;">{{ _('This order has not been paid for yet!') }}</label>
+        {% endif %}
     </form>
 </div>
 {% endif %}
