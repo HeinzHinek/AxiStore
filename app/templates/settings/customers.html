@@ -24,8 +24,9 @@ $(document).ready( function() {
     <table class="table table-hover table-striped">
         <tr>
             <th style="width: 10%;">{{ _('Customer ID') }}</th>
-            <th style="width: 30%;">{{ _('Customer Name') }}</th>
-            <th style="width: 30%;">{{ _('Company Name') }}</th>
+            <th style="width: 25%;">{{ _('Customer Name') }}</th>
+            <th style="width: 25%;">{{ _('Company Name') }}</th>
+            <th style="width: 10%; text-align: center;">{{ _('Base discount') }}</th>
             <th style="width: 15%;">{{ _('Recommended by') }}</th>
             <th style="width: 15%; text-align: center;">{{ _('Next nohinsho letter') }}</th>
         </tr>
@@ -35,6 +36,7 @@ $(document).ready( function() {
             <td>{{ customer.id }}</td>
             <td>{{ customer.name }}</td>
             <td>{{ customer.company_name }}</td>
+            <td style="text-align: center;">{{ customer.base_discount * 100 }}%</td>
             <td>{% if customer.recommender_id %}{{ customer.recommender.name }}{% endif %}</td>
             <td style="text-align: center;"><span></span>
                 <input type="hidden" class="nohinsho_num" value="{% if customer.order_no is none %}0{% else %}{{ customer.order_no }}{% endif %}"/>
