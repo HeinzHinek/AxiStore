@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<script>
+    $(document).ready( function() {
+        $('#author-a').click( function() {
+            $('#author-div').show('pulsate', 700);
+        });
+    });
+</script>
+
 <h1>{{ _('Settings') }}</h1>
 {% include 'flash.html' %}
 
@@ -39,5 +50,31 @@
 </div>
 <div>
     <a href="{{ url_for('customerCodes') }}">{{ _('Customer codes management') }}</a>
+</div>
+
+<div style="position: absolute; right: 10px; bottom: 10px;">
+    <a id="author-a" style="cursor: pointer;"><span class="glyphicon glyphicon-user"></span></a>
+</div>
+
+<div id="author-div" style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;
+        background-color: black; z-index: 10000; text-align: center;">
+    <div class="shadowed-div" style="width: 60%; height: 60%; margin: 80px auto; text-align: center; position: relative;">
+        <div style="position: absolute; right: 10px; top: 10px;">
+            <button type="button" class="close" onclick="$('#author-div').hide('fast');">&times;</button>
+        </div>
+        <table>
+            <tr>
+                <td rowspan="2" style="padding: 20px;">
+                    <img src="/static/img/hinek.jpg"/>
+                </td>
+                <td style="padding: 20px;">
+                    <h3>{{ _('If you need help with AxiStore, drop me a line!') }}</h3>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;"><h4>JanHajny83@gmail.com</h4></td>
+            </tr>
+        </table>
+    </div>
 </div>
 {% endblock %}
