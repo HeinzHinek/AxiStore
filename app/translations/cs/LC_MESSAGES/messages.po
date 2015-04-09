@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-08 14:47+0900\n"
-"PO-Revision-Date: 2015-04-08 14:51+0900\n"
+"POT-Creation-Date: 2015-04-09 16:05+0900\n"
+"PO-Revision-Date: 2015-04-09 16:08+0900\n"
 "Last-Translator: \n"
 "Language-Team: cs <LL@li.org>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
@@ -167,7 +167,7 @@ msgstr ", druhá třetina"
 msgid ", Third third"
 msgstr ", třetí třetina"
 
-#: app/forms.py:23 app/templates/settings/users.html:15
+#: app/forms.py:23 app/templates/settings/users.html:30
 msgid "Nickname"
 msgstr "Uživatelské jméno"
 
@@ -261,27 +261,27 @@ msgstr "Jméno"
 msgid "Category"
 msgstr "Kategorie"
 
-#: app/forms.py:136 app/templates/settings/makers.html:20
+#: app/forms.py:136 app/templates/settings/makers.html:35
 msgid "Average days to deliver"
 msgstr "Průměrný počet dnů dodávky"
 
-#: app/forms.py:179 app/templates/requests/axm_requests.html:69
+#: app/forms.py:179 app/templates/requests/axm_requests.html:75
 #: app/templates/requests/request.html:134
 msgid "Bank transfer"
 msgstr "Převodem"
 
-#: app/forms.py:179 app/templates/requests/axm_requests.html:71
+#: app/forms.py:179 app/templates/requests/axm_requests.html:77
 #: app/templates/requests/request.html:135
 msgid "PayPal"
 msgstr "PayPal"
 
-#: app/forms.py:179 app/templates/requests/axm_requests.html:73
+#: app/forms.py:179 app/templates/requests/axm_requests.html:79
 #: app/templates/requests/request.html:136
 msgid "On delivery"
 msgstr "Dobírka"
 
 #: app/forms.py:181 app/templates/requests/axm_requests.html:27
-#: app/templates/requests/axm_requests.html:84
+#: app/templates/requests/axm_requests.html:90
 #: app/templates/requests/request.html:76
 #: app/templates/requests/request.html:161
 #: app/templates/settings/customercodes.html:34
@@ -289,7 +289,7 @@ msgid "No"
 msgstr "Ne"
 
 #: app/forms.py:181 app/templates/requests/axm_requests.html:23
-#: app/templates/requests/axm_requests.html:82
+#: app/templates/requests/axm_requests.html:88
 #: app/templates/requests/request.html:43
 #: app/templates/requests/request.html:72
 #: app/templates/requests/request.html:159
@@ -371,7 +371,7 @@ msgid "Password Change"
 msgstr "Změna hesla"
 
 #: app/viewsBase.py:393 app/templates/navbar_admin.html:76
-#: app/templates/settings.html:3
+#: app/templates/settings.html:14
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -954,22 +954,22 @@ msgid "OK"
 msgstr "OK"
 
 #: app/templates/_pagination.html:7 app/templates/_pagination.html:9
-#: app/templates/settings/contacts.html:38
-#: app/templates/settings/contacts.html:40
-#: app/templates/settings/customers.html:53
-#: app/templates/settings/customers.html:55
-#: app/templates/settings/makers.html:46 app/templates/settings/makers.html:48
-#: app/templates/settings/users.html:43 app/templates/settings/users.html:45
+#: app/templates/settings/contacts.html:56
+#: app/templates/settings/contacts.html:58
+#: app/templates/settings/customers.html:82
+#: app/templates/settings/customers.html:84
+#: app/templates/settings/makers.html:64 app/templates/settings/makers.html:66
+#: app/templates/settings/users.html:62 app/templates/settings/users.html:64
 msgid "Previous"
 msgstr "Předchozí"
 
 #: app/templates/_pagination.html:28 app/templates/_pagination.html:30
-#: app/templates/settings/contacts.html:43
-#: app/templates/settings/contacts.html:45
-#: app/templates/settings/customers.html:58
-#: app/templates/settings/customers.html:60
-#: app/templates/settings/makers.html:51 app/templates/settings/makers.html:53
-#: app/templates/settings/users.html:48 app/templates/settings/users.html:50
+#: app/templates/settings/contacts.html:61
+#: app/templates/settings/contacts.html:63
+#: app/templates/settings/customers.html:87
+#: app/templates/settings/customers.html:89
+#: app/templates/settings/makers.html:69 app/templates/settings/makers.html:71
+#: app/templates/settings/users.html:67 app/templates/settings/users.html:69
 msgid "Next"
 msgstr "Další"
 
@@ -1136,45 +1136,49 @@ msgstr "Přihlášení"
 msgid "Order history"
 msgstr "Historie objednávek"
 
-#: app/templates/settings.html:8
+#: app/templates/settings.html:19
 msgid "Manage users"
 msgstr "Správa uživatelů"
 
-#: app/templates/settings.html:13
+#: app/templates/settings.html:24
 msgid "Manage product categories"
 msgstr "Správa kategorií produktů"
 
-#: app/templates/settings.html:16
+#: app/templates/settings.html:27
 msgid "Manage catalog terms"
 msgstr "Správa výrazů katalogu"
 
-#: app/templates/settings.html:21
+#: app/templates/settings.html:32
 msgid "Manage makers"
 msgstr "Správa výrobců"
 
-#: app/templates/settings.html:24
+#: app/templates/settings.html:35
 msgid "Manage customers"
 msgstr "Správa zákazníků"
 
-#: app/templates/settings.html:27
+#: app/templates/settings.html:38
 msgid "Overview of recommended customers' sales"
 msgstr "Přehled prodejů doporučeným zákazníkům"
 
-#: app/templates/settings.html:30
+#: app/templates/settings.html:41
 msgid "Manage contacts"
 msgstr "Správa kontaktů"
 
-#: app/templates/settings.html:35
+#: app/templates/settings.html:46
 msgid "Import data from csv"
 msgstr "Importovat data z csv souboru"
 
-#: app/templates/settings.html:38
+#: app/templates/settings.html:49
 msgid "Export data as csv"
 msgstr "Exportovat data jako csv soubor"
 
-#: app/templates/settings.html:41
+#: app/templates/settings.html:52
 msgid "Customer codes management"
 msgstr "Správa kódů zákazníka"
+
+#: app/templates/settings.html:71
+msgid "If you need help with AxiStore, drop me a line!"
+msgstr "Když si nevíš rady, můj mail najdeš tady:"
 
 #: app/templates/stock.html:14 app/templates/stock.html:37
 msgid "descending"
@@ -1295,7 +1299,7 @@ msgstr "ID dodávky"
 #: app/templates/deliveries/deliveries.html:34
 #: app/templates/deliveries/delivery.html:20
 #: app/templates/deliveries/editdelivery.html:76
-#: app/templates/requests/axm_requests.html:51
+#: app/templates/requests/axm_requests.html:53
 #: app/templates/requests/requests.html:15
 #: app/templates/supplies/supplyReport.html:60
 #: app/templates/supplies/supplyReport.html:82
@@ -2107,7 +2111,11 @@ msgstr "Přenos dat selhal!"
 msgid "Orders from Axis Mart overview"
 msgstr "Přehled objednávek z Axis Martu"
 
-#: app/templates/requests/axm_requests.html:52
+#: app/templates/requests/axm_requests.html:51
+msgid "Order No."
+msgstr "Č. obj."
+
+#: app/templates/requests/axm_requests.html:54
 #: app/templates/requests/cancelrequest.html:40
 #: app/templates/requests/editrequest.html:87
 #: app/templates/requests/request.html:144
@@ -2117,16 +2125,12 @@ msgstr "Přehled objednávek z Axis Martu"
 msgid "Received by"
 msgstr "Příjemce"
 
-#: app/templates/requests/axm_requests.html:53
-msgid "Order No."
-msgstr "Č. obj."
-
-#: app/templates/requests/axm_requests.html:54
+#: app/templates/requests/axm_requests.html:55
 #: app/templates/requests/request.html:130
 msgid "Payment Method"
 msgstr "Způsob platby"
 
-#: app/templates/requests/axm_requests.html:55
+#: app/templates/requests/axm_requests.html:56
 #: app/templates/requests/request.html:155
 msgid "Paid for?"
 msgstr "Zaplaceno?"
@@ -2313,9 +2317,9 @@ msgid "Phone number"
 msgstr "Telefonní číslo"
 
 #: app/templates/settings/addContact.html:85
-#: app/templates/settings/contacts.html:20
+#: app/templates/settings/contacts.html:35
 #: app/templates/settings/editContact.html:88
-#: app/templates/settings/users.html:17
+#: app/templates/settings/users.html:32
 msgid "Company"
 msgstr "Společnost"
 
@@ -2331,13 +2335,13 @@ msgid "Customer nickname"
 msgstr "Zkrácené jméno zákazníka"
 
 #: app/templates/settings/addCustomer.html:64
-#: app/templates/settings/customers.html:29
+#: app/templates/settings/customers.html:55
 #: app/templates/settings/editCustomer.html:87
 msgid "Base discount"
 msgstr "Základní sleva"
 
 #: app/templates/settings/addCustomer.html:81
-#: app/templates/settings/customers.html:30
+#: app/templates/settings/customers.html:56
 #: app/templates/settings/editCustomer.html:120
 msgid "Recommended by"
 msgstr "Doporučen kým"
@@ -2394,23 +2398,23 @@ msgstr "Přidat kategorii produktů"
 msgid "Category ID"
 msgstr "ID kategorie"
 
-#: app/templates/settings/contacts.html:5
+#: app/templates/settings/contacts.html:19
 msgid "List of Contacts"
 msgstr "Seznam kontaktů"
 
-#: app/templates/settings/contacts.html:11
+#: app/templates/settings/contacts.html:25
 msgid "Add contact"
 msgstr "Přidat kontakt"
 
-#: app/templates/settings/contacts.html:17
+#: app/templates/settings/contacts.html:32
 msgid "Contact ID"
 msgstr "ID kontaktu"
 
-#: app/templates/settings/contacts.html:18
+#: app/templates/settings/contacts.html:33
 msgid "First Name"
 msgstr "Křestní jméno"
 
-#: app/templates/settings/contacts.html:19
+#: app/templates/settings/contacts.html:34
 msgid "Surname"
 msgstr "Příjmení"
 
@@ -2423,7 +2427,7 @@ msgid "Select customer to manage codes:"
 msgstr "Vyeberte zákazníka, jehož kódy chcete spravovat"
 
 #: app/templates/settings/customercodes.html:25
-#: app/templates/settings/customers.html:27
+#: app/templates/settings/customers.html:53
 msgid "Customer Name"
 msgstr "Jméno zákazníka"
 
@@ -2431,23 +2435,23 @@ msgstr "Jméno zákazníka"
 msgid "Code definitions uploaded?"
 msgstr "Definice kódů nahrány?"
 
-#: app/templates/settings/customers.html:14
+#: app/templates/settings/customers.html:39
 msgid "List of Customers"
 msgstr "Seznam zákazníků"
 
-#: app/templates/settings/customers.html:20
+#: app/templates/settings/customers.html:45
 msgid "Add customer"
 msgstr "Přidat zákazníka"
 
-#: app/templates/settings/customers.html:26
+#: app/templates/settings/customers.html:52
 msgid "Customer ID"
 msgstr "ID zákazníka"
 
-#: app/templates/settings/customers.html:28
+#: app/templates/settings/customers.html:54
 msgid "Company Name"
 msgstr "Název společnosti"
 
-#: app/templates/settings/customers.html:31
+#: app/templates/settings/customers.html:57
 #: app/templates/settings/editCustomer.html:104
 msgid "Next nohinsho letter"
 msgstr "Řadové písmeno pro další nóhinšo"
@@ -2622,23 +2626,23 @@ msgstr "Naše kódy na jejich"
 msgid "Convert"
 msgstr "Převést"
 
-#: app/templates/settings/makers.html:5
+#: app/templates/settings/makers.html:19
 msgid "List of Makers"
 msgstr "Seznam výrobců"
 
-#: app/templates/settings/makers.html:11
+#: app/templates/settings/makers.html:25
 msgid "Add maker"
 msgstr "Přidat výrobce"
 
-#: app/templates/settings/makers.html:17
+#: app/templates/settings/makers.html:32
 msgid "Maker ID"
 msgstr "ID výrobce"
 
-#: app/templates/settings/makers.html:18
+#: app/templates/settings/makers.html:33
 msgid "Maker's Name"
 msgstr "Název výrobce"
 
-#: app/templates/settings/makers.html:19
+#: app/templates/settings/makers.html:34
 msgid "Product Category"
 msgstr "Kategorie produktu"
 
@@ -2701,23 +2705,23 @@ msgstr "Podíl:"
 msgid "No recommended customers found."
 msgstr "Žádný doporučený zákazník nenalezen."
 
-#: app/templates/settings/users.html:4
+#: app/templates/settings/users.html:18
 msgid "List of Users"
 msgstr "Seznam uživatelů"
 
-#: app/templates/settings/users.html:8
+#: app/templates/settings/users.html:22
 msgid "Add user"
 msgstr "Přidat uživatele"
 
-#: app/templates/settings/users.html:14
+#: app/templates/settings/users.html:29
 msgid "User ID"
 msgstr "ID uživatele"
 
-#: app/templates/settings/users.html:16
+#: app/templates/settings/users.html:31
 msgid "Role"
 msgstr "Role"
 
-#: app/templates/settings/users.html:18
+#: app/templates/settings/users.html:33
 msgid "Language"
 msgstr "Jazyk"
 
