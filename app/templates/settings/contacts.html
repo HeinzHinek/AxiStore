@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
+
+<script>
+    $(function() {
+        $('#contacts-table').tablesorter( {
+            sortList: [[2,0]],
+            widgets: ["saveSort"]
+        });
+    });
+</script>
+
 <div class="row">
     <h1>{{ _('List of Contacts') }}</h1>
     {% include 'flash.html' %}
@@ -12,14 +26,17 @@
     </div>
 
     {% if contacts %}
-    <table class="table table-hover table-striped">
+    <table id="contacts-table" class="table tablesorter table-hover table-striped" style="border-top: 2px solid #DDDDDD;">
+        <thead>
         <tr>
-            <th>{{ _('Contact ID') }}</th>
-            <th>{{ _('First Name') }}</th>
-            <th>{{ _('Surname') }}
-            <th>{{ _('Company') }}</th>
+            <th class="sort-header">{{ _('Contact ID') }}</th>
+            <th class="sort-header">{{ _('First Name') }}</th>
+            <th class="sort-header">{{ _('Surname') }}
+            <th class="sort-header">{{ _('Company') }}</th>
         </tr>
+        </thead>
 
+        <tbody>
         {% for contact in contacts.items %}
         <tr onclick="window.location.href = '{{ url_for("editContact", id=contact.id) }}'">
         <td>{{ contact.id }}</td>
@@ -28,6 +45,7 @@
         <td>{{ contact.customer.company_name }}</td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
     <br>
 

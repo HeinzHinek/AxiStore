@@ -1,8 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
+
 <script>
 $(document).ready( function() {
+
+    $.tablesorter.addParser({
+        id: 'nohinsho_letter',
+        is: function(s) {
+            return false;
+        },
+        format: function(s, table, cell) {
+            return $(cell).find('input').val();
+        },
+        type: 'numeric'
+    });
+
+    $('#customers-table').tablesorter( {
+        sortList: [[0,0]],
+        headers: {
+            5: { sorter: 'nohinsho_letter', sortInitialOrder: 'asc' }
+        },
+        widgets: ["saveSort"]
+    });
+
     $(".nohinsho_num").each( function() {
         var num = parseInt($(this).val()) + 65;
         $(this).closest('td').find('span').text(String.fromCharCode(num));
@@ -21,16 +46,19 @@ $(document).ready( function() {
     </div>
 
     {% if customers %}
-    <table class="table table-hover table-striped">
+    <table id="customers-table" class="table tablesorter table-hover table-striped" style="border-top: 2px solid #DDDDDD;">
+        <thead>
         <tr>
-            <th style="width: 10%;">{{ _('Customer ID') }}</th>
-            <th style="width: 25%;">{{ _('Customer Name') }}</th>
-            <th style="width: 25%;">{{ _('Company Name') }}</th>
-            <th style="width: 10%; text-align: center;">{{ _('Base discount') }}</th>
-            <th style="width: 15%;">{{ _('Recommended by') }}</th>
-            <th style="width: 15%; text-align: center;">{{ _('Next nohinsho letter') }}</th>
+            <th class="sort-header" style="width: 10%; vertical-align: middle;">{{ _('Customer ID') }}</th>
+            <th class="sort-header" style="width: 25%; vertical-align: middle;">{{ _('Customer Name') }}</th>
+            <th class="sort-header" style="width: 25%; vertical-align: middle;">{{ _('Company Name') }}</th>
+            <th class="sort-header" style="width: 10%; text-align: center; vertical-align: middle;">{{ _('Base discount') }}</th>
+            <th class="sort-header" style="width: 15%; vertical-align: middle;">{{ _('Recommended by') }}</th>
+            <th class="sort-header" style="width: 15%; text-align: center; vertical-align: middle;">{{ _('Next nohinsho letter') }}</th>
         </tr>
+        </thead>
 
+        <tbody>
         {% for customer in customers.items %}
         <tr onclick="window.location.href = '{{ url_for("editCustomer", id=customer.id) }}'">
             <td>{{ customer.id }}</td>
@@ -43,6 +71,7 @@ $(document).ready( function() {
             </td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
     <br>
 

@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
+
+<script>
+    $(function() {
+        $('#users-table').tablesorter( {
+            sortList: [[2,0]],
+            widgets: ["saveSort"]
+        });
+    });
+</script>
+
 <h1>{{ _('List of Users') }}</h1>
 {% include 'flash.html' %}
 
@@ -9,30 +23,35 @@
 </div>
 
 {% if users %}
-<table class="table table-hover table-striped">
+<table id="users-table" class="table tablesorter table-hover table-striped" style="border-top: 2px solid #DDDDDD;">
+<thead>
 <tr>
-    <th>{{ _('User ID') }}</th>
-    <th>{{ _('Nickname') }}</th>
-    <th>{{ _('Role') }}</th>
-    <th>{{ _('Company') }}</th>
-    <th>{{ _('Language') }}</th>
+    <th class="sort-header">{{ _('User ID') }}</th>
+    <th class="sort-header">{{ _('Nickname') }}</th>
+    <th class="sort-header">{{ _('Role') }}</th>
+    <th class="sort-header">{{ _('Company') }}</th>
+    <th class="sort-header">{{ _('Language') }}</th>
 </tr>
+</thead>
 
-{% for user in users.items %}
-<tr onclick="window.location.href = '{{ url_for("editUser", id=user.id) }}'">
-    <td>{{ user.id }}</td>
-    <td>{{ user.nickname }}</td>
-    <td>{{ roles[user.role] }}
-    {% if user.customer %}
-        <td>{{ user.customer.name }}</td>
-    {% elif user.maker %}
-        <td>{{ user.maker.name }}</td>
-    {% else %}
-        <td>-</td>
-    {% endif %}
-    <td>{{ languages[user.language] }}</td>
-</tr>
-{% endfor %}
+    <tbody>
+    {% for user in users.items %}
+    <tr onclick="window.location.href = '{{ url_for("editUser", id=user.id) }}'">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nickname }}</td>
+        <td>{{ roles[user.role] }}
+        {% if user.customer %}
+            <td>{{ user.customer.name }}</td>
+        {% elif user.maker %}
+            <td>{{ user.maker.name }}</td>
+        {% else %}
+            <td>-</td>
+        {% endif %}
+        <td>{{ languages[user.language] }}</td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
 </table>
 <br>
 

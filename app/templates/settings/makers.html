@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
+<link href="/static/css/tablesorter.css" rel="stylesheet">
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.tablesorter.js"></script>
+<script src="/static/js/jquery.tablesorter.widgets.js"></script>
+
+<script>
+    $(function() {
+        $('#makers-table').tablesorter( {
+            sortList: [[0,0]],
+            widgets: ["saveSort"]
+        });
+    });
+</script>
+
 <div class="row">
     <h1>{{ _('List of Makers') }}</h1>
     {% include 'flash.html' %}
@@ -12,14 +26,17 @@
     </div>
 
     {% if makers %}
-    <table class="table table-hover table-striped">
+    <table id="makers-table" class="table tablesorter table-hover table-striped" style="border-top: 2px solid #DDDDDD;">
+        <thead>
         <tr>
-            <th>{{ _('Maker ID') }}</th>
-            <th>{{ _('Maker\'s Name') }}</th>
-            <th>{{ _('Product Category') }}</th>
-            <th style="text-align: right;">{{ _('Average days to deliver') }}</th>
+            <th class="sort-header">{{ _('Maker ID') }}</th>
+            <th class="sort-header">{{ _('Maker\'s Name') }}</th>
+            <th class="sort-header">{{ _('Product Category') }}</th>
+            <th class="sort-header" style="text-align: right;">{{ _('Average days to deliver') }}</th>
         </tr>
+        </thead>
 
+        <tbody>
         {% for maker in makers.items %}
         <tr onclick="window.location.href = '{{ url_for("editMaker", id=maker.id) }}'">
         <td>{{maker.id}}</td>
@@ -36,6 +53,7 @@
         </td>
         </tr>
         {% endfor %}
+        </tbody>
     </table>
     <br>
 
