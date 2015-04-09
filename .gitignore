@@ -16,3 +16,4 @@ app/static/backup
 db_up.sh
 
 config.py
+runp-mysql.fcgi
