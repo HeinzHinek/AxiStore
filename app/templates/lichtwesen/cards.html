@@ -1,0 +1,140 @@
+{% extends "base_lichtwesen.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/cards.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/presentations/lichtwesen/cards/js/cards.js"></script>
+
+<div class="cards_bg" style='background-image: url({{ url_for("static", filename="presentations/lichtwesen/cards/bg_v7_vrepeat.jpg") }});'>
+    <div class="cards-header">
+        <h2>ホワット・ヘルプ？　リヒトヴェーゼンのカードセット</h2>
+        <div class="cards-horizontal-div">
+            <h3>1．取り出す枚数　　　</h3>
+            <div class="checkbox"><label><input type="radio" name="cardcount" value="one" checked style="cursor: pointer;">　1枚　　</label>
+                <label><input type="radio" name="cardcount"value="three" style="cursor: pointer;">　3枚　　</label></div>
+        </div>
+        <div class="cards-horizontal-div">
+            <h3  style="vertical-align: middle;">2．ご質問　　　　　　　</h3>
+            <input type="text" name="myhelp" id="myhelp" class="cards-question-text" size=50 maxlength="47" style="vertical-align: middle;">
+        </div>
+        <h3>3．お好みのカードをクリックしてください。</h3>
+    </div>
+    <div class="cards-lw-logo-div">
+        <a href="http://www.lichtwesen.jp/" rel="home">
+            <img src="{{ url_for('static', filename='presentations/lichtwesen/cards/lw-logo-white.png') }}" alt="Lichtwesen">
+        </a>
+    </div>
+
+    <div id="cardholder">
+        <div class="row">
+            <div class="cardset">
+                <a href="#" class="card-back card-c1"><span>Card</span></a>
+                <a href="#" class="card-back card-c2"><span>Card</span></a>
+                <a href="#" class="card-back card-c3"><span>Card</span></a>
+                <a href="#" class="card-back card-c4"><span>Card</span></a>
+                <a href="#" class="card-back card-c5"><span>Card</span></a>
+                <a href="#" class="card-back card-c6"><span>Card</span></a>
+                <a href="#" class="card-back card-c7"><span>Card</span></a>
+                <a href="#" class="card-back card-c8"><span>Card</span></a>
+                <a href="#" class="card-back card-c9"><span>Card</span></a>
+                <a href="#" class="card-back card-c10"><span>Card</span></a>
+                <a href="#" class="card-back card-c11"><span>Card</span></a>
+                <a href="#" class="card-back card-c12"><span>Card</span></a>
+                <a href="#" class="card-back card-c13"><span>Card</span></a>
+                <a href="#" class="card-back card-c14"><span>Card</span></a>
+                <a href="#" class="card-back card-c15"><span>Card</span></a>
+                <a href="#" class="card-back card-c16"><span>Card</span></a>
+                <a href="#" class="card-back card-c17"><span>Card</span></a>
+                <a href="#" class="card-back card-c18"><span>Card</span></a>
+                <a href="#" class="card-back card-c19"><span>Card</span></a>
+                <a href="#" class="card-back card-c20"><span>Card</span></a>
+                <a href="#" class="card-back card-c21"><span>Card</span></a>
+                <a href="#" class="card-back card-c22"><span>Card</span></a>
+                <a href="#" class="card-back card-c23"><span>Card</span></a>
+                <a href="#" class="card-back card-c24"><span>Card</span></a>
+                <a href="#" class="card-back card-c25"><span>Card</span></a>
+                <a href="#" class="card-back card-c26"><span>Card</span></a>
+                <a href="#" class="card-back card-c27"><span>Card</span></a>
+                <a href="#" class="card-back card-c28"><span>Card</span></a>
+                <a href="#" class="card-back card-c29"><span>Card</span></a>
+                <a href="#" class="card-back card-c30"><span>Card</span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cardset">
+                <a href="#" class="card-back card-c1"><span>Card</span></a>
+                <a href="#" class="card-back card-c2"><span>Card</span></a>
+                <a href="#" class="card-back card-c3"><span>Card</span></a>
+                <a href="#" class="card-back card-c4"><span>Card</span></a>
+                <a href="#" class="card-back card-c5"><span>Card</span></a>
+                <a href="#" class="card-back card-c6"><span>Card</span></a>
+                <a href="#" class="card-back card-c7"><span>Card</span></a>
+                <a href="#" class="card-back card-c8"><span>Card</span></a>
+                <a href="#" class="card-back card-c9"><span>Card</span></a>
+                <a href="#" class="card-back card-c10"><span>Card</span></a>
+                <a href="#" class="card-back card-c11"><span>Card</span></a>
+                <a href="#" class="card-back card-c12"><span>Card</span></a>
+                <a href="#" class="card-back card-c13"><span>Card</span></a>
+                <a href="#" class="card-back card-c14"><span>Card</span></a>
+                <a href="#" class="card-back card-c15"><span>Card</span></a>
+                <a href="#" class="card-back card-c16"><span>Card</span></a>
+                <a href="#" class="card-back card-c17"><span>Card</span></a>
+                <a href="#" class="card-back card-c18"><span>Card</span></a>
+                <a href="#" class="card-back card-c19"><span>Card</span></a>
+                <a href="#" class="card-back card-c20"><span>Card</span></a>
+                <a href="#" class="card-back card-c21"><span>Card</span></a>
+                <a href="#" class="card-back card-c22"><span>Card</span></a>
+                <a href="#" class="card-back card-c23"><span>Card</span></a>
+                <a href="#" class="card-back card-c24"><span>Card</span></a>
+                <a href="#" class="card-back card-c25"><span>Card</span></a>
+                <a href="#" class="card-back card-c26"><span>Card</span></a>
+                <a href="#" class="card-back card-c27"><span>Card</span></a>
+                <a href="#" class="card-back card-c28"><span>Card</span></a>
+                <a href="#" class="card-back card-c29"><span>Card</span></a>
+                <a href="#" class="card-back card-c30"><span>Card</span></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cardset">
+                <a href="#" class="card-back card-c1"><span>Card</span></a>
+                <a href="#" class="card-back card-c2"><span>Card</span></a>
+                <a href="#" class="card-back card-c3"><span>Card</span></a>
+                <a href="#" class="card-back card-c4"><span>Card</span></a>
+                <a href="#" class="card-back card-c5"><span>Card</span></a>
+                <a href="#" class="card-back card-c6"><span>Card</span></a>
+                <a href="#" class="card-back card-c7"><span>Card</span></a>
+                <a href="#" class="card-back card-c8"><span>Card</span></a>
+                <a href="#" class="card-back card-c9"><span>Card</span></a>
+                <a href="#" class="card-back card-c10"><span>Card</span></a>
+                <a href="#" class="card-back card-c11"><span>Card</span></a>
+                <a href="#" class="card-back card-c12"><span>Card</span></a>
+                <a href="#" class="card-back card-c13"><span>Card</span></a>
+                <a href="#" class="card-back card-c14"><span>Card</span></a>
+                <a href="#" class="card-back card-c15"><span>Card</span></a>
+                <a href="#" class="card-back card-c16"><span>Card</span></a>
+                <a href="#" class="card-back card-c17"><span>Card</span></a>
+                <a href="#" class="card-back card-c18"><span>Card</span></a>
+                <a href="#" class="card-back card-c19"><span>Card</span></a>
+                <a href="#" class="card-back card-c20"><span>Card</span></a>
+                <a href="#" class="card-back card-c21"><span>Card</span></a>
+                <a href="#" class="card-back card-c22"><span>Card</span></a>
+                <a href="#" class="card-back card-c23"><span>Card</span></a>
+                <a href="#" class="card-back card-c24"><span>Card</span></a>
+                <a href="#" class="card-back card-c25"><span>Card</span></a>
+                <a href="#" class="card-back card-c26"><span>Card</span></a>
+                <a href="#" class="card-back card-c27"><span>Card</span></a>
+                <a href="#" class="card-back card-c28"><span>Card</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="cards-footer">
+        <a id="mix" class="clearfix" title="シャッフル">シャッフル</a>
+    </div>
+
+    <input type="hidden" name="helpurl" id="helpurl"
+           value="{{ url_for('showcard') }}">
+    <input type="hidden" name="helpurl3" id="helpurl3"
+           value="{{ url_for('showcard') }}">
+</div>
+        
+{% endblock %}

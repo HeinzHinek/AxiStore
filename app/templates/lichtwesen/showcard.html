@@ -1,0 +1,113 @@
+{% extends "base_lichtwesen.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/cards.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/presentations/lichtwesen/cards/js/showcard.js"></script>
+
+<script>
+jQuery(document).ready(function($) {
+
+    var myhelp = getParameterByName('myhelp');
+    var numcards = getParameterByName('numcards');
+
+    if (numcards != 3) { numcards = 1 }
+
+    var selected = generateCards(numcards);
+    $("#card-name-1").text(selected[0]);
+
+    if (numcards == 3) {
+        $(".cards-divider-row").show();
+
+        $row2 = $("#card-row-1").clone()
+        $row2.attr('id', 'card-row-2');
+        $row2.find('#selected-card-img-1').attr('id', 'selected-card-img-2');
+        $row2.find('#card-name-1').attr('id', 'card-name-2');
+        $row2.appendTo(".show-card-table");
+        $("#card-name-2").text(selected[1]);
+
+        $(".cards-divider-row").clone().appendTo(".show-card-table");
+
+        $row3 = $("#card-row-1").clone()
+        $row3.attr('id', 'card-row-3');
+        $row3.find('#selected-card-img-1').attr('id', 'selected-card-img-3');
+        $row3.find('#card-name-1').attr('id', 'card-name-3');
+        $row3.appendTo(".show-card-table");
+        $("#card-name-3").text(selected[2]);
+    }
+
+    var img_url_stub = $("#img-url-stub").val();
+    for (i=0; i<selected.length; i++) {
+        var filename = selected[i];
+        if (selected[i] < 10) { filename ="0" + filename }
+        else if (selected[i] > 78) { filename = "special" }
+        var el = "selected-card-img-" + (i + 1);
+        var img_url = img_url_stub + filename + ".jpg";
+        $("#" + el).attr('src', img_url);
+    }
+
+    if (myhelp.length > 0) {
+        $(".myhelp-div").show();
+        $("#myhelp").text(myhelp);
+    }
+
+});
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function generateCards(numcards) {
+    var result = []
+    while (result.length < numcards) {
+        var randomnumber = Math.ceil(Math.random() * 86);
+        var found = false;
+        for (var i=0;i<result.length;i++){
+            if(result[i] == randomnumber) { found = true; break }
+        }
+        if (!found) result[result.length]=randomnumber;
+    }
+    return result;
+}
+
+</script>
+
+<input id="img-url-stub" type="hidden" value="/static/presentations/lichtwesen/cards/img/LW_card_"/>
+
+<div class="cards_bg" style='background-image: url({{ url_for("static", filename="presentations/lichtwesen/cards/bg_v7_vrepeat.jpg") }});'>
+    <!--
+    <div class="cards-lw-logo-div">
+        <a href="http://www.lichtwesen.jp/" rel="home">
+            <img src="{{ url_for('static', filename='presentations/lichtwesen/cards/lw-logo-white.png') }}" alt="Lichtwesen">
+        </a>
+    </div>
+    -->
+    <div class="cards-show-div">
+        <table class="show-card-table">
+            <tr style="height: 80px;">
+                <td style="vertical-align: top; width: 177px;">
+                    <a class="cards-link-button" href="{{ url_for('cards') }}"><div>≪ 戻る</div></a>
+                </td>
+                <td style="vertical-align: top;">
+                    <div class="myhelp-div"><p id="myhelp"></p></div>
+                </td>
+            </tr>
+            <tr id="card-row-1">
+                <td><img id="selected-card-img-1" class="selected-card-img"/></td>
+                <td style="vertical-align: top;">
+                    <h3 id="card-name-1"></h3>
+                </td>
+            </tr>
+            <tr class="cards-divider-row"><td colspan="2"><hr></td></tr>
+        </table>
+    </div>
+
+    <div class="cards-footer">
+        <a class="cards-link-button" href="{{ url_for('cards') }}"><div>≪ 戻る</div></a>
+    </div>
+
+</div>
+        
+{% endblock %}

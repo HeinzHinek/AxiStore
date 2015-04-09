@@ -1,0 +1,326 @@
+.cards_bg {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: #19357f;
+	background-repeat: repeat-y;
+	background-attachment: top;
+	background-position: right;
+	margin: 20px auto;
+	padding-top: 5px;
+	padding-bottom: 15px;
+	width: 1000px;
+	position: relative;
+}
+
+.cards-header {
+    text-align: left;
+    margin-left: 20px;
+    color: white;
+}
+
+.cards-horizontal-div * {
+    display: inline-block;
+}
+
+.cards-question-text {
+    color: black;
+    height: 35px;
+}
+
+.cards-lw-logo-div {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#cardholder {
+	padding-bottom: 10px;
+	margin-bottom: 10px
+}
+
+#cardholder .cardset {
+	height: 219px
+}
+
+#cardholder a {
+	text-decoration: none;
+	background-image: url('/static/presentations/lichtwesen/cards/back.png');
+	background-repeat: no-repeat;
+	height: 134px;
+	width: 89px;
+	position: absolute;
+	display: none;
+	overflow: hidden;
+	text-align: left;
+	text-indent: -999em
+}
+
+#cardholder a.hovercard {
+	height: 219px
+}
+
+#cardholder a span {
+	display: block;
+	height: 134px;
+	width: 89px;
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+#cardholder a.selected {
+	height: 219px
+}
+
+.cardset {
+    margin: 0px auto;
+    position: relative;
+    width: 834px;
+}
+
+.card-back {
+    display: inline;
+    display: none;
+}
+
+.card-c1 {
+	left: 0;
+	bottom: 0
+}
+
+.card-c2 {
+	left: 1%;
+	bottom: 3px
+}
+
+.card-c3 {
+	left: 2%;
+	bottom: 6px
+}
+
+.card-c4 {
+	left: 4%;
+	bottom: 11px
+}
+
+.card-c5 {
+	left: 5%;
+	bottom: 18px
+}
+
+.card-c6 {
+	left: 7%;
+	bottom: 25px
+}
+
+.card-c7 {
+	left: 9%;
+	bottom: 32px
+}
+
+.card-c8 {
+	left: 10%;
+	bottom: 41px
+}
+
+.card-c9 {
+	left: 12%;
+	bottom: 47px
+}
+
+.card-c10 {
+	left: 16%;
+	bottom: 55px
+}
+
+.card-c11 {
+	left: 20%;
+	bottom: 62px
+}
+
+.card-c12 {
+	left: 25%;
+	bottom: 68px
+}
+
+.card-c13 {
+	left: 30%;
+	bottom: 74px
+}
+
+.card-c14 {
+	left: 36%;
+	bottom: 78px
+}
+
+.card-c15 {
+	left: 43%;
+	bottom: 81px
+}
+
+.card-c16 {
+	left: 50%;
+	bottom: 81px
+}
+
+.card-c17 {
+	left: 57%;
+	bottom: 78px
+}
+
+.card-c18 {
+	left: 63%;
+	bottom: 74px
+}
+
+.card-c19 {
+	left: 68%;
+	bottom: 68px
+}
+
+.card-c20 {
+	left: 73%;
+	bottom: 62px
+}
+
+.card-c21 {
+	left: 77%;
+	bottom: 55px
+}
+
+.card-c22 {
+	left: 81%;
+	bottom: 47px
+}
+
+.card-c23 {
+	left: 83%;
+	bottom: 41px
+}
+
+.card-c24 {
+	left: 84%;
+	bottom: 32px
+}
+
+.card-c25 {
+	left: 86%;
+	bottom: 25px
+}
+
+.card-c26 {
+	left: 88%;
+	bottom: 18px
+}
+
+.card-c27 {
+	left: 89%;
+	bottom: 11px
+}
+
+.card-c28 {
+	left: 91%;
+	bottom: 6px
+}
+
+.card-c29 {
+	left: 92%;
+	bottom: 3px
+}
+
+.card-c30 {
+	left: 94%;
+	bottom: 0
+}
+
+.cards-footer {
+    text-align: left;
+    padding: 0 20px;
+}
+
+#mix {
+	background: url("/static/presentations/lichtwesen/cards/mix.png") no-repeat top left;
+	padding-left: 50px;
+	padding-top: 10px;
+	margin-bottom: 10px;
+	min-height: 42px;
+	display: block;
+	color: white;
+	text-decoration: underline;
+	font-size: 1.1em;
+	cursor: pointer;
+}
+
+#mix:hover {
+    text-shadow: 0 0 5px #FFFFFF;
+}
+
+.clearfix:before,.clearfix:after {
+	content: " ";
+	display: table
+}
+
+.clearfix:after {
+	clear: both
+}
+
+
+
+.cards-show-div {
+    text-align: left;
+    padding: 20px;
+    color: white;
+}
+
+.show-card-table {
+    width: 100%;
+}
+
+.show-card-table tr td{
+    padding: 0 20px;
+}
+
+.cards-link-button div{
+    margin: auto;
+    border: 1px solid white;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px;
+    width: 0px;
+    min-width: 100px;
+}
+
+.cards-link-button:hover {
+    text-decoration: none;
+}
+
+.cards-link-button div:hover {
+    color: black;
+    background-color: white;
+}
+
+.myhelp-div {
+    display: none;
+    color: black;
+    background-color: white;
+    padding: 0 20px;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 50px;
+}
+
+.selected-card-img {
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: 0 0 10px 2px #9E9E9E;
+    box-shadow: 0 0 10px 2px #9E9E9E;
+}
+
+.cards-divider-row {
+    display: none;
+}
+
+.cards-divider-row td {
+    padding: 0 !important;
+}

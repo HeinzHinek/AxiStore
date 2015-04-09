@@ -146,6 +146,14 @@ def before_request():
 def lichtwesen():
     return render_template('/lichtwesen/index.html')
 
+@app.route('/lichtwesen/cards')
+def cards():
+    return render_template('/lichtwesen/cards.html')
+
+@app.route('/lichtwesen/showcard')
+def showcard():
+    return render_template('/lichtwesen/showcard.html')
+
 
 @app.route('/')
 @app.route('/index')
