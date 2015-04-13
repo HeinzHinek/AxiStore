@@ -105,6 +105,7 @@ $(document).ready(function() {
         <tr>
             <th class="no-border row-indicator-left"></th>
             <th style="width: 5%;">{{ _('Code') }}</th>
+            <th style="width: 5%;">{{ _("Maker's code") }}</th>
             <th><span class="glyphicon glyphicon-camera"></span></th>
             <th>{{ _('Name CS') }}</th>
             <th>{{ _('Name JP') }}</th>
@@ -117,6 +118,7 @@ $(document).ready(function() {
         <tr class="tr-product">
             <td class="no-border row-indicator-left"></td>
             <td>{{ product.code }}</td>
+            <td>{{ product.maker_code }}</td>
             <td class="clickable-td {% if not product.img_url %}td-redir-edit{% endif %} {% if loop.last %}td-border-bottom-2px{% endif %}">
                 {% if product.img_url %}
                 <a class="fancybox" rel="group" href="{{ product.img_url.split('app')[1] }}" tabindex="-1">
