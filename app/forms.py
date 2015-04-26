@@ -2,7 +2,7 @@
 
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
-    HiddenField, FileField, BooleanField, SubmitField, DateTimeField
+    HiddenField, FileField, BooleanField, SubmitField, DateTimeField, TextAreaField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, PACKAGE_SIZES
@@ -59,6 +59,13 @@ class AddProductForm(Form):
                                       validators.length(max=300)])
     desc_JP = StringField('desc_CS', [validators.data_required(),
                                       validators.length(max=300)])
+
+    long_desc = TextAreaField('long_desc', [validators.length(max=5000)])
+    keywords = StringField('keywords', [validators.length(max=1000)])
+    subcategory_1 = StringField('subcategory_1', [validators.length(max=1000)])
+    subcategory_2 = StringField('subcategory_2', [validators.length(max=1000)])
+    subcategory_3 = StringField('subcategory_3', [validators.length(max=1000)])
+
     price_unit = FloatField('price_unit', [validators.number_range(min=0)])
     price_retail = FloatField('price_retail', [validators.number_range(min=0)])
     qty_stock = IntegerField('qty_stock', [validators.NumberRange(min=0, max=99999)], default=0)

@@ -25,6 +25,13 @@ def addProduct():
         product.maker_code = form.maker_code.data
         product.desc_CS = form.desc_CS.data
         product.desc_JP = form.desc_JP.data
+
+        product.long_desc = form.long_desc.data
+        product.keywords = form.keywords.data
+        product.subcategory_1 = form.subcategory_1.data
+        product.subcategory_2 = form.subcategory_2.data
+        product.subcategory_3 = form.subcategory_3.data
+
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
@@ -115,6 +122,13 @@ def editProduct(id=0):
         product.maker_code = form.maker_code.data
         product.desc_CS = form.desc_CS.data
         product.desc_JP = form.desc_JP.data
+
+        product.long_desc = form.long_desc.data
+        product.keywords = form.keywords.data
+        product.subcategory_1 = form.subcategory_1.data
+        product.subcategory_2 = form.subcategory_2.data
+        product.subcategory_3 = form.subcategory_3.data
+
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
         product.qty_stock = form.qty_stock.data
