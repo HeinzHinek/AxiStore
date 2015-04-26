@@ -50,6 +50,15 @@ class Product(db.Model):
     maker_id = db.Column(db.Integer, db.ForeignKey('maker.id'))
     desc_CS = db.Column(db.Unicode(300))
     desc_JP = db.Column(db.Unicode(300))
+
+    # Added 26.4.2015
+    long_desc = db.Column(db.Unicode())
+    keywords = db.Column(db.Unicode())
+    subcategory_1 = db.Column(db.Unicode())
+    subcategory_2 = db.Column(db.Unicode())
+    subcategory_3 = db.Column(db.Unicode())
+    # end
+
     price_unit = db.Column(db.Integer, default=0)
     price_retail = db.Column(db.Integer, default=0)
     qty_stock = db.Column(db.Integer)
