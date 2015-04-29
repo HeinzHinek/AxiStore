@@ -27,10 +27,9 @@ def addProduct():
         product.desc_JP = form.desc_JP.data
 
         product.long_desc = form.long_desc.data
+        product.detailed_desc = form.detailed_desc.data
+        product.subcategory_desc = form.subcategory_desc.data
         product.keywords = form.keywords.data
-        product.subcategory_1 = form.subcategory_1.data
-        product.subcategory_2 = form.subcategory_2.data
-        product.subcategory_3 = form.subcategory_3.data
 
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
@@ -124,10 +123,9 @@ def editProduct(id=0):
         product.desc_JP = form.desc_JP.data
 
         product.long_desc = form.long_desc.data
+        product.detailed_desc = form.detailed_desc.data
+        product.subcategory_desc = form.subcategory_desc.data
         product.keywords = form.keywords.data
-        product.subcategory_1 = form.subcategory_1.data
-        product.subcategory_2 = form.subcategory_2.data
-        product.subcategory_3 = form.subcategory_3.data
 
         product.price_unit = form.price_unit.data
         product.price_retail = form.price_retail.data
