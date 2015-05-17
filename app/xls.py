@@ -374,7 +374,7 @@ class CreateXls():
 
         for idx, item in enumerate(products):
             worksheet.write_string(idx+12, 0, str(item['product_code']), item_left)
-            maker_code = str(item['product_maker_code']) if item['product_maker_code'] else ""
+            maker_code = unicode(item['product_maker_code']) if item['product_maker_code'] else ""
             worksheet.write_string(idx+12, 1, maker_code, item_left)
             worksheet.write_string(idx+12, 2, item['product_name'], item_left)
             worksheet.write_number(idx+12, 3, item['quantity'], item_right)
