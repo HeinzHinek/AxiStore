@@ -343,6 +343,9 @@ class Request(db.Model):
     active_flg = db.Column(db.Boolean, default=True)
     products = db.relationship('RequestedProducts', backref='request', lazy='dynamic')
 
+    # Added 13.6.2015
+    note = db.Column(db.Unicode())
+
     def __init__(self):
         self.created_dt = datetime.utcnow()
 

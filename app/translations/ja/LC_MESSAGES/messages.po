@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-04-29 11:47+0900\n"
-"PO-Revision-Date: 2015-04-29 11:52+0900\n"
+"POT-Creation-Date: 2015-06-13 18:29+0900\n"
+"PO-Revision-Date: 2015-06-13 18:33+0900\n"
 "Last-Translator: \n"
 "Language-Team: ja <LL@li.org>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -36,7 +36,7 @@ msgstr "CSVファイルのアップロードと処理が成功しました。"
 #: app/templates/product/editProduct.html:157
 #: app/templates/requests/cancelrequest.html:56
 #: app/templates/requests/editrequest.html:117
-#: app/templates/requests/request.html:198
+#: app/templates/requests/request.html:206
 #: app/templates/supplies/editsupply.html:96
 #: app/templates/supplies/supply.html:59
 msgid "Product code"
@@ -48,7 +48,7 @@ msgstr "品番"
 #: app/templates/shop/_cart_table.html:6
 #: app/templates/shop/myorderhistory.html:53
 #: app/templates/shop/orderconfirm.html:39
-#: app/templates/shop/placeorder.html:35
+#: app/templates/shop/placeorder.html:38
 msgid "Product Name"
 msgstr "商品名"
 
@@ -309,7 +309,7 @@ msgid "Search"
 msgstr "検索"
 
 #: app/forms.py:238 app/forms.py:245 app/forms.py:252 app/forms.py:257
-#: app/forms.py:262 app/templates/deliveries/delivery.html:27
+#: app/forms.py:262 app/forms.py:267 app/templates/deliveries/delivery.html:27
 #: app/templates/deliveries/newDelivery.html:144
 #: app/templates/orders/createOrder.html:261
 #: app/templates/orders/order.html:27
@@ -671,7 +671,7 @@ msgstr "新しい製品は追加されました。"
 msgid "Add new product"
 msgstr "新しい製品を追加"
 
-#: app/viewsProduct.py:75 app/viewsRequest.py:143 app/viewsShop.py:144
+#: app/viewsProduct.py:75 app/viewsRequest.py:143 app/viewsShop.py:149
 msgid "Product not found."
 msgstr "製品は不明です。"
 
@@ -715,7 +715,7 @@ msgstr "注文番号はすでに登録しています！"
 msgid "Invalid data received!"
 msgstr "受信されたデータは不正です！"
 
-#: app/viewsRequest.py:151 app/viewsShop.py:157
+#: app/viewsRequest.py:151 app/viewsShop.py:162
 msgid "Order created successfully."
 msgstr "注文の登録が成功しました。"
 
@@ -836,12 +836,12 @@ msgstr ""
 "申し訳ありませんが、お客様の顧客データは足りません。お手数ですが、カストマー"
 "サポートにお問い合わせください。"
 
-#: app/viewsShop.py:180 app/templates/orders/createOrder.html:263
+#: app/viewsShop.py:185 app/templates/orders/createOrder.html:263
 #: app/templates/orders/orders.html:9
 msgid "Place order"
 msgstr "発注を入力"
 
-#: app/viewsShop.py:194
+#: app/viewsShop.py:199
 msgid ""
 "Unfortunatelly, your request could not be processed. Please, contact our "
 "customer support."
@@ -849,15 +849,15 @@ msgstr ""
 "申し訳ありませんが、お客様の発注が処理できません。お手数ですが、カストマーサ"
 "ポートにお問い合わせください。"
 
-#: app/viewsShop.py:213
+#: app/viewsShop.py:218
 msgid "Order Confirmation"
 msgstr "発注の確認"
 
-#: app/viewsShop.py:236 app/templates/shop/myorderhistory.html:20
+#: app/viewsShop.py:241 app/templates/shop/myorderhistory.html:20
 msgid "My Order History"
 msgstr "注文履歴"
 
-#: app/viewsShop.py:255 app/templates/navbar_customer.html:17
+#: app/viewsShop.py:260 app/templates/navbar_customer.html:17
 msgid "Data download"
 msgstr "データのダウンロード"
 
@@ -1244,7 +1244,7 @@ msgstr "メーカー"
 #: app/templates/requests/createRequest.html:273
 #: app/templates/requests/createRequest.html:289
 #: app/templates/requests/editrequest.html:118
-#: app/templates/requests/request.html:199
+#: app/templates/requests/request.html:207
 #: app/templates/settings/recommendedshares.html:127
 #: app/templates/settings/recommendedshares.html:187
 #: app/templates/supplies/editsupply.html:97
@@ -1264,7 +1264,7 @@ msgstr "チェコ語の説明"
 #: app/templates/requests/createRequest.html:274
 #: app/templates/requests/createRequest.html:290
 #: app/templates/requests/editrequest.html:119
-#: app/templates/requests/request.html:200
+#: app/templates/requests/request.html:208
 #: app/templates/settings/recommendedshares.html:128
 #: app/templates/settings/recommendedshares.html:188
 #: app/templates/supplies/editsupply.html:98
@@ -1357,12 +1357,12 @@ msgstr "閉じる"
 #: app/templates/requests/createRequest.html:291
 #: app/templates/requests/editrequest.html:120
 #: app/templates/requests/productrequests.html:46
-#: app/templates/requests/request.html:201
+#: app/templates/requests/request.html:209
 #: app/templates/settings/recommendedshares.html:131
 #: app/templates/settings/recommendedshares.html:191
 #: app/templates/shop/_cart_table.html:8
 #: app/templates/shop/orderconfirm.html:41
-#: app/templates/shop/placeorder.html:37
+#: app/templates/shop/placeorder.html:40
 #: app/templates/supplies/editsupply.html:99
 #: app/templates/supplies/supply.html:62
 #: app/templates/supplies/supplyReport.html:25
@@ -1585,7 +1585,7 @@ msgstr "キャンセル"
 #: app/templates/shop/_cart_table.html:5
 #: app/templates/shop/myorderhistory.html:52
 #: app/templates/shop/orderconfirm.html:38
-#: app/templates/shop/placeorder.html:34
+#: app/templates/shop/placeorder.html:37
 #: app/templates/supplies/supplyProducts.html:147
 #: app/templates/supplies/unsuppliedproducts.html:60
 msgid "Code"
@@ -1701,14 +1701,14 @@ msgstr "発注の詳細："
 
 #: app/templates/mail/order_confirm.html:27
 #: app/templates/shop/orderconfirm.html:40
-#: app/templates/shop/placeorder.html:36
+#: app/templates/shop/placeorder.html:39
 msgid "Your Price"
 msgstr "お客様の価格"
 
 #: app/templates/mail/order_confirm.html:29
 #: app/templates/shop/_cart_table.html:9
 #: app/templates/shop/orderconfirm.html:42
-#: app/templates/shop/placeorder.html:38
+#: app/templates/shop/placeorder.html:41
 msgid "Subtotal"
 msgstr "小計"
 
@@ -1716,7 +1716,7 @@ msgstr "小計"
 #: app/templates/mail/order_confirm.html:42
 #: app/templates/shop/orderconfirm.html:49
 #: app/templates/shop/orderconfirm.html:55
-#: app/templates/shop/placeorder.html:46 app/templates/shop/placeorder.html:52
+#: app/templates/shop/placeorder.html:49 app/templates/shop/placeorder.html:55
 #: app/templates/shop/shop.html:391 app/templates/shop/shop.html:396
 msgid "pcs"
 msgstr "個"
@@ -1724,7 +1724,7 @@ msgstr "個"
 #: app/templates/mail/order_confirm.html:41
 #: app/templates/settings/recommendedshares.html:224
 #: app/templates/shop/orderconfirm.html:54
-#: app/templates/shop/placeorder.html:51
+#: app/templates/shop/placeorder.html:54
 msgid "Total:"
 msgstr "合計："
 
@@ -1880,7 +1880,7 @@ msgstr "戻る"
 #: app/templates/orders/cancelorder.html:73
 #: app/templates/orders/order.html:104
 #: app/templates/requests/cancelrequest.html:84
-#: app/templates/requests/request.html:231
+#: app/templates/requests/request.html:239
 msgid "Cancel this order"
 msgstr "この受注を取り消す"
 
@@ -1949,7 +1949,7 @@ msgstr "本発注アイテムを一件削除"
 msgid "This order is empty. It should be deleted."
 msgstr "この発注はデータがありません。削除されるべきです。"
 
-#: app/templates/orders/order.html:100 app/templates/requests/request.html:227
+#: app/templates/orders/order.html:100 app/templates/requests/request.html:235
 msgid "Edit this order"
 msgstr "この発注を修正"
 
@@ -2190,7 +2190,7 @@ msgstr "お客様"
 
 #: app/templates/requests/cancelrequest.html:60
 #: app/templates/requests/editrequest.html:121
-#: app/templates/requests/request.html:202
+#: app/templates/requests/request.html:210
 msgid "Supplied"
 msgstr "納品日時"
 
@@ -2298,9 +2298,17 @@ msgstr "この受注はデータがありません。削除されるべきです
 msgid "Orders from customers for Product"
 msgstr "製品に対する受注"
 
+#: app/templates/requests/request.html:194
+msgid "Message from customer:"
+msgstr "お客様からの連絡："
+
 #: app/templates/requests/requests.html:5
 msgid "Orders from customers overview"
 msgstr "受注の一覧"
+
+#: app/templates/requests/requests.html:43
+msgid "Note"
+msgstr "連絡"
 
 #: app/templates/settings/addCategory.html:11
 #: app/templates/settings/categories.html:48
@@ -2818,31 +2826,35 @@ msgstr ""
 "お客様のご注文を承りました。確認メールは次のメールアドレスに送信されました："
 
 #: app/templates/shop/orderconfirm.html:61
-#: app/templates/shop/placeorder.html:27
+#: app/templates/shop/placeorder.html:30
 msgid "Back to the shop"
 msgstr "ショップへ戻る"
 
-#: app/templates/shop/placeorder.html:25
+#: app/templates/shop/placeorder.html:28
 msgid "Check your order before sending"
 msgstr "発注の前に内容をご確認ください"
 
-#: app/templates/shop/placeorder.html:33
+#: app/templates/shop/placeorder.html:36
 msgid "Image"
 msgstr "画像"
 
-#: app/templates/shop/placeorder.html:57
+#: app/templates/shop/placeorder.html:60
 msgid "No products to order."
 msgstr "発注商品がありません。"
 
-#: app/templates/shop/placeorder.html:63
+#: app/templates/shop/placeorder.html:64
+msgid "Message for Axis Mundi (optional)"
+msgstr "Axis Mundiへの連絡（任意）"
+
+#: app/templates/shop/placeorder.html:72
 msgid "Order items listed above?"
 msgstr "以上の商品を発注しますか？"
 
-#: app/templates/shop/placeorder.html:67
+#: app/templates/shop/placeorder.html:74
 msgid "No, return to shop"
 msgstr "いいえ、ショップに戻る"
 
-#: app/templates/shop/placeorder.html:68
+#: app/templates/shop/placeorder.html:75
 msgid "Yes, order!"
 msgstr "はい、発注します。"
 

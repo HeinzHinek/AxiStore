@@ -5,7 +5,7 @@ from flask import render_template, g, session, request, json, redirect, url_for,
 from flask_login import login_required, current_user, customer_allowed
 from flask.ext.babel import gettext
 from models import Product, Category, Cart, Request, RequestedProducts, Catalog, CatalogedProducts
-from forms import ShopHeaderForm, SimpleSubmitForm
+from forms import ShopHeaderForm, SimpleSubmitForm, ShopOrderConfirmForm
 from viewsProduct import prepare_catalog
 from csvHelper import generate_available_stock_csv, generate_product_details_csv
 from config import NO_PHOTO_URL, NO_PHOTO_THUMB_URL, USER_ROLES, AXM_PRODUCT_URL_JA
@@ -126,13 +126,18 @@ def placeorder():
 
     cart_items = Cart.query.filter_by(user_id=current_user.id).all()
 
-    form = SimpleSubmitForm()
+    form = ShopOrderConfirmForm()
     if form.validate_on_submit():
         new_request = Request()
         new_request.user_id = current_user.id
         if not current_user.customer:
             flash(gettext("We apologize but your customer data is insufficient. Please, contact our customer support."))
             return redirect(url_for("shop"))
+
+        customer_note = form.note.data
+        if customer_note:
+            new_request.note = customer_note
+
         new_request.customer_id = current_user.customer.id
         new_request.active_flg = True
         db.session.add(new_request)

@@ -188,6 +188,14 @@
         </tr>
     </table>
 </div>
+
+{% if req.note %}
+<div class="row well">
+    <label>{{ _('Message from customer:') }}</label><br/>
+    <span>{{ req.note }}</span>
+</div>
+{% endif %}
+
 {% endif %}
 
 {% if products %}

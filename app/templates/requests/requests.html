@@ -39,6 +39,9 @@
                     </ul>
                 </div>
             </th>
+            <th class="text-center td-border-right-1px" style="width: 100px;">
+                {{ _('Note') }}
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -49,7 +52,12 @@
             <td class="clickable-td td-border-left-2px">{{ request.id }}</td>
             <td class="clickable-td">{{ momentjs(request.created_dt).format('LLL') }}</td>
             <td class="clickable-td">{{ request.receiver.nickname }}</td>
-            <td class="clickable-td td-border-right-2px">{{ request.customer.name }}</td>
+            <td class="clickable-td">{{ request.customer.name }}</td>
+            <td class="clickable-td td-border-right-2px text-center">
+                {% if request.note %}
+                <span class="glyphicon glyphicon-exclamation-sign" style="color: crimson;"></span>
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>

@@ -260,3 +260,8 @@ class EditRequestForm(Form):
 class EditOrderForm(Form):
     qty_ordered = IntegerField('qty_ordered')
     submit = SubmitField(lazy_gettext('Submit'))
+
+
+class ShopOrderConfirmForm(Form):
+    note = TextAreaField('long_desc', [validators.length(max=5000)])
+    submit = SubmitField(lazy_gettext('Submit'))
