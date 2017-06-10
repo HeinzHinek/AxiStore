@@ -2,7 +2,7 @@
 
 from app import app
 from flask import request, jsonify
-from flask_login import login_required
+from permissions import login_required
 from config import PRODUCT_IMG_PATH, PRODUCT_THUMB_IMG_PATH, IMG_EXTENSIONS, NO_PHOTO_THUMB_URL
 from PIL import Image
 import os

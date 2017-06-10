@@ -4,9 +4,9 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from forms import AddContactForm
 from models import Contact, Customer
-from flask_login import login_required
+from permissions import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
-from flask.ext.babel import gettext
+from flask_babel import gettext
 
 
 @app.route('/contacts')

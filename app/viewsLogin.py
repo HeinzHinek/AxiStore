@@ -6,12 +6,12 @@ from forms import LoginForm
 from models import User
 from flask_login import login_user, logout_user
 from werkzeug.security import check_password_hash
-from flask.ext.babel import gettext
+from flask_babel import gettext
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if g.user is not None and g.user.is_authenticated():
+    if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():

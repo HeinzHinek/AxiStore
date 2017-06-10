@@ -6,7 +6,7 @@ from sqlalchemy.engine.reflection import Inspector
 from collections import OrderedDict
 from config import CSV_PATH
 from flask import request
-from flask.ext.babel import gettext
+from flask_babel import gettext
 from flask_login import current_user
 from datetime import datetime, timedelta
 from config import USER_ROLES

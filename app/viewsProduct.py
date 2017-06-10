@@ -4,8 +4,8 @@ from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from forms import AddProductForm
 from models import Product, Maker, Catalog, CatalogedProducts
-from flask_login import login_required
-from flask.ext.babel import gettext
+from permissions import login_required
+from flask_babel import gettext
 from imageHelper import getImgUrls
 from config import PACKAGE_SIZES
 

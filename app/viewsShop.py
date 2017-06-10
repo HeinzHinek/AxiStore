@@ -2,8 +2,9 @@
 
 from app import app, db, mailer
 from flask import render_template, g, session, request, json, redirect, url_for, flash
-from flask_login import login_required, current_user, customer_allowed
-from flask.ext.babel import gettext
+from flask_login import current_user
+from permissions import login_required, customer_allowed
+from flask_babel import gettext
 from models import Product, Category, Cart, Request, RequestedProducts, Catalog, CatalogedProducts
 from forms import ShopHeaderForm, SimpleSubmitForm, ShopOrderConfirmForm
 from viewsProduct import prepare_catalog

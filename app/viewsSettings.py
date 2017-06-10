@@ -4,12 +4,12 @@ from flask import render_template, flash, redirect, url_for, json
 from app import app
 from models import User, Customer, Catalog, CatalogedProducts, Maker
 from forms import UploadForm, AddUserForm, EditUserForm, SimpleSubmitForm
-from flask_login import login_required
+from permissions import login_required
 from werkzeug.security import generate_password_hash
-from flask.ext.babel import gettext
+from flask_babel import gettext
 from csvHelper import *
 from config import CSV_PATH
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 from config import USER_ROLES, LANGUAGES, CUSTOMER_TYPES, CUSTOMER_CODES_PATH
 import os
 import glob

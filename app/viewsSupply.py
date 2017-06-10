@@ -4,10 +4,10 @@ from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import SelectCustomerForm, SelectOrderNumberFormAxm, EditDateTimeForm, SimpleSubmitForm, EditSupplyForm
 from models import Supply, Product, Customer, SuppliedProducts, Request, RequestedProducts
-from flask_login import login_required
+from permissions import login_required
 from sqlalchemy import desc
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
-from flask.ext.babel import gettext
+from flask_babel import gettext
 from xls import CreateXls
 from imageHelper import getImgUrls
 from mailer import send_notification_mail_to_recommender

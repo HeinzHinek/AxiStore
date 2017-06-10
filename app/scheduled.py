@@ -2,7 +2,7 @@
 
 from app import db
 from models import Product, Customer
-from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL, CUSTOMER_TYPES, MYSQLPASSWORD
+from config import TEMP_FILES_PATH, LASTURA_SKLAD_URL, CUSTOMER_TYPES, MYSQL_PASSWORD
 from csvHelper import parse_csv, generate_axismart_availability_csv
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
@@ -88,4 +88,4 @@ def scheduleDumpMySQL():
     target_dir = 'app/static/backup/db'
     now = datetime.datetime.now()
     strdate = now.strftime('%Y%m%d')
-    os.system("mysqldump -u apps -p"+MYSQLPASSWORD+" apps > "+target_dir+"/dbbackup_"+strdate+".sql")
+    os.system("mysqldump -u apps -p" + MYSQL_PASSWORD + " apps > " + target_dir + "/dbbackup_" + strdate + ".sql")

@@ -4,10 +4,10 @@ from flask import render_template, flash, redirect, url_for, request, session, g
 from app import app, db
 from forms import AddMakerForm, SimpleSubmitForm
 from models import Maker, Category, Product, Order, OrderedProducts
-from flask_login import login_required, maker_allowed
+from permissions import login_required, maker_allowed
 from imageHelper import getImgUrls, getThumbUrls
 from config import DEFAULT_PER_PAGE, NO_PHOTO_URL, NO_PHOTO_THUMB_URL
-from flask.ext.babel import gettext
+from flask_babel import gettext
 
 @app.route('/makers')
 @app.route('/makers/<int:page>')

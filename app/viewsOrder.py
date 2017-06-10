@@ -6,9 +6,9 @@ from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditQt
 from models import Order, Product, OrderedProducts, Maker
 from mailer import send_order_mail_to_maker
 from xls import CreateXls
-from flask_login import login_required
+from permissions import login_required
 from config import DEFAULT_PER_PAGE
-from flask.ext.babel import gettext
+from flask_babel import gettext
 import flask, re
 
 

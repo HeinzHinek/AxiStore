@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask.ext.mail import Message
+from flask_mail import Message
 from app import app, mail
 from flask import render_template
 from flask_login import current_user
 from config import ADMINS, USER_ROLES, BASE_SHARE_FROM_RECOMMENDED
 from models import RequestedProducts, User, Customer
-from flask.ext.babel import gettext
+from flask_babel import gettext
 
 
 def send_email(subject, sender, recipients, text_body, html_body, attachment=False, mimetype=None, bulk=False):

@@ -4,11 +4,11 @@ from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
 from forms import SelectMakerForm, ProductQuantityForm, EditDateTimeForm, EditDeliveryForm
 from models import Delivery, Product, DeliveredProducts, Maker, Order, OrderedProducts
-from flask_login import login_required
+from permissions import login_required
 from config import DEFAULT_PER_PAGE
 from imageHelper import getImgUrls
 from mailer import send_delivery_notification_to_customers
-from flask.ext.babel import gettext
+from flask_babel import gettext
 import flask
 
 @app.route('/deliveries')

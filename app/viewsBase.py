@@ -4,10 +4,11 @@ from flask import render_template, request, g, session, flash, redirect, url_for
 from app import app, db, lm, babel
 from forms import UserForm, EditQtyStockForm, SearchForm, PasswordChangeForm
 from models import User, Product, Category, Maker, Request, RequestedProducts, SuppliedProducts, Supply, Customer, Order
-from flask_login import current_user, login_required, customer_allowed, maker_allowed
+from flask_login import current_user
+from permissions import login_required, customer_allowed, maker_allowed
 from werkzeug.security import generate_password_hash, check_password_hash
 from config import PRODUCTS_PER_PAGE, LANGUAGES, USER_ROLES, CUSTOMER_TYPES, AXM_PRODUCT_URL
-from flask.ext.babel import gettext
+from flask_babel import gettext
 from sqlalchemy import or_, func
 from datetime import datetime, timedelta
 from imageHelper import getImgUrls
@@ -409,7 +410,7 @@ def load_user(id):
 @babel.localeselector
 def get_locale():
     lang = request.accept_languages.best_match(LANGUAGES.keys())
-    if g.user.is_authenticated():
+    if g.user.is_authenticated:
         lang = g.user.language
     return lang
 

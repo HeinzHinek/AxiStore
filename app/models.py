@@ -52,10 +52,10 @@ class Product(db.Model):
     desc_JP = db.Column(db.Unicode(300))
 
     # Added 26.4.2015, edited 29.4.2015
-    long_desc = db.Column(db.Unicode())
-    detailed_desc = db.Column(db.Unicode())
-    subcategory_desc = db.Column(db.Unicode())
-    keywords = db.Column(db.Unicode())
+    long_desc = db.Column(db.Unicode(2000))
+    detailed_desc = db.Column(db.Unicode(2000))
+    subcategory_desc = db.Column(db.Unicode(2000))
+    keywords = db.Column(db.Unicode(1000))
     # end
 
     price_unit = db.Column(db.Integer, default=0)
@@ -344,7 +344,7 @@ class Request(db.Model):
     products = db.relationship('RequestedProducts', backref='request', lazy='dynamic')
 
     # Added 13.6.2015
-    note = db.Column(db.Unicode())
+    note = db.Column(db.Unicode(500))
 
     def __init__(self):
         self.created_dt = datetime.utcnow()

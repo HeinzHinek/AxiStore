@@ -4,9 +4,9 @@ from flask import render_template, redirect, flash, url_for, g, session, json
 from app import app, db
 from forms import SelectCustomerForm, OrderNumberForm, EditDateTimeForm, SimpleSubmitForm, EditRequestForm
 from models import Request, Product, RequestedProducts, Customer, Maker
-from flask_login import login_required
+from permissions import login_required
 from config import DEFAULT_PER_PAGE, CUSTOMER_TYPES
-from flask.ext.babel import gettext
+from flask_babel import gettext
 from datetime import *
 import flask
 

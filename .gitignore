@@ -17,3 +17,7 @@ db_up.sh
 
 config.py
 runp-mysql.fcgi
+
+
+.idea
+db_backup

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from flask_wtf import Form
+from flask_wtf import FlaskForm as Form
 from wtforms import StringField, PasswordField, FloatField, SelectField, IntegerField, FieldList, FormField, \
     HiddenField, FileField, BooleanField, SubmitField, DateTimeField, TextAreaField
 from wtforms import validators
 from wtforms.fields.html5 import EmailField, TelField
 from config import USER_ROLES, LANGUAGES, PRODUCTS_PER_PAGE, PACKAGE_SIZES
 from models import Product
-from flask.ext.babel import lazy_gettext
+from flask_babel import lazy_gettext
 import wtforms
 import operator
 
